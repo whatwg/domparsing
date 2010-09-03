@@ -1,6 +1,7 @@
 {
   "specs" :
-    [ "html"
+    [ "domcore"
+    , "html"
     , "webidl"
     , "window"
     , "xml"

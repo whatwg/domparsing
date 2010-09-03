@@ -1,4 +1,11 @@
 {
+  "DOMCORE" :
+  {
+    "href" : "http://bitbucket.org/ms2ger/web-dom-core/",
+    "title" : "Web DOM Core",
+    "authors" : "S. Pieters, G. Sneddon, Ms2ger, A. van Kesteren",
+    "publisher" : "WHATWG"
+  },
   "HTML" :
   {
     "href" : "http://www.whatwg.org/specs/web-apps/current-work/multipage",

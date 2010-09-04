@@ -90,8 +90,9 @@ required for conforming IDL fragments, as described in the Web IDL
 specification. <a data-anolis-ref="" href=#refsWEBIDL>[WEBIDL]</a>
 
 <p>Some of the terms used in this specification are defined in <cite>DOM
-Core</cite>.
+Core</cite> and <cite>HTML</cite>.
 <a data-anolis-ref="" href=#refsDOMCORE>[DOMCORE]</a>
+<a data-anolis-ref="" href=#refsHTML>[HTML]</a>
 
 <h3 id=extensibility><span class=secno>1.2 </span>Extensibility</h3>
 
@@ -137,13 +138,17 @@ following steps:
  a <a href=http://localhost/web-dom-core.html#dom-domexception-not_supported_err><code class=external data-anolis-spec=domcore title=dom-DOMException-NOT_SUPPORTED_ERR>NOT_SUPPORTED_ERR</code></a> exception and abort these
  steps.
 
- <li class=XXX><p>Parse <var title="">str</var> with a namespace-enabled XML
- parser. If <var title="">str</var> was well-formed, return the document.
+ <li><p>Parse <var title="">str</var> with a namespace-enabled <a class=external data-anolis-spec=html href=http://www.whatwg.org/html/#xml-parser>XML parser</a>.
 
- <li><p>Otherwise, let <var title="">document</var> a newly-created
- <a href=#xmldocument><code>XMLDocument</code></a> node. Append an <a href=http://localhost/web-dom-core.html#element><code class=external data-anolis-spec=domcore>Element</code></a> node to it, with its <a href=http://localhost/web-dom-core.html#dom-node-localname><code class=external data-anolis-spec=domcore title=dom-Node-localName>localName</code></a> set to <code title="">parsererror</code> and its <a href=http://localhost/web-dom-core.html#dom-node-namespaceuri><code class=external data-anolis-spec=domcore title=dom-Node-namespaceURI>namespaceURI</code></a> set to <code title="">http://www.mozilla.org/newlayout/xml/parsererror.xml</code>. User agents
- may append nodes to this element, for example to describe the nature of the
- error.
+ <li>
+  <p>If the previous step didn't return an error, return the newly created
+  <a href=http://localhost/web-dom-core.html#document><code class=external data-anolis-spec=domcore>Document</code></a>.
+
+  <p>Otherwise, let <var title="">document</var> a newly-created
+  <a href=#xmldocument><code>XMLDocument</code></a> node. Append an <a href=http://localhost/web-dom-core.html#element><code class=external data-anolis-spec=domcore>Element</code></a> node to it, with its <a href=http://localhost/web-dom-core.html#dom-node-localname><code class=external data-anolis-spec=domcore title=dom-Node-localName>localName</code></a> set to
+  <code title="">parsererror</code> and its <a href=http://localhost/web-dom-core.html#dom-node-namespaceuri><code class=external data-anolis-spec=domcore title=dom-Node-namespaceURI>namespaceURI</code></a> set to <code title="">http://www.mozilla.org/newlayout/xml/parsererror.xml</code>. User agents
+  may append nodes to this element, for example to describe the nature of the
+  error.
 </ol>
 
 
@@ -156,6 +161,8 @@ because the newer ones keep changing. -->
 
 <div id=anolis-references><dl><dt id=refsDOMCORE>[DOMCORE]
 <dd><cite><a href=http://bitbucket.org/ms2ger/web-dom-core/>Web DOM Core</a></cite>, S. Pieters, G. Sneddon, Ms2ger, A. van Kesteren. WHATWG.
+<dt id=refsHTML>[HTML]
+<dd><cite><a href=http://www.whatwg.org/specs/web-apps/current-work/multipage>HTML</a></cite>, I. Hickson. WHATWG.
 <dt id=refsRFC2119>[RFC2119]
 <dd><cite><a href=http://www.ietf.org/rfc/rfc2119.txt>Key words for use in RFCs to Indicate Requirement Levels</a></cite>, S. Bradner. IETF.
 <dt id=refsWEBIDL>[WEBIDL]

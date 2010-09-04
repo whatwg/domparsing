@@ -10,6 +10,7 @@
       "htmldocument" : "htmldocument",
       "browsing context" : "browsing-context",
       "active document" : "active-document",
-      "html parser" : "html-parser"
+      "html parser" : "html-parser",
+      "xml parser" : "xml-parser"
     }
 }

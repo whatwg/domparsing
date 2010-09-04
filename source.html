@@ -83,8 +83,9 @@ required for conforming IDL fragments, as described in the Web IDL
 specification. <span data-anolis-ref>WEBIDL</span>
 
 <p>Some of the terms used in this specification are defined in <cite>DOM
-Core</cite>.
+Core</cite> and <cite>HTML</cite>.
 <span data-anolis-ref>DOMCORE</span>
+<span data-anolis-ref>HTML</span>
 
 <h3>Extensibility</h3>
 
@@ -133,18 +134,22 @@ following steps:
  data-anolis-spec=domcore>NOT_SUPPORTED_ERR</code> exception and abort these
  steps.
 
- <li class=XXX><p>Parse <var title>str</var> with a namespace-enabled XML
- parser. If <var title>str</var> was well-formed, return the document.
+ <li><p>Parse <var title>str</var> with a namespace-enabled <span
+ data-anolis-spec=html>XML parser</span>.
 
- <li><p>Otherwise, let <var title>document</var> a newly-created
- <code>XMLDocument</code> node. Append an <code
- data-anolis-spec=domcore>Element</code> node to it, with its <code
- title=dom-Node-localName data-anolis-spec=domcore>localName</code> set to <code
- title>parsererror</code> and its <code title=dom-Node-namespaceURI
- data-anolis-spec=domcore>namespaceURI</code> set to <code
- title>http://www.mozilla.org/newlayout/xml/parsererror.xml</code>. User agents
- may append nodes to this element, for example to describe the nature of the
- error.
+ <li>
+  <p>If the previous step didn't return an error, return the newly created
+  <code data-anolis-spec=domcore>Document</code>.
+
+  <p>Otherwise, let <var title>document</var> a newly-created
+  <code>XMLDocument</code> node. Append an <code
+  data-anolis-spec=domcore>Element</code> node to it, with its <code
+  title=dom-Node-localName data-anolis-spec=domcore>localName</code> set to
+  <code title>parsererror</code> and its <code title=dom-Node-namespaceURI
+  data-anolis-spec=domcore>namespaceURI</code> set to <code
+  title>http://www.mozilla.org/newlayout/xml/parsererror.xml</code>. User agents
+  may append nodes to this element, for example to describe the nature of the
+  error.
 </ol>
 
 

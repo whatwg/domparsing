@@ -1,13 +1,13 @@
 ANOLIS = anolis
 PRINCE = prince
 
-all: spec spec.pdf xrefs.json
+all: domparser domparser.pdf xrefs.json
 
-spec: source.html cross-spec-refs references
+domparser: source.html cross-spec-refs references
 	$(ANOLIS) --output-encoding=ascii --omit-optional-tags --enable=xspecxref \
 	--enable=refs $< $@
 
-spec.pdf: spec
+domparser.pdf: domparser
 	$(PRINCE) -i html $< -o $@
 
 xrefs.json: source.html

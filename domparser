@@ -1,5 +1,5 @@
 <!DOCTYPE html><meta charset=UTF-8>
-<title>Spec</title>
+<title>The DOMParser interface</title>
 <link href=http://www.whatwg.org/style/specification rel=stylesheet>
 <style>
  pre, code { font-family:monospace, sans-serif; }
@@ -18,7 +18,7 @@
 </style>
 <body class=draft>
 <div class=head id=head>
-<h1>Spec</h1>
+<h1><code>DOMParser</code></h1>
 <h2 class="no-num no-toc" id=work-in-progress-&mdash;-last-update-3-september-2010>Work in Progress &mdash; Last Update 3 September 2010</h2>
 <dl>
  <dt>Editor
@@ -40,25 +40,17 @@
 
 <!--begin-toc-->
 <ol class=toc>
- <li><a href=#common-infrastructure><span class=secno>1 </span>Common infrastructure</a>
+ <li><a href=#conformance-requirements><span class=secno>1 </span>Conformance requirements</a>
   <ol>
-   <li><a href=#terminology><span class=secno>1.1 </span>Terminology</a></li>
-   <li><a href=#conformance-requirements><span class=secno>1.2 </span>Conformance requirements</a>
-    <ol>
-     <li><a href=#dependencies><span class=secno>1.2.1 </span>Dependencies</a></li>
-     <li><a href=#extensibility><span class=secno>1.2.2 </span>Extensibility</a></ol></ol></li>
+   <li><a href=#dependencies><span class=secno>1.1 </span>Dependencies</a></li>
+   <li><a href=#extensibility><span class=secno>1.2 </span>Extensibility</a></ol></li>
  <li><a class=no-num href=#references>References</a></li>
  <li><a class=no-num href=#acknowledgements>Acknowledgements</a></ol>
 <!--end-toc-->
 
 
 
-<h2 id=common-infrastructure><span class=secno>1 </span>Common infrastructure</h2>
-<h3 id=terminology><span class=secno>1.1 </span>Terminology</h3>
-<p>
-
-
-<h3 id=conformance-requirements><span class=secno>1.2 </span>Conformance requirements</h3>
+<h2 id=conformance-requirements><span class=secno>1 </span>Conformance requirements</h2>
 <p>All diagrams, examples, and notes in this specification are
 non-normative, as are all sections explicitly marked non-normative.
 Everything else in this specification is normative.</p>
@@ -88,29 +80,19 @@ out of memory, or to work around platform-specific limitations.</p>
 
 <p>When a method or an attribute is said to call another method or attribute, the user agent must invoke its internal API for that attribute or method so that e.g. the author can't change the behavior by overriding attributes or methods with custom properties or functions in ECMAScript.
 
-<p>Unless otherwise stated, string comparisons are done in a <span>case-sensitive</span> manner.
+<p>Unless otherwise stated, string comparisons are done in a <a class=external data-anolis-spec=domcore href=http://localhost/web-dom-core.html#case-sensitive>case-sensitive</a> manner.
 
-<h4 id=dependencies><span class=secno>1.2.1 </span>Dependencies</h4>
+<h3 id=dependencies><span class=secno>1.1 </span>Dependencies</h3>
 
 <p>The IDL fragments in this specification must be interpreted as
 required for conforming IDL fragments, as described in the Web IDL
 specification. <a data-anolis-ref="" href=#refsWEBIDL>[WEBIDL]</a>
 
-<p id=float-nan>Except where otherwise specified, if an IDL attribute that is a
-floating point number type (<a href=http://dev.w3.org/2006/webapi/WebIDL/#idl-float><code class=external data-anolis-spec=webidl>float</code></a>) is
-assigned an Infinity or Not-a-Number (NaN) value, a <code title=dom-DOMException-NOT_SUPPORTED_ERR>NOT_SUPPORTED_ERR</code> exception must
-be raised.
+<p>Some of the terms used in this specification are defined in <cite>DOM
+Core</cite>.
+<a data-anolis-ref="" href=#refsDOMCORE>[DOMCORE]</a>
 
-<p>Except where otherwise specified, if a method with an argument that is a
-floating point number type (<a href=http://dev.w3.org/2006/webapi/WebIDL/#idl-float><code class=external data-anolis-spec=webidl>float</code></a>) is
-passed an Infinity or Not-a-Number (NaN) value, a <code title=dom-DOMException-NOT_SUPPORTED_ERR>NOT_SUPPORTED_ERR</code> exception must
-be raised.
-
-<p>Some of the terms used in this specification are defined in <cite>Web
-IDL</cite>, <cite>XML</cite>, <cite>Namespaces in XML</cite> and
-<cite>HTML</cite>. <a data-anolis-ref="" href=#refsWEBIDL>[WEBIDL]</a> <a data-anolis-ref="" href=#refsXML>[XML]</a> <a data-anolis-ref="" href=#refsXMLNS>[XMLNS]</a> <a data-anolis-ref="" href=#refsHTML>[HTML]</a>
-
-<h4 id=extensibility><span class=secno>1.2.2 </span>Extensibility</h4>
+<h3 id=extensibility><span class=secno>1.2 </span>Extensibility</h3>
 
 <p>Vendor-specific proprietary extensions to this specification are
 strongly discouraged. Authors must not use such extensions, as
@@ -143,16 +125,12 @@ this specification.</p>
 <!-- Dates are only included for standards older than the Web,
 because the newer ones keep changing. -->
 
-<div id=anolis-references><dl><dt id=refsHTML>[HTML]
-<dd><cite><a href=http://www.whatwg.org/specs/web-apps/current-work/multipage>HTML</a></cite>, I. Hickson. WHATWG.
+<div id=anolis-references><dl><dt id=refsDOMCORE>[DOMCORE]
+<dd><cite><a href=http://bitbucket.org/ms2ger/web-dom-core/>Web DOM Core</a></cite>, S. Pieters, G. Sneddon, Ms2ger, A. van Kesteren. WHATWG.
 <dt id=refsRFC2119>[RFC2119]
 <dd><cite><a href=http://www.ietf.org/rfc/rfc2119.txt>Key words for use in RFCs to Indicate Requirement Levels</a></cite>, S. Bradner. IETF.
 <dt id=refsWEBIDL>[WEBIDL]
 <dd><cite><a href=http://dev.w3.org/2006/webapi/WebIDL/>Web IDL</a></cite>, C. McCormack, S. Weinig. W3C.
-<dt id=refsXML>[XML]
-<dd><cite><a href=http://www.w3.org/TR/xml/>Extensible Markup Language</a></cite>, T. Bray, J. Paoli, C. Sperberg-McQueen, E. Maler, F. Yergeau. W3C.
-<dt id=refsXMLNS>[XMLNS]
-<dd><cite><a href=http://www.w3.org/TR/xml-names/>Namespaces in XML</a></cite>, T. Bray, D. Hollander, A. Layman, R. Tobin. W3C.
 </dl></div>
 
 

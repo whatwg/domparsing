@@ -1,6 +1,6 @@
 <!doctype html>
 <meta charset=UTF-8>
-<title>Spec</title>
+<title>The DOMParser interface</title>
 <link rel=stylesheet href=http://www.whatwg.org/style/specification>
 <style>
  pre, code { font-family:monospace, sans-serif; }
@@ -19,7 +19,7 @@
 </style>
 <body class=draft>
 <div class=head id=head>
-<h1>Spec</h1>
+<h1><code>DOMParser</code></h1>
 <h2 class="no-num no-toc">Work in Progress &mdash; Last Update [DATE: 01 Jan 1901]</h2>
 <dl>
  <dt>Editor
@@ -42,12 +42,7 @@
 
 
 
-<h2>Common infrastructure</h2>
-<h3>Terminology</h3>
-<p>
-
-
-<h3>Conformance requirements</h3>
+<h2>Conformance requirements</h2>
 <p>All diagrams, examples, and notes in this specification are
 non-normative, as are all sections explicitly marked non-normative.
 Everything else in this specification is normative.</p>
@@ -78,33 +73,20 @@ out of memory, or to work around platform-specific limitations.</p>
 
 <p>When a method or an attribute is said to call another method or attribute, the user agent must invoke its internal API for that attribute or method so that e.g. the author can't change the behavior by overriding attributes or methods with custom properties or functions in ECMAScript.
 
-<p>Unless otherwise stated, string comparisons are done in a <span>case-sensitive</span> manner.
+<p>Unless otherwise stated, string comparisons are done in a <span
+data-anolis-spec=domcore>case-sensitive</span> manner.
 
-<h4>Dependencies</h4>
+<h3>Dependencies</h3>
 
 <p>The IDL fragments in this specification must be interpreted as
 required for conforming IDL fragments, as described in the Web IDL
 specification. <span data-anolis-ref>WEBIDL</span>
 
-<p id=float-nan>Except where otherwise specified, if an IDL attribute that is a
-floating point number type (<code data-anolis-spec=webidl>float</code>) is
-assigned an Infinity or Not-a-Number (NaN) value, a <code
-title=dom-DOMException-NOT_SUPPORTED_ERR>NOT_SUPPORTED_ERR</code> exception must
-be raised.
+<p>Some of the terms used in this specification are defined in <cite>DOM
+Core</cite>.
+<span data-anolis-ref>DOMCORE</span>
 
-<p>Except where otherwise specified, if a method with an argument that is a
-floating point number type (<code data-anolis-spec=webidl>float</code>) is
-passed an Infinity or Not-a-Number (NaN) value, a <code
-title=dom-DOMException-NOT_SUPPORTED_ERR>NOT_SUPPORTED_ERR</code> exception must
-be raised.
-
-<p>Some of the terms used in this specification are defined in <cite>Web
-IDL</cite>, <cite>XML</cite>, <cite>Namespaces in XML</cite> and
-<cite>HTML</cite>. <span data-anolis-ref>WEBIDL</span> <span
-data-anolis-ref>XML</span> <span data-anolis-ref>XMLNS</span> <span
-data-anolis-ref>HTML</span>
-
-<h4>Extensibility</h4>
+<h3>Extensibility</h3>
 
 <p>Vendor-specific proprietary extensions to this specification are
 strongly discouraged. Authors must not use such extensions, as

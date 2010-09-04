@@ -3,8 +3,5 @@
     [ "domcore"
     , "html"
     , "webidl"
-    , "window"
-    , "xml"
-    , "xmlns"
     ]
 }

@@ -127,7 +127,15 @@ interface <dfn id=domparser>DOMParser</dfn> {
   <a class=external data-anolis-spec=domcore href=http://localhost/web-dom-core.html#document>Document</a> <a href=#dom-domparser-parsefromstring title=dom-DOMParser-parseFromString>parseFromString</a>(DOMString str, DOMString contentType);
 }</pre>
 
-<p class=XXX><dfn id=dom-domparser-parsefromstring title=dom-DOMParser-parseFromString>parseFromString</dfn>
+<p>The <dfn id=dom-domparser-parsefromstring title=dom-DOMParser-parseFromString><code>parseFromString(<var title="">str</var>, <var title="">contentType</var>)</code></dfn> method must run the
+following steps:
+<ol>
+ <li><p>If <var title="">contentType</var> isn't <code title="">text/xml</code>, <code title="">application/xml</code> or <code title="">application/xhtml+xml</code>, raise
+ a <a href=http://localhost/web-dom-core.html#dom-domexception-not_supported_err><code class=external data-anolis-spec=domcore title=dom-DOMException-NOT_SUPPORTED_ERR>NOT_SUPPORTED_ERR</code></a> exception and abort these
+ steps.
+
+ <li class=XXX><p>Parse <var title="">str</var>
+</ol>
 
 
 

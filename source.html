@@ -120,7 +120,18 @@ interface <dfn>DOMParser</dfn> {
   <span data-anolis-spec=domcore>Document</span> <span title=dom-DOMParser-parseFromString>parseFromString</span>(DOMString str, DOMString contentType);
 }</pre>
 
-<p class=XXX><dfn title=dom-DOMParser-parseFromString>parseFromString</dfn>
+<p>The <dfn title=dom-DOMParser-parseFromString><code>parseFromString(<var
+title>str</var>, <var title>contentType</var>)</code></dfn> method must run the
+following steps:
+<ol>
+ <li><p>If <var title>contentType</var> isn't <code title>text/xml</code>, <code
+ title>application/xml</code> or <code title>application/xhtml+xml</code>, raise
+ a <code title=dom-DOMException-NOT_SUPPORTED_ERR
+ data-anolis-spec=domcore>NOT_SUPPORTED_ERR</code> exception and abort these
+ steps.
+
+ <li class=XXX><p>Parse <var title>str</var>
+</ol>
 
 
 

@@ -19,13 +19,13 @@
 <body class=draft>
 <div class=head id=head>
 <h1><a href=#domparser><code>DOMParser</code></a></h1>
-<h2 class="no-num no-toc" id=work-in-progress-&mdash;-last-update-3-september-2010>Work in Progress &mdash; Last Update 3 September 2010</h2>
+<h2 class="no-num no-toc" id=work-in-progress-&mdash;-last-update-4-september-2010>Work in Progress &mdash; Last Update 4 September 2010</h2>
 <dl>
  <dt>Editor
  <dd>Ms2ger &lt;ms2ger@gmail.com&gt;
 
  <dt>Version history
- <dd><a href=http://bitbucket.org/ms2ger/repo/>http://bitbucket.org/ms2ger/repo</a>
+ <dd><a href=http://bitbucket.org/ms2ger/domparser/>http://bitbucket.org/ms2ger/domparser</a>
 </dl>
 </div>
 

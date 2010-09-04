@@ -18,7 +18,7 @@
 </style>
 <body class=draft>
 <div class=head id=head>
-<h1><code>DOMParser</code></h1>
+<h1><a href=#domparser><code>DOMParser</code></a></h1>
 <h2 class="no-num no-toc" id=work-in-progress-&mdash;-last-update-3-september-2010>Work in Progress &mdash; Last Update 3 September 2010</h2>
 <dl>
  <dt>Editor
@@ -44,6 +44,7 @@
   <ol>
    <li><a href=#dependencies><span class=secno>1.1 </span>Dependencies</a></li>
    <li><a href=#extensibility><span class=secno>1.2 </span>Extensibility</a></ol></li>
+ <li><a href=#interface><span class=secno>2 </span>Interface</a></li>
  <li><a class=no-num href=#references>References</a></li>
  <li><a class=no-num href=#acknowledgements>Acknowledgements</a></ol>
 <!--end-toc-->
@@ -117,6 +118,17 @@ the requirements of such an extension specification, it becomes an
 specification</dfn> for the purposes of conformance requirements in
 this specification.</p>
 <!-- http://www.w3.org/mid/17E341CD-E790-422C-9F9A-69347EE01CEB@iki.fi -->
+
+
+
+<h2 id=interface><span class=secno>2 </span>Interface</h2>
+<pre class=idl>[Constructor]
+interface <dfn id=domparser>DOMParser</dfn> {
+  <a class=external data-anolis-spec=domcore href=http://localhost/web-dom-core.html#document>Document</a> <a href=#dom-domparser-parsefromstring title=dom-DOMParser-parseFromString>parseFromString</a>(DOMString str, DOMString contentType);
+}</pre>
+
+<p class=XXX><dfn id=dom-domparser-parsefromstring title=dom-DOMParser-parseFromString>parseFromString</dfn>
+
 
 
 <h2 class=no-num id=references>References</h2><!--REFS-->

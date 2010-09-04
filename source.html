@@ -115,7 +115,10 @@ this specification.</p>
 
 
 <h2>Interface</h2>
-<pre class=idl>[Constructor]
+<pre class=idl>interface <dfn>XMLDocument</dfn> : <span data-anolis-spec=domcore>Document</span> {
+};
+
+[Constructor]
 interface <dfn>DOMParser</dfn> {
   <span data-anolis-spec=domcore>Document</span> <span title=dom-DOMParser-parseFromString>parseFromString</span>(DOMString str, DOMString contentType);
 }</pre>
@@ -130,7 +133,18 @@ following steps:
  data-anolis-spec=domcore>NOT_SUPPORTED_ERR</code> exception and abort these
  steps.
 
- <li class=XXX><p>Parse <var title>str</var>
+ <li class=XXX><p>Parse <var title>str</var> with a namespace-enabled XML
+ parser. If <var title>str</var> was well-formed, return the document.
+
+ <li><p>Otherwise, let <var title>document</var> a newly-created
+ <code>XMLDocument</code> node. Append an <code
+ data-anolis-spec=domcore>Element</code> node to it, with its <code
+ title=dom-Node-localName data-anolis-spec=domcore>localName</code> set to <code
+ title>parsererror</code> and its <code title=dom-Node-namespaceURI
+ data-anolis-spec=domcore>namespaceURI</code> set to <code
+ title>http://www.mozilla.org/newlayout/xml/parsererror.xml</code>. User agents
+ may append nodes to this element, for example to describe the nature of the
+ error.
 </ol>
 
 

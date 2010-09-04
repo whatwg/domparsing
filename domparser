@@ -122,7 +122,10 @@ this specification.</p>
 
 
 <h2 id=interface><span class=secno>2 </span>Interface</h2>
-<pre class=idl>[Constructor]
+<pre class=idl>interface <dfn id=xmldocument>XMLDocument</dfn> : <a class=external data-anolis-spec=domcore href=http://localhost/web-dom-core.html#document>Document</a> {
+};
+
+[Constructor]
 interface <dfn id=domparser>DOMParser</dfn> {
   <a class=external data-anolis-spec=domcore href=http://localhost/web-dom-core.html#document>Document</a> <a href=#dom-domparser-parsefromstring title=dom-DOMParser-parseFromString>parseFromString</a>(DOMString str, DOMString contentType);
 }</pre>
@@ -134,7 +137,13 @@ following steps:
  a <a href=http://localhost/web-dom-core.html#dom-domexception-not_supported_err><code class=external data-anolis-spec=domcore title=dom-DOMException-NOT_SUPPORTED_ERR>NOT_SUPPORTED_ERR</code></a> exception and abort these
  steps.
 
- <li class=XXX><p>Parse <var title="">str</var>
+ <li class=XXX><p>Parse <var title="">str</var> with a namespace-enabled XML
+ parser. If <var title="">str</var> was well-formed, return the document.
+
+ <li><p>Otherwise, let <var title="">document</var> a newly-created
+ <a href=#xmldocument><code>XMLDocument</code></a> node. Append an <a href=http://localhost/web-dom-core.html#element><code class=external data-anolis-spec=domcore>Element</code></a> node to it, with its <a href=http://localhost/web-dom-core.html#dom-node-localname><code class=external data-anolis-spec=domcore title=dom-Node-localName>localName</code></a> set to <code title="">parsererror</code> and its <a href=http://localhost/web-dom-core.html#dom-node-namespaceuri><code class=external data-anolis-spec=domcore title=dom-Node-namespaceURI>namespaceURI</code></a> set to <code title="">http://www.mozilla.org/newlayout/xml/parsererror.xml</code>. User agents
+ may append nodes to this element, for example to describe the nature of the
+ error.
 </ol>
 
 

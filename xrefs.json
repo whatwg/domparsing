@@ -1,5 +1,6 @@
 {
   "dom-domparser-parsefromstring": "dom-domparser-parsefromstring",
   "domparser": "domparser",
-  "other applicable specifications": "other-applicable-specifications"
+  "other applicable specifications": "other-applicable-specifications",
+  "xmldocument": "xmldocument"
 }

@@ -19,7 +19,7 @@
 <body class=draft>
 <div class=head id=head>
 <h1><a href=#domparser><code>DOMParser</code></a></h1>
-<h2 class="no-num no-toc" id=work-in-progress-&mdash;-last-update-4-september-2010>Work in Progress &mdash; Last Update 4 September 2010</h2>
+<h2 class="no-num no-toc" id=work-in-progress-&mdash;-last-update-9-october-2010>Work in Progress &mdash; Last Update 9 October 2010</h2>
 <dl>
  <dt>Editor
  <dd>Ms2ger &lt;ms2ger@gmail.com&gt;
@@ -160,7 +160,7 @@ following steps:
 because the newer ones keep changing. -->
 
 <div id=anolis-references><dl><dt id=refsDOMCORE>[DOMCORE]
-<dd><cite><a href=http://bitbucket.org/ms2ger/web-dom-core/>Web DOM Core</a></cite>, S. Pieters, G. Sneddon, Ms2ger, A. van Kesteren. WHATWG.
+<dd><cite><a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html>Web DOM Core</a></cite>, A. van Kesteren. W3C.
 <dt id=refsHTML>[HTML]
 <dd><cite><a href=http://www.whatwg.org/specs/web-apps/current-work/multipage>HTML</a></cite>, I. Hickson. WHATWG.
 <dt id=refsRFC2119>[RFC2119]

@@ -181,6 +181,7 @@ string).
 interface <span data-anolis-spec=domcore>Element</span> {
   attribute DOMString <span title=dom-Element-innerHTML>innerHTML</span>;
   attribute DOMString <span title=dom-Element-outerHTML>outerHTML</span>;
+  void <span title=dom-Element-insertAdjacentHTML>insertAdjacentHTML</span>(DOMString position, DOMString text);
 };</pre>
 
 
@@ -414,6 +415,155 @@ string).
 </ol>
 
 </div>
+ 
+ 
+<h3><code title=dom-Element-insertAdjacentHTML>insertAdjacentHTML()</code></h3>
+
+<dl class=domintro>
+  <dt><var title>element</var> . <code title=dom-Element-insertAdjacentHTML>insertAdjacentHTML</code>(<var title>position</var>, <var title>text</var>)
+
+  <dd>
+    <p>Parses the given string <var title>text</var> as HTML or XML and inserts
+    the resulting nodes into the tree in the position given by the
+    <var title>position</var> argument, as follows:
+
+    <dl class=switch>
+      <dt>"beforebegin"
+      <dd>Before the element itself.
+
+      <dt>"afterbegin"
+      <dd>Just inside the element, before its first child.
+
+      <dt>"beforeend"
+      <dd>Just inside the element, after its last child.
+
+      <dt>"afterend"
+      <dd>After the element itself.
+    </dl>
+
+    <p>Throws a
+    <code data-anolis-spec=domcore title=dom-DOMException-SYNTAX_ERR>SYNTAX_ERR</code>
+    exception if the arguments have invalid values (e.g., in the case of an
+    <span data-anolis-spec=domcore>XML document</span>, if the given string is
+    not well-formed).
+
+    <p>Throws a
+    <code data-anolis-spec=domcore title=dom-DOMException-NO_MODIFICATION_ALLOWED_ERR>NO_MODIFICATION_ALLOWED_ERR</code>
+    exception if the given position isn't possible (e.g. inserting elements
+    after the root element of a <code data-anolis-spec=domcore>Document</code>).
+</dl>
+
+<div class=impl>
+
+<p>The
+<dfn title=dom-Element-insertAdjacentHTML><code>insertAdjacentHTML(<var title>position</var>, <var title>text</var>)</code></dfn>
+method, when invoked, must run the following algorithm:
+
+<ol>
+  <li>
+    <p>Use the first matching item from this list:
+
+    <dl class=switch>
+      <dt>If <var title>position</var> is an
+      <span data-anolis-spec=domcore>ASCII case-insensitive</span> match for
+      the string "beforebegin"
+      <dt>If <var title>position</var> is an
+      <span data-anolis-spec=domcore>ASCII case-insensitive</span> match for
+      the string "afterend"
+      <dd>
+        <p>Let <var title>context</var> be the <span>context object</span>'s
+        <code data-anolis-spec=domcore title=dom-Node-parentNode>parentNode</code>.
+
+        <p>If <var title>context</var> is null, abort these steps.
+
+        <p>If <var title>context</var> is a
+        <code data-anolis-spec=domcore>Document</code> object, throw a
+        <code data-anolis-spec=domcore title=dom-DOMException-NO_MODIFICATION_ALLOWED_ERR>NO_MODIFICATION_ALLOWED_ERR</code>
+        exception and abort these steps.
+
+      <dt>If <var title>position</var> is an
+      <span data-anolis-spec=domcore>ASCII case-insensitive</span> match for
+      the string "afterbegin"
+      <dt>If <var title>position</var> is an
+      <span data-anolis-spec=domcore>ASCII case-insensitive</span> match for
+      the string "beforeend"
+      <dd>
+        <p>Let <var title>context</var> be the <span>context object</span>.
+
+      <dt>Otherwise
+      <dd>
+        <p>Throw a
+        <code data-anolis-spec=domcore title=dom-DOMException-SYNTAX_ERR>SYNTAX_ERR</code>
+        exception.
+    </dl>
+
+  <li>
+    <p>If the <span>context object</span>'s
+    <code data-anolis-spec=domcore title=dom-Node-ownerDocument>ownerDocument</code>
+    is an <span data-anolis-spec=domcore>HTML document</span>: Invoke the
+    <span data-anolis-spec=html>HTML fragment parsing algorithm</span>.
+
+    <p>If the <span>context object</span>'s
+    <code data-anolis-spec=domcore title=dom-Node-ownerDocument>ownerDocument</code>
+    is an <span data-anolis-spec=domcore>XML document</span>: Invoke the
+    <span data-anolis-spec=html>XML fragment parsing algorithm</span>.
+
+    <p>In either case, the algorithm must be invoked with <var title>text</var>
+    as the <var title>input</var>, and <var title>context</var> as the
+    <var title>context</var> element.
+
+    <p>If this raises an exception, then abort these steps.
+
+    <p>Otherwise, let <var title>new children</var> be the nodes
+    returned.
+
+  <li>
+    <p>Set the
+    <code data-anolis-spec=domcore title=dom-Node-ownerDocument>ownerDocument</code>
+    of all the <code data-anolis-spec=domcore>Node</code>s in
+    <var title>new children</var> to the <var title>target document</var>.
+
+  <li>
+    <p>Use the first matching item from this list:
+
+    <dl class=switch>
+      <dt>If <var title>position</var> is an
+      <span data-anolis-spec=domcore>ASCII case-insensitive</span> match for
+      the string "beforebegin"
+      <dd>
+        <p>Insert all the <var title>new children</var> nodes immediately before
+        the <span>context object</span>.
+
+      <dt>If <var title>position</var> is an
+      <span data-anolis-spec=domcore>ASCII case-insensitive</span> match for
+      the string "afterbegin"
+      <dd>
+        <p>Insert all the <var title>new children</var> nodes before the first
+        child of the <span>context object</span>, if there is one. If there is
+        no such child, append them all to the <span>context object</span>.
+
+      <dt>If <var title>position</var> is an
+      <span data-anolis-spec=domcore>ASCII case-insensitive</span> match for
+      the string "beforeend"
+      <dd>
+        <p>Append all the <var title>new children</var> nodes to the
+        <span>context object</span>.
+
+      <dt>If <var title>position</var> is an
+      <span data-anolis-spec=domcore>ASCII case-insensitive</span> match for
+      the string "afterend"
+      <dd>
+        <p>Insert all the <var title>new children</var> nodes immediately after
+        the <span>context object</span>.
+    </dl>
+
+    <p>The <var title>new children</var> nodes must be inserted in a manner that
+    preserves their order and fires mutation events as if a
+    <code data-anolis-spec=domcore>DocumentFragment</code> containing the
+    <var title>new children</var> had been inserted.
+</ol>
+
+</div>
 
 
 
@@ -433,8 +583,10 @@ for their useful comments.
 
 <p>Special thanks to Ian Hickson for defining the
 <code title=dom-Element-innerHTML>innerHTML</code> and
-<code title=dom-Element-outerHTML>outerHTML</code> attributes in
+<code title=dom-Element-outerHTML>outerHTML</code> attributes, and the
+<code title=dom-Element-insertAdjacentHTML>insertAdjacentHTML()</code> method in
 <cite>HTML</cite>.
 <span data-anolis-ref class=informative>HTML</span>
+
 
 <script src="http://www.whatwg.org/specs/web-apps/current-work/dfn.js"></script>

@@ -52,7 +52,8 @@
  <li><a href=#extensions-to-the-element-interface><span class=secno>4 </span>Extensions to the <code class=external data-anolis-spec=domcore>Element</code> interface</a>
   <ol>
    <li><a href=#innerhtml><span class=secno>4.1 </span><code title=dom-Element-innerHTML>innerHTML</code></a></li>
-   <li><a href=#outerhtml><span class=secno>4.2 </span><code title=dom-Element-outerHTML>outerHTML</code></a></ol></li>
+   <li><a href=#outerhtml><span class=secno>4.2 </span><code title=dom-Element-outerHTML>outerHTML</code></a></li>
+   <li><a href=#insertadjacenthtml()><span class=secno>4.3 </span><code title=dom-Element-insertAdjacentHTML>insertAdjacentHTML()</code></a></ol></li>
  <li><a class=no-num href=#references>References</a></li>
  <li><a class=no-num href=#acknowledgements>Acknowledgements</a></ol>
 <!--end-toc-->
@@ -187,6 +188,7 @@ string).
 interface <a class=external data-anolis-spec=domcore href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#element>Element</a> {
   attribute DOMString <a href=#dom-element-innerhtml title=dom-Element-innerHTML>innerHTML</a>;
   attribute DOMString <a href=#dom-element-outerhtml title=dom-Element-outerHTML>outerHTML</a>;
+  void <a href=#dom-element-insertadjacenthtml title=dom-Element-insertAdjacentHTML>insertAdjacentHTML</a>(DOMString position, DOMString text);
 };</pre>
 
 
@@ -420,6 +422,155 @@ string).
 </ol>
 
 </div>
+ 
+ 
+<h3 id=insertadjacenthtml()><span class=secno>4.3 </span><a href=#dom-element-insertadjacenthtml><code title=dom-Element-insertAdjacentHTML>insertAdjacentHTML()</code></a></h3>
+
+<dl class=domintro>
+  <dt><var title="">element</var> . <a href=#dom-element-insertadjacenthtml><code title=dom-Element-insertAdjacentHTML>insertAdjacentHTML</code></a>(<var title="">position</var>, <var title="">text</var>)
+
+  <dd>
+    <p>Parses the given string <var title="">text</var> as HTML or XML and inserts
+    the resulting nodes into the tree in the position given by the
+    <var title="">position</var> argument, as follows:
+
+    <dl class=switch>
+      <dt>"beforebegin"
+      <dd>Before the element itself.
+
+      <dt>"afterbegin"
+      <dd>Just inside the element, before its first child.
+
+      <dt>"beforeend"
+      <dd>Just inside the element, after its last child.
+
+      <dt>"afterend"
+      <dd>After the element itself.
+    </dl>
+
+    <p>Throws a
+    <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#dom-domexception-syntax_err><code class=external data-anolis-spec=domcore title=dom-DOMException-SYNTAX_ERR>SYNTAX_ERR</code></a>
+    exception if the arguments have invalid values (e.g., in the case of an
+    <a class=external data-anolis-spec=domcore href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#xml-document>XML document</a>, if the given string is
+    not well-formed).
+
+    <p>Throws a
+    <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#dom-domexception-no_modification_allowed_err><code class=external data-anolis-spec=domcore title=dom-DOMException-NO_MODIFICATION_ALLOWED_ERR>NO_MODIFICATION_ALLOWED_ERR</code></a>
+    exception if the given position isn't possible (e.g. inserting elements
+    after the root element of a <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#document><code class=external data-anolis-spec=domcore>Document</code></a>).
+</dl>
+
+<div class=impl>
+
+<p>The
+<dfn id=dom-element-insertadjacenthtml title=dom-Element-insertAdjacentHTML><code>insertAdjacentHTML(<var title="">position</var>, <var title="">text</var>)</code></dfn>
+method, when invoked, must run the following algorithm:
+
+<ol>
+  <li>
+    <p>Use the first matching item from this list:
+
+    <dl class=switch>
+      <dt>If <var title="">position</var> is an
+      <a class=external data-anolis-spec=domcore href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#ascii-case-insensitive>ASCII case-insensitive</a> match for
+      the string "beforebegin"
+      <dt>If <var title="">position</var> is an
+      <a class=external data-anolis-spec=domcore href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#ascii-case-insensitive>ASCII case-insensitive</a> match for
+      the string "afterend"
+      <dd>
+        <p>Let <var title="">context</var> be the <a href=#context-object>context object</a>'s
+        <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#dom-node-parentnode><code class=external data-anolis-spec=domcore title=dom-Node-parentNode>parentNode</code></a>.
+
+        <p>If <var title="">context</var> is null, abort these steps.
+
+        <p>If <var title="">context</var> is a
+        <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#document><code class=external data-anolis-spec=domcore>Document</code></a> object, throw a
+        <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#dom-domexception-no_modification_allowed_err><code class=external data-anolis-spec=domcore title=dom-DOMException-NO_MODIFICATION_ALLOWED_ERR>NO_MODIFICATION_ALLOWED_ERR</code></a>
+        exception and abort these steps.
+
+      <dt>If <var title="">position</var> is an
+      <a class=external data-anolis-spec=domcore href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#ascii-case-insensitive>ASCII case-insensitive</a> match for
+      the string "afterbegin"
+      <dt>If <var title="">position</var> is an
+      <a class=external data-anolis-spec=domcore href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#ascii-case-insensitive>ASCII case-insensitive</a> match for
+      the string "beforeend"
+      <dd>
+        <p>Let <var title="">context</var> be the <a href=#context-object>context object</a>.
+
+      <dt>Otherwise
+      <dd>
+        <p>Throw a
+        <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#dom-domexception-syntax_err><code class=external data-anolis-spec=domcore title=dom-DOMException-SYNTAX_ERR>SYNTAX_ERR</code></a>
+        exception.
+    </dl>
+
+  <li>
+    <p>If the <a href=#context-object>context object</a>'s
+    <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#dom-node-ownerdocument><code class=external data-anolis-spec=domcore title=dom-Node-ownerDocument>ownerDocument</code></a>
+    is an <a class=external data-anolis-spec=domcore href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#html-document>HTML document</a>: Invoke the
+    <a class=external data-anolis-spec=html href=http://www.whatwg.org/html/#html-fragment-parsing-algorithm>HTML fragment parsing algorithm</a>.
+
+    <p>If the <a href=#context-object>context object</a>'s
+    <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#dom-node-ownerdocument><code class=external data-anolis-spec=domcore title=dom-Node-ownerDocument>ownerDocument</code></a>
+    is an <a class=external data-anolis-spec=domcore href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#xml-document>XML document</a>: Invoke the
+    <a class=external data-anolis-spec=html href=http://www.whatwg.org/html/#xml-fragment-parsing-algorithm>XML fragment parsing algorithm</a>.
+
+    <p>In either case, the algorithm must be invoked with <var title="">text</var>
+    as the <var title="">input</var>, and <var title="">context</var> as the
+    <var title="">context</var> element.
+
+    <p>If this raises an exception, then abort these steps.
+
+    <p>Otherwise, let <var title="">new children</var> be the nodes
+    returned.
+
+  <li>
+    <p>Set the
+    <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#dom-node-ownerdocument><code class=external data-anolis-spec=domcore title=dom-Node-ownerDocument>ownerDocument</code></a>
+    of all the <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#node><code class=external data-anolis-spec=domcore>Node</code></a>s in
+    <var title="">new children</var> to the <var title="">target document</var>.
+
+  <li>
+    <p>Use the first matching item from this list:
+
+    <dl class=switch>
+      <dt>If <var title="">position</var> is an
+      <a class=external data-anolis-spec=domcore href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#ascii-case-insensitive>ASCII case-insensitive</a> match for
+      the string "beforebegin"
+      <dd>
+        <p>Insert all the <var title="">new children</var> nodes immediately before
+        the <a href=#context-object>context object</a>.
+
+      <dt>If <var title="">position</var> is an
+      <a class=external data-anolis-spec=domcore href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#ascii-case-insensitive>ASCII case-insensitive</a> match for
+      the string "afterbegin"
+      <dd>
+        <p>Insert all the <var title="">new children</var> nodes before the first
+        child of the <a href=#context-object>context object</a>, if there is one. If there is
+        no such child, append them all to the <a href=#context-object>context object</a>.
+
+      <dt>If <var title="">position</var> is an
+      <a class=external data-anolis-spec=domcore href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#ascii-case-insensitive>ASCII case-insensitive</a> match for
+      the string "beforeend"
+      <dd>
+        <p>Append all the <var title="">new children</var> nodes to the
+        <a href=#context-object>context object</a>.
+
+      <dt>If <var title="">position</var> is an
+      <a class=external data-anolis-spec=domcore href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#ascii-case-insensitive>ASCII case-insensitive</a> match for
+      the string "afterend"
+      <dd>
+        <p>Insert all the <var title="">new children</var> nodes immediately after
+        the <a href=#context-object>context object</a>.
+    </dl>
+
+    <p>The <var title="">new children</var> nodes must be inserted in a manner that
+    preserves their order and fires mutation events as if a
+    <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#documentfragment><code class=external data-anolis-spec=domcore>DocumentFragment</code></a> containing the
+    <var title="">new children</var> had been inserted.
+</ol>
+
+</div>
 
 
 
@@ -447,8 +598,10 @@ for their useful comments.
 
 <p>Special thanks to Ian Hickson for defining the
 <a href=#dom-element-innerhtml><code title=dom-Element-innerHTML>innerHTML</code></a> and
-<a href=#dom-element-outerhtml><code title=dom-Element-outerHTML>outerHTML</code></a> attributes in
+<a href=#dom-element-outerhtml><code title=dom-Element-outerHTML>outerHTML</code></a> attributes, and the
+<a href=#dom-element-insertadjacenthtml><code title=dom-Element-insertAdjacentHTML>insertAdjacentHTML()</code></a> method in
 <cite>HTML</cite>.
 <a class=informative data-anolis-ref="" href=#refsHTML>[HTML]</a>
+
 
 <script src=http://www.whatwg.org/specs/web-apps/current-work/dfn.js></script>

@@ -1,5 +1,5 @@
 <!DOCTYPE html><meta charset=UTF-8>
-<title>The DOMParser interface</title>
+<title>DOM Parsing and Serialization</title>
 <link href=http://www.whatwg.org/style/specification rel=stylesheet>
 <style>
  pre, code { font-family:monospace, sans-serif; }
@@ -18,7 +18,7 @@
 </style>
 <body class=draft>
 <div class=head id=head>
-<h1><a href=#domparser><code>DOMParser</code></a></h1>
+<h1>DOM Parsing and Serialization</h1>
 <h2 class="no-num no-toc" id=work-in-progress-&mdash;-last-update-4-november-2010>Work in Progress &mdash; Last Update 4 November 2010</h2>
 <dl>
  <dt>Editor
@@ -153,11 +153,8 @@ following steps:
 
 
 
-<h2 class=no-num id=references>References</h2><!--REFS-->
+<h2 class=no-num id=references>References</h2>
 <p>All references are normative unless marked "Non-normative".</p>
-
-<!-- Dates are only included for standards older than the Web,
-because the newer ones keep changing. -->
 
 <div id=anolis-references><dl><dt id=refsDOMCORE>[DOMCORE]
 <dd><cite><a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html>Web DOM Core</a></cite>, A. van Kesteren. W3C.

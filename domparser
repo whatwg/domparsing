@@ -19,7 +19,7 @@
 <body class=draft>
 <div class=head id=head>
 <h1>DOM Parsing and Serialization</h1>
-<h2 class="no-num no-toc" id=work-in-progress-&mdash;-last-update-4-november-2010>Work in Progress &mdash; Last Update 4 November 2010</h2>
+<h2 class="no-num no-toc" id=work-in-progress-&mdash;-last-update-6-november-2010>Work in Progress &mdash; Last Update 6 November 2010</h2>
 <dl>
  <dt>Editor
  <dd>Ms2ger &lt;ms2ger@gmail.com&gt;
@@ -129,7 +129,7 @@ this specification.</p>
 [Constructor]
 interface <dfn id=domparser>DOMParser</dfn> {
   <a class=external data-anolis-spec=domcore href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#document>Document</a> <a href=#dom-domparser-parsefromstring title=dom-DOMParser-parseFromString>parseFromString</a>(DOMString str, DOMString contentType);
-}</pre>
+};</pre>
 
 <p>The <dfn id=dom-domparser-parsefromstring title=dom-DOMParser-parseFromString><code>parseFromString(<var title="">str</var>, <var title="">contentType</var>)</code></dfn> method must run the
 following steps:

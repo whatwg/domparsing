@@ -115,7 +115,7 @@ this specification.</p>
 
 
 
-<h2>Interface</h2>
+<h2>The <code>DOMParser</code> interface</h2>
 <pre class=idl>interface <dfn>XMLDocument</dfn> : <span data-anolis-spec=domcore>Document</span> {
 };
 
@@ -151,6 +151,21 @@ following steps:
   may append nodes to this element, for example to describe the nature of the
   error.
 </ol>
+
+
+
+<h2>The <code>XMLSerializer</code> interface</h2>
+<pre class=idl>[Constructor]
+interface <dfn>XMLSerializer</dfn> {
+  DOMString <span title=dom-XMLSerializer-serializeToString>serializeToString</span>(<span data-anolis-spec=domcore>Node</span> root);
+};</pre>
+
+<p>The
+<dfn title=dom-XMLSerializer-serializeToString><code>serializeToString(<var
+title>root</var>)</code></dfn> method must return the result of running the
+<span data-anolis-spec=html>XML fragment serialization algorithm</span> on
+<var title>root</var> (this might raise an exception instead of returning a
+string).
 
 
 

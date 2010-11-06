@@ -44,7 +44,8 @@
   <ol>
    <li><a href=#dependencies><span class=secno>1.1 </span>Dependencies</a></li>
    <li><a href=#extensibility><span class=secno>1.2 </span>Extensibility</a></ol></li>
- <li><a href=#interface><span class=secno>2 </span>Interface</a></li>
+ <li><a href=#the-domparser-interface><span class=secno>2 </span>The <code>DOMParser</code> interface</a></li>
+ <li><a href=#the-xmlserializer-interface><span class=secno>3 </span>The <code>XMLSerializer</code> interface</a></li>
  <li><a class=no-num href=#references>References</a></li>
  <li><a class=no-num href=#acknowledgements>Acknowledgements</a></ol>
 <!--end-toc-->
@@ -122,7 +123,7 @@ this specification.</p>
 
 
 
-<h2 id=interface><span class=secno>2 </span>Interface</h2>
+<h2 id=the-domparser-interface><span class=secno>2 </span>The <a href=#domparser><code>DOMParser</code></a> interface</h2>
 <pre class=idl>interface <dfn id=xmldocument>XMLDocument</dfn> : <a class=external data-anolis-spec=domcore href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#document>Document</a> {
 };
 
@@ -150,6 +151,20 @@ following steps:
   may append nodes to this element, for example to describe the nature of the
   error.
 </ol>
+
+
+
+<h2 id=the-xmlserializer-interface><span class=secno>3 </span>The <a href=#xmlserializer><code>XMLSerializer</code></a> interface</h2>
+<pre class=idl>[Constructor]
+interface <dfn id=xmlserializer>XMLSerializer</dfn> {
+  DOMString <a href=#dom-xmlserializer-serializetostring title=dom-XMLSerializer-serializeToString>serializeToString</a>(<a class=external data-anolis-spec=domcore href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#node>Node</a> root);
+};</pre>
+
+<p>The
+<dfn id=dom-xmlserializer-serializetostring title=dom-XMLSerializer-serializeToString><code>serializeToString(<var title="">root</var>)</code></dfn> method must return the result of running the
+<a class=external data-anolis-spec=html href=http://www.whatwg.org/html/#xml-fragment-serialization-algorithm>XML fragment serialization algorithm</a> on
+<var title="">root</var> (this might raise an exception instead of returning a
+string).
 
 
 

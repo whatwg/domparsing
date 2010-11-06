@@ -1,6 +1,8 @@
 {
   "dom-domparser-parsefromstring": "dom-domparser-parsefromstring",
+  "dom-xmlserializer-serializetostring": "dom-xmlserializer-serializetostring",
   "domparser": "domparser",
   "other applicable specifications": "other-applicable-specifications",
-  "xmldocument": "xmldocument"
+  "xmldocument": "xmldocument",
+  "xmlserializer": "xmlserializer"
 }

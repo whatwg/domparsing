@@ -51,7 +51,8 @@
  <li><a href=#the-xmlserializer-interface><span class=secno>3 </span>The <code>XMLSerializer</code> interface</a></li>
  <li><a href=#extensions-to-the-element-interface><span class=secno>4 </span>Extensions to the <code class=external data-anolis-spec=domcore>Element</code> interface</a>
   <ol>
-   <li><a href=#innerhtml><span class=secno>4.1 </span><code title=dom-Element-innerHTML>innerHTML</code></a></ol></li>
+   <li><a href=#innerhtml><span class=secno>4.1 </span><code title=dom-Element-innerHTML>innerHTML</code></a></li>
+   <li><a href=#outerhtml><span class=secno>4.2 </span><code title=dom-Element-outerHTML>outerHTML</code></a></ol></li>
  <li><a class=no-num href=#references>References</a></li>
  <li><a class=no-num href=#acknowledgements>Acknowledgements</a></ol>
 <!--end-toc-->
@@ -185,6 +186,7 @@ string).
 <pre class=idl>[Supplemental]
 interface <a class=external data-anolis-spec=domcore href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#element>Element</a> {
   attribute DOMString <a href=#dom-element-innerhtml title=dom-Element-innerHTML>innerHTML</a>;
+  attribute DOMString <a href=#dom-element-outerhtml title=dom-Element-outerHTML>outerHTML</a>;
 };</pre>
 
 
@@ -311,6 +313,115 @@ exception instead of returning a string).
 </div>
 
 
+<h3 id=outerhtml><span class=secno>4.2 </span><a href=#dom-element-outerhtml><code title=dom-Element-outerHTML>outerHTML</code></a></h3>
+
+<p>The <dfn id=dom-element-outerhtml title=dom-Element-outerHTML><code>outerHTML</code></dfn> IDL
+attribute represents the markup of the
+<a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#element><code class=external data-anolis-spec=domcore>Element</code></a> and its contents.
+
+<dl class=domintro>
+  <dt><var title="">element</var> . <a href=#dom-element-outerhtml><code title=dom-Element-outerHTML>outerHTML</code></a> [ = <var title="">value</var> ]
+  <dd>
+    <p>Returns a fragment of HTML or XML that represents the element and its
+    contents.
+
+    <p>Can be set, to replace the element with nodes parsed from the given
+    string.
+
+    <p>In the case of an <a class=external data-anolis-spec=domcore href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#xml-document>XML document</a>,
+    will throw an
+    <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#dom-domexception-invalid_state_err><code class=external data-anolis-spec=domcore title=dom-DOMException-INVALID_STATE_ERR>INVALID_STATE_ERR</code></a>
+    if the element cannot be serialized to XML, and a
+    <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#dom-domexception-syntax_err><code class=external data-anolis-spec=domcore title=dom-DOMException-SYNTAX_ERR>SYNTAX_ERR</code></a>
+    if the given string is not well-formed.
+
+    <p>Throws a
+    <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#dom-domexception-no_modification_allowed_err><code class=external data-anolis-spec=domcore title=dom-DOMException-NO_MODIFICATION_ALLOWED_ERR>NO_MODIFICATION_ALLOWED_ERR</code></a>
+    exception if the parent of the element is the
+    <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#document><code class=external data-anolis-spec=domcore>Document</code></a> node.
+</dl>
+
+<div class=impl>
+
+<p>On getting, if the <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#element><code class=external data-anolis-spec=domcore>Element</code></a>'s
+<a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#dom-node-ownerdocument><code class=external data-anolis-spec=domcore title=dom-Node-ownerDocument>ownerDocument</code></a>
+is an <a class=external data-anolis-spec=domcore href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#html-document>HTML document</a>, then the attribute
+must return the result of running the
+<a class=external data-anolis-spec=html href=http://www.whatwg.org/html/#html-fragment-serialization-algorithm>HTML fragment serialization algorithm</a> on a
+fictional node whose only child is <a href=#context-object>context object</a>; otherwise, the
+<a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#element><code class=external data-anolis-spec=domcore>Element</code></a>'s
+<a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#dom-node-ownerdocument><code class=external data-anolis-spec=domcore title=dom-Node-ownerDocument>ownerDocument</code></a>
+is an <a class=external data-anolis-spec=domcore href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#xml-document>XML document</a>, and the attribute must
+return the result of running the
+<a class=external data-anolis-spec=html href=http://www.whatwg.org/html/#xml-fragment-serialization-algorithm>XML fragment serialization algorithm</a> on that
+fictional node instead (this might raise an exception instead of returning a
+string).
+
+<p>On setting, the following steps must be run:
+
+<ol>
+  <li>
+    <p>Let <var title="">parent</var> be the <a href=#context-object>context object</a>'s
+    <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#dom-node-parentnode><code class=external data-anolis-spec=domcore title=dom-Node-parentNode>parentNode</code></a>.
+
+  <li>
+    <p>If <var title="">parent</var> is null, abort these steps. There would be no
+    way to obtain a reference to the nodes created even if the remaining steps
+    were run.
+
+  <li>
+    <p>If <var title="">parent</var> is a
+    <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#document><code class=external data-anolis-spec=domcore>Document</code></a> object, throw a
+    <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#dom-domexception-no_modification_allowed_err><code class=external data-anolis-spec=domcore title=dom-DOMException-NO_MODIFICATION_ALLOWED_ERR>NO_MODIFICATION_ALLOWED_ERR</code></a>
+    exception and abort these steps.
+
+  <li>
+    <p>If <var title="">parent</var> is a
+    <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#documentfragment><code class=external data-anolis-spec=domcore>DocumentFragment</code></a> node, let
+    <var title="">parent</var> be a new with <code title="">body</code> as its
+    <a class=external data-anolis-spec=domcore href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-element-local-name title=concept-element-local-name>local name</a>
+    and the <a class=external data-anolis-spec=domcore href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#html-namespace>HTML namespace</a> as its
+    <a class=external data-anolis-spec=domcore href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-element-namespace title=concept-element-namespace>namespace</a>.
+
+  <li>
+    <p>If the <a href=#context-object>context object</a>'s
+    <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#dom-node-ownerdocument><code class=external data-anolis-spec=domcore title=dom-Node-ownerDocument>ownerDocument</code></a>
+    is an <a class=external data-anolis-spec=domcore href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#html-document>HTML document</a>: Invoke the
+    <a class=external data-anolis-spec=html href=http://www.whatwg.org/html/#html-fragment-parsing-algorithm>HTML fragment parsing algorithm</a>.
+
+    <p>If the <a href=#context-object>context object</a>'s
+    <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#dom-node-ownerdocument><code class=external data-anolis-spec=domcore title=dom-Node-ownerDocument>ownerDocument</code></a>
+    is an <a class=external data-anolis-spec=domcore href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#xml-document>XML document</a>: Invoke the
+    <a class=external data-anolis-spec=html href=http://www.whatwg.org/html/#xml-fragment-parsing-algorithm>XML fragment parsing algorithm</a>.
+
+    <p>In either case, the algorithm must be invoked with the string being
+    assigned into the <a href=#dom-element-outerhtml><code title=dom-Element-outerHTML>outerHTML</code></a>
+    attribute as the <var title="">input</var>, and <var title="">parent</var> as the
+    <var title="">context</var> element.
+
+    <p>If this raises an exception, then abort these steps.
+
+    <p>Otherwise, let <var title="">new children</var> be the nodes returned.
+
+  <li>
+    <p>Set the
+    <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#dom-node-ownerdocument><code class=external data-anolis-spec=domcore title=dom-Node-ownerDocument>ownerDocument</code></a>
+    of all the nodes in <var title="">new children</var> to the
+    <a href=#context-object>context object</a>'s
+    <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#dom-node-ownerdocument><code class=external data-anolis-spec=domcore title=dom-Node-ownerDocument>ownerDocument</code></a>.
+
+  <li>
+    <p>Remove the <a href=#context-object>context object</a> from its parent node, firing
+    mutation events as appropriate, and then insert in its place all the
+    <var title="">new children</var> nodes, preserving their order, and again
+    firing mutation events as if a
+    <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#documentfragment><code class=external data-anolis-spec=domcore>DocumentFragment</code></a> containing the
+    <var title="">new children</var> had been inserted.
+</ol>
+
+</div>
+
+
 
 <h2 class=no-num id=references>References</h2>
 <p>All references are normative unless marked "Non-normative".</p>
@@ -335,7 +446,8 @@ exception instead of returning a string).
 for their useful comments.
 
 <p>Special thanks to Ian Hickson for defining the
-<a href=#dom-element-innerhtml><code title=dom-Element-innerHTML>innerHTML</code></a> attribute in
+<a href=#dom-element-innerhtml><code title=dom-Element-innerHTML>innerHTML</code></a> and
+<a href=#dom-element-outerhtml><code title=dom-Element-outerHTML>outerHTML</code></a> attributes in
 <cite>HTML</cite>.
 <a class=informative data-anolis-ref="" href=#refsHTML>[HTML]</a>
 

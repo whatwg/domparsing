@@ -42,7 +42,13 @@
 
 
 
-<h2>Conformance requirements</h2>
+<h2>Common infrastructure</h2>
+<h3>Terminology</h3>
+<p>The term <dfn>context object</dfn> means the object on which the method or
+attribute being discussed was called.
+
+
+<h3>Conformance requirements</h3>
 <p>All diagrams, examples, and notes in this specification are
 non-normative, as are all sections explicitly marked non-normative.
 Everything else in this specification is normative.</p>
@@ -76,7 +82,7 @@ out of memory, or to work around platform-specific limitations.</p>
 <p>Unless otherwise stated, string comparisons are done in a <span
 data-anolis-spec=domcore>case-sensitive</span> manner.
 
-<h3>Dependencies</h3>
+<h4>Dependencies</h4>
 
 <p>The IDL fragments in this specification must be interpreted as
 required for conforming IDL fragments, as described in the Web IDL
@@ -87,7 +93,7 @@ Core</cite> and <cite>HTML</cite>.
 <span data-anolis-ref>DOMCORE</span>
 <span data-anolis-ref>HTML</span>
 
-<h3>Extensibility</h3>
+<h4>Extensibility</h4>
 
 <p>Vendor-specific proprietary extensions to this specification are
 strongly discouraged. Authors must not use such extensions, as
@@ -169,6 +175,138 @@ string).
 
 
 
+<h2>Extensions to the <code data-anolis-spec=domcore>Element</code> interface</h2>
+
+<pre class=idl>[Supplemental]
+interface <span data-anolis-spec=domcore>Element</span> {
+  attribute DOMString <span title=dom-Element-innerHTML>innerHTML</span>;
+};</pre>
+
+
+<h3><code title=dom-Element-innerHTML>innerHTML</code></h3>
+<p>The <dfn title=dom-Element-innerHTML><code>innerHTML</code></dfn> IDL
+attribute represents the markup of the
+<code data-anolis-spec=domcore>Element</code>'s contents.
+
+<dl class=domintro>
+  <!--doc.ih
+  <dt><var title>document</var> . <code title=dom-Document-innerHTML>innerHTML</code> [ = <var title>value</var> ]
+  <dd>
+    <p>Returns a fragment of HTML or XML that represents the
+    <code data-anolis-spec=domcore>Document</code>.
+
+    <p>Can be set, to replace the
+    <code data-anolis-spec=domcore>Document</code>'s contents with the result of
+    parsing the given string.
+
+    <p>In the case of an <span data-anolis-spec=domcore>XML document</span>,
+    will throw an
+    <code data-anolis-spec=domcore title=dom-DOMException-INVALID_STATE_ERR>INVALID_STATE_ERR</code>
+    if the <code data-anolis-spec=domcore>Document</code> cannot be serialized
+    to XML, and a
+    <code data-anolis-spec=domcore title=dom-DOMException-SYNTAX_ERR>SYNTAX_ERR</code>
+    if the given string is not well-formed.
+  -->
+
+  <dt><var title>element</var> . <code title=dom-Element-innerHTML>innerHTML</code> [ = <var title>value</var> ]
+  <dd>
+    <p>Returns a fragment of HTML or XML that represents the element's
+    contents.
+
+    <p>Can be set, to replace the contents of the element with nodes
+    parsed from the given string.
+
+    <p>In the case of an <span data-anolis-spec=domcore>XML document</span>,
+    will throw an
+    <code data-anolis-spec=domcore title=dom-DOMException-INVALID_STATE_ERR>INVALID_STATE_ERR</code>
+    if the <code data-anolis-spec=domcore>Element</code> cannot be serialized
+    to XML, and a
+    <code data-anolis-spec=domcore title=dom-DOMException-SYNTAX_ERR>SYNTAX_ERR</code>
+    if the given string is not well-formed.
+</dl>
+
+<div class=impl>
+
+<p>On getting, if the <code data-anolis-spec=domcore>Element</code>'s
+<code data-anolis-spec=domcore title=dom-Node-ownerDocument>ownerDocument</code>
+is an <span data-anolis-spec=domcore>HTML document</span>, then the attribute
+must return the result of running the
+<span data-anolis-spec=html>HTML fragment serialization algorithm</span> on the
+<code data-anolis-spec=domcore>Element</code>; otherwise, the
+<code data-anolis-spec=domcore>Element</code>'s
+<code data-anolis-spec=domcore title=dom-Node-ownerDocument>ownerDocument</code>
+is an <span data-anolis-spec=domcore>XML document</span>, and the attribute must
+return the result of running the
+<span data-anolis-spec=html>XML fragment serialization algorithm</span> on the
+<code data-anolis-spec=domcore>Element</code> instead (this might raise an
+exception instead of returning a string).
+
+<p>On setting, the following steps must be run:
+
+<ol>
+  <li>
+    <p>If the <code data-anolis-spec=domcore>Element</code>'s
+    <code data-anolis-spec=domcore title=dom-Node-ownerDocument>ownerDocument</code>
+    is an <span data-anolis-spec=domcore>HTML document</span>: Invoke the
+    <span data-anolis-spec=html>HTML fragment parsing algorithm</span>.
+
+    <p>If the <code data-anolis-spec=domcore>Element</code>'s
+    <code data-anolis-spec=domcore title=dom-Node-ownerDocument>ownerDocument</code>
+    is an <span data-anolis-spec=domcore>XML document</span>: Invoke the
+    <span data-anolis-spec=html>XML fragment parsing algorithm</span>.
+
+    <p>In either case, the algorithm must be invoked with the given value as the
+    <var title>input</var>, and the <span>context object</span> as the
+    <var title>context</var> element.
+    <!--doc.ih
+    If the node is an <code data-anolis-spec=domcore>Element</code>
+    node, then, in addition, that element must be passed as the <var
+    title="">context</var> element.
+    -->
+
+    <p>If this raises an exception, then abort these steps.
+
+    <p>Otherwise, let <var title>new children</var> be the nodes returned.
+
+  <!--doc.ih
+  <li>
+    <p>If the attribute is being set on a <code>Document</code> node,
+    and that document has an <span>active parser</span>, then abort
+    that parser.
+  -->
+
+  <li>
+    <p>Remove the child nodes of the <span>context object</span>, firing
+    appropriate mutation events.
+
+  <li>
+    <p>
+    <!--doc.ih
+    If the attribute is being set on a <code>Document</code> node,
+    let <var title>target document</var> be that
+    <code>Document</code> node. Otherwise, the attribute is being set
+    on an <code>Element</code> node;
+    -->
+    Let <var title>target document</var> be the <span>context object</span>'s
+    <code data-anolis-spec=domcore title=dom-Node-ownerDocument>ownerDocument</code>.
+
+  <li>
+    <p>Set the
+    <code data-anolis-spec=domcore title=dom-Node-ownerDocument>ownerDocument</code>
+    of all the <code data-anolis-spec=domcore>Node</code>s in
+    <var title>new children</var> to the <var title>target document</var>.
+
+  <li>
+    <p>Append all the <var title>new children</var> nodes to the
+    <span>context object</span>, preserving their order, and firing mutation
+    events as if a <code data-anolis-spec=domcore>DocumentFragment</code>
+    containing the <var title>new children</var> had been inserted.
+</ol>
+
+</div>
+
+
+
 <h2 class=no-num>References</h2>
 <p>All references are normative unless marked "Non-normative".</p>
 
@@ -183,5 +321,9 @@ string).
 
 for their useful comments.
 
+<p>Special thanks to Ian Hickson for defining the
+<code title=dom-Element-innerHTML>innerHTML</code> attribute in
+<cite>HTML</cite>.
+<span data-anolis-ref class=informative>HTML</span>
 
 <script src="http://www.whatwg.org/specs/web-apps/current-work/dfn.js"></script>

@@ -1,5 +1,7 @@
 {
+  "context object": "context-object",
   "dom-domparser-parsefromstring": "dom-domparser-parsefromstring",
+  "dom-element-innerhtml": "dom-element-innerhtml",
   "dom-xmlserializer-serializetostring": "dom-xmlserializer-serializetostring",
   "domparser": "domparser",
   "other applicable specifications": "other-applicable-specifications",

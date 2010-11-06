@@ -89,8 +89,9 @@ required for conforming IDL fragments, as described in the Web IDL
 specification. <span data-anolis-ref>WEBIDL</span>
 
 <p>Some of the terms used in this specification are defined in <cite>DOM
-Core</cite> and <cite>HTML</cite>.
+Core</cite>, <cite>DOM Range</cite> and <cite>HTML</cite>.
 <span data-anolis-ref>DOMCORE</span>
+<span data-anolis-ref>DOMRANGE</span>
 <span data-anolis-ref>HTML</span>
 
 <h4>Extensibility</h4>
@@ -567,6 +568,96 @@ method, when invoked, must run the following algorithm:
 
 
 
+<h2>Extensions to the <code data-anolis-spec=domrange>Range</code> interface</h2>
+
+<pre class=idl>[Supplemental]
+interface <span data-anolis-spec=domrange>Range</span> {
+  <span data-anolis-spec=domcore>DocumentFragment</span> <span title=dom-Range-createContextualFragment>createContextualFragment</span>(DOMString fragment);
+};</pre>
+
+<dl class=domintro>
+  <dt><var title>fragment</var> = <var title>range</var> . <code title=dom-Range-createContextualFragment>createContextualFragment</code>(<var title>fragment</var>)
+  <dd>
+    <p>Returns a <code data-anolis-spec=domcore>DocumentFragment</code>, created
+    from the markup string given.
+</dl>
+
+<div class=impl>
+
+<p>The
+<dfn title=dom-Range-createContextualFragment><code>createContextualFragment(<var title>fragment</var>)</code></dfn>
+method must run the following steps:
+
+<ol>
+  <li>If the <span>context object</span>'s
+  <span data-anolis-spec=domrange title=concept-range-start>start's</span>
+  <var data-anolis-spec=domrange title=concept-boundary-point-node>node</var> is
+  null, raise an
+  <code data-anolis-spec=domcore title=dom-DOMException-INVALID_STATE_ERR>INVALID_STATE_ERR</code>
+  exception and abort these steps.
+
+  <li>
+    <p>Let <var title>element</var> the <span>context object</span>'s
+    <span data-anolis-spec=domrange title=concept-range-start>start's</span>
+    <var data-anolis-spec=domrange title=concept-boundary-point-node>node</var>.
+
+    <p>If the following are all true:
+
+    <ul>
+      <li><var title>element</var>'s
+      <code data-anolis-spec=domcore title=dom-Node-ownerDocument>ownerDocument</code>
+      is an <span data-anolis-spec=domcore>HTML document</span>,
+
+      <li><var title>element</var>'s
+      <span data-anolis-spec=domcore title=concept-element-local-name>local name</span>
+      is "<code title>html</code>", and
+
+      <li><var title>element</var>'s
+      <span data-anolis-spec=domcore title=concept-element-namespace>namespace</span>
+      is the <span data-anolis-spec=domcore>HTML namespace</span>;
+    </ul>
+
+    <p>let <var title>element</var> be a new
+    <code data-anolis-spec=domcore>Element</code> with "<code title>body</code>"
+    as its
+    <span data-anolis-spec=domcore title=concept-element-local-name>local name</span>
+    and the <span data-anolis-spec=domcore>HTML namespace</span> as its
+    <span data-anolis-spec=domcore title=concept-element-namespace>namespace</span>.
+
+  <li>
+    <p>If the node's document is an <span data-anolis-spec=domcore>HTML
+    document</span>: Invoke the <span data-anolis-spec=html>HTML fragment
+    parsing algorithm</span>.
+
+    <p>If the node's document is an <span data-anolis-spec=domcore>XML
+    document</span>: Invoke the <span data-anolis-spec=html>XML fragment parsing
+    algorithm</span>.
+
+    <p>In either case, the algorithm must be invoked with
+    <var title>fragment</var> as the <var title>input</var> and
+    <var title>element</var> as the <var title>context</var> element.
+
+  <li>If this raises an exception, then abort these steps. Otherwise, let <var
+  title>new children</var> be the nodes returned.
+
+  <li>Set the
+  <code data-anolis-spec=domcore title=dom-Node-ownerDocument>ownerDocument</code>
+  of all the nodes in <var title>new children</var> to the
+  <span>context object</span>'s
+  <span data-anolis-spec=domrange title=concept-range-root>root's</span>
+  <code data-anolis-spec=domcore title=dom-Node-ownerDocument>ownerDocument</code>.
+
+  <li>Let <var title>fragment</var> be a new
+  <code data-anolis-spec=domcore>DocumentFragment</code> and append all
+  <var title>new children</var> to it.
+
+  <li>Return <var title>fragment</var>.
+</ol>
+
+</div>
+
+
+
 <h2 class=no-num>References</h2>
 <p>All references are normative unless marked "Non-normative".</p>
 
@@ -577,7 +668,7 @@ method, when invoked, must run the following algorithm:
 <h2 class=no-num>Acknowledgements</h2>
 <p>Thanks to
 
-
+Henri Sivonen
 
 for their useful comments.
 

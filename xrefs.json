@@ -4,6 +4,7 @@
   "dom-element-innerhtml": "dom-element-innerhtml",
   "dom-element-insertadjacenthtml": "dom-element-insertadjacenthtml",
   "dom-element-outerhtml": "dom-element-outerhtml",
+  "dom-range-createcontextualfragment": "dom-range-createcontextualfragment",
   "dom-xmlserializer-serializetostring": "dom-xmlserializer-serializetostring",
   "domparser": "domparser",
   "other applicable specifications": "other-applicable-specifications",

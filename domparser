@@ -19,7 +19,7 @@
 <body class=draft>
 <div class=head id=head>
 <h1>DOM Parsing and Serialization</h1>
-<h2 class="no-num no-toc" id=work-in-progress-&mdash;-last-update-11-november-2010>Work in Progress &mdash; Last Update 11 November 2010</h2>
+<h2 class="no-num no-toc" id=work-in-progress-&mdash;-last-update-13-november-2010>Work in Progress &mdash; Last Update 13 November 2010</h2>
 <dl>
  <dt>Editor
  <dd>Ms2ger &lt;ms2ger@gmail.com&gt;
@@ -645,7 +645,10 @@ method must run the following steps:
     <var title="">fragment</var> as the <var title="">input</var> and
     <var title="">element</var> as the <var title="">context</var> element.
 
-  <li>If this raises an exception, then abort these steps. Otherwise, let <var title="">new children</var> be the nodes returned.
+  <li>If this raises an exception, then abort these steps. Otherwise, let
+  <var title="">new children</var> be the nodes returned.
+
+  <li>Mark all scripts in <var title="">new children</var> as "already started".
 
   <li>Set the
   <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#dom-node-ownerdocument><code class=external data-anolis-spec=domcore title=dom-Node-ownerDocument>ownerDocument</code></a>

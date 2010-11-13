@@ -637,8 +637,10 @@ method must run the following steps:
     <var title>fragment</var> as the <var title>input</var> and
     <var title>element</var> as the <var title>context</var> element.
 
-  <li>If this raises an exception, then abort these steps. Otherwise, let <var
-  title>new children</var> be the nodes returned.
+  <li>If this raises an exception, then abort these steps. Otherwise, let
+  <var title>new children</var> be the nodes returned.
+
+  <li>Mark all scripts in <var title>new children</var> as "already started".
 
   <li>Set the
   <code data-anolis-spec=domcore title=dom-Node-ownerDocument>ownerDocument</code>

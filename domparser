@@ -177,10 +177,36 @@ interface <dfn id=xmlserializer>XMLSerializer</dfn> {
 };</pre>
 
 <p>The
-<dfn title=dom-XMLSerializer-serializeToString id=dom-xmlserializer-serializetostring><code>serializeToString(<var title="">root</var>)</code></dfn> method must return the result of running the
-<a data-anolis-spec=html class=external href=http://www.whatwg.org/html/#xml-fragment-serialization-algorithm>XML fragment serialization algorithm</a> on
-<var title="">root</var> (this might raise an exception instead of returning a
-string).
+<dfn title=dom-XMLSerializer-serializeToString id=dom-xmlserializer-serializetostring><code>serializeToString(<var title="">root</var>)</code></dfn>
+method must run the appropriate steps, depending on <var title="">root</var>'s
+interface:
+<dl class=switch>
+  <dt><a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#element><code data-anolis-spec=domcore class=external>Element</code></a>
+  <dt><a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#document><code data-anolis-spec=domcore class=external>Document</code></a>
+  <dd><p>Run the
+  <a data-anolis-spec=html class=external href=http://www.whatwg.org/html/#xml-fragment-serialization-algorithm>XML fragment serialization algorithm</a> on
+  <var title="">root</var>. If this threw an exception, allow that exception to
+  propagate out from this algorithm. Otherwise, return the returned string.
+
+  <dt><a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#comment><code data-anolis-spec=domcore class=external>Comment</code></a>
+  <dd>
+    <p>Let <var title="">markup</var> the concatenation of
+    "<code title="">&lt;!--</code>", <var title="">root</var>'s
+    <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#dom-characterdata-data><code data-anolis-spec=domcore title=dom-characterdata-data class=external>data</code></a>, and
+    "<code title="">--&gt;</code>".
+
+    <p>If <var title="">markup</var> matches the
+    <a href=http://www.w3.org/TR/xml/#NT-Comment><code data-anolis-spec=xml title=comment class=external>Comment</code></a> production, return
+    <var title="">markup</var>. Otherwise, throw an
+    <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#dom-domexception-invalid_state_err><code data-anolis-spec=domcore title=dom-DOMException-INVALID_STATE_ERR class=external>INVALID_STATE_ERR</code></a>
+    exception.
+
+  <dt><a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#documentfragment><code data-anolis-spec=domcore class=external>DocumentFragment</code></a>
+  <dt><a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#documenttype><code data-anolis-spec=domcore class=external>DocumentType</code></a>
+  <dt><a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#processinginstruction><code data-anolis-spec=domcore class=external>ProcessingInstruction</code></a>
+  <dt><a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#text><code data-anolis-spec=domcore class=external>Text</code></a>
+  <dd class=XXX>You tell me.
+</dl>
 
 
 

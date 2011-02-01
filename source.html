@@ -168,11 +168,36 @@ interface <dfn>XMLSerializer</dfn> {
 };</pre>
 
 <p>The
-<dfn title=dom-XMLSerializer-serializeToString><code>serializeToString(<var
-title>root</var>)</code></dfn> method must return the result of running the
-<span data-anolis-spec=html>XML fragment serialization algorithm</span> on
-<var title>root</var> (this might raise an exception instead of returning a
-string).
+<dfn title=dom-XMLSerializer-serializeToString><code>serializeToString(<var title>root</var>)</code></dfn>
+method must run the appropriate steps, depending on <var title>root</var>'s
+interface:
+<dl class=switch>
+  <dt><code data-anolis-spec=domcore>Element</code>
+  <dt><code data-anolis-spec=domcore>Document</code>
+  <dd><p>Run the
+  <span data-anolis-spec=html>XML fragment serialization algorithm</span> on
+  <var title>root</var>. If this threw an exception, allow that exception to
+  propagate out from this algorithm. Otherwise, return the returned string.
+
+  <dt><code data-anolis-spec=domcore>Comment</code>
+  <dd>
+    <p>Let <var title>markup</var> the concatenation of
+    "<code title>&lt;!--</code>", <var title>root</var>'s
+    <code title=dom-characterdata-data data-anolis-spec=domcore>data</code>, and
+    "<code title>--></code>".
+
+    <p>If <var title>markup</var> matches the
+    <code title=comment data-anolis-spec=xml>Comment</code> production, return
+    <var title>markup</var>. Otherwise, throw an
+    <code title=dom-DOMException-INVALID_STATE_ERR data-anolis-spec=domcore>INVALID_STATE_ERR</code>
+    exception.
+
+  <dt><code data-anolis-spec=domcore>DocumentFragment</code>
+  <dt><code data-anolis-spec=domcore>DocumentType</code>
+  <dt><code data-anolis-spec=domcore>ProcessingInstruction</code>
+  <dt><code data-anolis-spec=domcore>Text</code>
+  <dd class=XXX>You tell me.
+</dl>
 
 
 

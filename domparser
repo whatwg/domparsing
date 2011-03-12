@@ -631,11 +631,26 @@ method must run the following steps:
   exception and abort these steps.
 
   <li>
-    <p>Let <var title="">element</var> the <a href=#context-object>context object</a>'s
+    <p>Let <var title="">node</var> the <a href=#context-object>context object</a>'s
     <a class=external data-anolis-spec=domrange href=http://html5.org/specs/dom-range.html#concept-range-start title=concept-range-start>start's</a>
     <a href=http://html5.org/specs/dom-range.html#concept-boundary-point-node><var class=external data-anolis-spec=domrange title=concept-boundary-point-node>node</var></a>.
 
-    <p>If the following are all true:
+    <p>Let <var title="">element</var> be as follows, depending on
+    <var title="">node</var>'s interface:
+    <dl class=switch>
+      <dt><a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#element><code class=external data-anolis-spec=domcore>Element</code></a>
+      <dd><var title="">node</var>
+
+      <dt><a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#text><code class=external data-anolis-spec=domcore>Text</code></a>
+      <dd><var title="">node</var>'s
+      <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#dom-node-parentelement><code class=external data-anolis-spec=domcore title=dom-Node-parentElement>parentElement</code></a>
+
+      <dt>&hellip;
+      <dd>You tell me
+    </dl>
+
+  <li>
+    <p>If either <var title="">element</var> is null or the following are all true:
 
     <ul>
       <li><var title="">element</var>'s
@@ -717,11 +732,7 @@ method must run the following steps:
 
 
 <h2 class=no-num id=acknowledgements>Acknowledgements</h2>
-<p>Thanks to
-
-Henri Sivonen
-
-for their useful comments.
+<p>Thanks to Aryeh Gregor and Henri Sivonen for their useful comments.
 
 <p>Special thanks to Ian Hickson for defining the
 <a href=#dom-element-innerhtml><code title=dom-Element-innerHTML>innerHTML</code></a> and

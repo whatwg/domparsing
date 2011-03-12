@@ -622,11 +622,26 @@ method must run the following steps:
   exception and abort these steps.
 
   <li>
-    <p>Let <var title>element</var> the <span>context object</span>'s
+    <p>Let <var title>node</var> the <span>context object</span>'s
     <span data-anolis-spec=domrange title=concept-range-start>start's</span>
     <var data-anolis-spec=domrange title=concept-boundary-point-node>node</var>.
 
-    <p>If the following are all true:
+    <p>Let <var title>element</var> be as follows, depending on
+    <var title>node</var>'s interface:
+    <dl class=switch>
+      <dt><code data-anolis-spec=domcore>Element</code>
+      <dd><var title>node</var>
+
+      <dt><code data-anolis-spec=domcore>Text</code>
+      <dd><var title>node</var>'s
+      <code data-anolis-spec=domcore title=dom-Node-parentElement>parentElement</code>
+
+      <dt>&hellip;
+      <dd>You tell me
+    </dl>
+
+  <li>
+    <p>If either <var title>element</var> is null or the following are all true:
 
     <ul>
       <li><var title>element</var>'s
@@ -693,11 +708,7 @@ method must run the following steps:
 
 
 <h2 class=no-num>Acknowledgements</h2>
-<p>Thanks to
-
-Henri Sivonen
-
-for their useful comments.
+<p>Thanks to Aryeh Gregor and Henri Sivonen for their useful comments.
 
 <p>Special thanks to Ian Hickson for defining the
 <code title=dom-Element-innerHTML>innerHTML</code> and

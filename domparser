@@ -40,6 +40,7 @@
 
 <!--begin-toc-->
 <ol class=toc>
+ <li><a class=no-num href=#issues>Issues</a></li>
  <li><a href=#conformance><span class=secno>1 </span>Conformance</a>
   <ol>
    <li><a href=#dependencies><span class=secno>1.1 </span>Dependencies</a></li>
@@ -56,6 +57,15 @@
  <li><a class=no-num href=#references>References</a></li>
  <li><a class=no-num href=#acknowledgements>Acknowledgements</a></ol>
 <!--end-toc-->
+
+
+
+<h2 class=no-num id=issues>Issues</h2>
+<p>Various issues are listed in the rest of the document.
+
+<p class=XXX>This specification currently requires using the XML Parser for
+some APIs, when in an XML document. It is unclear whether consensus can be
+found for this approach.
 
 
 

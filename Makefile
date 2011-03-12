@@ -1,10 +1,10 @@
 ANOLIS = anolis
 
-all: domparser xrefs.json
+all: domparser data/xrefs/dom/domps.json
 
 domparser: source.html data Makefile
 	$(ANOLIS) --output-encoding=ascii --omit-optional-tags --enable=xspecxref \
 	--enable=refs --use-strict $< $@
 
-xrefs.json: source.html Makefile
-	$(ANOLIS) --dump-xrefs $< /tmp/spec
+data/xrefs/dom/domps.json: source.html Makefile
+	$(ANOLIS) --dump-xrefs=$@ $< /tmp/spec

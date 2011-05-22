@@ -294,7 +294,8 @@ exception instead of returning a string).
 
     <p>In either case, the algorithm must be invoked with the given value as the
     <var title>input</var>, and the <span>context object</span> as the
-    <var title>context</var> element.
+    <var data-anolis-spec=html title=concept-frag-parse-context>context</var>
+    element.
     <!--doc.ih
     If the node is an <code data-anolis-spec=domcore>Element</code>
     node, then, in addition, that element must be passed as the <var
@@ -408,7 +409,9 @@ string).
   <li>
     <p>If <var title>parent</var> is a
     <code data-anolis-spec=domcore>DocumentFragment</code> node, let
-    <var title>parent</var> be a new with <code title>body</code> as its
+    <var title>parent</var> be a new
+    <code data-anolis-spec=domcore>Element</code> with <code title>body</code>
+    as its
     <span data-anolis-spec=domcore title=concept-element-local-name>local name</span>
     and the <span data-anolis-spec=domcore>HTML namespace</span> as its
     <span data-anolis-spec=domcore title=concept-element-namespace>namespace</span>.
@@ -427,7 +430,8 @@ string).
     <p>In either case, the algorithm must be invoked with the string being
     assigned into the <code title=dom-Element-outerHTML>outerHTML</code>
     attribute as the <var title>input</var>, and <var title>parent</var> as the
-    <var title>context</var> element.
+    <var data-anolis-spec=html title=concept-frag-parse-context>context</var>
+    element.
 
     <p>If this raises an exception, then abort these steps.
 
@@ -545,7 +549,8 @@ method, when invoked, must run the following algorithm:
 
     <p>In either case, the algorithm must be invoked with <var title>text</var>
     as the <var title>input</var>, and <var title>context</var> as the
-    <var title>context</var> element.
+    <var data-anolis-spec=html title=concept-frag-parse-context>context</var>
+    element.
 
     <p>If this raises an exception, then abort these steps.
 

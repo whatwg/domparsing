@@ -19,7 +19,7 @@
 <body class=draft>
 <div class=head id=head>
 <h1>DOM Parsing and Serialization</h1>
-<h2 class="no-num no-toc" id=work-in-progress-&mdash;-last-update-12-march-2011>Work in Progress &mdash; Last Update 12 March 2011</h2>
+<h2 class="no-num no-toc" id=work-in-progress-&mdash;-last-update-22-may-2011>Work in Progress &mdash; Last Update 22 May 2011</h2>
 <dl>
  <dt>Editor
  <dd>Ms2ger &lt;ms2ger@gmail.com&gt;
@@ -302,7 +302,8 @@ exception instead of returning a string).
 
     <p>In either case, the algorithm must be invoked with the given value as the
     <var title="">input</var>, and the <a href=#context-object>context object</a> as the
-    <var title="">context</var> element.
+    <a href=http://www.whatwg.org/html/#concept-frag-parse-context><var class=external data-anolis-spec=html title=concept-frag-parse-context>context</var></a>
+    element.
     <!--doc.ih
     If the node is an <code data-anolis-spec=domcore>Element</code>
     node, then, in addition, that element must be passed as the <var
@@ -416,7 +417,9 @@ string).
   <li>
     <p>If <var title="">parent</var> is a
     <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#documentfragment><code class=external data-anolis-spec=domcore>DocumentFragment</code></a> node, let
-    <var title="">parent</var> be a new with <code title="">body</code> as its
+    <var title="">parent</var> be a new
+    <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#element><code class=external data-anolis-spec=domcore>Element</code></a> with <code title="">body</code>
+    as its
     <a class=external data-anolis-spec=domcore href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-element-local-name title=concept-element-local-name>local name</a>
     and the <a class=external data-anolis-spec=domcore href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#html-namespace>HTML namespace</a> as its
     <a class=external data-anolis-spec=domcore href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-element-namespace title=concept-element-namespace>namespace</a>.
@@ -435,7 +438,8 @@ string).
     <p>In either case, the algorithm must be invoked with the string being
     assigned into the <a href=#dom-element-outerhtml><code title=dom-Element-outerHTML>outerHTML</code></a>
     attribute as the <var title="">input</var>, and <var title="">parent</var> as the
-    <var title="">context</var> element.
+    <a href=http://www.whatwg.org/html/#concept-frag-parse-context><var class=external data-anolis-spec=html title=concept-frag-parse-context>context</var></a>
+    element.
 
     <p>If this raises an exception, then abort these steps.
 
@@ -553,7 +557,8 @@ method, when invoked, must run the following algorithm:
 
     <p>In either case, the algorithm must be invoked with <var title="">text</var>
     as the <var title="">input</var>, and <var title="">context</var> as the
-    <var title="">context</var> element.
+    <a href=http://www.whatwg.org/html/#concept-frag-parse-context><var class=external data-anolis-spec=html title=concept-frag-parse-context>context</var></a>
+    element.
 
     <p>If this raises an exception, then abort these steps.
 

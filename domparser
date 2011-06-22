@@ -46,14 +46,18 @@
    <li><a href=#dependencies><span class=secno>1.1 </span>Dependencies</a></li>
    <li><a href=#extensibility><span class=secno>1.2 </span>Extensibility</a></ol></li>
  <li><a href=#terminology><span class=secno>2 </span>Terminology</a></li>
- <li><a href=#the-domparser-interface><span class=secno>3 </span>The <code>DOMParser</code> interface</a></li>
- <li><a href=#the-xmlserializer-interface><span class=secno>4 </span>The <code>XMLSerializer</code> interface</a></li>
- <li><a href=#extensions-to-the-element-interface><span class=secno>5 </span>Extensions to the <code class=external data-anolis-spec=domcore>Element</code> interface</a>
+ <li><a href=#parsing-and-serializing-nodes><span class=secno>3 </span>Parsing and serializing <code class=external data-anolis-spec=domcore>Node</code>s</a>
   <ol>
-   <li><a href=#innerhtml><span class=secno>5.1 </span><code title=dom-Element-innerHTML>innerHTML</code></a></li>
-   <li><a href=#outerhtml><span class=secno>5.2 </span><code title=dom-Element-outerHTML>outerHTML</code></a></li>
-   <li><a href=#insertadjacenthtml()><span class=secno>5.3 </span><code title=dom-Element-insertAdjacentHTML>insertAdjacentHTML()</code></a></ol></li>
- <li><a href=#extensions-to-the-range-interface><span class=secno>6 </span>Extensions to the <code class=external data-anolis-spec=domrange>Range</code> interface</a></li>
+   <li><a href=#parsing><span class=secno>3.1 </span>Parsing</a></li>
+   <li><a href=#serializing><span class=secno>3.2 </span>Serializing</a></ol></li>
+ <li><a href=#the-domparser-interface><span class=secno>4 </span>The <code>DOMParser</code> interface</a></li>
+ <li><a href=#the-xmlserializer-interface><span class=secno>5 </span>The <code>XMLSerializer</code> interface</a></li>
+ <li><a href=#extensions-to-the-element-interface><span class=secno>6 </span>Extensions to the <code class=external data-anolis-spec=domcore>Element</code> interface</a>
+  <ol>
+   <li><a href=#innerhtml><span class=secno>6.1 </span><code title=dom-Element-innerHTML>innerHTML</code></a></li>
+   <li><a href=#outerhtml><span class=secno>6.2 </span><code title=dom-Element-outerHTML>outerHTML</code></a></li>
+   <li><a href=#insertadjacenthtml()><span class=secno>6.3 </span><code title=dom-Element-insertAdjacentHTML>insertAdjacentHTML()</code></a></ol></li>
+ <li><a href=#extensions-to-the-range-interface><span class=secno>7 </span>Extensions to the <code class=external data-anolis-spec=domrange>Range</code> interface</a></li>
  <li><a class=no-num href=#references>References</a></li>
  <li><a class=no-num href=#acknowledgements>Acknowledgements</a></ol>
 <!--end-toc-->
@@ -147,7 +151,43 @@ attribute being discussed was called.
 
 
 
-<h2 id=the-domparser-interface><span class=secno>3 </span>The <a href=#domparser><code>DOMParser</code></a> interface</h2>
+<h2 id=parsing-and-serializing-nodes><span class=secno>3 </span>Parsing and serializing <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#node><code class=external data-anolis-spec=domcore>Node</code></a>s</h2>
+<h3 id=parsing><span class=secno>3.1 </span>Parsing</h3>
+<h3 id=serializing><span class=secno>3.2 </span>Serializing</h3>
+<p>To <dfn id=concept-serialize-xml title=concept-serialize-xml>produce an XML serialization</dfn> of a
+<a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#node><code class=external data-anolis-spec=domcore>Node</code></a> <var title="">node</var>, the user agent
+must run the appropriate steps, depending on <var title="">node</var>'s interface:
+<dl class=switch>
+  <dt><a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#element><code class=external data-anolis-spec=domcore>Element</code></a>
+  <dt><a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#document><code class=external data-anolis-spec=domcore>Document</code></a>
+  <dd><p>Run the
+  <a class=external data-anolis-spec=html href=http://www.whatwg.org/html/#xml-fragment-serialization-algorithm>XML fragment serialization algorithm</a> on
+  <var title="">node</var>. If this threw an exception, allow that exception to
+  propagate out from this algorithm. Otherwise, return the returned string.
+
+  <dt><a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#comment><code class=external data-anolis-spec=domcore>Comment</code></a>
+  <dd>
+    <p>Let <var title="">markup</var> the concatenation of
+    "<code title="">&lt;!--</code>", <var title="">node</var>'s
+    <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#dom-characterdata-data><code class=external data-anolis-spec=domcore title=dom-characterdata-data>data</code></a>, and
+    "<code title="">--&gt;</code>".
+
+    <p>If <var title="">markup</var> matches the
+    <a href=http://www.w3.org/TR/xml/#NT-Comment><code class=external data-anolis-spec=xml title=comment>Comment</code></a> production, return
+    <var title="">markup</var>. Otherwise, throw an
+    <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#dom-domexception-invalid_state_err><code class=external data-anolis-spec=domcore title=dom-DOMException-INVALID_STATE_ERR>INVALID_STATE_ERR</code></a>
+    exception.
+
+  <dt><a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#documentfragment><code class=external data-anolis-spec=domcore>DocumentFragment</code></a>
+  <dt><a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#documenttype><code class=external data-anolis-spec=domcore>DocumentType</code></a>
+  <dt><a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#processinginstruction><code class=external data-anolis-spec=domcore>ProcessingInstruction</code></a>
+  <dt><a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#text><code class=external data-anolis-spec=domcore>Text</code></a>
+  <dd class=XXX>You tell me.
+</dl>
+
+
+
+<h2 id=the-domparser-interface><span class=secno>4 </span>The <a href=#domparser><code>DOMParser</code></a> interface</h2>
 <pre class=idl>interface <dfn id=xmldocument>XMLDocument</dfn> : <a class=external data-anolis-spec=domcore href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#document>Document</a> {
 };
 
@@ -178,7 +218,7 @@ following steps:
 
 
 
-<h2 id=the-xmlserializer-interface><span class=secno>4 </span>The <a href=#xmlserializer><code>XMLSerializer</code></a> interface</h2>
+<h2 id=the-xmlserializer-interface><span class=secno>5 </span>The <a href=#xmlserializer><code>XMLSerializer</code></a> interface</h2>
 <pre class=idl>[Constructor]
 interface <dfn id=xmlserializer>XMLSerializer</dfn> {
   DOMString <a href=#dom-xmlserializer-serializetostring title=dom-XMLSerializer-serializeToString>serializeToString</a>(<a class=external data-anolis-spec=domcore href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#node>Node</a> root);
@@ -186,39 +226,12 @@ interface <dfn id=xmlserializer>XMLSerializer</dfn> {
 
 <p>The
 <dfn id=dom-xmlserializer-serializetostring title=dom-XMLSerializer-serializeToString><code>serializeToString(<var title="">root</var>)</code></dfn>
-method must run the appropriate steps, depending on <var title="">root</var>'s
-interface:
-<dl class=switch>
-  <dt><a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#element><code class=external data-anolis-spec=domcore>Element</code></a>
-  <dt><a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#document><code class=external data-anolis-spec=domcore>Document</code></a>
-  <dd><p>Run the
-  <a class=external data-anolis-spec=html href=http://www.whatwg.org/html/#xml-fragment-serialization-algorithm>XML fragment serialization algorithm</a> on
-  <var title="">root</var>. If this threw an exception, allow that exception to
-  propagate out from this algorithm. Otherwise, return the returned string.
-
-  <dt><a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#comment><code class=external data-anolis-spec=domcore>Comment</code></a>
-  <dd>
-    <p>Let <var title="">markup</var> the concatenation of
-    "<code title="">&lt;!--</code>", <var title="">root</var>'s
-    <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#dom-characterdata-data><code class=external data-anolis-spec=domcore title=dom-characterdata-data>data</code></a>, and
-    "<code title="">--&gt;</code>".
-
-    <p>If <var title="">markup</var> matches the
-    <a href=http://www.w3.org/TR/xml/#NT-Comment><code class=external data-anolis-spec=xml title=comment>Comment</code></a> production, return
-    <var title="">markup</var>. Otherwise, throw an
-    <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#dom-domexception-invalid_state_err><code class=external data-anolis-spec=domcore title=dom-DOMException-INVALID_STATE_ERR>INVALID_STATE_ERR</code></a>
-    exception.
-
-  <dt><a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#documentfragment><code class=external data-anolis-spec=domcore>DocumentFragment</code></a>
-  <dt><a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#documenttype><code class=external data-anolis-spec=domcore>DocumentType</code></a>
-  <dt><a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#processinginstruction><code class=external data-anolis-spec=domcore>ProcessingInstruction</code></a>
-  <dt><a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#text><code class=external data-anolis-spec=domcore>Text</code></a>
-  <dd class=XXX>You tell me.
-</dl>
+method must
+<a href=#concept-serialize-xml title=concept-serialize-xml>produce an XML serialization</a> of
+<var title="">root</var> and return the result.
 
 
-
-<h2 id=extensions-to-the-element-interface><span class=secno>5 </span>Extensions to the <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#element><code class=external data-anolis-spec=domcore>Element</code></a> interface</h2>
+<h2 id=extensions-to-the-element-interface><span class=secno>6 </span>Extensions to the <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#element><code class=external data-anolis-spec=domcore>Element</code></a> interface</h2>
 
 <pre class=idl>partial interface <a class=external data-anolis-spec=domcore href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#element>Element</a> {
   attribute DOMString <a href=#dom-element-innerhtml title=dom-Element-innerHTML>innerHTML</a>;
@@ -227,7 +240,7 @@ interface:
 };</pre>
 
 
-<h3 id=innerhtml><span class=secno>5.1 </span><a href=#dom-element-innerhtml><code title=dom-Element-innerHTML>innerHTML</code></a></h3>
+<h3 id=innerhtml><span class=secno>6.1 </span><a href=#dom-element-innerhtml><code title=dom-Element-innerHTML>innerHTML</code></a></h3>
 <p>The <dfn id=dom-element-innerhtml title=dom-Element-innerHTML><code>innerHTML</code></dfn> IDL
 attribute represents the markup of the
 <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#element><code class=external data-anolis-spec=domcore>Element</code></a>'s contents.
@@ -351,7 +364,7 @@ exception instead of returning a string).
 </div>
 
 
-<h3 id=outerhtml><span class=secno>5.2 </span><a href=#dom-element-outerhtml><code title=dom-Element-outerHTML>outerHTML</code></a></h3>
+<h3 id=outerhtml><span class=secno>6.2 </span><a href=#dom-element-outerhtml><code title=dom-Element-outerHTML>outerHTML</code></a></h3>
 
 <p>The <dfn id=dom-element-outerhtml title=dom-Element-outerHTML><code>outerHTML</code></dfn> IDL
 attribute represents the markup of the
@@ -463,7 +476,7 @@ string).
 </div>
  
  
-<h3 id=insertadjacenthtml()><span class=secno>5.3 </span><a href=#dom-element-insertadjacenthtml><code title=dom-Element-insertAdjacentHTML>insertAdjacentHTML()</code></a></h3>
+<h3 id=insertadjacenthtml()><span class=secno>6.3 </span><a href=#dom-element-insertadjacenthtml><code title=dom-Element-insertAdjacentHTML>insertAdjacentHTML()</code></a></h3>
 
 <dl class=domintro>
   <dt><var title="">element</var> . <a href=#dom-element-insertadjacenthtml><code title=dom-Element-insertAdjacentHTML>insertAdjacentHTML</code></a>(<var title="">position</var>, <var title="">text</var>)
@@ -614,7 +627,7 @@ method, when invoked, must run the following algorithm:
 
 
 
-<h2 id=extensions-to-the-range-interface><span class=secno>6 </span>Extensions to the <a href=http://html5.org/specs/dom-range.html#range><code class=external data-anolis-spec=domrange>Range</code></a> interface</h2>
+<h2 id=extensions-to-the-range-interface><span class=secno>7 </span>Extensions to the <a href=http://html5.org/specs/dom-range.html#range><code class=external data-anolis-spec=domrange>Range</code></a> interface</h2>
 
 <pre class=idl>partial interface <a class=external data-anolis-spec=domrange href=http://html5.org/specs/dom-range.html#range>Range</a> {
   <a class=external data-anolis-spec=domcore href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#documentfragment>DocumentFragment</a> <a href=#dom-range-createcontextualfragment title=dom-Range-createContextualFragment>createContextualFragment</a>(DOMString fragment);

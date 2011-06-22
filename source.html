@@ -131,6 +131,42 @@ attribute being discussed was called.
 
 
 
+<h2>Parsing and serializing <code data-anolis-spec=domcore>Node</code>s</h2>
+<h3>Parsing</h3>
+<h3>Serializing</h3>
+<p>To <dfn title=concept-serialize-xml>produce an XML serialization</dfn> of a
+<code data-anolis-spec=domcore>Node</code> <var title>node</var>, the user agent
+must run the appropriate steps, depending on <var title>node</var>'s interface:
+<dl class=switch>
+  <dt><code data-anolis-spec=domcore>Element</code>
+  <dt><code data-anolis-spec=domcore>Document</code>
+  <dd><p>Run the
+  <span data-anolis-spec=html>XML fragment serialization algorithm</span> on
+  <var title>node</var>. If this threw an exception, allow that exception to
+  propagate out from this algorithm. Otherwise, return the returned string.
+
+  <dt><code data-anolis-spec=domcore>Comment</code>
+  <dd>
+    <p>Let <var title>markup</var> the concatenation of
+    "<code title>&lt;!--</code>", <var title>node</var>'s
+    <code title=dom-characterdata-data data-anolis-spec=domcore>data</code>, and
+    "<code title>--></code>".
+
+    <p>If <var title>markup</var> matches the
+    <code title=comment data-anolis-spec=xml>Comment</code> production, return
+    <var title>markup</var>. Otherwise, throw an
+    <code title=dom-DOMException-INVALID_STATE_ERR data-anolis-spec=domcore>INVALID_STATE_ERR</code>
+    exception.
+
+  <dt><code data-anolis-spec=domcore>DocumentFragment</code>
+  <dt><code data-anolis-spec=domcore>DocumentType</code>
+  <dt><code data-anolis-spec=domcore>ProcessingInstruction</code>
+  <dt><code data-anolis-spec=domcore>Text</code>
+  <dd class=XXX>You tell me.
+</dl>
+
+
+
 <h2>The <code>DOMParser</code> interface</h2>
 <pre class=idl>interface <dfn>XMLDocument</dfn> : <span data-anolis-spec=domcore>Document</span> {
 };
@@ -178,36 +214,9 @@ interface <dfn>XMLSerializer</dfn> {
 
 <p>The
 <dfn title=dom-XMLSerializer-serializeToString><code>serializeToString(<var title>root</var>)</code></dfn>
-method must run the appropriate steps, depending on <var title>root</var>'s
-interface:
-<dl class=switch>
-  <dt><code data-anolis-spec=domcore>Element</code>
-  <dt><code data-anolis-spec=domcore>Document</code>
-  <dd><p>Run the
-  <span data-anolis-spec=html>XML fragment serialization algorithm</span> on
-  <var title>root</var>. If this threw an exception, allow that exception to
-  propagate out from this algorithm. Otherwise, return the returned string.
-
-  <dt><code data-anolis-spec=domcore>Comment</code>
-  <dd>
-    <p>Let <var title>markup</var> the concatenation of
-    "<code title>&lt;!--</code>", <var title>root</var>'s
-    <code title=dom-characterdata-data data-anolis-spec=domcore>data</code>, and
-    "<code title>--></code>".
-
-    <p>If <var title>markup</var> matches the
-    <code title=comment data-anolis-spec=xml>Comment</code> production, return
-    <var title>markup</var>. Otherwise, throw an
-    <code title=dom-DOMException-INVALID_STATE_ERR data-anolis-spec=domcore>INVALID_STATE_ERR</code>
-    exception.
-
-  <dt><code data-anolis-spec=domcore>DocumentFragment</code>
-  <dt><code data-anolis-spec=domcore>DocumentType</code>
-  <dt><code data-anolis-spec=domcore>ProcessingInstruction</code>
-  <dt><code data-anolis-spec=domcore>Text</code>
-  <dd class=XXX>You tell me.
-</dl>
-
+method must
+<span title=concept-serialize-xml>produce an XML serialization</span> of
+<var title>root</var> and return the result.
 
 
 <h2>Extensions to the <code data-anolis-spec=domcore>Element</code> interface</h2>

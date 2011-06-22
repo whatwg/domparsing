@@ -641,15 +641,21 @@ method must run the following steps:
     <p>Let <var title>element</var> be as follows, depending on
     <var title>node</var>'s interface:
     <dl class=switch>
+      <dt><code data-anolis-spec=domcore>Document</code>
+      <dt><code data-anolis-spec=domcore>DocumentFragment</code>
+      <dd>null
+
       <dt><code data-anolis-spec=domcore>Element</code>
       <dd><var title>node</var>
 
       <dt><code data-anolis-spec=domcore>Text</code>
+      <dt><code data-anolis-spec=domcore>Comment</code>
       <dd><var title>node</var>'s
       <code data-anolis-spec=domcore title=dom-Node-parentElement>parentElement</code>
 
-      <dt>&hellip;
-      <dd>You tell me
+      <dt><code data-anolis-spec=domcore>DocumentType</code>
+      <dt><code data-anolis-spec=domcore>ProcessingInstruction</code>
+      <dd>DOM Range prevents this case. <code data-anolis-ref>DOMRANGE</span>
     </dl>
 
   <li>

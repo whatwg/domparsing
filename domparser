@@ -649,18 +649,24 @@ method must run the following steps:
     <p>Let <var title="">element</var> be as follows, depending on
     <var title="">node</var>'s interface:
     <dl class=switch>
+      <dt><a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#document><code class=external data-anolis-spec=domcore>Document</code></a>
+      <dt><a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#documentfragment><code class=external data-anolis-spec=domcore>DocumentFragment</code></a>
+      <dd>null
+
       <dt><a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#element><code class=external data-anolis-spec=domcore>Element</code></a>
       <dd><var title="">node</var>
 
       <dt><a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#text><code class=external data-anolis-spec=domcore>Text</code></a>
+      <dt><a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#comment><code class=external data-anolis-spec=domcore>Comment</code></a>
       <dd><var title="">node</var>'s
       <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#dom-node-parentelement><code class=external data-anolis-spec=domcore title=dom-Node-parentElement>parentElement</code></a>
 
-      <dt>&hellip;
-      <dd>You tell me
-    </dl>
+      <dt><a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#documenttype><code class=external data-anolis-spec=domcore>DocumentType</code></a>
+      <dt><a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#processinginstruction><code class=external data-anolis-spec=domcore>ProcessingInstruction</code></a>
+      <dd>DOM Range prevents this case. <code data-anolis-ref="">DOMRANGE
+    </code></dl><code data-anolis-ref="">
 
-  <li>
+  </code><li><code data-anolis-ref="">
     <p>If either <var title="">element</var> is null or the following are all true:
 
     <ul>
@@ -684,7 +690,7 @@ method must run the following steps:
     and the <a class=external data-anolis-spec=domcore href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#html-namespace>HTML namespace</a> as its
     <a class=external data-anolis-spec=domcore href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-element-namespace title=concept-element-namespace>namespace</a>.
 
-  <li>
+  </code><li><code data-anolis-ref="">
     <p>If the node's document is an <a class=external data-anolis-spec=domcore href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#html-document>HTML
     document</a>: Invoke the <a class=external data-anolis-spec=html href=http://www.whatwg.org/html/#html-fragment-parsing-algorithm>HTML fragment
     parsing algorithm</a>.
@@ -697,26 +703,26 @@ method must run the following steps:
     <var title="">fragment</var> as the <var title="">input</var> and
     <var title="">element</var> as the <var title="">context</var> element.
 
-  <li>If this raises an exception, then abort these steps. Otherwise, let
+  </code><li><code data-anolis-ref="">If this raises an exception, then abort these steps. Otherwise, let
   <var title="">new children</var> be the nodes returned.
 
-  <li>Unmark all scripts in <var title="">new children</var> as "already started".
+  </code><li><code data-anolis-ref="">Unmark all scripts in <var title="">new children</var> as "already started".
 
-  <li>Set the
+  </code><li><code data-anolis-ref="">Set the
   <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#dom-node-ownerdocument><code class=external data-anolis-spec=domcore title=dom-Node-ownerDocument>ownerDocument</code></a>
   of all the nodes in <var title="">new children</var> to the
   <a href=#context-object>context object</a>'s
   <a class=external data-anolis-spec=domrange href=http://html5.org/specs/dom-range.html#concept-range-root title=concept-range-root>root's</a>
   <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#dom-node-ownerdocument><code class=external data-anolis-spec=domcore title=dom-Node-ownerDocument>ownerDocument</code></a>.
 
-  <li>Let <var title="">fragment</var> be a new
+  </code><li><code data-anolis-ref="">Let <var title="">fragment</var> be a new
   <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#documentfragment><code class=external data-anolis-spec=domcore>DocumentFragment</code></a> and append all
   <var title="">new children</var> to it.
 
-  <li>Return <var title="">fragment</var>.
-</ol>
+  </code><li><code data-anolis-ref="">Return <var title="">fragment</var>.
+</code></ol><code data-anolis-ref="">
 
-</div>
+</code></div><code data-anolis-ref="">
 
 
 
@@ -754,3 +760,4 @@ method must run the following steps:
 
 
 <script src=http://www.whatwg.org/specs/web-apps/current-work/dfn.js></script>
+</code>

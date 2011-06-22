@@ -153,15 +153,36 @@ must run the appropriate steps, depending on <var title>node</var>'s interface:
     "<code title>--></code>".
 
     <p>If <var title>markup</var> matches the
-    <code title=comment data-anolis-spec=xml>Comment</code> production, return
+    <code data-anolis-spec=xml>Comment</code> production, return
     <var title>markup</var>. Otherwise, throw an
     <code title=dom-DOMException-INVALID_STATE_ERR data-anolis-spec=domcore>INVALID_STATE_ERR</code>
     exception.
 
+  <dt><code data-anolis-spec=domcore>Text</code>
+  <dd>
+    <p>Let <var title>data</var> be <var title>node</var>'s
+    <code title=dom-characterdata-data data-anolis-spec=domcore>data</code>.
+
+    <p>If <var title>node</var> has its <span>serialize as CDATA flag</span>
+    set, run the following steps:
+    <ol>
+      <li>If <var title>data</var> doesn't match the
+      <code data-anolis-spec=xml>CData</code> production, throw an
+      <code title=dom-DOMException-INVALID_STATE_ERR data-anolis-spec=domcore>INVALID_STATE_ERR</code>
+      exception and terminate the entire algorithm.
+
+      <li>Let <var title>markup</var> be the concatenation of
+      "<code title>&lt;![CDATA[</code>", <var title>data</var>, and
+      "<code title>]]></code>".
+
+      <li>Return <var title>markup</var>.
+    </ol>
+
+    <p>Otherwise, return <var title>data</var>.
+
   <dt><code data-anolis-spec=domcore>DocumentFragment</code>
   <dt><code data-anolis-spec=domcore>DocumentType</code>
   <dt><code data-anolis-spec=domcore>ProcessingInstruction</code>
-  <dt><code data-anolis-spec=domcore>Text</code>
   <dd class=XXX>You tell me.
 </dl>
 
@@ -610,6 +631,35 @@ method, when invoked, must run the following algorithm:
     <code data-anolis-spec=domcore>DocumentFragment</code> containing the
     <var title>new children</var> had been inserted.
 </ol>
+
+</div>
+
+
+
+<h2>Extensions to the <code data-anolis-spec=domcore>Text</code> interface</h2>
+
+<pre class=idl>partial interface <span data-anolis-spec=domcore>Text</span> {
+  attribute boolean <span title=dom-Text-serializeAsCDATA>serializeAsCDATA</span>;
+};</pre>
+
+<dl class=domintro>
+  <dt><var title>text</var> .
+      <code title=dom-Text-serializeAsCDATA>serializeAsCDATA</code> [ = <var title>value</var> ]
+  <dd>Controls whether, in XML, this node is serialized as a CDATA section.
+</dl>
+
+<div class=impl>
+
+<p><code data-anolis-spec=domcore>Text</code> nodes have an additional
+associated flag, the <dfn>serialize as CDATA flag</dfn>.
+
+<p>On getting, the
+<dfn title=dom-Text-serializeAsCDATA><code>serializeAsCDATA</code></dfn>
+attribute must return whether the <span>context object</span> has its
+<span>serialize as CDATA flag</span> set.
+On setting, if the new value is true, the user agent must set the
+<span>context object</span>'s <span>serialize as CDATA flag</span>, and
+otherwise, must unset it.
 
 </div>
 

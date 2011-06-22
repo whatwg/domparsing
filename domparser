@@ -57,7 +57,8 @@
    <li><a href=#innerhtml><span class=secno>6.1 </span><code title=dom-Element-innerHTML>innerHTML</code></a></li>
    <li><a href=#outerhtml><span class=secno>6.2 </span><code title=dom-Element-outerHTML>outerHTML</code></a></li>
    <li><a href=#insertadjacenthtml()><span class=secno>6.3 </span><code title=dom-Element-insertAdjacentHTML>insertAdjacentHTML()</code></a></ol></li>
- <li><a href=#extensions-to-the-range-interface><span class=secno>7 </span>Extensions to the <code class=external data-anolis-spec=domrange>Range</code> interface</a></li>
+ <li><a href=#extensions-to-the-text-interface><span class=secno>7 </span>Extensions to the <code class=external data-anolis-spec=domcore>Text</code> interface</a></li>
+ <li><a href=#extensions-to-the-range-interface><span class=secno>8 </span>Extensions to the <code class=external data-anolis-spec=domrange>Range</code> interface</a></li>
  <li><a class=no-num href=#references>References</a></li>
  <li><a class=no-num href=#acknowledgements>Acknowledgements</a></ol>
 <!--end-toc-->
@@ -173,15 +174,36 @@ must run the appropriate steps, depending on <var title="">node</var>'s interfac
     "<code title="">--&gt;</code>".
 
     <p>If <var title="">markup</var> matches the
-    <a href=http://www.w3.org/TR/xml/#NT-Comment><code class=external data-anolis-spec=xml title=comment>Comment</code></a> production, return
+    <a href=http://www.w3.org/TR/xml/#NT-Comment><code class=external data-anolis-spec=xml>Comment</code></a> production, return
     <var title="">markup</var>. Otherwise, throw an
     <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#dom-domexception-invalid_state_err><code class=external data-anolis-spec=domcore title=dom-DOMException-INVALID_STATE_ERR>INVALID_STATE_ERR</code></a>
     exception.
 
+  <dt><a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#text><code class=external data-anolis-spec=domcore>Text</code></a>
+  <dd>
+    <p>Let <var title="">data</var> be <var title="">node</var>'s
+    <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#dom-characterdata-data><code class=external data-anolis-spec=domcore title=dom-characterdata-data>data</code></a>.
+
+    <p>If <var title="">node</var> has its <a href=#serialize-as-cdata-flag>serialize as CDATA flag</a>
+    set, run the following steps:
+    <ol>
+      <li>If <var title="">data</var> doesn't match the
+      <a href=http://www.w3.org/TR/xml/#NT-CData><code class=external data-anolis-spec=xml>CData</code></a> production, throw an
+      <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#dom-domexception-invalid_state_err><code class=external data-anolis-spec=domcore title=dom-DOMException-INVALID_STATE_ERR>INVALID_STATE_ERR</code></a>
+      exception and terminate the entire algorithm.
+
+      <li>Let <var title="">markup</var> be the concatenation of
+      "<code title="">&lt;![CDATA[</code>", <var title="">data</var>, and
+      "<code title="">]]&gt;</code>".
+
+      <li>Return <var title="">markup</var>.
+    </ol>
+
+    <p>Otherwise, return <var title="">data</var>.
+
   <dt><a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#documentfragment><code class=external data-anolis-spec=domcore>DocumentFragment</code></a>
   <dt><a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#documenttype><code class=external data-anolis-spec=domcore>DocumentType</code></a>
   <dt><a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#processinginstruction><code class=external data-anolis-spec=domcore>ProcessingInstruction</code></a>
-  <dt><a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#text><code class=external data-anolis-spec=domcore>Text</code></a>
   <dd class=XXX>You tell me.
 </dl>
 
@@ -627,7 +649,36 @@ method, when invoked, must run the following algorithm:
 
 
 
-<h2 id=extensions-to-the-range-interface><span class=secno>7 </span>Extensions to the <a href=http://html5.org/specs/dom-range.html#range><code class=external data-anolis-spec=domrange>Range</code></a> interface</h2>
+<h2 id=extensions-to-the-text-interface><span class=secno>7 </span>Extensions to the <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#text><code class=external data-anolis-spec=domcore>Text</code></a> interface</h2>
+
+<pre class=idl>partial interface <a class=external data-anolis-spec=domcore href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#text>Text</a> {
+  attribute boolean <a href=#dom-text-serializeascdata title=dom-Text-serializeAsCDATA>serializeAsCDATA</a>;
+};</pre>
+
+<dl class=domintro>
+  <dt><var title="">text</var> .
+      <a href=#dom-text-serializeascdata><code title=dom-Text-serializeAsCDATA>serializeAsCDATA</code></a> [ = <var title="">value</var> ]
+  <dd>Controls whether, in XML, this node is serialized as a CDATA section.
+</dl>
+
+<div class=impl>
+
+<p><a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#text><code class=external data-anolis-spec=domcore>Text</code></a> nodes have an additional
+associated flag, the <dfn id=serialize-as-cdata-flag>serialize as CDATA flag</dfn>.
+
+<p>On getting, the
+<dfn id=dom-text-serializeascdata title=dom-Text-serializeAsCDATA><code>serializeAsCDATA</code></dfn>
+attribute must return whether the <a href=#context-object>context object</a> has its
+<a href=#serialize-as-cdata-flag>serialize as CDATA flag</a> set.
+On setting, if the new value is true, the user agent must set the
+<a href=#context-object>context object</a>'s <a href=#serialize-as-cdata-flag>serialize as CDATA flag</a>, and
+otherwise, must unset it.
+
+</div>
+
+
+
+<h2 id=extensions-to-the-range-interface><span class=secno>8 </span>Extensions to the <a href=http://html5.org/specs/dom-range.html#range><code class=external data-anolis-spec=domrange>Range</code></a> interface</h2>
 
 <pre class=idl>partial interface <a class=external data-anolis-spec=domrange href=http://html5.org/specs/dom-range.html#range>Range</a> {
   <a class=external data-anolis-spec=domcore href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#documentfragment>DocumentFragment</a> <a href=#dom-range-createcontextualfragment title=dom-Range-createContextualFragment>createContextualFragment</a>(DOMString fragment);

@@ -19,7 +19,7 @@
 <body class=draft>
 <div class=head id=head>
 <h1>DOM Parsing and Serialization</h1>
-<h2 class="no-num no-toc" id=work-in-progress-&mdash;-last-update-22-may-2011>Work in Progress &mdash; Last Update 22 May 2011</h2>
+<h2 class="no-num no-toc" id=work-in-progress-&mdash;-last-update-22-june-2011>Work in Progress &mdash; Last Update 22 June 2011</h2>
 <dl>
  <dt>Editor
  <dd>Ms2ger &lt;ms2ger@gmail.com&gt;
@@ -738,7 +738,7 @@ method must run the following steps:
 <dd><cite><a href=http://www.ietf.org/rfc/rfc2119.txt>Key words for use in RFCs to Indicate Requirement Levels</a></cite>, S. Bradner. IETF.
 
 <dt id=refsWEBIDL>[WEBIDL]
-<dd><cite><a href=http://dev.w3.org/2006/webapi/WebIDL/>Web IDL</a></cite>, C. McCormack and S. Weinig. W3C.
+<dd><cite><a href=http://dev.w3.org/2006/webapi/WebIDL/>Web IDL</a></cite>, C. McCormack. W3C.
 
 </dl></div>
 

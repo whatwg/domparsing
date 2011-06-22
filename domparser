@@ -220,8 +220,7 @@ interface:
 
 <h2 id=extensions-to-the-element-interface><span class=secno>5 </span>Extensions to the <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#element><code class=external data-anolis-spec=domcore>Element</code></a> interface</h2>
 
-<pre class=idl>[Supplemental]
-interface <a class=external data-anolis-spec=domcore href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#element>Element</a> {
+<pre class=idl>partial interface <a class=external data-anolis-spec=domcore href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#element>Element</a> {
   attribute DOMString <a href=#dom-element-innerhtml title=dom-Element-innerHTML>innerHTML</a>;
   attribute DOMString <a href=#dom-element-outerhtml title=dom-Element-outerHTML>outerHTML</a>;
   void <a href=#dom-element-insertadjacenthtml title=dom-Element-insertAdjacentHTML>insertAdjacentHTML</a>(DOMString position, DOMString text);
@@ -617,8 +616,7 @@ method, when invoked, must run the following algorithm:
 
 <h2 id=extensions-to-the-range-interface><span class=secno>6 </span>Extensions to the <a href=http://html5.org/specs/dom-range.html#range><code class=external data-anolis-spec=domrange>Range</code></a> interface</h2>
 
-<pre class=idl>[Supplemental]
-interface <a class=external data-anolis-spec=domrange href=http://html5.org/specs/dom-range.html#range>Range</a> {
+<pre class=idl>partial interface <a class=external data-anolis-spec=domrange href=http://html5.org/specs/dom-range.html#range>Range</a> {
   <a class=external data-anolis-spec=domcore href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#documentfragment>DocumentFragment</a> <a href=#dom-range-createcontextualfragment title=dom-Range-createContextualFragment>createContextualFragment</a>(DOMString fragment);
 };</pre>
 

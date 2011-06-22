@@ -212,8 +212,7 @@ interface:
 
 <h2>Extensions to the <code data-anolis-spec=domcore>Element</code> interface</h2>
 
-<pre class=idl>[Supplemental]
-interface <span data-anolis-spec=domcore>Element</span> {
+<pre class=idl>partial interface <span data-anolis-spec=domcore>Element</span> {
   attribute DOMString <span title=dom-Element-innerHTML>innerHTML</span>;
   attribute DOMString <span title=dom-Element-outerHTML>outerHTML</span>;
   void <span title=dom-Element-insertAdjacentHTML>insertAdjacentHTML</span>(DOMString position, DOMString text);
@@ -609,8 +608,7 @@ method, when invoked, must run the following algorithm:
 
 <h2>Extensions to the <code data-anolis-spec=domrange>Range</code> interface</h2>
 
-<pre class=idl>[Supplemental]
-interface <span data-anolis-spec=domrange>Range</span> {
+<pre class=idl>partial interface <span data-anolis-spec=domrange>Range</span> {
   <span data-anolis-spec=domcore>DocumentFragment</span> <span title=dom-Range-createContextualFragment>createContextualFragment</span>(DOMString fragment);
 };</pre>
 

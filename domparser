@@ -19,7 +19,7 @@
 <body class=draft>
 <div class=head id=head>
 <h1>DOM Parsing and Serialization</h1>
-<h2 class="no-num no-toc" id=work-in-progress-&mdash;-last-update-22-june-2011>Work in Progress &mdash; Last Update 22 June 2011</h2>
+<h2 class="no-num no-toc" id=work-in-progress-&mdash;-last-update-23-june-2011>Work in Progress &mdash; Last Update 23 June 2011</h2>
 <dl>
  <dt>Editor
  <dd>Ms2ger &lt;ms2ger@gmail.com&gt;
@@ -727,10 +727,10 @@ method must run the following steps:
 
       <dt><a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#documenttype><code class=external data-anolis-spec=domcore>DocumentType</code></a>
       <dt><a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#processinginstruction><code class=external data-anolis-spec=domcore>ProcessingInstruction</code></a>
-      <dd>DOM Range prevents this case. <code data-anolis-ref="">DOMRANGE
-    </code></dl><code data-anolis-ref="">
+      <dd>DOM Range prevents this case. <a data-anolis-ref="" href=#refsDOMRANGE>[DOMRANGE]</a>
+    </dl>
 
-  </code><li><code data-anolis-ref="">
+  <li>
     <p>If either <var title="">element</var> is null or the following are all true:
 
     <ul>
@@ -754,7 +754,7 @@ method must run the following steps:
     and the <a class=external data-anolis-spec=domcore href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#html-namespace>HTML namespace</a> as its
     <a class=external data-anolis-spec=domcore href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-element-namespace title=concept-element-namespace>namespace</a>.
 
-  </code><li><code data-anolis-ref="">
+  <li>
     <p>If the node's document is an <a class=external data-anolis-spec=domcore href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#html-document>HTML
     document</a>: Invoke the <a class=external data-anolis-spec=html href=http://www.whatwg.org/html/#html-fragment-parsing-algorithm>HTML fragment
     parsing algorithm</a>.
@@ -767,26 +767,26 @@ method must run the following steps:
     <var title="">fragment</var> as the <var title="">input</var> and
     <var title="">element</var> as the <var title="">context</var> element.
 
-  </code><li><code data-anolis-ref="">If this raises an exception, then abort these steps. Otherwise, let
+  <li>If this raises an exception, then abort these steps. Otherwise, let
   <var title="">new children</var> be the nodes returned.
 
-  </code><li><code data-anolis-ref="">Unmark all scripts in <var title="">new children</var> as "already started".
+  <li>Unmark all scripts in <var title="">new children</var> as "already started".
 
-  </code><li><code data-anolis-ref="">Set the
+  <li>Set the
   <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#dom-node-ownerdocument><code class=external data-anolis-spec=domcore title=dom-Node-ownerDocument>ownerDocument</code></a>
   of all the nodes in <var title="">new children</var> to the
   <a href=#context-object>context object</a>'s
   <a class=external data-anolis-spec=domrange href=http://html5.org/specs/dom-range.html#concept-range-root title=concept-range-root>root's</a>
   <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#dom-node-ownerdocument><code class=external data-anolis-spec=domcore title=dom-Node-ownerDocument>ownerDocument</code></a>.
 
-  </code><li><code data-anolis-ref="">Let <var title="">fragment</var> be a new
+  <li>Let <var title="">fragment</var> be a new
   <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#documentfragment><code class=external data-anolis-spec=domcore>DocumentFragment</code></a> and append all
   <var title="">new children</var> to it.
 
-  </code><li><code data-anolis-ref="">Return <var title="">fragment</var>.
-</code></ol><code data-anolis-ref="">
+  <li>Return <var title="">fragment</var>.
+</ol>
 
-</code></div><code data-anolis-ref="">
+</div>
 
 
 
@@ -813,7 +813,8 @@ method must run the following steps:
 
 
 <h2 class=no-num id=acknowledgements>Acknowledgements</h2>
-<p>Thanks to Aryeh Gregor and Henri Sivonen for their useful comments.
+<p>Thanks to Anne van Kesteren, Aryeh Gregor and Henri Sivonen for their useful
+comments.
 
 <p>Special thanks to Ian Hickson for defining the
 <a href=#dom-element-innerhtml><code title=dom-Element-innerHTML>innerHTML</code></a> and
@@ -824,4 +825,3 @@ method must run the following steps:
 
 
 <script src=http://www.whatwg.org/specs/web-apps/current-work/dfn.js></script>
-</code>

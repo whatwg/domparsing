@@ -181,6 +181,17 @@ must run the appropriate steps, depending on <var title>node</var>'s interface:
     <p>Otherwise, return <var title>data</var>.
 
   <dt><code data-anolis-spec=domcore>DocumentFragment</code>
+  <dd>
+    <p>Let <var title>markup</var> the empty string.
+
+    <p>For each
+    <span title=concept-tree-child data-anolis-spec=domcore>child</span> of
+    <var title>node</var>, in order,
+    <span title=concept-serialize-xml>produce an XML serialization</span>
+    of the child and concatenate the result to <var title>markup</var>.
+
+    <p>Return <var title>markup</var>.
+
   <dt><code data-anolis-spec=domcore>DocumentType</code>
   <dt><code data-anolis-spec=domcore>ProcessingInstruction</code>
   <dd class=XXX>You tell me.

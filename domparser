@@ -19,7 +19,7 @@
 <body class=draft>
 <div class=head id=head>
 <h1>DOM Parsing and Serialization</h1>
-<h2 class="no-num no-toc" id=work-in-progress-&mdash;-last-update-23-june-2011>Work in Progress &mdash; Last Update 23 June 2011</h2>
+<h2 class="no-num no-toc" id=work-in-progress-&mdash;-last-update-26-june-2011>Work in Progress &mdash; Last Update 26 June 2011</h2>
 <dl>
  <dt>Editor
  <dd>Ms2ger &lt;ms2ger@gmail.com&gt;
@@ -202,6 +202,17 @@ must run the appropriate steps, depending on <var title="">node</var>'s interfac
     <p>Otherwise, return <var title="">data</var>.
 
   <dt><a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#documentfragment><code class=external data-anolis-spec=domcore>DocumentFragment</code></a>
+  <dd>
+    <p>Let <var title="">markup</var> the empty string.
+
+    <p>For each
+    <a class=external data-anolis-spec=domcore href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-tree-child title=concept-tree-child>child</a> of
+    <var title="">node</var>, in order,
+    <a href=#concept-serialize-xml title=concept-serialize-xml>produce an XML serialization</a>
+    of the child and concatenate the result to <var title="">markup</var>.
+
+    <p>Return <var title="">markup</var>.
+
   <dt><a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#documenttype><code class=external data-anolis-spec=domcore>DocumentType</code></a>
   <dt><a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#processinginstruction><code class=external data-anolis-spec=domcore>ProcessingInstruction</code></a>
   <dd class=XXX>You tell me.

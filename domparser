@@ -19,7 +19,7 @@
 <body class=draft>
 <div class=head id=head>
 <h1>DOM Parsing and Serialization</h1>
-<h2 class="no-num no-toc" id=work-in-progress-&mdash;-last-update-26-june-2011>Work in Progress &mdash; Last Update 26 June 2011</h2>
+<h2 class="no-num no-toc" id=work-in-progress-&mdash;-last-update-31-august-2011>Work in Progress &mdash; Last Update 31 August 2011</h2>
 <dl>
  <dt>Editor
  <dd>Ms2ger &lt;ms2ger@gmail.com&gt;
@@ -162,7 +162,7 @@ must run the appropriate steps, depending on <var title="">node</var>'s interfac
   <dt><a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#element><code class=external data-anolis-spec=domcore>Element</code></a>
   <dt><a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#document><code class=external data-anolis-spec=domcore>Document</code></a>
   <dd><p>Run the
-  <a class=external data-anolis-spec=html href=http://www.whatwg.org/html/#xml-fragment-serialization-algorithm>XML fragment serialization algorithm</a> on
+  <a class=external data-anolis-spec=html href=http://www.whatwg.org/specs/web-apps/current-work/multipage/the-xhtml-syntax.html#xml-fragment-serialization-algorithm>XML fragment serialization algorithm</a> on
   <var title="">node</var>. If this threw an exception, allow that exception to
   propagate out from this algorithm. Otherwise, return the returned string.
 
@@ -236,7 +236,7 @@ following steps:
  a <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#dom-domexception-not_supported_err><code class=external data-anolis-spec=domcore title=dom-DOMException-NOT_SUPPORTED_ERR>NOT_SUPPORTED_ERR</code></a> exception and abort these
  steps.
 
- <li><p>Parse <var title="">str</var> with a namespace-enabled <a class=external data-anolis-spec=html href=http://www.whatwg.org/html/#xml-parser>XML parser</a>.
+ <li><p>Parse <var title="">str</var> with a namespace-enabled <a class=external data-anolis-spec=html href=http://www.whatwg.org/specs/web-apps/current-work/multipage/the-xhtml-syntax.html#xml-parser>XML parser</a>.
 
  <li>
   <p>If the previous step didn't return an error, return the newly created
@@ -321,13 +321,13 @@ attribute represents the markup of the
 <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#dom-node-ownerdocument><code class=external data-anolis-spec=domcore title=dom-Node-ownerDocument>ownerDocument</code></a>
 is an <a class=external data-anolis-spec=domcore href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#html-document>HTML document</a>, then the attribute
 must return the result of running the
-<a class=external data-anolis-spec=html href=http://www.whatwg.org/html/#html-fragment-serialization-algorithm>HTML fragment serialization algorithm</a> on the
+<a class=external data-anolis-spec=html href=http://www.whatwg.org/specs/web-apps/current-work/multipage/the-end.html#html-fragment-serialization-algorithm>HTML fragment serialization algorithm</a> on the
 <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#element><code class=external data-anolis-spec=domcore>Element</code></a>; otherwise, the
 <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#element><code class=external data-anolis-spec=domcore>Element</code></a>'s
 <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#dom-node-ownerdocument><code class=external data-anolis-spec=domcore title=dom-Node-ownerDocument>ownerDocument</code></a>
 is an <a class=external data-anolis-spec=domcore href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#xml-document>XML document</a>, and the attribute must
 return the result of running the
-<a class=external data-anolis-spec=html href=http://www.whatwg.org/html/#xml-fragment-serialization-algorithm>XML fragment serialization algorithm</a> on the
+<a class=external data-anolis-spec=html href=http://www.whatwg.org/specs/web-apps/current-work/multipage/the-xhtml-syntax.html#xml-fragment-serialization-algorithm>XML fragment serialization algorithm</a> on the
 <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#element><code class=external data-anolis-spec=domcore>Element</code></a> instead (this might raise an
 exception instead of returning a string).
 
@@ -338,16 +338,16 @@ exception instead of returning a string).
     <p>If the <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#element><code class=external data-anolis-spec=domcore>Element</code></a>'s
     <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#dom-node-ownerdocument><code class=external data-anolis-spec=domcore title=dom-Node-ownerDocument>ownerDocument</code></a>
     is an <a class=external data-anolis-spec=domcore href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#html-document>HTML document</a>: Invoke the
-    <a class=external data-anolis-spec=html href=http://www.whatwg.org/html/#html-fragment-parsing-algorithm>HTML fragment parsing algorithm</a>.
+    <a class=external data-anolis-spec=html href=http://www.whatwg.org/specs/web-apps/current-work/multipage/the-end.html#html-fragment-parsing-algorithm>HTML fragment parsing algorithm</a>.
 
     <p>If the <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#element><code class=external data-anolis-spec=domcore>Element</code></a>'s
     <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#dom-node-ownerdocument><code class=external data-anolis-spec=domcore title=dom-Node-ownerDocument>ownerDocument</code></a>
     is an <a class=external data-anolis-spec=domcore href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#xml-document>XML document</a>: Invoke the
-    <a class=external data-anolis-spec=html href=http://www.whatwg.org/html/#xml-fragment-parsing-algorithm>XML fragment parsing algorithm</a>.
+    <a class=external data-anolis-spec=html href=http://www.whatwg.org/specs/web-apps/current-work/multipage/the-xhtml-syntax.html#xml-fragment-parsing-algorithm>XML fragment parsing algorithm</a>.
 
     <p>In either case, the algorithm must be invoked with the given value as the
     <var title="">input</var>, and the <a href=#context-object>context object</a> as the
-    <a href=http://www.whatwg.org/html/#concept-frag-parse-context><var class=external data-anolis-spec=html title=concept-frag-parse-context>context</var></a>
+    <a href=http://www.whatwg.org/specs/web-apps/current-work/multipage/the-end.html#concept-frag-parse-context><var class=external data-anolis-spec=html title=concept-frag-parse-context>context</var></a>
     element.
     <!--doc.ih
     If the node is an <code data-anolis-spec=domcore>Element</code>
@@ -431,13 +431,13 @@ attribute represents the markup of the
 <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#dom-node-ownerdocument><code class=external data-anolis-spec=domcore title=dom-Node-ownerDocument>ownerDocument</code></a>
 is an <a class=external data-anolis-spec=domcore href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#html-document>HTML document</a>, then the attribute
 must return the result of running the
-<a class=external data-anolis-spec=html href=http://www.whatwg.org/html/#html-fragment-serialization-algorithm>HTML fragment serialization algorithm</a> on a
+<a class=external data-anolis-spec=html href=http://www.whatwg.org/specs/web-apps/current-work/multipage/the-end.html#html-fragment-serialization-algorithm>HTML fragment serialization algorithm</a> on a
 fictional node whose only child is <a href=#context-object>context object</a>; otherwise, the
 <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#element><code class=external data-anolis-spec=domcore>Element</code></a>'s
 <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#dom-node-ownerdocument><code class=external data-anolis-spec=domcore title=dom-Node-ownerDocument>ownerDocument</code></a>
 is an <a class=external data-anolis-spec=domcore href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#xml-document>XML document</a>, and the attribute must
 return the result of running the
-<a class=external data-anolis-spec=html href=http://www.whatwg.org/html/#xml-fragment-serialization-algorithm>XML fragment serialization algorithm</a> on that
+<a class=external data-anolis-spec=html href=http://www.whatwg.org/specs/web-apps/current-work/multipage/the-xhtml-syntax.html#xml-fragment-serialization-algorithm>XML fragment serialization algorithm</a> on that
 fictional node instead (this might raise an exception instead of returning a
 string).
 
@@ -473,17 +473,17 @@ string).
     <p>If the <a href=#context-object>context object</a>'s
     <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#dom-node-ownerdocument><code class=external data-anolis-spec=domcore title=dom-Node-ownerDocument>ownerDocument</code></a>
     is an <a class=external data-anolis-spec=domcore href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#html-document>HTML document</a>: Invoke the
-    <a class=external data-anolis-spec=html href=http://www.whatwg.org/html/#html-fragment-parsing-algorithm>HTML fragment parsing algorithm</a>.
+    <a class=external data-anolis-spec=html href=http://www.whatwg.org/specs/web-apps/current-work/multipage/the-end.html#html-fragment-parsing-algorithm>HTML fragment parsing algorithm</a>.
 
     <p>If the <a href=#context-object>context object</a>'s
     <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#dom-node-ownerdocument><code class=external data-anolis-spec=domcore title=dom-Node-ownerDocument>ownerDocument</code></a>
     is an <a class=external data-anolis-spec=domcore href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#xml-document>XML document</a>: Invoke the
-    <a class=external data-anolis-spec=html href=http://www.whatwg.org/html/#xml-fragment-parsing-algorithm>XML fragment parsing algorithm</a>.
+    <a class=external data-anolis-spec=html href=http://www.whatwg.org/specs/web-apps/current-work/multipage/the-xhtml-syntax.html#xml-fragment-parsing-algorithm>XML fragment parsing algorithm</a>.
 
     <p>In either case, the algorithm must be invoked with the string being
     assigned into the <a href=#dom-element-outerhtml><code title=dom-Element-outerHTML>outerHTML</code></a>
     attribute as the <var title="">input</var>, and <var title="">parent</var> as the
-    <a href=http://www.whatwg.org/html/#concept-frag-parse-context><var class=external data-anolis-spec=html title=concept-frag-parse-context>context</var></a>
+    <a href=http://www.whatwg.org/specs/web-apps/current-work/multipage/the-end.html#concept-frag-parse-context><var class=external data-anolis-spec=html title=concept-frag-parse-context>context</var></a>
     element.
 
     <p>If this raises an exception, then abort these steps.
@@ -593,16 +593,16 @@ method, when invoked, must run the following algorithm:
     <p>If the <a href=#context-object>context object</a>'s
     <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#dom-node-ownerdocument><code class=external data-anolis-spec=domcore title=dom-Node-ownerDocument>ownerDocument</code></a>
     is an <a class=external data-anolis-spec=domcore href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#html-document>HTML document</a>: Invoke the
-    <a class=external data-anolis-spec=html href=http://www.whatwg.org/html/#html-fragment-parsing-algorithm>HTML fragment parsing algorithm</a>.
+    <a class=external data-anolis-spec=html href=http://www.whatwg.org/specs/web-apps/current-work/multipage/the-end.html#html-fragment-parsing-algorithm>HTML fragment parsing algorithm</a>.
 
     <p>If the <a href=#context-object>context object</a>'s
     <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#dom-node-ownerdocument><code class=external data-anolis-spec=domcore title=dom-Node-ownerDocument>ownerDocument</code></a>
     is an <a class=external data-anolis-spec=domcore href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#xml-document>XML document</a>: Invoke the
-    <a class=external data-anolis-spec=html href=http://www.whatwg.org/html/#xml-fragment-parsing-algorithm>XML fragment parsing algorithm</a>.
+    <a class=external data-anolis-spec=html href=http://www.whatwg.org/specs/web-apps/current-work/multipage/the-xhtml-syntax.html#xml-fragment-parsing-algorithm>XML fragment parsing algorithm</a>.
 
     <p>In either case, the algorithm must be invoked with <var title="">text</var>
     as the <var title="">input</var>, and <var title="">context</var> as the
-    <a href=http://www.whatwg.org/html/#concept-frag-parse-context><var class=external data-anolis-spec=html title=concept-frag-parse-context>context</var></a>
+    <a href=http://www.whatwg.org/specs/web-apps/current-work/multipage/the-end.html#concept-frag-parse-context><var class=external data-anolis-spec=html title=concept-frag-parse-context>context</var></a>
     element.
 
     <p>If this raises an exception, then abort these steps.
@@ -767,11 +767,11 @@ method must run the following steps:
 
   <li>
     <p>If the node's document is an <a class=external data-anolis-spec=domcore href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#html-document>HTML
-    document</a>: Invoke the <a class=external data-anolis-spec=html href=http://www.whatwg.org/html/#html-fragment-parsing-algorithm>HTML fragment
+    document</a>: Invoke the <a class=external data-anolis-spec=html href=http://www.whatwg.org/specs/web-apps/current-work/multipage/the-end.html#html-fragment-parsing-algorithm>HTML fragment
     parsing algorithm</a>.
 
     <p>If the node's document is an <a class=external data-anolis-spec=domcore href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#xml-document>XML
-    document</a>: Invoke the <a class=external data-anolis-spec=html href=http://www.whatwg.org/html/#xml-fragment-parsing-algorithm>XML fragment parsing
+    document</a>: Invoke the <a class=external data-anolis-spec=html href=http://www.whatwg.org/specs/web-apps/current-work/multipage/the-xhtml-syntax.html#xml-fragment-parsing-algorithm>XML fragment parsing
     algorithm</a>.
 
     <p>In either case, the algorithm must be invoked with
@@ -805,19 +805,19 @@ method must run the following steps:
 <p>All references are normative unless marked "Non-normative".</p>
 
 <div id=anolis-references><dl><dt id=refsDOMCORE>[DOMCORE]
-<dd><cite><a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html>DOM Core</a></cite>, A. van Kesteren and Ms2ger. W3C.
+<dd><cite><a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html>DOM Core</a></cite>, Anne van Kesteren and Ms2ger. W3C.
 
 <dt id=refsDOMRANGE>[DOMRANGE]
-<dd><cite><a href=http://html5.org/specs/dom-range.html>DOM Range</a></cite>, Ms2ger. WHATWG.
+<dd><cite><a href=http://html5.org/specs/dom-range.html>DOM Range</a></cite>, Aryeh Gregor and Ms2ger. WHATWG.
 
 <dt id=refsHTML>[HTML]
-<dd><cite><a href=http://www.whatwg.org/specs/web-apps/current-work/multipage>HTML</a></cite>, I. Hickson. WHATWG.
+<dd><cite><a href=http://www.whatwg.org/html>HTML</a></cite>, Ian Hickson. WHATWG.
 
 <dt id=refsRFC2119>[RFC2119]
-<dd><cite><a href=http://www.ietf.org/rfc/rfc2119.txt>Key words for use in RFCs to Indicate Requirement Levels</a></cite>, S. Bradner. IETF.
+<dd><cite><a href=http://tools.ietf.org/html/rfc2119>Key words for use in RFCs to Indicate Requirement Levels</a></cite>, Scott Bradner. IETF.
 
 <dt id=refsWEBIDL>[WEBIDL]
-<dd><cite><a href=http://dev.w3.org/2006/webapi/WebIDL/>Web IDL</a></cite>, C. McCormack. W3C.
+<dd><cite><a href=http://dev.w3.org/2006/webapi/WebIDL/>Web IDL</a></cite>, Cameron McCormack. W3C.
 
 </dl></div>
 

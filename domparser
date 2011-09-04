@@ -19,7 +19,7 @@
 <body class=draft>
 <div class=head id=head>
 <h1>DOM Parsing and Serialization</h1>
-<h2 class="no-num no-toc" id=work-in-progress-&mdash;-last-update-31-august-2011>Work in Progress &mdash; Last Update 31 August 2011</h2>
+<h2 class="no-num no-toc" id=work-in-progress-&mdash;-last-update-4-september-2011>Work in Progress &mdash; Last Update 4 September 2011</h2>
 <dl>
  <dt>Editor
  <dd>Ms2ger &lt;ms2ger@gmail.com&gt;
@@ -519,7 +519,7 @@ string).
     the resulting nodes into the tree in the position given by the
     <var title="">position</var> argument, as follows:
 
-    <dl class=switch>
+    <dl>
       <dt>"beforebegin"
       <dd>Before the element itself.
 
@@ -858,7 +858,7 @@ comments.
 <a href=#dom-element-innerhtml><code title=dom-Element-innerHTML>innerHTML</code></a> and
 <a href=#dom-element-outerhtml><code title=dom-Element-outerHTML>outerHTML</code></a> attributes, and the
 <a href=#dom-element-insertadjacenthtml><code title=dom-Element-insertAdjacentHTML>insertAdjacentHTML()</code></a> method in
-<cite>HTML</cite>.
+<cite>HTML</cite> and his useful comments.
 <a class=informative data-anolis-ref="" href=#refsHTML>[HTML]</a>
 
 

@@ -58,7 +58,7 @@
    <li><a href=#outerhtml><span class=secno>6.2 </span><code title=dom-Element-outerHTML>outerHTML</code></a></li>
    <li><a href=#insertadjacenthtml()><span class=secno>6.3 </span><code title=dom-Element-insertAdjacentHTML>insertAdjacentHTML()</code></a></ol></li>
  <li><a href=#extensions-to-the-text-interface><span class=secno>7 </span>Extensions to the <code class=external data-anolis-spec=domcore>Text</code> interface</a></li>
- <li><a href=#extensions-to-the-range-interface><span class=secno>8 </span>Extensions to the <code class=external data-anolis-spec=domrange>Range</code> interface</a></li>
+ <li><a href=#extensions-to-the-range-interface><span class=secno>8 </span>Extensions to the <code class=external data-anolis-spec=domcore>Range</code> interface</a></li>
  <li><a class=no-num href=#references>References</a></li>
  <li><a class=no-num href=#acknowledgements>Acknowledgements</a></ol>
 <!--end-toc-->
@@ -112,10 +112,9 @@ out of memory, or to work around platform-specific limitations.</p>
 required for conforming IDL fragments, as described in the Web IDL
 specification. <a data-anolis-ref="" href=#refsWEBIDL>[WEBIDL]</a>
 
-<p>Some of the terms used in this specification are defined in <cite>DOM
-Core</cite>, <cite>DOM Range</cite> and <cite>HTML</cite>.
+<p>Some of the terms used in this specification are defined in
+<cite>DOM Core</cite> and <cite>HTML</cite>.
 <a data-anolis-ref="" href=#refsDOMCORE>[DOMCORE]</a>
-<a data-anolis-ref="" href=#refsDOMRANGE>[DOMRANGE]</a>
 <a data-anolis-ref="" href=#refsHTML>[HTML]</a>
 
 
@@ -687,9 +686,9 @@ otherwise, must unset it.
 
 
 
-<h2 id=extensions-to-the-range-interface><span class=secno>8 </span>Extensions to the <a href=http://html5.org/specs/dom-range.html#range><code class=external data-anolis-spec=domrange>Range</code></a> interface</h2>
+<h2 id=extensions-to-the-range-interface><span class=secno>8 </span>Extensions to the <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#range><code class=external data-anolis-spec=domcore>Range</code></a> interface</h2>
 
-<pre class=idl>partial interface <a class=external data-anolis-spec=domrange href=http://html5.org/specs/dom-range.html#range>Range</a> {
+<pre class=idl>partial interface <a class=external data-anolis-spec=domcore href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#range>Range</a> {
   <a class=external data-anolis-spec=domcore href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#documentfragment>DocumentFragment</a> <a href=#dom-range-createcontextualfragment title=dom-Range-createContextualFragment>createContextualFragment</a>(DOMString fragment);
 };</pre>
 
@@ -708,16 +707,16 @@ method must run the following steps:
 
 <ol>
   <li>If the <a href=#context-object>context object</a>'s
-  <a class=external data-anolis-spec=domrange href=http://html5.org/specs/dom-range.html#concept-range-start title=concept-range-start>start's</a>
-  <a href=http://html5.org/specs/dom-range.html#concept-boundary-point-node><var class=external data-anolis-spec=domrange title=concept-boundary-point-node>node</var></a> is
+  <a class=external data-anolis-spec=domcore href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-range-start title=concept-range-start>start</a>
+  <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-range-bp-node><var class=external data-anolis-spec=domcore title=concept-range-bp-node>node</var></a> is
   null, raise an
   <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#dom-domexception-invalid_state_err><code class=external data-anolis-spec=domcore title=dom-DOMException-INVALID_STATE_ERR>INVALID_STATE_ERR</code></a>
   exception and abort these steps.
 
   <li>
     <p>Let <var title="">node</var> the <a href=#context-object>context object</a>'s
-    <a class=external data-anolis-spec=domrange href=http://html5.org/specs/dom-range.html#concept-range-start title=concept-range-start>start's</a>
-    <a href=http://html5.org/specs/dom-range.html#concept-boundary-point-node><var class=external data-anolis-spec=domrange title=concept-boundary-point-node>node</var></a>.
+    <a class=external data-anolis-spec=domcore href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-range-start title=concept-range-start>start</a>
+    <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-range-bp-node><var class=external data-anolis-spec=domcore title=concept-range-bp-node>node</var></a>.
 
     <p>Let <var title="">element</var> be as follows, depending on
     <var title="">node</var>'s interface:
@@ -736,7 +735,7 @@ method must run the following steps:
 
       <dt><a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#documenttype><code class=external data-anolis-spec=domcore>DocumentType</code></a>
       <dt><a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#processinginstruction><code class=external data-anolis-spec=domcore>ProcessingInstruction</code></a>
-      <dd>DOM Range prevents this case. <a data-anolis-ref="" href=#refsDOMRANGE>[DOMRANGE]</a>
+      <dd>DOM Core prevents this case. <a data-anolis-ref="" href=#refsDOMCORE>[DOMCORE]</a>
     </dl>
 
   <li>
@@ -788,9 +787,6 @@ method must run the following steps:
 
 <div id=anolis-references><dl><dt id=refsDOMCORE>[DOMCORE]
 <dd><cite><a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html>DOM Core</a></cite>, Anne van Kesteren and Ms2ger. W3C.
-
-<dt id=refsDOMRANGE>[DOMRANGE]
-<dd><cite><a href=http://html5.org/specs/dom-range.html>DOM Range</a></cite>, Aryeh Gregor and Ms2ger. WHATWG.
 
 <dt id=refsHTML>[HTML]
 <dd><cite><a href=http://www.whatwg.org/html>HTML</a></cite>, Ian Hickson. WHATWG.

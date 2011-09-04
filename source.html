@@ -91,10 +91,9 @@ data-anolis-spec=domcore>case-sensitive</span> manner.
 required for conforming IDL fragments, as described in the Web IDL
 specification. <span data-anolis-ref>WEBIDL</span>
 
-<p>Some of the terms used in this specification are defined in <cite>DOM
-Core</cite>, <cite>DOM Range</cite> and <cite>HTML</cite>.
+<p>Some of the terms used in this specification are defined in
+<cite>DOM Core</cite> and <cite>HTML</cite>.
 <span data-anolis-ref>DOMCORE</span>
-<span data-anolis-ref>DOMRANGE</span>
 <span data-anolis-ref>HTML</span>
 
 
@@ -674,9 +673,9 @@ otherwise, must unset it.
 
 
 
-<h2>Extensions to the <code data-anolis-spec=domrange>Range</code> interface</h2>
+<h2>Extensions to the <code data-anolis-spec=domcore>Range</code> interface</h2>
 
-<pre class=idl>partial interface <span data-anolis-spec=domrange>Range</span> {
+<pre class=idl>partial interface <span data-anolis-spec=domcore>Range</span> {
   <span data-anolis-spec=domcore>DocumentFragment</span> <span title=dom-Range-createContextualFragment>createContextualFragment</span>(DOMString fragment);
 };</pre>
 
@@ -695,16 +694,16 @@ method must run the following steps:
 
 <ol>
   <li>If the <span>context object</span>'s
-  <span data-anolis-spec=domrange title=concept-range-start>start's</span>
-  <var data-anolis-spec=domrange title=concept-boundary-point-node>node</var> is
+  <span data-anolis-spec=domcore title=concept-range-start>start</span>
+  <var data-anolis-spec=domcore title=concept-range-bp-node>node</var> is
   null, raise an
   <code data-anolis-spec=domcore title=dom-DOMException-INVALID_STATE_ERR>INVALID_STATE_ERR</code>
   exception and abort these steps.
 
   <li>
     <p>Let <var title>node</var> the <span>context object</span>'s
-    <span data-anolis-spec=domrange title=concept-range-start>start's</span>
-    <var data-anolis-spec=domrange title=concept-boundary-point-node>node</var>.
+    <span data-anolis-spec=domcore title=concept-range-start>start</span>
+    <var data-anolis-spec=domcore title=concept-range-bp-node>node</var>.
 
     <p>Let <var title>element</var> be as follows, depending on
     <var title>node</var>'s interface:
@@ -723,7 +722,7 @@ method must run the following steps:
 
       <dt><code data-anolis-spec=domcore>DocumentType</code>
       <dt><code data-anolis-spec=domcore>ProcessingInstruction</code>
-      <dd>DOM Range prevents this case. <span data-anolis-ref>DOMRANGE</span>
+      <dd>DOM Core prevents this case. <span data-anolis-ref>DOMCORE</span>
     </dl>
 
   <li>

@@ -480,9 +480,8 @@ string).
     is an <a class=external data-anolis-spec=domcore href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#xml-document>XML document</a>: Invoke the
     <a class=external data-anolis-spec=html href=http://www.whatwg.org/specs/web-apps/current-work/multipage/the-xhtml-syntax.html#xml-fragment-parsing-algorithm>XML fragment parsing algorithm</a>.
 
-    <p>In either case, the algorithm must be invoked with the string being
-    assigned into the <a href=#dom-element-outerhtml><code title=dom-Element-outerHTML>outerHTML</code></a>
-    attribute as the <var title="">input</var>, and <var title="">parent</var> as the
+    <p>In either case, the algorithm must be invoked with the given value as the
+    <var title="">input</var>, and <var title="">parent</var> as the
     <a href=http://www.whatwg.org/specs/web-apps/current-work/multipage/the-end.html#concept-frag-parse-context><var class=external data-anolis-spec=html title=concept-frag-parse-context>context</var></a>
     element.
 

@@ -133,6 +133,58 @@ attribute being discussed was called.
 
 <h2>Parsing and serializing <code data-anolis-spec=domcore>Node</code>s</h2>
 <h3>Parsing</h3>
+<p>The following steps form the
+<dfn title=concept-parse-fragment>fragment parsing algorithm</dfn>, whose
+arguments are a <var title>markup</var> string and a
+<var title>context node</var>.
+
+<ol>
+  <li>
+    <p>If the <var title>context node</var>'s
+    <code data-anolis-spec=domcore title=dom-Node-ownerDocument>ownerDocument</code>
+    is an <span data-anolis-spec=domcore>HTML document</span>: let
+    <var title>algorithm</var> be the
+    <span data-anolis-spec=html>HTML fragment parsing algorithm</span>.
+
+    <p>If the <var title>context node</var>'s
+    <code data-anolis-spec=domcore title=dom-Node-ownerDocument>ownerDocument</code>
+    is an <span data-anolis-spec=domcore>XML document</span>: let
+    <var title>algorithm</var> be the
+    <span data-anolis-spec=html>XML fragment parsing algorithm</span>.
+
+  <li>
+    <p>Invoke <var title>algorithm</var> with <var title>markup</var> as
+    the <var title>input</var>, and <var title>context node</var> as the
+    <var data-anolis-spec=html title=concept-frag-parse-context>context</var>
+    element.
+
+  <li>
+    <p>If this raised an exception, then abort these steps.
+
+  <li>
+    <p>Let <var title>new children</var> be the nodes returned.
+
+  <li>
+    <p>Let <var title>fragment</var> be a new
+    <code data-anolis-spec=domcore>DocumentFragment</code> whose
+    <span data-anolis-spec=domcore title=concept-node-document>node document</span>
+    is <var title>context node</var>'s
+    <span data-anolis-spec=domcore title=concept-node-document>node document</span>.
+
+  <li>
+    <p><span data-anolis-spec=domcore title=concept-node-append>Append</span>
+    each <span data-anolis-spec=domcore title=concept-node>node</span> in
+    <var title>new children</var> to <var title>fragment</var> (in order).
+
+    <p class=note>This ensures the
+    <span data-anolis-spec=domcore title=concept-node-document>node document</span>
+    for the new <span data-anolis-spec=domcore title=concept-node>nodes</span>
+    is correct.
+
+  <li>
+    <p>Return <var title>fragment</var>.
+</ol>
+
 <h3>Serializing</h3>
 <p>To <dfn title=concept-serialize-xml>produce an XML serialization</dfn> of a
 <code data-anolis-spec=domcore>Node</code> <var title>node</var>, the user agent
@@ -322,63 +374,22 @@ exception instead of returning a string).
 
 <ol>
   <li>
-    <p>If the <code data-anolis-spec=domcore>Element</code>'s
-    <code data-anolis-spec=domcore title=dom-Node-ownerDocument>ownerDocument</code>
-    is an <span data-anolis-spec=domcore>HTML document</span>: Invoke the
-    <span data-anolis-spec=html>HTML fragment parsing algorithm</span>.
+    <p>Let <var title>fragment</var> be the result of invoking the
+    <span title=concept-parse-fragment>fragment parsing algorithm</span> with
+    the given value as <var title>markup</var>, and the
+    <span>context object</span> as the <var title>context node</var>.
 
-    <p>If the <code data-anolis-spec=domcore>Element</code>'s
-    <code data-anolis-spec=domcore title=dom-Node-ownerDocument>ownerDocument</code>
-    is an <span data-anolis-spec=domcore>XML document</span>: Invoke the
-    <span data-anolis-spec=html>XML fragment parsing algorithm</span>.
-
-    <p>In either case, the algorithm must be invoked with the given value as the
-    <var title>input</var>, and the <span>context object</span> as the
-    <var data-anolis-spec=html title=concept-frag-parse-context>context</var>
-    element.
-    <!--doc.ih
-    If the node is an <code data-anolis-spec=domcore>Element</code>
-    node, then, in addition, that element must be passed as the <var
-    title="">context</var> element.
-    -->
-
-    <p>If this raises an exception, then abort these steps.
-
-    <p>Otherwise, let <var title>new children</var> be the nodes returned.
-
-  <!--doc.ih
-  <li>
-    <p>If the attribute is being set on a <code>Document</code> node,
-    and that document has an <span>active parser</span>, then abort
-    that parser.
-  -->
+    <p>If this raised an exception, then abort these steps.
 
   <li>
-    <p>Remove the child nodes of the <span>context object</span>, firing
-    appropriate mutation events.
+    <p>While the <span>context object</span> has
+    <span data-anolis-spec=domcore title=concept-tree-child>children</span>,
+    <span data-anolis-spec=domcore title=concept-node-remove>remove</span> its
+    <span data-anolis-spec=domcore title=concept-tree-first-child>first child</span>.
 
   <li>
-    <p>
-    <!--doc.ih
-    If the attribute is being set on a <code>Document</code> node,
-    let <var title>target document</var> be that
-    <code>Document</code> node. Otherwise, the attribute is being set
-    on an <code>Element</code> node;
-    -->
-    Let <var title>target document</var> be the <span>context object</span>'s
-    <code data-anolis-spec=domcore title=dom-Node-ownerDocument>ownerDocument</code>.
-
-  <li>
-    <p>Set the
-    <code data-anolis-spec=domcore title=dom-Node-ownerDocument>ownerDocument</code>
-    of all the <code data-anolis-spec=domcore>Node</code>s in
-    <var title>new children</var> to the <var title>target document</var>.
-
-  <li>
-    <p>Append all the <var title>new children</var> nodes to the
-    <span>context object</span>, preserving their order, and firing mutation
-    events as if a <code data-anolis-spec=domcore>DocumentFragment</code>
-    containing the <var title>new children</var> had been inserted.
+    <p><span data-anolis-spec=domcore title=concept-node-append>Append</span>
+    <var title>fragment</var> to the <span>context object</span>.
 </ol>
 
 </div>
@@ -457,39 +468,18 @@ string).
     <span data-anolis-spec=domcore title=concept-element-namespace>namespace</span>.
 
   <li>
-    <p>If the <span>context object</span>'s
-    <code data-anolis-spec=domcore title=dom-Node-ownerDocument>ownerDocument</code>
-    is an <span data-anolis-spec=domcore>HTML document</span>: Invoke the
-    <span data-anolis-spec=html>HTML fragment parsing algorithm</span>.
+    <p>Let <var title>fragment</var> be the result of invoking the
+    <span title=concept-parse-fragment>fragment parsing algorithm</span> with
+    the given value as <var title>markup</var>, and <var title>parent</var> as
+    the <var title>context node</var>.
 
-    <p>If the <span>context object</span>'s
-    <code data-anolis-spec=domcore title=dom-Node-ownerDocument>ownerDocument</code>
-    is an <span data-anolis-spec=domcore>XML document</span>: Invoke the
-    <span data-anolis-spec=html>XML fragment parsing algorithm</span>.
-
-    <p>In either case, the algorithm must be invoked with the given value as the
-    <var title>input</var>, and <var title>parent</var> as the
-    <var data-anolis-spec=html title=concept-frag-parse-context>context</var>
-    element.
-
-    <p>If this raises an exception, then abort these steps.
-
-    <p>Otherwise, let <var title>new children</var> be the nodes returned.
+    <p>If this raised an exception, then abort these steps.
 
   <li>
-    <p>Set the
-    <code data-anolis-spec=domcore title=dom-Node-ownerDocument>ownerDocument</code>
-    of all the nodes in <var title>new children</var> to the
-    <span>context object</span>'s
-    <code data-anolis-spec=domcore title=dom-Node-ownerDocument>ownerDocument</code>.
-
-  <li>
-    <p>Remove the <span>context object</span> from its parent node, firing
-    mutation events as appropriate, and then insert in its place all the
-    <var title>new children</var> nodes, preserving their order, and again
-    firing mutation events as if a
-    <code data-anolis-spec=domcore>DocumentFragment</code> containing the
-    <var title>new children</var> had been inserted.
+    <p><span data-anolis-spec=domcore title=concept-node-replace>Replace</span>
+    the <span>context object</span> with <var title>fragment</var> within
+    the <span>context object</span>'s
+    <span span data-anolis-spec=domcore title=concept-tree-parent>parent</span>.
 </ol>
 
 </div>
@@ -603,31 +593,12 @@ method, when invoked, must run the following algorithm:
     <span data-anolis-spec=domcore title=concept-element-namespace>namespace</span>.
 
   <li>
-    <p>If the <span>context object</span>'s
-    <code data-anolis-spec=domcore title=dom-Node-ownerDocument>ownerDocument</code>
-    is an <span data-anolis-spec=domcore>HTML document</span>: Invoke the
-    <span data-anolis-spec=html>HTML fragment parsing algorithm</span>.
+    <p>Let <var title>fragment</var> be the result of invoking the
+    <span title=concept-parse-fragment>fragment parsing algorithm</span> with
+    <var title>text</var> as <var title>markup</var>, and
+    <var title>parent</var> as the <var title>context node</var>.
 
-    <p>If the <span>context object</span>'s
-    <code data-anolis-spec=domcore title=dom-Node-ownerDocument>ownerDocument</code>
-    is an <span data-anolis-spec=domcore>XML document</span>: Invoke the
-    <span data-anolis-spec=html>XML fragment parsing algorithm</span>.
-
-    <p>In either case, the algorithm must be invoked with <var title>text</var>
-    as the <var title>input</var>, and <var title>context</var> as the
-    <var data-anolis-spec=html title=concept-frag-parse-context>context</var>
-    element.
-
-    <p>If this raises an exception, then abort these steps.
-
-    <p>Otherwise, let <var title>new children</var> be the nodes
-    returned.
-
-  <li>
-    <p>Set the
-    <code data-anolis-spec=domcore title=dom-Node-ownerDocument>ownerDocument</code>
-    of all the <code data-anolis-spec=domcore>Node</code>s in
-    <var title>new children</var> to the <var title>target document</var>.
+    <p>If this raised an exception, then abort these steps.
 
   <li>
     <p>Use the first matching item from this list:
@@ -637,36 +608,37 @@ method, when invoked, must run the following algorithm:
       <span data-anolis-spec=domcore>ASCII case-insensitive</span> match for
       the string "beforebegin"
       <dd>
-        <p>Insert all the <var title>new children</var> nodes immediately before
-        the <span>context object</span>.
+        <p><span data-anolis-spec=domcore title=concept-node-insert>Insert</span>
+        <var title>fragment</var> into the <span>context object</span>'s
+        <span span data-anolis-spec=domcore title=concept-tree-parent>parent</span>
+        before the <span>context object</span>.
 
       <dt>If <var title>position</var> is an
       <span data-anolis-spec=domcore>ASCII case-insensitive</span> match for
       the string "afterbegin"
       <dd>
-        <p>Insert all the <var title>new children</var> nodes before the first
-        child of the <span>context object</span>, if there is one. If there is
-        no such child, append them all to the <span>context object</span>.
+        <p><span data-anolis-spec=domcore title=concept-node-insert>Insert</span>
+        <var title>fragment</var> into the <span>context object</span>
+        before its
+        <span data-anolis-spec=domcore title=concept-tree-first-child>first child</span>.
 
       <dt>If <var title>position</var> is an
       <span data-anolis-spec=domcore>ASCII case-insensitive</span> match for
       the string "beforeend"
       <dd>
-        <p>Append all the <var title>new children</var> nodes to the
-        <span>context object</span>.
+        <p><span data-anolis-spec=domcore title=concept-node-append>Append</span>
+        <var title>fragment</var> to the <span>context object</span>.
 
       <dt>If <var title>position</var> is an
       <span data-anolis-spec=domcore>ASCII case-insensitive</span> match for
       the string "afterend"
       <dd>
-        <p>Insert all the <var title>new children</var> nodes immediately after
-        the <span>context object</span>.
+        <p><span data-anolis-spec=domcore title=concept-node-insert>Insert</span>
+        <var title>fragment</var> into the <span>context object</span>'s
+        <span data-anolis-spec=domcore title=concept-tree-parent>parent</span>
+        before the <span>context object</span>'s
+        <span data-anolis-spec=domcore title=concept-tree-next-sibling>next sibling</span>.
     </dl>
-
-    <p>The <var title>new children</var> nodes must be inserted in a manner that
-    preserves their order and fires mutation events as if a
-    <code data-anolis-spec=domcore>DocumentFragment</code> containing the
-    <var title>new children</var> had been inserted.
 </ol>
 
 </div>
@@ -779,35 +751,19 @@ method must run the following steps:
     <span data-anolis-spec=domcore title=concept-element-namespace>namespace</span>.
 
   <li>
-    <p>If the node's document is an <span data-anolis-spec=domcore>HTML
-    document</span>: Invoke the <span data-anolis-spec=html>HTML fragment
-    parsing algorithm</span>.
+    <p>Let <var title>fragment node</var> be the result of invoking the
+    <span title=concept-parse-fragment>fragment parsing algorithm</span> with
+    <var title>fragment</var> as <var title>markup</var>, and
+    <var title>element</var> as the <var title>context node</var>.
 
-    <p>If the node's document is an <span data-anolis-spec=domcore>XML
-    document</span>: Invoke the <span data-anolis-spec=html>XML fragment parsing
-    algorithm</span>.
+    <p>If this raised an exception, then abort these steps.
 
-    <p>In either case, the algorithm must be invoked with
-    <var title>fragment</var> as the <var title>input</var> and
-    <var title>element</var> as the <var title>context</var> element.
+  <li>
+    <p>Unmark all scripts in <var title>fragment node</var> as
+    "already started".
 
-  <li>If this raises an exception, then abort these steps. Otherwise, let
-  <var title>new children</var> be the nodes returned.
-
-  <li>Unmark all scripts in <var title>new children</var> as "already started".
-
-  <li>Set the
-  <code data-anolis-spec=domcore title=dom-Node-ownerDocument>ownerDocument</code>
-  of all the nodes in <var title>new children</var> to the
-  <span>context object</span>'s
-  <span data-anolis-spec=domrange title=concept-range-root>root's</span>
-  <code data-anolis-spec=domcore title=dom-Node-ownerDocument>ownerDocument</code>.
-
-  <li>Let <var title>fragment</var> be a new
-  <code data-anolis-spec=domcore>DocumentFragment</code> and append all
-  <var title>new children</var> to it.
-
-  <li>Return <var title>fragment</var>.
+  <li>
+    <p>Return <var title>fragment node</var>.
 </ol>
 
 </div>
@@ -822,8 +778,9 @@ method must run the following steps:
 
 
 <h2 class=no-num>Acknowledgements</h2>
-<p>Thanks to Anne van Kesteren, Aryeh Gregor and Henri Sivonen for their useful
-comments.
+<p>Thanks to
+Anne van Kesteren, Aryeh Gregor, Henri Sivonen and timeless
+for their useful comments.
 
 <p>Special thanks to Ian Hickson for defining the
 <code title=dom-Element-innerHTML>innerHTML</code> and

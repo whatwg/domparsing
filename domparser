@@ -154,6 +154,58 @@ attribute being discussed was called.
 
 <h2 id=parsing-and-serializing-nodes><span class=secno>3 </span>Parsing and serializing <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#node><code class=external data-anolis-spec=domcore>Node</code></a>s</h2>
 <h3 id=parsing><span class=secno>3.1 </span>Parsing</h3>
+<p>The following steps form the
+<dfn id=concept-parse-fragment title=concept-parse-fragment>fragment parsing algorithm</dfn>, whose
+arguments are a <var title="">markup</var> string and a
+<var title="">context node</var>.
+
+<ol>
+  <li>
+    <p>If the <var title="">context node</var>'s
+    <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#dom-node-ownerdocument><code class=external data-anolis-spec=domcore title=dom-Node-ownerDocument>ownerDocument</code></a>
+    is an <a class=external data-anolis-spec=domcore href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#html-document>HTML document</a>: let
+    <var title="">algorithm</var> be the
+    <a class=external data-anolis-spec=html href=http://www.whatwg.org/specs/web-apps/current-work/multipage/the-end.html#html-fragment-parsing-algorithm>HTML fragment parsing algorithm</a>.
+
+    <p>If the <var title="">context node</var>'s
+    <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#dom-node-ownerdocument><code class=external data-anolis-spec=domcore title=dom-Node-ownerDocument>ownerDocument</code></a>
+    is an <a class=external data-anolis-spec=domcore href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#xml-document>XML document</a>: let
+    <var title="">algorithm</var> be the
+    <a class=external data-anolis-spec=html href=http://www.whatwg.org/specs/web-apps/current-work/multipage/the-xhtml-syntax.html#xml-fragment-parsing-algorithm>XML fragment parsing algorithm</a>.
+
+  <li>
+    <p>Invoke <var title="">algorithm</var> with <var title="">markup</var> as
+    the <var title="">input</var>, and <var title="">context node</var> as the
+    <a href=http://www.whatwg.org/specs/web-apps/current-work/multipage/the-end.html#concept-frag-parse-context><var class=external data-anolis-spec=html title=concept-frag-parse-context>context</var></a>
+    element.
+
+  <li>
+    <p>If this raised an exception, then abort these steps.
+
+  <li>
+    <p>Let <var title="">new children</var> be the nodes returned.
+
+  <li>
+    <p>Let <var title="">fragment</var> be a new
+    <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#documentfragment><code class=external data-anolis-spec=domcore>DocumentFragment</code></a> whose
+    <a class=external data-anolis-spec=domcore href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-node-document title=concept-node-document>node document</a>
+    is <var title="">context node</var>'s
+    <a class=external data-anolis-spec=domcore href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-node-document title=concept-node-document>node document</a>.
+
+  <li>
+    <p><a class=external data-anolis-spec=domcore href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-node-append title=concept-node-append>Append</a>
+    each <a class=external data-anolis-spec=domcore href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-node title=concept-node>node</a> in
+    <var title="">new children</var> to <var title="">fragment</var> (in order).
+
+    <p class=note>This ensures the
+    <a class=external data-anolis-spec=domcore href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-node-document title=concept-node-document>node document</a>
+    for the new <a class=external data-anolis-spec=domcore href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-node title=concept-node>nodes</a>
+    is correct.
+
+  <li>
+    <p>Return <var title="">fragment</var>.
+</ol>
+
 <h3 id=serializing><span class=secno>3.2 </span>Serializing</h3>
 <p>To <dfn id=concept-serialize-xml title=concept-serialize-xml>produce an XML serialization</dfn> of a
 <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#node><code class=external data-anolis-spec=domcore>Node</code></a> <var title="">node</var>, the user agent
@@ -335,63 +387,22 @@ exception instead of returning a string).
 
 <ol>
   <li>
-    <p>If the <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#element><code class=external data-anolis-spec=domcore>Element</code></a>'s
-    <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#dom-node-ownerdocument><code class=external data-anolis-spec=domcore title=dom-Node-ownerDocument>ownerDocument</code></a>
-    is an <a class=external data-anolis-spec=domcore href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#html-document>HTML document</a>: Invoke the
-    <a class=external data-anolis-spec=html href=http://www.whatwg.org/specs/web-apps/current-work/multipage/the-end.html#html-fragment-parsing-algorithm>HTML fragment parsing algorithm</a>.
+    <p>Let <var title="">fragment</var> be the result of invoking the
+    <a href=#concept-parse-fragment title=concept-parse-fragment>fragment parsing algorithm</a> with
+    the given value as <var title="">markup</var>, and the
+    <a href=#context-object>context object</a> as the <var title="">context node</var>.
 
-    <p>If the <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#element><code class=external data-anolis-spec=domcore>Element</code></a>'s
-    <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#dom-node-ownerdocument><code class=external data-anolis-spec=domcore title=dom-Node-ownerDocument>ownerDocument</code></a>
-    is an <a class=external data-anolis-spec=domcore href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#xml-document>XML document</a>: Invoke the
-    <a class=external data-anolis-spec=html href=http://www.whatwg.org/specs/web-apps/current-work/multipage/the-xhtml-syntax.html#xml-fragment-parsing-algorithm>XML fragment parsing algorithm</a>.
-
-    <p>In either case, the algorithm must be invoked with the given value as the
-    <var title="">input</var>, and the <a href=#context-object>context object</a> as the
-    <a href=http://www.whatwg.org/specs/web-apps/current-work/multipage/the-end.html#concept-frag-parse-context><var class=external data-anolis-spec=html title=concept-frag-parse-context>context</var></a>
-    element.
-    <!--doc.ih
-    If the node is an <code data-anolis-spec=domcore>Element</code>
-    node, then, in addition, that element must be passed as the <var
-    title="">context</var> element.
-    -->
-
-    <p>If this raises an exception, then abort these steps.
-
-    <p>Otherwise, let <var title="">new children</var> be the nodes returned.
-
-  <!--doc.ih
-  <li>
-    <p>If the attribute is being set on a <code>Document</code> node,
-    and that document has an <span>active parser</span>, then abort
-    that parser.
-  -->
+    <p>If this raised an exception, then abort these steps.
 
   <li>
-    <p>Remove the child nodes of the <a href=#context-object>context object</a>, firing
-    appropriate mutation events.
+    <p>While the <a href=#context-object>context object</a> has
+    <a class=external data-anolis-spec=domcore href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-tree-child title=concept-tree-child>children</a>,
+    <a class=external data-anolis-spec=domcore href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-node-remove title=concept-node-remove>remove</a> its
+    <a class=external data-anolis-spec=domcore href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-tree-first-child title=concept-tree-first-child>first child</a>.
 
   <li>
-    <p>
-    <!--doc.ih
-    If the attribute is being set on a <code>Document</code> node,
-    let <var title>target document</var> be that
-    <code>Document</code> node. Otherwise, the attribute is being set
-    on an <code>Element</code> node;
-    -->
-    Let <var title="">target document</var> be the <a href=#context-object>context object</a>'s
-    <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#dom-node-ownerdocument><code class=external data-anolis-spec=domcore title=dom-Node-ownerDocument>ownerDocument</code></a>.
-
-  <li>
-    <p>Set the
-    <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#dom-node-ownerdocument><code class=external data-anolis-spec=domcore title=dom-Node-ownerDocument>ownerDocument</code></a>
-    of all the <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#node><code class=external data-anolis-spec=domcore>Node</code></a>s in
-    <var title="">new children</var> to the <var title="">target document</var>.
-
-  <li>
-    <p>Append all the <var title="">new children</var> nodes to the
-    <a href=#context-object>context object</a>, preserving their order, and firing mutation
-    events as if a <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#documentfragment><code class=external data-anolis-spec=domcore>DocumentFragment</code></a>
-    containing the <var title="">new children</var> had been inserted.
+    <p><a class=external data-anolis-spec=domcore href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-node-append title=concept-node-append>Append</a>
+    <var title="">fragment</var> to the <a href=#context-object>context object</a>.
 </ol>
 
 </div>
@@ -470,39 +481,18 @@ string).
     <a class=external data-anolis-spec=domcore href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-element-namespace title=concept-element-namespace>namespace</a>.
 
   <li>
-    <p>If the <a href=#context-object>context object</a>'s
-    <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#dom-node-ownerdocument><code class=external data-anolis-spec=domcore title=dom-Node-ownerDocument>ownerDocument</code></a>
-    is an <a class=external data-anolis-spec=domcore href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#html-document>HTML document</a>: Invoke the
-    <a class=external data-anolis-spec=html href=http://www.whatwg.org/specs/web-apps/current-work/multipage/the-end.html#html-fragment-parsing-algorithm>HTML fragment parsing algorithm</a>.
+    <p>Let <var title="">fragment</var> be the result of invoking the
+    <a href=#concept-parse-fragment title=concept-parse-fragment>fragment parsing algorithm</a> with
+    the given value as <var title="">markup</var>, and <var title="">parent</var> as
+    the <var title="">context node</var>.
 
-    <p>If the <a href=#context-object>context object</a>'s
-    <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#dom-node-ownerdocument><code class=external data-anolis-spec=domcore title=dom-Node-ownerDocument>ownerDocument</code></a>
-    is an <a class=external data-anolis-spec=domcore href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#xml-document>XML document</a>: Invoke the
-    <a class=external data-anolis-spec=html href=http://www.whatwg.org/specs/web-apps/current-work/multipage/the-xhtml-syntax.html#xml-fragment-parsing-algorithm>XML fragment parsing algorithm</a>.
-
-    <p>In either case, the algorithm must be invoked with the given value as the
-    <var title="">input</var>, and <var title="">parent</var> as the
-    <a href=http://www.whatwg.org/specs/web-apps/current-work/multipage/the-end.html#concept-frag-parse-context><var class=external data-anolis-spec=html title=concept-frag-parse-context>context</var></a>
-    element.
-
-    <p>If this raises an exception, then abort these steps.
-
-    <p>Otherwise, let <var title="">new children</var> be the nodes returned.
+    <p>If this raised an exception, then abort these steps.
 
   <li>
-    <p>Set the
-    <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#dom-node-ownerdocument><code class=external data-anolis-spec=domcore title=dom-Node-ownerDocument>ownerDocument</code></a>
-    of all the nodes in <var title="">new children</var> to the
-    <a href=#context-object>context object</a>'s
-    <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#dom-node-ownerdocument><code class=external data-anolis-spec=domcore title=dom-Node-ownerDocument>ownerDocument</code></a>.
-
-  <li>
-    <p>Remove the <a href=#context-object>context object</a> from its parent node, firing
-    mutation events as appropriate, and then insert in its place all the
-    <var title="">new children</var> nodes, preserving their order, and again
-    firing mutation events as if a
-    <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#documentfragment><code class=external data-anolis-spec=domcore>DocumentFragment</code></a> containing the
-    <var title="">new children</var> had been inserted.
+    <p><a class=external data-anolis-spec=domcore href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-node-replace title=concept-node-replace>Replace</a>
+    the <a href=#context-object>context object</a> with <var title="">fragment</var> within
+    the <a href=#context-object>context object</a>'s
+    <a class=external data-anolis-spec=domcore href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-tree-parent span="" title=concept-tree-parent>parent</a>.
 </ol>
 
 </div>
@@ -616,31 +606,12 @@ method, when invoked, must run the following algorithm:
     <a class=external data-anolis-spec=domcore href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-element-namespace title=concept-element-namespace>namespace</a>.
 
   <li>
-    <p>If the <a href=#context-object>context object</a>'s
-    <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#dom-node-ownerdocument><code class=external data-anolis-spec=domcore title=dom-Node-ownerDocument>ownerDocument</code></a>
-    is an <a class=external data-anolis-spec=domcore href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#html-document>HTML document</a>: Invoke the
-    <a class=external data-anolis-spec=html href=http://www.whatwg.org/specs/web-apps/current-work/multipage/the-end.html#html-fragment-parsing-algorithm>HTML fragment parsing algorithm</a>.
+    <p>Let <var title="">fragment</var> be the result of invoking the
+    <a href=#concept-parse-fragment title=concept-parse-fragment>fragment parsing algorithm</a> with
+    <var title="">text</var> as <var title="">markup</var>, and
+    <var title="">parent</var> as the <var title="">context node</var>.
 
-    <p>If the <a href=#context-object>context object</a>'s
-    <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#dom-node-ownerdocument><code class=external data-anolis-spec=domcore title=dom-Node-ownerDocument>ownerDocument</code></a>
-    is an <a class=external data-anolis-spec=domcore href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#xml-document>XML document</a>: Invoke the
-    <a class=external data-anolis-spec=html href=http://www.whatwg.org/specs/web-apps/current-work/multipage/the-xhtml-syntax.html#xml-fragment-parsing-algorithm>XML fragment parsing algorithm</a>.
-
-    <p>In either case, the algorithm must be invoked with <var title="">text</var>
-    as the <var title="">input</var>, and <var title="">context</var> as the
-    <a href=http://www.whatwg.org/specs/web-apps/current-work/multipage/the-end.html#concept-frag-parse-context><var class=external data-anolis-spec=html title=concept-frag-parse-context>context</var></a>
-    element.
-
-    <p>If this raises an exception, then abort these steps.
-
-    <p>Otherwise, let <var title="">new children</var> be the nodes
-    returned.
-
-  <li>
-    <p>Set the
-    <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#dom-node-ownerdocument><code class=external data-anolis-spec=domcore title=dom-Node-ownerDocument>ownerDocument</code></a>
-    of all the <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#node><code class=external data-anolis-spec=domcore>Node</code></a>s in
-    <var title="">new children</var> to the <var title="">target document</var>.
+    <p>If this raised an exception, then abort these steps.
 
   <li>
     <p>Use the first matching item from this list:
@@ -650,36 +621,37 @@ method, when invoked, must run the following algorithm:
       <a class=external data-anolis-spec=domcore href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#ascii-case-insensitive>ASCII case-insensitive</a> match for
       the string "beforebegin"
       <dd>
-        <p>Insert all the <var title="">new children</var> nodes immediately before
-        the <a href=#context-object>context object</a>.
+        <p><a class=external data-anolis-spec=domcore href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-node-insert title=concept-node-insert>Insert</a>
+        <var title="">fragment</var> into the <a href=#context-object>context object</a>'s
+        <a class=external data-anolis-spec=domcore href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-tree-parent span="" title=concept-tree-parent>parent</a>
+        before the <a href=#context-object>context object</a>.
 
       <dt>If <var title="">position</var> is an
       <a class=external data-anolis-spec=domcore href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#ascii-case-insensitive>ASCII case-insensitive</a> match for
       the string "afterbegin"
       <dd>
-        <p>Insert all the <var title="">new children</var> nodes before the first
-        child of the <a href=#context-object>context object</a>, if there is one. If there is
-        no such child, append them all to the <a href=#context-object>context object</a>.
+        <p><a class=external data-anolis-spec=domcore href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-node-insert title=concept-node-insert>Insert</a>
+        <var title="">fragment</var> into the <a href=#context-object>context object</a>
+        before its
+        <a class=external data-anolis-spec=domcore href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-tree-first-child title=concept-tree-first-child>first child</a>.
 
       <dt>If <var title="">position</var> is an
       <a class=external data-anolis-spec=domcore href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#ascii-case-insensitive>ASCII case-insensitive</a> match for
       the string "beforeend"
       <dd>
-        <p>Append all the <var title="">new children</var> nodes to the
-        <a href=#context-object>context object</a>.
+        <p><a class=external data-anolis-spec=domcore href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-node-append title=concept-node-append>Append</a>
+        <var title="">fragment</var> to the <a href=#context-object>context object</a>.
 
       <dt>If <var title="">position</var> is an
       <a class=external data-anolis-spec=domcore href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#ascii-case-insensitive>ASCII case-insensitive</a> match for
       the string "afterend"
       <dd>
-        <p>Insert all the <var title="">new children</var> nodes immediately after
-        the <a href=#context-object>context object</a>.
+        <p><a class=external data-anolis-spec=domcore href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-node-insert title=concept-node-insert>Insert</a>
+        <var title="">fragment</var> into the <a href=#context-object>context object</a>'s
+        <a class=external data-anolis-spec=domcore href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-tree-parent title=concept-tree-parent>parent</a>
+        before the <a href=#context-object>context object</a>'s
+        <a class=external data-anolis-spec=domcore href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-tree-next-sibling title=concept-tree-next-sibling>next sibling</a>.
     </dl>
-
-    <p>The <var title="">new children</var> nodes must be inserted in a manner that
-    preserves their order and fires mutation events as if a
-    <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#documentfragment><code class=external data-anolis-spec=domcore>DocumentFragment</code></a> containing the
-    <var title="">new children</var> had been inserted.
 </ol>
 
 </div>
@@ -792,35 +764,19 @@ method must run the following steps:
     <a class=external data-anolis-spec=domcore href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-element-namespace title=concept-element-namespace>namespace</a>.
 
   <li>
-    <p>If the node's document is an <a class=external data-anolis-spec=domcore href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#html-document>HTML
-    document</a>: Invoke the <a class=external data-anolis-spec=html href=http://www.whatwg.org/specs/web-apps/current-work/multipage/the-end.html#html-fragment-parsing-algorithm>HTML fragment
-    parsing algorithm</a>.
+    <p>Let <var title="">fragment node</var> be the result of invoking the
+    <a href=#concept-parse-fragment title=concept-parse-fragment>fragment parsing algorithm</a> with
+    <var title="">fragment</var> as <var title="">markup</var>, and
+    <var title="">element</var> as the <var title="">context node</var>.
 
-    <p>If the node's document is an <a class=external data-anolis-spec=domcore href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#xml-document>XML
-    document</a>: Invoke the <a class=external data-anolis-spec=html href=http://www.whatwg.org/specs/web-apps/current-work/multipage/the-xhtml-syntax.html#xml-fragment-parsing-algorithm>XML fragment parsing
-    algorithm</a>.
+    <p>If this raised an exception, then abort these steps.
 
-    <p>In either case, the algorithm must be invoked with
-    <var title="">fragment</var> as the <var title="">input</var> and
-    <var title="">element</var> as the <var title="">context</var> element.
+  <li>
+    <p>Unmark all scripts in <var title="">fragment node</var> as
+    "already started".
 
-  <li>If this raises an exception, then abort these steps. Otherwise, let
-  <var title="">new children</var> be the nodes returned.
-
-  <li>Unmark all scripts in <var title="">new children</var> as "already started".
-
-  <li>Set the
-  <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#dom-node-ownerdocument><code class=external data-anolis-spec=domcore title=dom-Node-ownerDocument>ownerDocument</code></a>
-  of all the nodes in <var title="">new children</var> to the
-  <a href=#context-object>context object</a>'s
-  <a class=external data-anolis-spec=domrange href=http://html5.org/specs/dom-range.html#concept-range-root title=concept-range-root>root's</a>
-  <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#dom-node-ownerdocument><code class=external data-anolis-spec=domcore title=dom-Node-ownerDocument>ownerDocument</code></a>.
-
-  <li>Let <var title="">fragment</var> be a new
-  <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#documentfragment><code class=external data-anolis-spec=domcore>DocumentFragment</code></a> and append all
-  <var title="">new children</var> to it.
-
-  <li>Return <var title="">fragment</var>.
+  <li>
+    <p>Return <var title="">fragment node</var>.
 </ol>
 
 </div>
@@ -850,8 +806,9 @@ method must run the following steps:
 
 
 <h2 class=no-num id=acknowledgements>Acknowledgements</h2>
-<p>Thanks to Anne van Kesteren, Aryeh Gregor and Henri Sivonen for their useful
-comments.
+<p>Thanks to
+Anne van Kesteren, Aryeh Gregor, Henri Sivonen and timeless
+for their useful comments.
 
 <p>Special thanks to Ian Hickson for defining the
 <a href=#dom-element-innerhtml><code title=dom-Element-innerHTML>innerHTML</code></a> and

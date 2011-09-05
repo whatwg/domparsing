@@ -156,17 +156,17 @@ attribute being discussed was called.
 <p>The following steps form the
 <dfn id=concept-parse-fragment title=concept-parse-fragment>fragment parsing algorithm</dfn>, whose
 arguments are a <var title="">markup</var> string and a
-<var title="">context node</var>.
+<var title="">context element</var>.
 
 <ol>
   <li>
-    <p>If the <var title="">context node</var>'s
+    <p>If the <var title="">context element</var>'s
     <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#dom-node-ownerdocument><code class=external data-anolis-spec=domcore title=dom-Node-ownerDocument>ownerDocument</code></a>
     is an <a class=external data-anolis-spec=domcore href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#html-document>HTML document</a>: let
     <var title="">algorithm</var> be the
     <a class=external data-anolis-spec=html href=http://www.whatwg.org/specs/web-apps/current-work/multipage/the-end.html#html-fragment-parsing-algorithm>HTML fragment parsing algorithm</a>.
 
-    <p>If the <var title="">context node</var>'s
+    <p>If the <var title="">context element</var>'s
     <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#dom-node-ownerdocument><code class=external data-anolis-spec=domcore title=dom-Node-ownerDocument>ownerDocument</code></a>
     is an <a class=external data-anolis-spec=domcore href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#xml-document>XML document</a>: let
     <var title="">algorithm</var> be the
@@ -174,7 +174,7 @@ arguments are a <var title="">markup</var> string and a
 
   <li>
     <p>Invoke <var title="">algorithm</var> with <var title="">markup</var> as
-    the <var title="">input</var>, and <var title="">context node</var> as the
+    the <var title="">input</var>, and <var title="">context element</var> as the
     <a href=http://www.whatwg.org/specs/web-apps/current-work/multipage/the-end.html#concept-frag-parse-context><var class=external data-anolis-spec=html title=concept-frag-parse-context>context</var></a>
     element.
 
@@ -188,7 +188,7 @@ arguments are a <var title="">markup</var> string and a
     <p>Let <var title="">fragment</var> be a new
     <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#documentfragment><code class=external data-anolis-spec=domcore>DocumentFragment</code></a> whose
     <a class=external data-anolis-spec=domcore href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-node-document title=concept-node-document>node document</a>
-    is <var title="">context node</var>'s
+    is <var title="">context element</var>'s
     <a class=external data-anolis-spec=domcore href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-node-document title=concept-node-document>node document</a>.
 
   <li>
@@ -389,7 +389,7 @@ exception instead of returning a string).
     <p>Let <var title="">fragment</var> be the result of invoking the
     <a href=#concept-parse-fragment title=concept-parse-fragment>fragment parsing algorithm</a> with
     the given value as <var title="">markup</var>, and the
-    <a href=#context-object>context object</a> as the <var title="">context node</var>.
+    <a href=#context-object>context object</a> as the <var title="">context element</var>.
 
     <p>If this raised an exception, then abort these steps.
 
@@ -483,7 +483,7 @@ string).
     <p>Let <var title="">fragment</var> be the result of invoking the
     <a href=#concept-parse-fragment title=concept-parse-fragment>fragment parsing algorithm</a> with
     the given value as <var title="">markup</var>, and <var title="">parent</var> as
-    the <var title="">context node</var>.
+    the <var title="">context element</var>.
 
     <p>If this raised an exception, then abort these steps.
 
@@ -606,7 +606,7 @@ method, when invoked, must run the following algorithm:
     <p>Let <var title="">fragment</var> be the result of invoking the
     <a href=#concept-parse-fragment title=concept-parse-fragment>fragment parsing algorithm</a> with
     <var title="">text</var> as <var title="">markup</var>, and
-    <var title="">parent</var> as the <var title="">context node</var>.
+    <var title="">parent</var> as the <var title="">context element</var>.
 
     <p>If this raised an exception, then abort these steps.
 
@@ -764,7 +764,7 @@ method must run the following steps:
     <p>Let <var title="">fragment node</var> be the result of invoking the
     <a href=#concept-parse-fragment title=concept-parse-fragment>fragment parsing algorithm</a> with
     <var title="">fragment</var> as <var title="">markup</var>, and
-    <var title="">element</var> as the <var title="">context node</var>.
+    <var title="">element</var> as the <var title="">context element</var>.
 
     <p>If this raised an exception, then abort these steps.
 

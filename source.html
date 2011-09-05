@@ -135,17 +135,17 @@ attribute being discussed was called.
 <p>The following steps form the
 <dfn title=concept-parse-fragment>fragment parsing algorithm</dfn>, whose
 arguments are a <var title>markup</var> string and a
-<var title>context node</var>.
+<var title>context element</var>.
 
 <ol>
   <li>
-    <p>If the <var title>context node</var>'s
+    <p>If the <var title>context element</var>'s
     <code data-anolis-spec=domcore title=dom-Node-ownerDocument>ownerDocument</code>
     is an <span data-anolis-spec=domcore>HTML document</span>: let
     <var title>algorithm</var> be the
     <span data-anolis-spec=html>HTML fragment parsing algorithm</span>.
 
-    <p>If the <var title>context node</var>'s
+    <p>If the <var title>context element</var>'s
     <code data-anolis-spec=domcore title=dom-Node-ownerDocument>ownerDocument</code>
     is an <span data-anolis-spec=domcore>XML document</span>: let
     <var title>algorithm</var> be the
@@ -153,7 +153,7 @@ arguments are a <var title>markup</var> string and a
 
   <li>
     <p>Invoke <var title>algorithm</var> with <var title>markup</var> as
-    the <var title>input</var>, and <var title>context node</var> as the
+    the <var title>input</var>, and <var title>context element</var> as the
     <var data-anolis-spec=html title=concept-frag-parse-context>context</var>
     element.
 
@@ -167,7 +167,7 @@ arguments are a <var title>markup</var> string and a
     <p>Let <var title>fragment</var> be a new
     <code data-anolis-spec=domcore>DocumentFragment</code> whose
     <span data-anolis-spec=domcore title=concept-node-document>node document</span>
-    is <var title>context node</var>'s
+    is <var title>context element</var>'s
     <span data-anolis-spec=domcore title=concept-node-document>node document</span>.
 
   <li>
@@ -376,7 +376,7 @@ exception instead of returning a string).
     <p>Let <var title>fragment</var> be the result of invoking the
     <span title=concept-parse-fragment>fragment parsing algorithm</span> with
     the given value as <var title>markup</var>, and the
-    <span>context object</span> as the <var title>context node</var>.
+    <span>context object</span> as the <var title>context element</var>.
 
     <p>If this raised an exception, then abort these steps.
 
@@ -470,7 +470,7 @@ string).
     <p>Let <var title>fragment</var> be the result of invoking the
     <span title=concept-parse-fragment>fragment parsing algorithm</span> with
     the given value as <var title>markup</var>, and <var title>parent</var> as
-    the <var title>context node</var>.
+    the <var title>context element</var>.
 
     <p>If this raised an exception, then abort these steps.
 
@@ -593,7 +593,7 @@ method, when invoked, must run the following algorithm:
     <p>Let <var title>fragment</var> be the result of invoking the
     <span title=concept-parse-fragment>fragment parsing algorithm</span> with
     <var title>text</var> as <var title>markup</var>, and
-    <var title>parent</var> as the <var title>context node</var>.
+    <var title>parent</var> as the <var title>context element</var>.
 
     <p>If this raised an exception, then abort these steps.
 
@@ -751,7 +751,7 @@ method must run the following steps:
     <p>Let <var title>fragment node</var> be the result of invoking the
     <span title=concept-parse-fragment>fragment parsing algorithm</span> with
     <var title>fragment</var> as <var title>markup</var>, and
-    <var title>element</var> as the <var title>context node</var>.
+    <var title>element</var> as the <var title>context element</var>.
 
     <p>If this raised an exception, then abort these steps.
 

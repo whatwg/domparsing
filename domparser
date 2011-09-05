@@ -19,7 +19,7 @@
 <body class=draft>
 <div class=head id=head>
 <h1>DOM Parsing and Serialization</h1>
-<h2 class="no-num no-toc" id=work-in-progress-&mdash;-last-update-4-september-2011>Work in Progress &mdash; Last Update 4 September 2011</h2>
+<h2 class="no-num no-toc" id=work-in-progress-&mdash;-last-update-5-september-2011>Work in Progress &mdash; Last Update 5 September 2011</h2>
 <dl>
  <dt>Editor
  <dd>Ms2ger &lt;ms2ger@gmail.com&gt;
@@ -578,12 +578,10 @@ method, when invoked, must run the following algorithm:
     </dl>
 
   <li>
-    <p>If the following are all true:
+    <p>If <var title="">context</var> is not an
+    <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#element><code class=external data-anolis-spec=domcore>Element</code></a> or the following are all true:
 
     <ul>
-      <li><var title="">context</var> is an
-      <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#element><code class=external data-anolis-spec=domcore>Element</code></a>,
-
       <li><var title="">context</var>'s
       <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#dom-node-ownerdocument><code class=external data-anolis-spec=domcore title=dom-Node-ownerDocument>ownerDocument</code></a>
       is an <a class=external data-anolis-spec=domcore href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#html-document>HTML document</a>,

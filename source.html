@@ -565,12 +565,10 @@ method, when invoked, must run the following algorithm:
     </dl>
 
   <li>
-    <p>If the following are all true:
+    <p>If <var title>context</var> is not an
+    <code data-anolis-spec=domcore>Element</code> or the following are all true:
 
     <ul>
-      <li><var title>context</var> is an
-      <code data-anolis-spec=domcore>Element</code>,
-
       <li><var title>context</var>'s
       <code data-anolis-spec=domcore title=dom-Node-ownerDocument>ownerDocument</code>
       is an <span data-anolis-spec=domcore>HTML document</span>,

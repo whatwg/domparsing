@@ -459,11 +459,17 @@ string).
     <p>If <var title>parent</var> is a
     <code data-anolis-spec=domcore>DocumentFragment</code> node, let
     <var title>parent</var> be a new
-    <code data-anolis-spec=domcore>Element</code> with <code title>body</code>
-    as its
-    <span data-anolis-spec=domcore title=concept-element-local-name>local name</span>
-    and the <span data-anolis-spec=domcore>HTML namespace</span> as its
-    <span data-anolis-spec=domcore title=concept-element-namespace>namespace</span>.
+    <code data-anolis-spec=domcore>Element</code> with
+    <ul>
+      <li><code title>body</code> as its
+      <span data-anolis-spec=domcore title=concept-element-local-name>local name</span>,
+      <li>the <span data-anolis-spec=domcore>HTML namespace</span> as its
+      <span data-anolis-spec=domcore title=concept-element-namespace>namespace</span>, and
+      <li>the <span>context object</span>'s
+      <span data-anolis-spec=domcore title=concept-node-document>node document</span>
+      as its
+      <span data-anolis-spec=domcore title=concept-node-document>node document</span>.
+    </ul>
 
   <li>
     <p>Let <var title>fragment</var> be the result of invoking the
@@ -582,11 +588,17 @@ method, when invoked, must run the following algorithm:
     </ul>
 
     <p>let <var title>context</var> be a new
-    <code data-anolis-spec=domcore>Element</code> with "<code title>body</code>"
-    as its
-    <span data-anolis-spec=domcore title=concept-element-local-name>local name</span>
-    and the <span data-anolis-spec=domcore>HTML namespace</span> as its
-    <span data-anolis-spec=domcore title=concept-element-namespace>namespace</span>.
+    <code data-anolis-spec=domcore>Element</code> with
+    <ul>
+      <li><code title>body</code> as its
+      <span data-anolis-spec=domcore title=concept-element-local-name>local name</span>,
+      <li>the <span data-anolis-spec=domcore>HTML namespace</span> as its
+      <span data-anolis-spec=domcore title=concept-element-namespace>namespace</span>, and
+      <li>the <span>context object</span>'s
+      <span data-anolis-spec=domcore title=concept-node-document>node document</span>
+      as its
+      <span data-anolis-spec=domcore title=concept-node-document>node document</span>.
+    </ul>
 
   <li>
     <p>Let <var title>fragment</var> be the result of invoking the
@@ -740,11 +752,17 @@ method must run the following steps:
     </ul>
 
     <p>let <var title>element</var> be a new
-    <code data-anolis-spec=domcore>Element</code> with "<code title>body</code>"
-    as its
-    <span data-anolis-spec=domcore title=concept-element-local-name>local name</span>
-    and the <span data-anolis-spec=domcore>HTML namespace</span> as its
-    <span data-anolis-spec=domcore title=concept-element-namespace>namespace</span>.
+    <code data-anolis-spec=domcore>Element</code> with
+    <ul>
+      <li><code title>body</code> as its
+      <span data-anolis-spec=domcore title=concept-element-local-name>local name</span>,
+      <li>the <span data-anolis-spec=domcore>HTML namespace</span> as its
+      <span data-anolis-spec=domcore title=concept-element-namespace>namespace</span>, and
+      <li>the <span>context object</span>'s
+      <span data-anolis-spec=domcore title=concept-node-document>node document</span>
+      as its
+      <span data-anolis-spec=domcore title=concept-node-document>node document</span>.
+    </ul>
 
   <li>
     <p>Let <var title>fragment node</var> be the result of invoking the

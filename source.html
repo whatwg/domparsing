@@ -461,13 +461,13 @@ string).
 
   <li>
     <p>If <var title>parent</var> is a
-    <code data-anolis-spec=domcore>Document</code> object, throw a
+    <code data-anolis-spec=domcore>Document</code>, throw a
     <code data-anolis-spec=domcore title=dom-DOMException-NO_MODIFICATION_ALLOWED_ERR>NO_MODIFICATION_ALLOWED_ERR</code>
     exception and abort these steps.
 
   <li>
     <p>If <var title>parent</var> is a
-    <code data-anolis-spec=domcore>DocumentFragment</code> node, let
+    <code data-anolis-spec=domcore>DocumentFragment</code>, let
     <var title>parent</var> be a new
     <code data-anolis-spec=domcore>Element</code> with
     <ul>
@@ -559,7 +559,7 @@ method, when invoked, must run the following algorithm:
         <p>If <var title>context</var> is null, abort these steps.
 
         <p>If <var title>context</var> is a
-        <code data-anolis-spec=domcore>Document</code> object, throw a
+        <code data-anolis-spec=domcore>Document</code>, throw a
         <code data-anolis-spec=domcore title=dom-DOMException-NO_MODIFICATION_ALLOWED_ERR>NO_MODIFICATION_ALLOWED_ERR</code>
         exception and abort these steps.
 

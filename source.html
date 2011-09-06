@@ -272,19 +272,29 @@ following steps:
  <li><p>Parse <var title>str</var> with a namespace-enabled <span
  data-anolis-spec=html>XML parser</span>.
 
- <li>
-  <p>If the previous step didn't return an error, return the newly created
-  <code data-anolis-spec=domcore>Document</code>.
+ <li><p>If the previous step didn't return an error, return the newly created
+ <code data-anolis-spec=domcore>Document</code> and terminate these steps.
 
-  <p>Otherwise, let <var title>document</var> a newly-created
-  <code>XMLDocument</code> node. Append an <code
-  data-anolis-spec=domcore>Element</code> node to it, with its <code
-  title=dom-Node-localName data-anolis-spec=domcore>localName</code> set to
-  <code title>parsererror</code> and its <code title=dom-Node-namespaceURI
-  data-anolis-spec=domcore>namespaceURI</code> set to <code
-  title>http://www.mozilla.org/newlayout/xml/parsererror.xml</code>. User agents
-  may append nodes to this element, for example to describe the nature of the
-  error.
+ <li><p>Let <var title>document</var> be a newly-created
+ <code>XMLDocument</code>.
+
+ <li>
+  <p>Let <var title>root</var> be a new
+  <code data-anolis-spec=domcore>Element</code>, with its
+  <span title=concept-element-local-name data-anolis-spec=domcore>local name</span>
+  set to <code title>parsererror</code> and its
+  <span title=concept-element-namespace data-anolis-spec=domcore>namespace</span>
+  set to
+  <code title>http://www.mozilla.org/newlayout/xml/parsererror.xml</code>.
+
+  <p>User agents may
+  <span data-anolis-spec=domcore title=concept-node-append>append</span> nodes
+  to <var title>root</var>, for example to describe the nature of the error.
+
+ <li><p><span data-anolis-spec=domcore title=concept-node-append>Append</span>
+ <var title>root</var> to <var title>document</var>.
+
+ <li><p>Return <var title>document</var>.
 </ol>
 
 

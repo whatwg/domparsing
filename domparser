@@ -289,15 +289,29 @@ following steps:
 
  <li><p>Parse <var title="">str</var> with a namespace-enabled <a class=external data-anolis-spec=html href=http://www.whatwg.org/specs/web-apps/current-work/multipage/the-xhtml-syntax.html#xml-parser>XML parser</a>.
 
- <li>
-  <p>If the previous step didn't return an error, return the newly created
-  <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#document><code class=external data-anolis-spec=domcore>Document</code></a>.
+ <li><p>If the previous step didn't return an error, return the newly created
+ <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#document><code class=external data-anolis-spec=domcore>Document</code></a> and terminate these steps.
 
-  <p>Otherwise, let <var title="">document</var> a newly-created
-  <a href=#xmldocument><code>XMLDocument</code></a> node. Append an <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#element><code class=external data-anolis-spec=domcore>Element</code></a> node to it, with its <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#dom-node-localname><code class=external data-anolis-spec=domcore title=dom-Node-localName>localName</code></a> set to
-  <code title="">parsererror</code> and its <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#dom-node-namespaceuri><code class=external data-anolis-spec=domcore title=dom-Node-namespaceURI>namespaceURI</code></a> set to <code title="">http://www.mozilla.org/newlayout/xml/parsererror.xml</code>. User agents
-  may append nodes to this element, for example to describe the nature of the
-  error.
+ <li><p>Let <var title="">document</var> be a newly-created
+ <a href=#xmldocument><code>XMLDocument</code></a>.
+
+ <li>
+  <p>Let <var title="">root</var> be a new
+  <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#element><code class=external data-anolis-spec=domcore>Element</code></a>, with its
+  <a class=external data-anolis-spec=domcore href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-element-local-name title=concept-element-local-name>local name</a>
+  set to <code title="">parsererror</code> and its
+  <a class=external data-anolis-spec=domcore href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-element-namespace title=concept-element-namespace>namespace</a>
+  set to
+  <code title="">http://www.mozilla.org/newlayout/xml/parsererror.xml</code>.
+
+  <p>User agents may
+  <a class=external data-anolis-spec=domcore href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-node-append title=concept-node-append>append</a> nodes
+  to <var title="">root</var>, for example to describe the nature of the error.
+
+ <li><p><a class=external data-anolis-spec=domcore href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-node-append title=concept-node-append>Append</a>
+ <var title="">root</var> to <var title="">document</var>.
+
+ <li><p>Return <var title="">document</var>.
 </ol>
 
 

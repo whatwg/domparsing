@@ -19,7 +19,7 @@
 <body class=draft>
 <div class=head id=head>
 <h1>DOM Parsing and Serialization</h1>
-<h2 class="no-num no-toc" id=work-in-progress-&mdash;-last-update-5-september-2011>Work in Progress &mdash; Last Update 5 September 2011</h2>
+<h2 class="no-num no-toc" id=work-in-progress-&mdash;-last-update-6-september-2011>Work in Progress &mdash; Last Update 6 September 2011</h2>
 <dl>
  <dt>Editor
  <dd>Ms2ger &lt;ms2ger@gmail.com&gt;
@@ -368,18 +368,17 @@ attribute represents the markup of the
 
 <div class=impl>
 
-<p>On getting, if the <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#element><code class=external data-anolis-spec=domcore>Element</code></a>'s
+<p>On getting, if the <a href=#context-object>context object</a>'s
 <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#dom-node-ownerdocument><code class=external data-anolis-spec=domcore title=dom-Node-ownerDocument>ownerDocument</code></a>
 is an <a class=external data-anolis-spec=domcore href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#html-document>HTML document</a>, then the attribute
 must return the result of running the
 <a class=external data-anolis-spec=html href=http://www.whatwg.org/specs/web-apps/current-work/multipage/the-end.html#html-fragment-serialization-algorithm>HTML fragment serialization algorithm</a> on the
-<a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#element><code class=external data-anolis-spec=domcore>Element</code></a>; otherwise, the
-<a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#element><code class=external data-anolis-spec=domcore>Element</code></a>'s
+<a href=#context-object>context object</a>; otherwise, the <a href=#context-object>context object</a>'s
 <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#dom-node-ownerdocument><code class=external data-anolis-spec=domcore title=dom-Node-ownerDocument>ownerDocument</code></a>
 is an <a class=external data-anolis-spec=domcore href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#xml-document>XML document</a>, and the attribute must
 return the result of running the
 <a class=external data-anolis-spec=html href=http://www.whatwg.org/specs/web-apps/current-work/multipage/the-xhtml-syntax.html#xml-fragment-serialization-algorithm>XML fragment serialization algorithm</a> on the
-<a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#element><code class=external data-anolis-spec=domcore>Element</code></a> instead (this might raise an
+<a href=#context-object>context object</a> instead (this might raise an
 exception instead of returning a string).
 
 <p>On setting, the following steps must be run:
@@ -437,13 +436,13 @@ attribute represents the markup of the
 
 <div class=impl>
 
-<p>On getting, if the <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#element><code class=external data-anolis-spec=domcore>Element</code></a>'s
+<p>On getting, if the <a href=#context-object>context object</a>'s
 <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#dom-node-ownerdocument><code class=external data-anolis-spec=domcore title=dom-Node-ownerDocument>ownerDocument</code></a>
 is an <a class=external data-anolis-spec=domcore href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#html-document>HTML document</a>, then the attribute
 must return the result of running the
 <a class=external data-anolis-spec=html href=http://www.whatwg.org/specs/web-apps/current-work/multipage/the-end.html#html-fragment-serialization-algorithm>HTML fragment serialization algorithm</a> on a
 fictional node whose only child is <a href=#context-object>context object</a>; otherwise, the
-<a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#element><code class=external data-anolis-spec=domcore>Element</code></a>'s
+<a href=#context-object>context object</a>'s
 <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#dom-node-ownerdocument><code class=external data-anolis-spec=domcore title=dom-Node-ownerDocument>ownerDocument</code></a>
 is an <a class=external data-anolis-spec=domcore href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#xml-document>XML document</a>, and the attribute must
 return the result of running the

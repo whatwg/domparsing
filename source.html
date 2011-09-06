@@ -355,18 +355,17 @@ attribute represents the markup of the
 
 <div class=impl>
 
-<p>On getting, if the <code data-anolis-spec=domcore>Element</code>'s
+<p>On getting, if the <span>context object</span>'s
 <code data-anolis-spec=domcore title=dom-Node-ownerDocument>ownerDocument</code>
 is an <span data-anolis-spec=domcore>HTML document</span>, then the attribute
 must return the result of running the
 <span data-anolis-spec=html>HTML fragment serialization algorithm</span> on the
-<code data-anolis-spec=domcore>Element</code>; otherwise, the
-<code data-anolis-spec=domcore>Element</code>'s
+<span>context object</span>; otherwise, the <span>context object</span>'s
 <code data-anolis-spec=domcore title=dom-Node-ownerDocument>ownerDocument</code>
 is an <span data-anolis-spec=domcore>XML document</span>, and the attribute must
 return the result of running the
 <span data-anolis-spec=html>XML fragment serialization algorithm</span> on the
-<code data-anolis-spec=domcore>Element</code> instead (this might raise an
+<span>context object</span> instead (this might raise an
 exception instead of returning a string).
 
 <p>On setting, the following steps must be run:
@@ -424,13 +423,13 @@ attribute represents the markup of the
 
 <div class=impl>
 
-<p>On getting, if the <code data-anolis-spec=domcore>Element</code>'s
+<p>On getting, if the <span>context object</span>'s
 <code data-anolis-spec=domcore title=dom-Node-ownerDocument>ownerDocument</code>
 is an <span data-anolis-spec=domcore>HTML document</span>, then the attribute
 must return the result of running the
 <span data-anolis-spec=html>HTML fragment serialization algorithm</span> on a
 fictional node whose only child is <span>context object</span>; otherwise, the
-<code data-anolis-spec=domcore>Element</code>'s
+<span>context object</span>'s
 <code data-anolis-spec=domcore title=dom-Node-ownerDocument>ownerDocument</code>
 is an <span data-anolis-spec=domcore>XML document</span>, and the attribute must
 return the result of running the

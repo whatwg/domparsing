@@ -19,7 +19,7 @@
 <body class=draft>
 <div class=head id=head>
 <h1>DOM Parsing and Serialization</h1>
-<h2 class="no-num no-toc" id=work-in-progress-&mdash;-last-update-6-september-2011>Work in Progress &mdash; Last Update 6 September 2011</h2>
+<h2 class="no-num no-toc" id=work-in-progress-&mdash;-last-update-8-september-2011>Work in Progress &mdash; Last Update 8 September 2011</h2>
 <dl>
  <dt>Editor
  <dd>Ms2ger &lt;ms2ger@gmail.com&gt;
@@ -113,8 +113,8 @@ required for conforming IDL fragments, as described in the Web IDL
 specification. <a data-anolis-ref="" href=#refsWEBIDL>[WEBIDL]</a>
 
 <p>Some of the terms used in this specification are defined in
-<cite>DOM Core</cite> and <cite>HTML</cite>.
-<a data-anolis-ref="" href=#refsDOMCORE>[DOMCORE]</a>
+<cite>DOM4</cite> and <cite>HTML</cite>.
+<a data-anolis-ref="" href=#refsDOM>[DOM]</a>
 <a data-anolis-ref="" href=#refsHTML>[HTML]</a>
 
 
@@ -514,8 +514,8 @@ string).
 </ol>
 
 </div>
- 
- 
+
+
 <h3 id=insertadjacenthtml()><span class=secno>6.3 </span><a href=#dom-element-insertadjacenthtml><code title=dom-Element-insertAdjacentHTML>insertAdjacentHTML()</code></a></h3>
 
 <dl class=domintro>
@@ -730,16 +730,14 @@ method must run the following steps:
 
 <ol>
   <li>If the <a href=#context-object>context object</a>'s
-  <a class=external data-anolis-spec=domcore href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-range-start title=concept-range-start>start</a>
-  <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-range-bp-node><var class=external data-anolis-spec=domcore title=concept-range-bp-node>node</var></a> is
-  null, raise an
+  <a class=external data-anolis-spec=domcore href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-range-start-node title=concept-range-start-node>start node</a>
+  is null, raise an
   <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#dom-domexception-invalid_state_err><code class=external data-anolis-spec=domcore title=dom-DOMException-INVALID_STATE_ERR>INVALID_STATE_ERR</code></a>
   exception and abort these steps.
 
   <li>
     <p>Let <var title="">node</var> the <a href=#context-object>context object</a>'s
-    <a class=external data-anolis-spec=domcore href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-range-start title=concept-range-start>start</a>
-    <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-range-bp-node><var class=external data-anolis-spec=domcore title=concept-range-bp-node>node</var></a>.
+    <a class=external data-anolis-spec=domcore href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-range-start-node title=concept-range-start-node>start node</a>.
 
     <p>Let <var title="">element</var> be as follows, depending on
     <var title="">node</var>'s interface:
@@ -758,7 +756,7 @@ method must run the following steps:
 
       <dt><a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#documenttype><code class=external data-anolis-spec=domcore>DocumentType</code></a>
       <dt><a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#processinginstruction><code class=external data-anolis-spec=domcore>ProcessingInstruction</code></a>
-      <dd>DOM Core prevents this case. <a data-anolis-ref="" href=#refsDOMCORE>[DOMCORE]</a>
+      <dd>DOM4 prevents this case. <a data-anolis-ref="" href=#refsDOM>[DOM]</a>
     </dl>
 
   <li>
@@ -814,8 +812,8 @@ method must run the following steps:
 <h2 class=no-num id=references>References</h2>
 <p>All references are normative unless marked "Non-normative".</p>
 
-<div id=anolis-references><dl><dt id=refsDOMCORE>[DOMCORE]
-<dd><cite><a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html>DOM Core</a></cite>, Anne van Kesteren and Ms2ger. W3C.
+<div id=anolis-references><dl><dt id=refsDOM>[DOM]
+<dd><cite><a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html>DOM4</a></cite>, Anne van Kesteren, Aryeh Gregor and Ms2ger. W3C.
 
 <dt id=refsHTML>[HTML]
 <dd><cite><a href=http://www.whatwg.org/html>HTML</a></cite>, Ian Hickson. WHATWG.

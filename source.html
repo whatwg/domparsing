@@ -83,7 +83,7 @@ out of memory, or to work around platform-specific limitations.</p>
 <p>When a method or an attribute is said to call another method or attribute, the user agent must invoke its internal API for that attribute or method so that e.g. the author can't change the behavior by overriding attributes or methods with custom properties or functions in ECMAScript.
 
 <p>Unless otherwise stated, string comparisons are done in a <span
-data-anolis-spec=domcore>case-sensitive</span> manner.
+data-anolis-spec=dom>case-sensitive</span> manner.
 
 
 <h3>Dependencies</h3>
@@ -130,7 +130,7 @@ attribute being discussed was called.
 
 
 
-<h2>Parsing and serializing <code data-anolis-spec=domcore>Node</code>s</h2>
+<h2>Parsing and serializing <code data-anolis-spec=dom>Node</code>s</h2>
 <h3>Parsing</h3>
 <p>The following steps form the
 <dfn title=concept-parse-fragment>fragment parsing algorithm</dfn>, whose
@@ -140,14 +140,14 @@ arguments are a <var title>markup</var> string and a
 <ol>
   <li>
     <p>If the <var title>context element</var>'s
-    <span data-anolis-spec=domcore title=concept-node-document>node document</span>
-    is an <span data-anolis-spec=domcore>HTML document</span>: let
+    <span data-anolis-spec=dom title=concept-node-document>node document</span>
+    is an <span data-anolis-spec=dom>HTML document</span>: let
     <var title>algorithm</var> be the
     <span data-anolis-spec=html>HTML fragment parsing algorithm</span>.
 
     <p>If the <var title>context element</var>'s
-    <span data-anolis-spec=domcore title=concept-node-document>node document</span>
-    is an <span data-anolis-spec=domcore>XML document</span>: let
+    <span data-anolis-spec=dom title=concept-node-document>node document</span>
+    is an <span data-anolis-spec=dom>XML document</span>: let
     <var title>algorithm</var> be the
     <span data-anolis-spec=html>XML fragment parsing algorithm</span>.
 
@@ -165,19 +165,19 @@ arguments are a <var title>markup</var> string and a
 
   <li>
     <p>Let <var title>fragment</var> be a new
-    <code data-anolis-spec=domcore>DocumentFragment</code> whose
-    <span data-anolis-spec=domcore title=concept-node-document>node document</span>
+    <code data-anolis-spec=dom>DocumentFragment</code> whose
+    <span data-anolis-spec=dom title=concept-node-document>node document</span>
     is <var title>context element</var>'s
-    <span data-anolis-spec=domcore title=concept-node-document>node document</span>.
+    <span data-anolis-spec=dom title=concept-node-document>node document</span>.
 
   <li>
-    <p><span data-anolis-spec=domcore title=concept-node-append>Append</span>
-    each <span data-anolis-spec=domcore title=concept-node>node</span> in
+    <p><span data-anolis-spec=dom title=concept-node-append>Append</span>
+    each <span data-anolis-spec=dom title=concept-node>node</span> in
     <var title>new children</var> to <var title>fragment</var> (in order).
 
     <p class=note>This ensures the
-    <span data-anolis-spec=domcore title=concept-node-document>node document</span>
-    for the new <span data-anolis-spec=domcore title=concept-node>nodes</span>
+    <span data-anolis-spec=dom title=concept-node-document>node document</span>
+    for the new <span data-anolis-spec=dom title=concept-node>nodes</span>
     is correct.
 
   <li>
@@ -186,40 +186,40 @@ arguments are a <var title>markup</var> string and a
 
 <h3>Serializing</h3>
 <p>To <dfn title=concept-serialize-xml>produce an XML serialization</dfn> of a
-<code data-anolis-spec=domcore>Node</code> <var title>node</var>, the user agent
+<code data-anolis-spec=dom>Node</code> <var title>node</var>, the user agent
 must run the appropriate steps, depending on <var title>node</var>'s interface:
 <dl class=switch>
-  <dt><code data-anolis-spec=domcore>Element</code>
-  <dt><code data-anolis-spec=domcore>Document</code>
+  <dt><code data-anolis-spec=dom>Element</code>
+  <dt><code data-anolis-spec=dom>Document</code>
   <dd><p>Run the
   <span data-anolis-spec=html>XML fragment serialization algorithm</span> on
   <var title>node</var>. If this threw an exception, allow that exception to
   propagate out from this algorithm. Otherwise, return the returned string.
 
-  <dt><code data-anolis-spec=domcore>Comment</code>
+  <dt><code data-anolis-spec=dom>Comment</code>
   <dd>
     <p>Let <var title>markup</var> the concatenation of
     "<code title>&lt;!--</code>", <var title>node</var>'s
-    <code title=dom-characterdata-data data-anolis-spec=domcore>data</code>, and
+    <code title=dom-characterdata-data data-anolis-spec=dom>data</code>, and
     "<code title>--></code>".
 
     <p>If <var title>markup</var> matches the
     <code data-anolis-spec=xml>Comment</code> production, return
     <var title>markup</var>. Otherwise, throw an
-    <code title=dom-DOMException-INVALID_STATE_ERR data-anolis-spec=domcore>INVALID_STATE_ERR</code>
+    <code title=dom-DOMException-INVALID_STATE_ERR data-anolis-spec=dom>INVALID_STATE_ERR</code>
     exception.
 
-  <dt><code data-anolis-spec=domcore>Text</code>
+  <dt><code data-anolis-spec=dom>Text</code>
   <dd>
     <p>Let <var title>data</var> be <var title>node</var>'s
-    <code title=dom-characterdata-data data-anolis-spec=domcore>data</code>.
+    <code title=dom-characterdata-data data-anolis-spec=dom>data</code>.
 
     <p>If <var title>node</var> has its <span>serialize as CDATA flag</span>
     set, run the following steps:
     <ol>
       <li>If <var title>data</var> doesn't match the
       <code data-anolis-spec=xml>CData</code> production, throw an
-      <code title=dom-DOMException-INVALID_STATE_ERR data-anolis-spec=domcore>INVALID_STATE_ERR</code>
+      <code title=dom-DOMException-INVALID_STATE_ERR data-anolis-spec=dom>INVALID_STATE_ERR</code>
       exception and terminate the entire algorithm.
 
       <li>Let <var title>markup</var> be the concatenation of
@@ -231,32 +231,32 @@ must run the appropriate steps, depending on <var title>node</var>'s interface:
 
     <p>Otherwise, return <var title>data</var>.
 
-  <dt><code data-anolis-spec=domcore>DocumentFragment</code>
+  <dt><code data-anolis-spec=dom>DocumentFragment</code>
   <dd>
     <p>Let <var title>markup</var> the empty string.
 
     <p>For each
-    <span title=concept-tree-child data-anolis-spec=domcore>child</span> of
+    <span title=concept-tree-child data-anolis-spec=dom>child</span> of
     <var title>node</var>, in order,
     <span title=concept-serialize-xml>produce an XML serialization</span>
     of the child and concatenate the result to <var title>markup</var>.
 
     <p>Return <var title>markup</var>.
 
-  <dt><code data-anolis-spec=domcore>DocumentType</code>
-  <dt><code data-anolis-spec=domcore>ProcessingInstruction</code>
+  <dt><code data-anolis-spec=dom>DocumentType</code>
+  <dt><code data-anolis-spec=dom>ProcessingInstruction</code>
   <dd class=XXX>You tell me.
 </dl>
 
 
 
 <h2>The <code>DOMParser</code> interface</h2>
-<pre class=idl>interface <dfn>XMLDocument</dfn> : <span data-anolis-spec=domcore>Document</span> {
+<pre class=idl>interface <dfn>XMLDocument</dfn> : <span data-anolis-spec=dom>Document</span> {
 };
 
 [Constructor]
 interface <dfn>DOMParser</dfn> {
-  <span data-anolis-spec=domcore>Document</span> <span title=dom-DOMParser-parseFromString>parseFromString</span>(DOMString str, DOMString contentType);
+  <span data-anolis-spec=dom>Document</span> <span title=dom-DOMParser-parseFromString>parseFromString</span>(DOMString str, DOMString contentType);
 };</pre>
 
 <p>The <dfn title=dom-DOMParser-parseFromString><code>parseFromString(<var
@@ -266,32 +266,32 @@ following steps:
  <li><p>If <var title>contentType</var> isn't <code title>text/xml</code>, <code
  title>application/xml</code> or <code title>application/xhtml+xml</code>, raise
  a <code title=dom-DOMException-NOT_SUPPORTED_ERR
- data-anolis-spec=domcore>NOT_SUPPORTED_ERR</code> exception and abort these
+ data-anolis-spec=dom>NOT_SUPPORTED_ERR</code> exception and abort these
  steps.
 
  <li><p>Parse <var title>str</var> with a namespace-enabled <span
  data-anolis-spec=html>XML parser</span>.
 
  <li><p>If the previous step didn't return an error, return the newly created
- <code data-anolis-spec=domcore>Document</code> and terminate these steps.
+ <code data-anolis-spec=dom>Document</code> and terminate these steps.
 
  <li><p>Let <var title>document</var> be a newly-created
  <code>XMLDocument</code>.
 
  <li>
   <p>Let <var title>root</var> be a new
-  <code data-anolis-spec=domcore>Element</code>, with its
-  <span title=concept-element-local-name data-anolis-spec=domcore>local name</span>
+  <code data-anolis-spec=dom>Element</code>, with its
+  <span title=concept-element-local-name data-anolis-spec=dom>local name</span>
   set to <code title>parsererror</code> and its
-  <span title=concept-element-namespace data-anolis-spec=domcore>namespace</span>
+  <span title=concept-element-namespace data-anolis-spec=dom>namespace</span>
   set to
   <code title>http://www.mozilla.org/newlayout/xml/parsererror.xml</code>.
 
   <p>User agents may
-  <span data-anolis-spec=domcore title=concept-node-append>append</span> nodes
+  <span data-anolis-spec=dom title=concept-node-append>append</span> nodes
   to <var title>root</var>, for example to describe the nature of the error.
 
- <li><p><span data-anolis-spec=domcore title=concept-node-append>Append</span>
+ <li><p><span data-anolis-spec=dom title=concept-node-append>Append</span>
  <var title>root</var> to <var title>document</var>.
 
  <li><p>Return <var title>document</var>.
@@ -302,7 +302,7 @@ following steps:
 <h2>The <code>XMLSerializer</code> interface</h2>
 <pre class=idl>[Constructor]
 interface <dfn>XMLSerializer</dfn> {
-  DOMString <span title=dom-XMLSerializer-serializeToString>serializeToString</span>(<span data-anolis-spec=domcore>Node</span> root);
+  DOMString <span title=dom-XMLSerializer-serializeToString>serializeToString</span>(<span data-anolis-spec=dom>Node</span> root);
 };</pre>
 
 <p>The
@@ -312,9 +312,9 @@ method must
 <var title>root</var> and return the result.
 
 
-<h2>Extensions to the <code data-anolis-spec=domcore>Element</code> interface</h2>
+<h2>Extensions to the <code data-anolis-spec=dom>Element</code> interface</h2>
 
-<pre class=idl>partial interface <span data-anolis-spec=domcore>Element</span> {
+<pre class=idl>partial interface <span data-anolis-spec=dom>Element</span> {
   attribute DOMString <span title=dom-Element-innerHTML>innerHTML</span>;
   attribute DOMString <span title=dom-Element-outerHTML>outerHTML</span>;
   void <span title=dom-Element-insertAdjacentHTML>insertAdjacentHTML</span>(DOMString position, DOMString text);
@@ -324,25 +324,25 @@ method must
 <h3><code title=dom-Element-innerHTML>innerHTML</code></h3>
 <p>The <dfn title=dom-Element-innerHTML><code>innerHTML</code></dfn> IDL
 attribute represents the markup of the
-<code data-anolis-spec=domcore>Element</code>'s contents.
+<code data-anolis-spec=dom>Element</code>'s contents.
 
 <dl class=domintro>
   <!--doc.ih
   <dt><var title>document</var> . <code title=dom-Document-innerHTML>innerHTML</code> [ = <var title>value</var> ]
   <dd>
     <p>Returns a fragment of HTML or XML that represents the
-    <code data-anolis-spec=domcore>Document</code>.
+    <code data-anolis-spec=dom>Document</code>.
 
     <p>Can be set, to replace the
-    <code data-anolis-spec=domcore>Document</code>'s contents with the result of
+    <code data-anolis-spec=dom>Document</code>'s contents with the result of
     parsing the given string.
 
-    <p>In the case of an <span data-anolis-spec=domcore>XML document</span>,
+    <p>In the case of an <span data-anolis-spec=dom>XML document</span>,
     will throw an
-    <code data-anolis-spec=domcore title=dom-DOMException-INVALID_STATE_ERR>INVALID_STATE_ERR</code>
-    if the <code data-anolis-spec=domcore>Document</code> cannot be serialized
+    <code data-anolis-spec=dom title=dom-DOMException-INVALID_STATE_ERR>INVALID_STATE_ERR</code>
+    if the <code data-anolis-spec=dom>Document</code> cannot be serialized
     to XML, and a
-    <code data-anolis-spec=domcore title=dom-DOMException-SYNTAX_ERR>SYNTAX_ERR</code>
+    <code data-anolis-spec=dom title=dom-DOMException-SYNTAX_ERR>SYNTAX_ERR</code>
     if the given string is not well-formed.
   -->
 
@@ -354,25 +354,25 @@ attribute represents the markup of the
     <p>Can be set, to replace the contents of the element with nodes
     parsed from the given string.
 
-    <p>In the case of an <span data-anolis-spec=domcore>XML document</span>,
+    <p>In the case of an <span data-anolis-spec=dom>XML document</span>,
     will throw an
-    <code data-anolis-spec=domcore title=dom-DOMException-INVALID_STATE_ERR>INVALID_STATE_ERR</code>
-    if the <code data-anolis-spec=domcore>Element</code> cannot be serialized
+    <code data-anolis-spec=dom title=dom-DOMException-INVALID_STATE_ERR>INVALID_STATE_ERR</code>
+    if the <code data-anolis-spec=dom>Element</code> cannot be serialized
     to XML, and a
-    <code data-anolis-spec=domcore title=dom-DOMException-SYNTAX_ERR>SYNTAX_ERR</code>
+    <code data-anolis-spec=dom title=dom-DOMException-SYNTAX_ERR>SYNTAX_ERR</code>
     if the given string is not well-formed.
 </dl>
 
 <div class=impl>
 
 <p>On getting, if the <span>context object</span>'s
-<span data-anolis-spec=domcore title=concept-node-document>node document</span>
-is an <span data-anolis-spec=domcore>HTML document</span>, then the attribute
+<span data-anolis-spec=dom title=concept-node-document>node document</span>
+is an <span data-anolis-spec=dom>HTML document</span>, then the attribute
 must return the result of running the
 <span data-anolis-spec=html>HTML fragment serialization algorithm</span> on the
 <span>context object</span>; otherwise, the <span>context object</span>'s
-<span data-anolis-spec=domcore title=concept-node-document>node document</span>
-is an <span data-anolis-spec=domcore>XML document</span>, and the attribute must
+<span data-anolis-spec=dom title=concept-node-document>node document</span>
+is an <span data-anolis-spec=dom>XML document</span>, and the attribute must
 return the result of running the
 <span data-anolis-spec=html>XML fragment serialization algorithm</span> on the
 <span>context object</span> instead (this might raise an
@@ -391,12 +391,12 @@ exception instead of returning a string).
 
   <li>
     <p>While the <span>context object</span> has
-    <span data-anolis-spec=domcore title=concept-tree-child>children</span>,
-    <span data-anolis-spec=domcore title=concept-node-remove>remove</span> its
-    <span data-anolis-spec=domcore title=concept-tree-first-child>first child</span>.
+    <span data-anolis-spec=dom title=concept-tree-child>children</span>,
+    <span data-anolis-spec=dom title=concept-node-remove>remove</span> its
+    <span data-anolis-spec=dom title=concept-tree-first-child>first child</span>.
 
   <li>
-    <p><span data-anolis-spec=domcore title=concept-node-append>Append</span>
+    <p><span data-anolis-spec=dom title=concept-node-append>Append</span>
     <var title>fragment</var> to the <span>context object</span>.
 </ol>
 
@@ -407,7 +407,7 @@ exception instead of returning a string).
 
 <p>The <dfn title=dom-Element-outerHTML><code>outerHTML</code></dfn> IDL
 attribute represents the markup of the
-<code data-anolis-spec=domcore>Element</code> and its contents.
+<code data-anolis-spec=dom>Element</code> and its contents.
 
 <dl class=domintro>
   <dt><var title>element</var> . <code title=dom-Element-outerHTML>outerHTML</code> [ = <var title>value</var> ]
@@ -418,30 +418,30 @@ attribute represents the markup of the
     <p>Can be set, to replace the element with nodes parsed from the given
     string.
 
-    <p>In the case of an <span data-anolis-spec=domcore>XML document</span>,
+    <p>In the case of an <span data-anolis-spec=dom>XML document</span>,
     will throw an
-    <code data-anolis-spec=domcore title=dom-DOMException-INVALID_STATE_ERR>INVALID_STATE_ERR</code>
+    <code data-anolis-spec=dom title=dom-DOMException-INVALID_STATE_ERR>INVALID_STATE_ERR</code>
     if the element cannot be serialized to XML, and a
-    <code data-anolis-spec=domcore title=dom-DOMException-SYNTAX_ERR>SYNTAX_ERR</code>
+    <code data-anolis-spec=dom title=dom-DOMException-SYNTAX_ERR>SYNTAX_ERR</code>
     if the given string is not well-formed.
 
     <p>Throws a
-    <code data-anolis-spec=domcore title=dom-DOMException-NO_MODIFICATION_ALLOWED_ERR>NO_MODIFICATION_ALLOWED_ERR</code>
+    <code data-anolis-spec=dom title=dom-DOMException-NO_MODIFICATION_ALLOWED_ERR>NO_MODIFICATION_ALLOWED_ERR</code>
     exception if the parent of the element is the
-    <code data-anolis-spec=domcore>Document</code> node.
+    <code data-anolis-spec=dom>Document</code> node.
 </dl>
 
 <div class=impl>
 
 <p>On getting, if the <span>context object</span>'s
-<span data-anolis-spec=domcore title=concept-node-document>node document</span>
-is an <span data-anolis-spec=domcore>HTML document</span>, then the attribute
+<span data-anolis-spec=dom title=concept-node-document>node document</span>
+is an <span data-anolis-spec=dom>HTML document</span>, then the attribute
 must return the result of running the
 <span data-anolis-spec=html>HTML fragment serialization algorithm</span> on a
 fictional node whose only child is <span>context object</span>; otherwise, the
 <span>context object</span>'s
-<span data-anolis-spec=domcore title=concept-node-document>node document</span>
-is an <span data-anolis-spec=domcore>XML document</span>, and the attribute must
+<span data-anolis-spec=dom title=concept-node-document>node document</span>
+is an <span data-anolis-spec=dom>XML document</span>, and the attribute must
 return the result of running the
 <span data-anolis-spec=html>XML fragment serialization algorithm</span> on that
 fictional node instead (this might raise an exception instead of returning a
@@ -452,7 +452,7 @@ string).
 <ol>
   <li>
     <p>Let <var title>parent</var> be the <span>context object</span>'s
-    <code data-anolis-spec=domcore title=dom-Node-parentNode>parentNode</code>.
+    <code data-anolis-spec=dom title=dom-Node-parentNode>parentNode</code>.
 
   <li>
     <p>If <var title>parent</var> is null, abort these steps. There would be no
@@ -461,24 +461,24 @@ string).
 
   <li>
     <p>If <var title>parent</var> is a
-    <code data-anolis-spec=domcore>Document</code>, throw a
-    <code data-anolis-spec=domcore title=dom-DOMException-NO_MODIFICATION_ALLOWED_ERR>NO_MODIFICATION_ALLOWED_ERR</code>
+    <code data-anolis-spec=dom>Document</code>, throw a
+    <code data-anolis-spec=dom title=dom-DOMException-NO_MODIFICATION_ALLOWED_ERR>NO_MODIFICATION_ALLOWED_ERR</code>
     exception and abort these steps.
 
   <li>
     <p>If <var title>parent</var> is a
-    <code data-anolis-spec=domcore>DocumentFragment</code>, let
+    <code data-anolis-spec=dom>DocumentFragment</code>, let
     <var title>parent</var> be a new
-    <code data-anolis-spec=domcore>Element</code> with
+    <code data-anolis-spec=dom>Element</code> with
     <ul>
       <li><code title>body</code> as its
-      <span data-anolis-spec=domcore title=concept-element-local-name>local name</span>,
-      <li>the <span data-anolis-spec=domcore>HTML namespace</span> as its
-      <span data-anolis-spec=domcore title=concept-element-namespace>namespace</span>, and
+      <span data-anolis-spec=dom title=concept-element-local-name>local name</span>,
+      <li>the <span data-anolis-spec=dom>HTML namespace</span> as its
+      <span data-anolis-spec=dom title=concept-element-namespace>namespace</span>, and
       <li>the <span>context object</span>'s
-      <span data-anolis-spec=domcore title=concept-node-document>node document</span>
+      <span data-anolis-spec=dom title=concept-node-document>node document</span>
       as its
-      <span data-anolis-spec=domcore title=concept-node-document>node document</span>.
+      <span data-anolis-spec=dom title=concept-node-document>node document</span>.
     </ul>
 
   <li>
@@ -490,10 +490,10 @@ string).
     <p>If this raised an exception, then abort these steps.
 
   <li>
-    <p><span data-anolis-spec=domcore title=concept-node-replace>Replace</span>
+    <p><span data-anolis-spec=dom title=concept-node-replace>Replace</span>
     the <span>context object</span> with <var title>fragment</var> within
     the <span>context object</span>'s
-    <span span data-anolis-spec=domcore title=concept-tree-parent>parent</span>.
+    <span span data-anolis-spec=dom title=concept-tree-parent>parent</span>.
 </ol>
 
 </div>
@@ -524,15 +524,15 @@ string).
     </dl>
 
     <p>Throws a
-    <code data-anolis-spec=domcore title=dom-DOMException-SYNTAX_ERR>SYNTAX_ERR</code>
+    <code data-anolis-spec=dom title=dom-DOMException-SYNTAX_ERR>SYNTAX_ERR</code>
     exception if the arguments have invalid values (e.g., in the case of an
-    <span data-anolis-spec=domcore>XML document</span>, if the given string is
+    <span data-anolis-spec=dom>XML document</span>, if the given string is
     not well-formed).
 
     <p>Throws a
-    <code data-anolis-spec=domcore title=dom-DOMException-NO_MODIFICATION_ALLOWED_ERR>NO_MODIFICATION_ALLOWED_ERR</code>
+    <code data-anolis-spec=dom title=dom-DOMException-NO_MODIFICATION_ALLOWED_ERR>NO_MODIFICATION_ALLOWED_ERR</code>
     exception if the given position isn't possible (e.g. inserting elements
-    after the root element of a <code data-anolis-spec=domcore>Document</code>).
+    after the root element of a <code data-anolis-spec=dom>Document</code>).
 </dl>
 
 <div class=impl>
@@ -547,27 +547,27 @@ method, when invoked, must run the following algorithm:
 
     <dl class=switch>
       <dt>If <var title>position</var> is an
-      <span data-anolis-spec=domcore>ASCII case-insensitive</span> match for
+      <span data-anolis-spec=dom>ASCII case-insensitive</span> match for
       the string "beforebegin"
       <dt>If <var title>position</var> is an
-      <span data-anolis-spec=domcore>ASCII case-insensitive</span> match for
+      <span data-anolis-spec=dom>ASCII case-insensitive</span> match for
       the string "afterend"
       <dd>
         <p>Let <var title>context</var> be the <span>context object</span>'s
-        <code data-anolis-spec=domcore title=dom-Node-parentNode>parentNode</code>.
+        <code data-anolis-spec=dom title=dom-Node-parentNode>parentNode</code>.
 
         <p>If <var title>context</var> is null, abort these steps.
 
         <p>If <var title>context</var> is a
-        <code data-anolis-spec=domcore>Document</code>, throw a
-        <code data-anolis-spec=domcore title=dom-DOMException-NO_MODIFICATION_ALLOWED_ERR>NO_MODIFICATION_ALLOWED_ERR</code>
+        <code data-anolis-spec=dom>Document</code>, throw a
+        <code data-anolis-spec=dom title=dom-DOMException-NO_MODIFICATION_ALLOWED_ERR>NO_MODIFICATION_ALLOWED_ERR</code>
         exception and abort these steps.
 
       <dt>If <var title>position</var> is an
-      <span data-anolis-spec=domcore>ASCII case-insensitive</span> match for
+      <span data-anolis-spec=dom>ASCII case-insensitive</span> match for
       the string "afterbegin"
       <dt>If <var title>position</var> is an
-      <span data-anolis-spec=domcore>ASCII case-insensitive</span> match for
+      <span data-anolis-spec=dom>ASCII case-insensitive</span> match for
       the string "beforeend"
       <dd>
         <p>Let <var title>context</var> be the <span>context object</span>.
@@ -575,39 +575,39 @@ method, when invoked, must run the following algorithm:
       <dt>Otherwise
       <dd>
         <p>Throw a
-        <code data-anolis-spec=domcore title=dom-DOMException-SYNTAX_ERR>SYNTAX_ERR</code>
+        <code data-anolis-spec=dom title=dom-DOMException-SYNTAX_ERR>SYNTAX_ERR</code>
         exception.
     </dl>
 
   <li>
     <p>If <var title>context</var> is not an
-    <code data-anolis-spec=domcore>Element</code> or the following are all true:
+    <code data-anolis-spec=dom>Element</code> or the following are all true:
 
     <ul>
       <li><var title>context</var>'s
-      <span data-anolis-spec=domcore title=concept-node-document>node document</span>
-      is an <span data-anolis-spec=domcore>HTML document</span>,
+      <span data-anolis-spec=dom title=concept-node-document>node document</span>
+      is an <span data-anolis-spec=dom>HTML document</span>,
 
       <li><var title>context</var>'s
-      <span data-anolis-spec=domcore title=concept-element-local-name>local name</span>
+      <span data-anolis-spec=dom title=concept-element-local-name>local name</span>
       is "<code title>html</code>", and
 
       <li><var title>context</var>'s
-      <span data-anolis-spec=domcore title=concept-element-namespace>namespace</span>
-      is the <span data-anolis-spec=domcore>HTML namespace</span>;
+      <span data-anolis-spec=dom title=concept-element-namespace>namespace</span>
+      is the <span data-anolis-spec=dom>HTML namespace</span>;
     </ul>
 
     <p>let <var title>context</var> be a new
-    <code data-anolis-spec=domcore>Element</code> with
+    <code data-anolis-spec=dom>Element</code> with
     <ul>
       <li><code title>body</code> as its
-      <span data-anolis-spec=domcore title=concept-element-local-name>local name</span>,
-      <li>the <span data-anolis-spec=domcore>HTML namespace</span> as its
-      <span data-anolis-spec=domcore title=concept-element-namespace>namespace</span>, and
+      <span data-anolis-spec=dom title=concept-element-local-name>local name</span>,
+      <li>the <span data-anolis-spec=dom>HTML namespace</span> as its
+      <span data-anolis-spec=dom title=concept-element-namespace>namespace</span>, and
       <li>the <span>context object</span>'s
-      <span data-anolis-spec=domcore title=concept-node-document>node document</span>
+      <span data-anolis-spec=dom title=concept-node-document>node document</span>
       as its
-      <span data-anolis-spec=domcore title=concept-node-document>node document</span>.
+      <span data-anolis-spec=dom title=concept-node-document>node document</span>.
     </ul>
 
   <li>
@@ -623,39 +623,39 @@ method, when invoked, must run the following algorithm:
 
     <dl class=switch>
       <dt>If <var title>position</var> is an
-      <span data-anolis-spec=domcore>ASCII case-insensitive</span> match for
+      <span data-anolis-spec=dom>ASCII case-insensitive</span> match for
       the string "beforebegin"
       <dd>
-        <p><span data-anolis-spec=domcore title=concept-node-insert>Insert</span>
+        <p><span data-anolis-spec=dom title=concept-node-insert>Insert</span>
         <var title>fragment</var> into the <span>context object</span>'s
-        <span span data-anolis-spec=domcore title=concept-tree-parent>parent</span>
+        <span span data-anolis-spec=dom title=concept-tree-parent>parent</span>
         before the <span>context object</span>.
 
       <dt>If <var title>position</var> is an
-      <span data-anolis-spec=domcore>ASCII case-insensitive</span> match for
+      <span data-anolis-spec=dom>ASCII case-insensitive</span> match for
       the string "afterbegin"
       <dd>
-        <p><span data-anolis-spec=domcore title=concept-node-insert>Insert</span>
+        <p><span data-anolis-spec=dom title=concept-node-insert>Insert</span>
         <var title>fragment</var> into the <span>context object</span>
         before its
-        <span data-anolis-spec=domcore title=concept-tree-first-child>first child</span>.
+        <span data-anolis-spec=dom title=concept-tree-first-child>first child</span>.
 
       <dt>If <var title>position</var> is an
-      <span data-anolis-spec=domcore>ASCII case-insensitive</span> match for
+      <span data-anolis-spec=dom>ASCII case-insensitive</span> match for
       the string "beforeend"
       <dd>
-        <p><span data-anolis-spec=domcore title=concept-node-append>Append</span>
+        <p><span data-anolis-spec=dom title=concept-node-append>Append</span>
         <var title>fragment</var> to the <span>context object</span>.
 
       <dt>If <var title>position</var> is an
-      <span data-anolis-spec=domcore>ASCII case-insensitive</span> match for
+      <span data-anolis-spec=dom>ASCII case-insensitive</span> match for
       the string "afterend"
       <dd>
-        <p><span data-anolis-spec=domcore title=concept-node-insert>Insert</span>
+        <p><span data-anolis-spec=dom title=concept-node-insert>Insert</span>
         <var title>fragment</var> into the <span>context object</span>'s
-        <span data-anolis-spec=domcore title=concept-tree-parent>parent</span>
+        <span data-anolis-spec=dom title=concept-tree-parent>parent</span>
         before the <span>context object</span>'s
-        <span data-anolis-spec=domcore title=concept-tree-next-sibling>next sibling</span>.
+        <span data-anolis-spec=dom title=concept-tree-next-sibling>next sibling</span>.
     </dl>
 </ol>
 
@@ -663,9 +663,9 @@ method, when invoked, must run the following algorithm:
 
 
 
-<h2>Extensions to the <code data-anolis-spec=domcore>Text</code> interface</h2>
+<h2>Extensions to the <code data-anolis-spec=dom>Text</code> interface</h2>
 
-<pre class=idl>partial interface <span data-anolis-spec=domcore>Text</span> {
+<pre class=idl>partial interface <span data-anolis-spec=dom>Text</span> {
   attribute boolean <span title=dom-Text-serializeAsCDATA>serializeAsCDATA</span>;
 };</pre>
 
@@ -677,7 +677,7 @@ method, when invoked, must run the following algorithm:
 
 <div class=impl>
 
-<p><code data-anolis-spec=domcore>Text</code> nodes have an additional
+<p><code data-anolis-spec=dom>Text</code> nodes have an additional
 associated flag, the <dfn>serialize as CDATA flag</dfn>.
 
 <p>On getting, the
@@ -692,16 +692,16 @@ otherwise, must unset it.
 
 
 
-<h2>Extensions to the <code data-anolis-spec=domcore>Range</code> interface</h2>
+<h2>Extensions to the <code data-anolis-spec=dom>Range</code> interface</h2>
 
-<pre class=idl>partial interface <span data-anolis-spec=domcore>Range</span> {
-  <span data-anolis-spec=domcore>DocumentFragment</span> <span title=dom-Range-createContextualFragment>createContextualFragment</span>(DOMString fragment);
+<pre class=idl>partial interface <span data-anolis-spec=dom>Range</span> {
+  <span data-anolis-spec=dom>DocumentFragment</span> <span title=dom-Range-createContextualFragment>createContextualFragment</span>(DOMString fragment);
 };</pre>
 
 <dl class=domintro>
   <dt><var title>fragment</var> = <var title>range</var> . <code title=dom-Range-createContextualFragment>createContextualFragment</code>(<var title>fragment</var>)
   <dd>
-    <p>Returns a <code data-anolis-spec=domcore>DocumentFragment</code>, created
+    <p>Returns a <code data-anolis-spec=dom>DocumentFragment</code>, created
     from the markup string given.
 </dl>
 
@@ -713,32 +713,32 @@ method must run the following steps:
 
 <ol>
   <li>If the <span>context object</span>'s
-  <span data-anolis-spec=domcore title=concept-range-start-node>start node</span>
+  <span data-anolis-spec=dom title=concept-range-start-node>start node</span>
   is null, raise an
-  <code data-anolis-spec=domcore title=dom-DOMException-INVALID_STATE_ERR>INVALID_STATE_ERR</code>
+  <code data-anolis-spec=dom title=dom-DOMException-INVALID_STATE_ERR>INVALID_STATE_ERR</code>
   exception and abort these steps.
 
   <li>
     <p>Let <var title>node</var> the <span>context object</span>'s
-    <span data-anolis-spec=domcore title=concept-range-start-node>start node</span>.
+    <span data-anolis-spec=dom title=concept-range-start-node>start node</span>.
 
     <p>Let <var title>element</var> be as follows, depending on
     <var title>node</var>'s interface:
     <dl class=switch>
-      <dt><code data-anolis-spec=domcore>Document</code>
-      <dt><code data-anolis-spec=domcore>DocumentFragment</code>
+      <dt><code data-anolis-spec=dom>Document</code>
+      <dt><code data-anolis-spec=dom>DocumentFragment</code>
       <dd>null
 
-      <dt><code data-anolis-spec=domcore>Element</code>
+      <dt><code data-anolis-spec=dom>Element</code>
       <dd><var title>node</var>
 
-      <dt><code data-anolis-spec=domcore>Text</code>
-      <dt><code data-anolis-spec=domcore>Comment</code>
+      <dt><code data-anolis-spec=dom>Text</code>
+      <dt><code data-anolis-spec=dom>Comment</code>
       <dd><var title>node</var>'s
-      <code data-anolis-spec=domcore title=dom-Node-parentElement>parentElement</code>
+      <code data-anolis-spec=dom title=dom-Node-parentElement>parentElement</code>
 
-      <dt><code data-anolis-spec=domcore>DocumentType</code>
-      <dt><code data-anolis-spec=domcore>ProcessingInstruction</code>
+      <dt><code data-anolis-spec=dom>DocumentType</code>
+      <dt><code data-anolis-spec=dom>ProcessingInstruction</code>
       <dd>DOM4 prevents this case. <span data-anolis-ref>DOM</span>
     </dl>
 
@@ -747,29 +747,29 @@ method must run the following steps:
 
     <ul>
       <li><var title>element</var>'s
-      <span data-anolis-spec=domcore title=concept-node-document>node document</span>
-      is an <span data-anolis-spec=domcore>HTML document</span>,
+      <span data-anolis-spec=dom title=concept-node-document>node document</span>
+      is an <span data-anolis-spec=dom>HTML document</span>,
 
       <li><var title>element</var>'s
-      <span data-anolis-spec=domcore title=concept-element-local-name>local name</span>
+      <span data-anolis-spec=dom title=concept-element-local-name>local name</span>
       is "<code title>html</code>", and
 
       <li><var title>element</var>'s
-      <span data-anolis-spec=domcore title=concept-element-namespace>namespace</span>
-      is the <span data-anolis-spec=domcore>HTML namespace</span>;
+      <span data-anolis-spec=dom title=concept-element-namespace>namespace</span>
+      is the <span data-anolis-spec=dom>HTML namespace</span>;
     </ul>
 
     <p>let <var title>element</var> be a new
-    <code data-anolis-spec=domcore>Element</code> with
+    <code data-anolis-spec=dom>Element</code> with
     <ul>
       <li><code title>body</code> as its
-      <span data-anolis-spec=domcore title=concept-element-local-name>local name</span>,
-      <li>the <span data-anolis-spec=domcore>HTML namespace</span> as its
-      <span data-anolis-spec=domcore title=concept-element-namespace>namespace</span>, and
+      <span data-anolis-spec=dom title=concept-element-local-name>local name</span>,
+      <li>the <span data-anolis-spec=dom>HTML namespace</span> as its
+      <span data-anolis-spec=dom title=concept-element-namespace>namespace</span>, and
       <li>the <span>context object</span>'s
-      <span data-anolis-spec=domcore title=concept-node-document>node document</span>
+      <span data-anolis-spec=dom title=concept-node-document>node document</span>
       as its
-      <span data-anolis-spec=domcore title=concept-node-document>node document</span>.
+      <span data-anolis-spec=dom title=concept-node-document>node document</span>.
     </ul>
 
   <li>

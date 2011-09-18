@@ -57,15 +57,16 @@ var parent = document.createElement("div");
 var child = document.createElement("div");
 
 test (function() {
-  assert_throws("NO_MODIFICATION_ALLOWED_ERR", function() {child.insertAdjacentHTML("Beforebegin", "foo")});
-  assert_throws("NO_MODIFICATION_ALLOWED_ERR", function() {child.insertAdjacentHTML("AfterEnd", "foo")})
-});
+  child.insertAdjacentHTML("Beforebegin", "foo");
+  child.insertAdjacentHTML("AfterEnd", "foo");
+  assert_false(child.hasChildNodes());
+}, "When the parent node is null, insertAdjacentHTML should do nothing for beforebegin and afterend");
 
 
 test(function() {
-  child.insertAdjacentHTML("afterBegin", "foo"); // mustn't throw
-  child.insertAdjacentHTML("beforeend", "foo"); // mustn't throw
-
+  child.insertAdjacentHTML("afterBegin", "foo");
+  child.insertAdjacentHTML("beforeend", "bar");
+  assert_equals(child.textContent, "foobar");
   parent.appendChild(child);
 });
 

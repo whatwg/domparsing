@@ -2,5 +2,7 @@ createContextualFragment.html
 innerhtml-01.xhtml
 innerhtml-02.html
 innerhtml-03.xhtml
+insert_adjacent_html.html
+insert_adjacent_html.xhtml
 outerhtml-01.html
 dir support

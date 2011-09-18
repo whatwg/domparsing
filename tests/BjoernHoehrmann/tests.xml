@@ -1,0 +1,453 @@
+<doc>
+<tests>
+<code><![CDATA[
+
+// The media type text/xml must be supported
+var doc = new DOMParser().parseFromString("<y/>", "text/xml");
+return doc.documentElement.localName == "y";
+
+// The media type application/xml must be supported
+var doc = new DOMParser().parseFromString("<y/>", "application/xml");
+return doc.documentElement.localName == "y";
+
+// DOMParser with error handler must be supported
+var handler = function(err) { return false; }
+var parser = new DOMParser(handler);
+return !!parser;
+
+// DOMParser error handler must be called on fatal errors
+var called = false;
+var handler = function(err) { called = true; return false; }
+var parser = new DOMParser(handler);
+parser.parseFromString("<y", "application/xml");
+return called;
+
+// Internet media types are case-insensitive by definition
+var doc = new DOMParser().parseFromString("<y/>", "tExt/xMl");
+return doc.documentElement.localName == "y";
+
+// White space surrounding the media type must be ignored
+var doc = new DOMParser().parseFromString("<y/>", " text/xml ");
+return doc.documentElement.localName == "y";
+
+// Throw on syntax errors in the media type
+try {
+  var doc = new DOMParser().parseFromString("<y/>", "xml");
+  return false;
+} catch(e) {
+  return true;
+}
+
+// Throw on syntax errors in the media type
+try {
+  var doc = new DOMParser().parseFromString("<y/>", "");
+  return false;
+} catch(e) {
+  return true;
+}
+
+// Throw on media types that cannot be XML
+try {
+  var doc = new DOMParser().parseFromString("<y/>", "image/png");
+  return false;
+} catch(e) {
+  return true;
+}
+
+// The media type does not have a default value
+try {
+  var doc = new DOMParser().parseFromString("<y/>");
+  return false;
+} catch(e) {
+  return true;
+}
+
+// Encoding declarations must be ignored
+var s = "<?xml version='1.0' encoding='iso-8859-1'?><y>\uF6F6</y>";
+var doc = new DOMParser().parseFromString(s, "text/xml");
+return doc.documentElement.textContent.indexOf("\uF6F6") >= 0;
+
+]]></code>
+</tests>
+
+<tests>
+<code><![CDATA[
+// inputEncoding must be null after parsing
+var s = "<?xml version='1.0' encoding='iso-8859-1'?><y>\uF6F6</y>";
+var doc = new DOMParser().parseFromString(s, "text/xml");
+return !doc.inputEncoding;
+
+// xmlEncoding must have a value equivalent to the encoding declaration
+var s = "<?xml version='1.0' encoding='windows-1252'?><y>\uF6F6</y>";
+var doc = new DOMParser().parseFromString(s, "text/xml");
+/* It might be acceptable to use an alias so this a bit fuzzy */
+return !doc.xmlEncoding || doc.xmlEncoding.toLowerCase() == 'windows-1252';
+
+]]></code>
+</tests>
+
+
+<tests>
+<code><![CDATA[
+// Unicode signatures are not allowed
+var handler = function(err){ return false; };
+var parser = new DOMParser();
+try { parser = new DOMParser(handler); } catch (e) {}
+var s = "\uFEFF<?xml version='1.0'?><y/>";
+try {
+  var doc = parser.parseFromString(s, "text/xml");
+  return doc.documentElement.localName == "parsererror";
+} catch(e) {
+  return true;
+}
+
+// Unicode signatures are not allowed
+var handler = function(err){ return false; };
+var parser = new DOMParser();
+try { parser = new DOMParser(handler); } catch (e) {}
+var s = "\uFEFF\uFEFF<?xml version='1.0'?><y/>";
+try {
+  var doc = parser.parseFromString(s, "text/xml");
+  return doc.documentElement.localName == "parsererror";
+} catch(e) {
+  return true;
+}
+
+// Unicode signatures are not allowed
+var handler = function(err){ return false; };
+var parser = new DOMParser();
+try { parser = new DOMParser(handler); } catch (e) {}
+var s = "\uFEFF<y/>";
+try {
+  var doc = parser.parseFromString(s, "text/xml");
+  return doc.documentElement.localName == "parsererror";
+} catch(e) {
+  return true;
+}
+
+// Unicode signatures are not allowed
+var handler = function(err){ return false; };
+var parser = new DOMParser();
+try { parser = new DOMParser(handler); } catch (e) {}
+var s = "\uFEFF\uFEFF<y/>";
+try {
+  var doc = parser.parseFromString(s, "text/xml");
+  return doc.documentElement.localName == "parsererror";
+} catch(e) {
+  return true;
+}
+
+// Unicode signatures are not allowed
+var handler = function(err){ return false; };
+var parser = new DOMParser();
+try { parser = new DOMParser(handler); } catch (e) {}
+var s = "\uBBEF\u3CBF\u7979\u3E2F";
+try {
+  var doc = parser.parseFromString(s, "text/xml");
+  return doc.documentElement.localName == "parsererror";
+} catch(e) {
+  return true;
+}
+
+// Unicode signatures are not allowed
+var handler = function(err){ return false; };
+var parser = new DOMParser();
+try { parser = new DOMParser(handler); } catch (e) {}
+var s = "\uEFBB\uBF3C\u7979\u2F3E";
+try {
+  var doc = parser.parseFromString(s, "text/xml");
+  return doc.documentElement.localName == "parsererror";
+} catch(e) {
+  return true;
+}
+
+// Incomplete documents are not allowed
+var handler = function(err){ return false; };
+var parser = new DOMParser();
+try { parser = new DOMParser(handler); } catch (e) {}
+var s = "<y>";
+try {
+  var doc = parser.parseFromString(s, "text/xml");
+  return doc.documentElement.localName == "parsererror";
+} catch(e) {
+  return true;
+}
+
+// Incomplete documents are not allowed
+var handler = function(err){ return false; };
+var parser = new DOMParser();
+try { parser = new DOMParser(handler); } catch (e) {}
+var s = "<y/><!--";
+try {
+  var doc = parser.parseFromString(s, "text/xml");
+  return doc.documentElement.localName == "parsererror";
+} catch(e) {
+  return true;
+}
+
+// Not well-formed due to bad character reference
+var handler = function(err){ return false; };
+var parser = new DOMParser();
+try { parser = new DOMParser(handler); } catch (e) {}
+var s = "<y>&#xFF000000F6;</y>";
+try {
+  var doc = parser.parseFromString(s, "text/xml");
+  return doc.documentElement.localName == "parsererror";
+} catch(e) {
+  return true;
+}
+
+// Not well-formed due to bad character reference
+var handler = function(err){ return false; };
+var parser = new DOMParser();
+try { parser = new DOMParser(handler); } catch (e) {}
+var s = "<y>&#18446744073709551862;</y>";
+try {
+  var doc = parser.parseFromString(s, "text/xml");
+  return doc.documentElement.localName == "parsererror";
+} catch(e) {
+  return true;
+}
+
+// Unpaired surrogates are not allowed
+var handler = function(err){ return false; };
+var parser = new DOMParser();
+try { parser = new DOMParser(handler); } catch (e) {}
+var s = "<y>\uD800</y>";
+try {
+  var doc = parser.parseFromString(s, "text/xml");
+  return doc.documentElement.localName == "parsererror";
+} catch(e) {
+  return true;
+}
+
+]]></code>
+</tests>
+
+<tests>
+<code><![CDATA[
+// Unserializable content, "--" in comment
+try {
+  var doc = new DOMParser().parseFromString("<y/>", "text/xml");
+  var cmt = doc.createComment("--");
+  var str = new XMLSerializer().serializeToString(cmt);
+  return false;
+} catch (e) {
+  return true;
+}
+
+// Unserializable content, PI with 'xml' as target
+try {
+  var doc = new DOMParser().parseFromString("<y/>", "text/xml");
+  var pi = doc.createProcessingInstruction("xml", 'version="1.0"');
+  var str = new XMLSerializer().serializeToString(pi);
+  return false;
+} catch (e) {
+  return true;
+}
+
+// Unserializable content, PI with '?>' as data
+try {
+  var doc = new DOMParser().parseFromString("<y/>", "text/xml");
+  var pi = doc.createProcessingInstruction("example", '?>');
+  var str = new XMLSerializer().serializeToString(pi);
+  return false;
+} catch (e) {
+  return true;
+}
+
+// Unserializable content, document without document element
+try {
+  var doc = new DOMParser().parseFromString("<y/>", "text/xml");
+  doc.removeChild(doc.documentElement);
+  var str = new XMLSerializer().serializeToString(doc);
+  return false;
+} catch (e) {
+  return true;
+}
+
+// Unserializable content, xmlns element
+try {
+  var doc = new DOMParser().parseFromString("<y/>", "text/xml");
+  var sub = doc.createElementNS("http://www.w3.org/2000/xmlns/", "y");
+  var str = new XMLSerializer().serializeToString(sub);
+  return false;
+} catch (e) {
+  return true;
+}
+
+// Unserializable content, unpaired surrogate in text
+try {
+  var doc = new DOMParser().parseFromString("<y/>", "text/xml");
+  var txt = doc.createTextNode("\uD800");
+  var str = new XMLSerializer().serializeToString(txt);
+  return false;
+} catch (e) {
+  return true;
+}
+
+// Unserializable content, unpaired surrogate in text via splitText
+try {
+  /* TODO: need to review this */
+  var doc = new DOMParser().parseFromString("<y/>", "text/xml");
+  var txt = doc.createTextNode("\uD800\uDC00");
+  doc.documentElement.appendChild(txt);
+  var sub = txt.splitText(1);
+  doc.documentElement.removeChild(sub);
+  var str = new XMLSerializer().serializeToString(doc);
+  return false;
+} catch (e) {
+  return true;
+}
+
+// Goldfarb's First Law of Text Processing -- attribute white space
+var doc = new DOMParser().parseFromString("<y y='&#xa;'/>", "text/xml");
+var str = new XMLSerializer().serializeToString(doc);
+return str.indexOf('&') >= 0;
+
+// Namespace declarations are fixed as necessary
+var doc1 = new DOMParser().parseFromString("<y/>", "text/xml");
+doc1.documentElement.setAttributeNS('example:', 'example', 'example');
+var str = new XMLSerializer().serializeToString(doc1);
+var doc2 = new DOMParser().parseFromString(str, "text/xml");
+return doc2.documentElement.getAttributeNS('example:', 'example')
+  == 'example';
+
+// Serialization must be explicit about elements in no namespace
+var s = "<y xmlns='example:'><y xmlns=''><y/></y></y>";
+var doc = new DOMParser().parseFromString(s, "text/xml");
+var sub = doc.documentElement.firstChild.firstChild;
+var str = new XMLSerializer().serializeToString(sub);
+return str.indexOf("xmlns") >= 0;
+
+// No Unicode signature in the serialized document
+var doc = new DOMParser().parseFromString("<y/>", "text/xml");
+var str = new XMLSerializer().serializeToString(doc);
+return str.indexOf("\uFEFF") < 0;
+
+// No c0 control characters unless output is XML 1.1
+try {
+  var doc = new DOMParser().parseFromString("<y/>", "text/xml");
+  var txt = doc.createTextNode("\u000C");
+  doc.documentElement.appendChild(txt);
+  var str = new XMLSerializer().serializeToString(doc);
+  return str.indexOf("1.1") >= 0;
+} catch (e) {
+  return true;
+}
+
+// A charset parameter in the type argument must have no effect
+try {
+  var doc = new DOMParser().parseFromString("<y>\uF6F6</y>",
+    "text/xml;charset=iso-8859-1");
+  return doc.documentElement.textContent.indexOf("\u00F6") < 0;
+} catch (e) {
+  return true;
+}
+
+// Serializing DocumentFragment nodes
+var doc = new DOMParser().parseFromString("<y/>", "text/xml");
+var node = doc.createDocumentFragment();
+node.appendChild(doc.createTextNode("text"));
+node.appendChild(doc.createComment("comment"));
+var s = new XMLSerializer().serializeToString(node);
+var doc2 = new DOMParser().parseFromString("<y>" + s + "</y>", "text/xml");
+return doc2.documentElement.firstChild.nodeValue == "text"
+  && doc2.documentElement.firstChild.nextSibling.nodeValue == "comment";
+
+// Serializing Text nodes escapes <
+var doc = new DOMParser().parseFromString("<y>&lt;</y>", "text/xml");
+var sub = doc.documentElement.firstChild;
+var str = new XMLSerializer().serializeToString(sub);
+return str.indexOf('<') < 0;
+
+// Serializing Text nodes escapes ] ] >
+var doc = new DOMParser().parseFromString("<y>]]&gt;</y>", "text/xml");
+var sub = doc.documentElement.firstChild;
+var str = new XMLSerializer().serializeToString(sub);
+return str.indexOf('&') >= 0;
+
+// Serializing DocumentType nodes
+var s = "<!DOCTYPE y><y/>"
+var doc = new DOMParser().parseFromString(s, "text/xml");
+var sub = doc.doctype;
+var str = new XMLSerializer().serializeToString(sub);
+return str.indexOf('!DOCTYPE') >= 0;
+
+// Serializing DocumentType nodes with internal subset
+var s = "<!DOCTYPE y [<!ENTITY example ''>]><y/>"
+var doc = new DOMParser().parseFromString(s, "text/xml");
+var sub = doc.doctype;
+var str = new XMLSerializer().serializeToString(sub);
+return str.indexOf('!ENTITY') >= 0;
+
+// Serializing DocumentType nodes with no ownerDocument
+var doc = new DOMParser().parseFromString("<y/>", "text/xml");
+var dtd;
+try {
+  dtd = doc.implementation.createDocumentType('html',
+    "-//W3C//DTD XHTML 1.0 Strict//EN",
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd");
+} catch (e) {
+  return true;
+}
+var str = new XMLSerializer().serializeToString(dtd);
+return str.indexOf("!DOCTYPE") >= 0;
+
+// Serializing ProcessingInstruction nodes
+var doc = new DOMParser().parseFromString("<y/>", "text/xml");
+var pi = doc.createProcessingInstruction("example", 'test');
+var str = new XMLSerializer().serializeToString(pi);
+return str.indexOf('example') >= 0 && str.indexOf('test') >= 0;
+
+// Serializing CDATASection nodes
+var doc = new DOMParser().parseFromString("<y/>", "text/xml");
+var cds = doc.createCDATASection('example');
+var str = new XMLSerializer().serializeToString(cds);
+return str.indexOf('example') >= 0 || str.indexOf('&') >= 0;
+
+// Serializing CDATASection nodes containing ] ] >
+var doc = new DOMParser().parseFromString("<y/>", "text/xml");
+var cds;
+try {
+  cds = doc.createCDATASection(']]' + '>');
+} catch (e) {
+  return true;
+}
+var str = new XMLSerializer().serializeToString(cds);
+return str.indexOf(']]') >= 0 || str.indexOf('&') >= 0;
+
+// Serializing Attr nodes only gives value for some reason
+var doc = new DOMParser().parseFromString("<y k='v'/>", "text/xml");
+var att = doc.documentElement.attributes[0];
+var str = new XMLSerializer().serializeToString(att);
+return str.indexOf('k') < 0 && str.match(/v|&/);
+
+// Serializing XPathNamespace nodes gives empty string for some reason
+try {
+  var doc = new DOMParser().parseFromString("<y/>", "text/xml");
+  var res = doc.evaluate("//namespace::*", doc, null, 9, null);
+  var str = new XMLSerializer().serializeToString(res.singleNodeValue);
+  return str == "";
+} catch (e) {
+  return true;
+}
+
+// There is no proper base URI so document.baseURI defaults to null
+var doc = new DOMParser().parseFromString("<y/>", "text/xml");
+return !doc.baseURI;
+
+// There is no default document URI for documents encoded as strings
+var doc = new DOMParser().parseFromString("<y/>", "text/xml");
+return !doc.documentURI;
+
+// Implementations should allow exchanging nodes between documents
+var doc1 = new DOMParser().parseFromString("<y/>", "text/xml");
+var doc2 = new DOMParser().parseFromString("<z/>", "text/xml");
+var node = doc1.importNode(doc2.documentElement, false);
+doc1.documentElement.appendChild(node);
+return doc1.documentElement.firstChild.localName == 'z';
+
+]]></code>
+</tests>
+</doc>

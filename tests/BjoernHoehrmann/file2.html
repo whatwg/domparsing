@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<style>
+  .did-not-run { background-color: silver; }
+  .success { background-color: #ccff99 }
+  .failure { background-color: #cc9999 }
+</style>
+<script src='jquery-1.5.min.js'>
+</script>
+<script>
+if (window.addEventListener)
+  window.addEventListener('load', function(){
+  try {
+    var elems = document.getElementsByClassName('did-not-run');
+    while (elems.length > 0) {
+      var elem = elems[0];
+      $(elem).addClass('failure');
+
+      try {
+        elem.textContent = elem.textContent
+          .replace(/^[\r\n\t ]+/, "")
+          .replace(/[\r\n\t ]+$/, "");
+        var func = new Function(elem.textContent);
+        $(elem).removeClass('did-not-run');
+        if (func.call()) {
+          $(elem).removeClass('failure');
+          $(elem).addClass('success');
+        } 
+      } catch (e) {
+      }
+    }
+    var csv = document.createElement("pre");
+    csv.setAttribute("id", "csv");
+    $('#tests').append(csv);
+/*
+    $('#tests').after($(csv).text(
+      "# " + navigator.userAgent.replace(/,/g, '#') + "\n"
+    ));
+*/
+    $('.test').each(function(){
+      var s =
+        $.sha1(this.textContent) + "," +
+        navigator.userAgent.replace(/,/g, '#') + "," +
+        ($(this).hasClass('success') ? 'success' : 
+         $(this).hasClass('failure') ? 'failure' :
+         "unknown") + "\n";
+      $(csv).append(s)
+    });
+  } catch (e) {
+    /**/
+  }
+  }, false);
+</script>
+<dl id='tests'>
+<dt> The media type text/xml must be supported<dd><pre class='test did-not-run'>var doc = new DOMParser().parseFromString(&quot;&lt;y/&gt;&quot;, &quot;text/xml&quot;);
+return doc.documentElement.localName == &quot;y&quot;;</pre>
+<dt> The media type application/xml must be supported<dd><pre class='test did-not-run'>var doc = new DOMParser().parseFromString(&quot;&lt;y/&gt;&quot;, &quot;application/xml&quot;);
+return doc.documentElement.localName == &quot;y&quot;;</pre>
+<dt> DOMParser with error handler must be supported<dd><pre class='test did-not-run'>var handler = function(err) { return false; }
+var parser = new DOMParser(handler);
+return !!parser;</pre>
+<dt> DOMParser error handler must be called on fatal errors<dd><pre class='test did-not-run'>var called = false;
+var handler = function(err) { called = true; return false; }
+var parser = new DOMParser(handler);
+parser.parseFromString(&quot;&lt;y&quot;, &quot;application/xml&quot;);
+return called;</pre>
+<dt> Internet media types are case-insensitive by definition<dd><pre class='test did-not-run'>var doc = new DOMParser().parseFromString(&quot;&lt;y/&gt;&quot;, &quot;tExt/xMl&quot;);
+return doc.documentElement.localName == &quot;y&quot;;</pre>
+<dt> White space surrounding the media type must be ignored<dd><pre class='test did-not-run'>var doc = new DOMParser().parseFromString(&quot;&lt;y/&gt;&quot;, &quot; text/xml &quot;);
+return doc.documentElement.localName == &quot;y&quot;;</pre>
+<dt> Throw on syntax errors in the media type<dd><pre class='test did-not-run'>try {
+  var doc = new DOMParser().parseFromString(&quot;&lt;y/&gt;&quot;, &quot;xml&quot;);
+  return false;
+} catch(e) {
+  return true;
+}</pre>
+<dt> Throw on syntax errors in the media type<dd><pre class='test did-not-run'>try {
+  var doc = new DOMParser().parseFromString(&quot;&lt;y/&gt;&quot;, &quot;&quot;);
+  return false;
+} catch(e) {
+  return true;
+}</pre>
+<dt> Throw on media types that cannot be XML<dd><pre class='test did-not-run'>try {
+  var doc = new DOMParser().parseFromString(&quot;&lt;y/&gt;&quot;, &quot;image/png&quot;);
+  return false;
+} catch(e) {
+  return true;
+}</pre>
+<dt> The media type does not have a default value<dd><pre class='test did-not-run'>try {
+  var doc = new DOMParser().parseFromString(&quot;&lt;y/&gt;&quot;);
+  return false;
+} catch(e) {
+  return true;
+}</pre>
+<dt> Encoding declarations must be ignored<dd><pre class='test did-not-run'>var s = &quot;&lt;?xml version=&#39;1.0&#39; encoding=&#39;iso-8859-1&#39;?&gt;&lt;y&gt;\uF6F6&lt;/y&gt;&quot;;
+var doc = new DOMParser().parseFromString(s, &quot;text/xml&quot;);
+return doc.documentElement.textContent.indexOf(&quot;\uF6F6&quot;) &gt;= 0;</pre>
+<dt> inputEncoding must be null after parsing<dd><pre class='test did-not-run'>var s = &quot;&lt;?xml version=&#39;1.0&#39; encoding=&#39;iso-8859-1&#39;?&gt;&lt;y&gt;\uF6F6&lt;/y&gt;&quot;;
+var doc = new DOMParser().parseFromString(s, &quot;text/xml&quot;);
+return !doc.inputEncoding;</pre>
+<dt> xmlEncoding must have a value equivalent to the encoding declaration<dd><pre class='test did-not-run'>var s = &quot;&lt;?xml version=&#39;1.0&#39; encoding=&#39;windows-1252&#39;?&gt;&lt;y&gt;\uF6F6&lt;/y&gt;&quot;;
+var doc = new DOMParser().parseFromString(s, &quot;text/xml&quot;);
+/* It might be acceptable to use an alias so this a bit fuzzy */
+return !doc.xmlEncoding || doc.xmlEncoding.toLowerCase() == &#39;windows-1252&#39;;</pre>
+<dt> Unicode signatures are not allowed<dd><pre class='test did-not-run'>var handler = function(err){ return false; };
+var parser = new DOMParser();
+try { parser = new DOMParser(handler); } catch (e) {}
+var s = &quot;\uFEFF&lt;?xml version=&#39;1.0&#39;?&gt;&lt;y/&gt;&quot;;
+try {
+  var doc = parser.parseFromString(s, &quot;text/xml&quot;);
+  return doc.documentElement.localName == &quot;parsererror&quot;;
+} catch(e) {
+  return true;
+}</pre>
+<dt> Unicode signatures are not allowed<dd><pre class='test did-not-run'>var handler = function(err){ return false; };
+var parser = new DOMParser();
+try { parser = new DOMParser(handler); } catch (e) {}
+var s = &quot;\uFEFF\uFEFF&lt;?xml version=&#39;1.0&#39;?&gt;&lt;y/&gt;&quot;;
+try {
+  var doc = parser.parseFromString(s, &quot;text/xml&quot;);
+  return doc.documentElement.localName == &quot;parsererror&quot;;
+} catch(e) {
+  return true;
+}</pre>
+<dt> Unicode signatures are not allowed<dd><pre class='test did-not-run'>var handler = function(err){ return false; };
+var parser = new DOMParser();
+try { parser = new DOMParser(handler); } catch (e) {}
+var s = &quot;\uFEFF&lt;y/&gt;&quot;;
+try {
+  var doc = parser.parseFromString(s, &quot;text/xml&quot;);
+  return doc.documentElement.localName == &quot;parsererror&quot;;
+} catch(e) {
+  return true;
+}</pre>
+<dt> Unicode signatures are not allowed<dd><pre class='test did-not-run'>var handler = function(err){ return false; };
+var parser = new DOMParser();
+try { parser = new DOMParser(handler); } catch (e) {}
+var s = &quot;\uFEFF\uFEFF&lt;y/&gt;&quot;;
+try {
+  var doc = parser.parseFromString(s, &quot;text/xml&quot;);
+  return doc.documentElement.localName == &quot;parsererror&quot;;
+} catch(e) {
+  return true;
+}</pre>
+<dt> Unicode signatures are not allowed<dd><pre class='test did-not-run'>var handler = function(err){ return false; };
+var parser = new DOMParser();
+try { parser = new DOMParser(handler); } catch (e) {}
+var s = &quot;\uBBEF\u3CBF\u7979\u3E2F&quot;;
+try {
+  var doc = parser.parseFromString(s, &quot;text/xml&quot;);
+  return doc.documentElement.localName == &quot;parsererror&quot;;
+} catch(e) {
+  return true;
+}</pre>
+<dt> Unicode signatures are not allowed<dd><pre class='test did-not-run'>var handler = function(err){ return false; };
+var parser = new DOMParser();
+try { parser = new DOMParser(handler); } catch (e) {}
+var s = &quot;\uEFBB\uBF3C\u7979\u2F3E&quot;;
+try {
+  var doc = parser.parseFromString(s, &quot;text/xml&quot;);
+  return doc.documentElement.localName == &quot;parsererror&quot;;
+} catch(e) {
+  return true;
+}</pre>
+<dt> Incomplete documents are not allowed<dd><pre class='test did-not-run'>var handler = function(err){ return false; };
+var parser = new DOMParser();
+try { parser = new DOMParser(handler); } catch (e) {}
+var s = &quot;&lt;y&gt;&quot;;
+try {
+  var doc = parser.parseFromString(s, &quot;text/xml&quot;);
+  return doc.documentElement.localName == &quot;parsererror&quot;;
+} catch(e) {
+  return true;
+}</pre>
+<dt> Incomplete documents are not allowed<dd><pre class='test did-not-run'>var handler = function(err){ return false; };
+var parser = new DOMParser();
+try { parser = new DOMParser(handler); } catch (e) {}
+var s = &quot;&lt;y/&gt;&lt;!--&quot;;
+try {
+  var doc = parser.parseFromString(s, &quot;text/xml&quot;);
+  return doc.documentElement.localName == &quot;parsererror&quot;;
+} catch(e) {
+  return true;
+}</pre>
+<dt> Not well-formed due to bad character reference<dd><pre class='test did-not-run'>var handler = function(err){ return false; };
+var parser = new DOMParser();
+try { parser = new DOMParser(handler); } catch (e) {}
+var s = &quot;&lt;y&gt;&amp;#xFF000000F6;&lt;/y&gt;&quot;;
+try {
+  var doc = parser.parseFromString(s, &quot;text/xml&quot;);
+  return doc.documentElement.localName == &quot;parsererror&quot;;
+} catch(e) {
+  return true;
+}</pre>
+<dt> Not well-formed due to bad character reference<dd><pre class='test did-not-run'>var handler = function(err){ return false; };
+var parser = new DOMParser();
+try { parser = new DOMParser(handler); } catch (e) {}
+var s = &quot;&lt;y&gt;&amp;#18446744073709551862;&lt;/y&gt;&quot;;
+try {
+  var doc = parser.parseFromString(s, &quot;text/xml&quot;);
+  return doc.documentElement.localName == &quot;parsererror&quot;;
+} catch(e) {
+  return true;
+}</pre>
+<dt> Unpaired surrogates are not allowed<dd><pre class='test did-not-run'>var handler = function(err){ return false; };
+var parser = new DOMParser();
+try { parser = new DOMParser(handler); } catch (e) {}
+var s = &quot;&lt;y&gt;\uD800&lt;/y&gt;&quot;;
+try {
+  var doc = parser.parseFromString(s, &quot;text/xml&quot;);
+  return doc.documentElement.localName == &quot;parsererror&quot;;
+} catch(e) {
+  return true;
+}</pre>
+<dt> Unserializable content, &quot;--&quot; in comment<dd><pre class='test did-not-run'>try {
+  var doc = new DOMParser().parseFromString(&quot;&lt;y/&gt;&quot;, &quot;text/xml&quot;);
+  var cmt = doc.createComment(&quot;--&quot;);
+  var str = new XMLSerializer().serializeToString(cmt);
+  return false;
+} catch (e) {
+  return true;
+}</pre>
+<dt> Unserializable content, PI with &#39;xml&#39; as target<dd><pre class='test did-not-run'>try {
+  var doc = new DOMParser().parseFromString(&quot;&lt;y/&gt;&quot;, &quot;text/xml&quot;);
+  var pi = doc.createProcessingInstruction(&quot;xml&quot;, &#39;version=&quot;1.0&quot;&#39;);
+  var str = new XMLSerializer().serializeToString(pi);
+  return false;
+} catch (e) {
+  return true;
+}</pre>
+<dt> Unserializable content, PI with &#39;?&gt;&#39; as data<dd><pre class='test did-not-run'>try {
+  var doc = new DOMParser().parseFromString(&quot;&lt;y/&gt;&quot;, &quot;text/xml&quot;);
+  var pi = doc.createProcessingInstruction(&quot;example&quot;, &#39;?&gt;&#39;);
+  var str = new XMLSerializer().serializeToString(pi);
+  return false;
+} catch (e) {
+  return true;
+}</pre>
+<dt> Unserializable content, document without document element<dd><pre class='test did-not-run'>try {
+  var doc = new DOMParser().parseFromString(&quot;&lt;y/&gt;&quot;, &quot;text/xml&quot;);
+  doc.removeChild(doc.documentElement);
+  var str = new XMLSerializer().serializeToString(doc);
+  return false;
+} catch (e) {
+  return true;
+}</pre>
+<dt> Unserializable content, xmlns element<dd><pre class='test did-not-run'>try {
+  var doc = new DOMParser().parseFromString(&quot;&lt;y/&gt;&quot;, &quot;text/xml&quot;);
+  var sub = doc.createElementNS(&quot;http://www.w3.org/2000/xmlns/&quot;, &quot;y&quot;);
+  var str = new XMLSerializer().serializeToString(sub);
+  return false;
+} catch (e) {
+  return true;
+}</pre>
+<dt> Unserializable content, unpaired surrogate in text<dd><pre class='test did-not-run'>try {
+  var doc = new DOMParser().parseFromString(&quot;&lt;y/&gt;&quot;, &quot;text/xml&quot;);
+  var txt = doc.createTextNode(&quot;\uD800&quot;);
+  var str = new XMLSerializer().serializeToString(txt);
+  return false;
+} catch (e) {
+  return true;
+}</pre>
+<dt> Unserializable content, unpaired surrogate in text via splitText<dd><pre class='test did-not-run'>try {
+  /* TODO: need to review this */
+  var doc = new DOMParser().parseFromString(&quot;&lt;y/&gt;&quot;, &quot;text/xml&quot;);
+  var txt = doc.createTextNode(&quot;\uD800\uDC00&quot;);
+  doc.documentElement.appendChild(txt);
+  var sub = txt.splitText(1);
+  doc.documentElement.removeChild(sub);
+  var str = new XMLSerializer().serializeToString(doc);
+  return false;
+} catch (e) {
+  return true;
+}</pre>
+<dt> Goldfarb&#39;s First Law of Text Processing -- attribute white space<dd><pre class='test did-not-run'>var doc = new DOMParser().parseFromString(&quot;&lt;y y=&#39;&amp;#xa;&#39;/&gt;&quot;, &quot;text/xml&quot;);
+var str = new XMLSerializer().serializeToString(doc);
+return str.indexOf(&#39;&amp;&#39;) &gt;= 0;</pre>
+<dt> Namespace declarations are fixed as necessary<dd><pre class='test did-not-run'>var doc1 = new DOMParser().parseFromString(&quot;&lt;y/&gt;&quot;, &quot;text/xml&quot;);
+doc1.documentElement.setAttributeNS(&#39;example:&#39;, &#39;example&#39;, &#39;example&#39;);
+var str = new XMLSerializer().serializeToString(doc1);
+var doc2 = new DOMParser().parseFromString(str, &quot;text/xml&quot;);
+return doc2.documentElement.getAttributeNS(&#39;example:&#39;, &#39;example&#39;)
+  == &#39;example&#39;;</pre>
+<dt> Serialization must be explicit about elements in no namespace<dd><pre class='test did-not-run'>var s = &quot;&lt;y xmlns=&#39;example:&#39;&gt;&lt;y xmlns=&#39;&#39;&gt;&lt;y/&gt;&lt;/y&gt;&lt;/y&gt;&quot;;
+var doc = new DOMParser().parseFromString(s, &quot;text/xml&quot;);
+var sub = doc.documentElement.firstChild.firstChild;
+var str = new XMLSerializer().serializeToString(sub);
+return str.indexOf(&quot;xmlns&quot;) &gt;= 0;</pre>
+<dt> No Unicode signature in the serialized document<dd><pre class='test did-not-run'>var doc = new DOMParser().parseFromString(&quot;&lt;y/&gt;&quot;, &quot;text/xml&quot;);
+var str = new XMLSerializer().serializeToString(doc);
+return str.indexOf(&quot;\uFEFF&quot;) &lt; 0;</pre>
+<dt> No c0 control characters unless output is XML 1.1<dd><pre class='test did-not-run'>try {
+  var doc = new DOMParser().parseFromString(&quot;&lt;y/&gt;&quot;, &quot;text/xml&quot;);
+  var txt = doc.createTextNode(&quot;\u000C&quot;);
+  doc.documentElement.appendChild(txt);
+  var str = new XMLSerializer().serializeToString(doc);
+  return str.indexOf(&quot;1.1&quot;) &gt;= 0;
+} catch (e) {
+  return true;
+}</pre>
+<dt> A charset parameter in the type argument must have no effect<dd><pre class='test did-not-run'>try {
+  var doc = new DOMParser().parseFromString(&quot;&lt;y&gt;\uF6F6&lt;/y&gt;&quot;,
+    &quot;text/xml;charset=iso-8859-1&quot;);
+  return doc.documentElement.textContent.indexOf(&quot;\u00F6&quot;) &lt; 0;
+} catch (e) {
+  return true;
+}</pre>
+<dt> Serializing DocumentFragment nodes<dd><pre class='test did-not-run'>var doc = new DOMParser().parseFromString(&quot;&lt;y/&gt;&quot;, &quot;text/xml&quot;);
+var node = doc.createDocumentFragment();
+node.appendChild(doc.createTextNode(&quot;text&quot;));
+node.appendChild(doc.createComment(&quot;comment&quot;));
+var s = new XMLSerializer().serializeToString(node);
+var doc2 = new DOMParser().parseFromString(&quot;&lt;y&gt;&quot; + s + &quot;&lt;/y&gt;&quot;, &quot;text/xml&quot;);
+return doc2.documentElement.firstChild.nodeValue == &quot;text&quot;
+  &amp;&amp; doc2.documentElement.firstChild.nextSibling.nodeValue == &quot;comment&quot;;</pre>
+<dt> Serializing Text nodes escapes &lt;<dd><pre class='test did-not-run'>var doc = new DOMParser().parseFromString(&quot;&lt;y&gt;&amp;lt;&lt;/y&gt;&quot;, &quot;text/xml&quot;);
+var sub = doc.documentElement.firstChild;
+var str = new XMLSerializer().serializeToString(sub);
+return str.indexOf(&#39;&lt;&#39;) &lt; 0;</pre>
+<dt> Serializing Text nodes escapes ] ] &gt;<dd><pre class='test did-not-run'>var doc = new DOMParser().parseFromString(&quot;&lt;y&gt;]]&amp;gt;&lt;/y&gt;&quot;, &quot;text/xml&quot;);
+var sub = doc.documentElement.firstChild;
+var str = new XMLSerializer().serializeToString(sub);
+return str.indexOf(&#39;&amp;&#39;) &gt;= 0;</pre>
+<dt> Serializing DocumentType nodes<dd><pre class='test did-not-run'>var s = &quot;&lt;!DOCTYPE y&gt;&lt;y/&gt;&quot;
+var doc = new DOMParser().parseFromString(s, &quot;text/xml&quot;);
+var sub = doc.doctype;
+var str = new XMLSerializer().serializeToString(sub);
+return str.indexOf(&#39;!DOCTYPE&#39;) &gt;= 0;</pre>
+<dt> Serializing DocumentType nodes with internal subset<dd><pre class='test did-not-run'>var s = &quot;&lt;!DOCTYPE y [&lt;!ENTITY example &#39;&#39;&gt;]&gt;&lt;y/&gt;&quot;
+var doc = new DOMParser().parseFromString(s, &quot;text/xml&quot;);
+var sub = doc.doctype;
+var str = new XMLSerializer().serializeToString(sub);
+return str.indexOf(&#39;!ENTITY&#39;) &gt;= 0;</pre>
+<dt> Serializing DocumentType nodes with no ownerDocument<dd><pre class='test did-not-run'>var doc = new DOMParser().parseFromString(&quot;&lt;y/&gt;&quot;, &quot;text/xml&quot;);
+var dtd;
+try {
+  dtd = doc.implementation.createDocumentType(&#39;html&#39;,
+    &quot;-//W3C//DTD XHTML 1.0 Strict//EN&quot;,
+    &quot;http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd&quot;);
+} catch (e) {
+  return true;
+}
+var str = new XMLSerializer().serializeToString(dtd);
+return str.indexOf(&quot;!DOCTYPE&quot;) &gt;= 0;</pre>
+<dt> Serializing ProcessingInstruction nodes<dd><pre class='test did-not-run'>var doc = new DOMParser().parseFromString(&quot;&lt;y/&gt;&quot;, &quot;text/xml&quot;);
+var pi = doc.createProcessingInstruction(&quot;example&quot;, &#39;test&#39;);
+var str = new XMLSerializer().serializeToString(pi);
+return str.indexOf(&#39;example&#39;) &gt;= 0 &amp;&amp; str.indexOf(&#39;test&#39;) &gt;= 0;</pre>
+<dt> Serializing CDATASection nodes<dd><pre class='test did-not-run'>var doc = new DOMParser().parseFromString(&quot;&lt;y/&gt;&quot;, &quot;text/xml&quot;);
+var cds = doc.createCDATASection(&#39;example&#39;);
+var str = new XMLSerializer().serializeToString(cds);
+return str.indexOf(&#39;example&#39;) &gt;= 0 || str.indexOf(&#39;&amp;&#39;) &gt;= 0;</pre>
+<dt> Serializing CDATASection nodes containing ] ] &gt;<dd><pre class='test did-not-run'>var doc = new DOMParser().parseFromString(&quot;&lt;y/&gt;&quot;, &quot;text/xml&quot;);
+var cds;
+try {
+  cds = doc.createCDATASection(&#39;]]&#39; + &#39;&gt;&#39;);
+} catch (e) {
+  return true;
+}
+var str = new XMLSerializer().serializeToString(cds);
+return str.indexOf(&#39;]]&#39;) &gt;= 0 || str.indexOf(&#39;&amp;&#39;) &gt;= 0;</pre>
+<dt> Serializing Attr nodes only gives value for some reason<dd><pre class='test did-not-run'>var doc = new DOMParser().parseFromString(&quot;&lt;y k=&#39;v&#39;/&gt;&quot;, &quot;text/xml&quot;);
+var att = doc.documentElement.attributes[0];
+var str = new XMLSerializer().serializeToString(att);
+return str.indexOf(&#39;k&#39;) &lt; 0 &amp;&amp; str.match(/v|&amp;/);</pre>
+<dt> Serializing XPathNamespace nodes gives empty string for some reason<dd><pre class='test did-not-run'>try {
+  var doc = new DOMParser().parseFromString(&quot;&lt;y/&gt;&quot;, &quot;text/xml&quot;);
+  var res = doc.evaluate(&quot;//namespace::*&quot;, doc, null, 9, null);
+  var str = new XMLSerializer().serializeToString(res.singleNodeValue);
+  return str == &quot;&quot;;
+} catch (e) {
+  return true;
+}</pre>
+<dt> There is no proper base URI so document.baseURI defaults to null<dd><pre class='test did-not-run'>var doc = new DOMParser().parseFromString(&quot;&lt;y/&gt;&quot;, &quot;text/xml&quot;);
+return !doc.baseURI;</pre>
+<dt> There is no default document URI for documents encoded as strings<dd><pre class='test did-not-run'>var doc = new DOMParser().parseFromString(&quot;&lt;y/&gt;&quot;, &quot;text/xml&quot;);
+return !doc.documentURI;</pre>
+<dt> Implementations should allow exchanging nodes between documents<dd><pre class='test did-not-run'>var doc1 = new DOMParser().parseFromString(&quot;&lt;y/&gt;&quot;, &quot;text/xml&quot;);
+var doc2 = new DOMParser().parseFromString(&quot;&lt;z/&gt;&quot;, &quot;text/xml&quot;);
+var node = doc1.importNode(doc2.documentElement, false);
+doc1.documentElement.appendChild(node);
+return doc1.documentElement.firstChild.localName == &#39;z&#39;;</pre>

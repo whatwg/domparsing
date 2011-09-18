@@ -712,11 +712,12 @@ otherwise, must unset it.
 method must run the following steps:
 
 <ol>
-  <li>If the <span>context object</span>'s
-  <span data-anolis-spec=dom title=concept-range-start-node>start node</span>
-  is null, raise an
-  <code data-anolis-spec=dom title=dom-DOMException-INVALID_STATE_ERR>INVALID_STATE_ERR</code>
-  exception and abort these steps.
+  <li>
+    <p>If the <span>context object</span>'s
+    <span data-anolis-spec=dom title=concept-range-detached>detached flag</span>
+    is set, throw an
+    <code data-anolis-spec=dom title=dom-DOMException-INVALID_STATE_ERR>INVALID_STATE_ERR</code>
+    exception and terminate these steps.
 
   <li>
     <p>Let <var title>node</var> the <span>context object</span>'s

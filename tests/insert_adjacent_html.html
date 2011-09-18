@@ -1,19 +1,13 @@
 <!DOCTYPE HTML>
 <html>
-<!--
-https://bugzilla.mozilla.org/show_bug.cgi?id=613662
--->
 <head>
   <title>insertAdjacentHTML</title>
   <script src="support/testharness.js"></script>
+  <script src="support/testharnessreport.js"></script>
 </head>
 <body>
-<a target="_blank" href="https://bugzilla.mozilla.org/show_bug.cgi?id=613662">Mozilla Bug 613662</a>
-<p id="display"></p><div id="content" style="display: none"></div><div id="content2" style="display: none"></div><pre id="test">
+<p id="display"></p><div id="content" style="display: none"></div><div id="content2" style="display: none"></div>
 <script>
-
-/** Test for Bug 613662 **/
-
 var script_ran = false;
 
 function testPositions(node) {
@@ -21,6 +15,7 @@ function testPositions(node) {
     script_ran = false;
     node.insertAdjacentHTML("beforeBegin", "\u003Cscript>script_ran = true;\u003C/script><i></i>");
     assert_equals(node.previousSibling.localName, "i", "Should have had <i> as previous sibling");
+    assert_equals(node.previousSibling.previousSibling.localName, "script", "Should have had <script> as second previous child");
     assert_false(script_ran, "script should not have run");
   }, "beforeBegin " + node)
 
@@ -28,13 +23,15 @@ function testPositions(node) {
     script_ran = false;
     node.insertAdjacentHTML("Afterbegin", "<b></b>\u003Cscript>script_ran = true;\u003C/script>");
     assert_equals(node.firstChild.localName, "b", "Should have had <b> as first child");
+    assert_equals(node.firstChild.nextSibling.localName, "script", "Should have had <script> as second child");
     assert_false(script_ran, "script should not have run");
-  }, "afterBegin " + node);
+  }, "Afterbegin " + node);
 
   test(function() {
     script_ran = false;
     node.insertAdjacentHTML("BeforeEnd", "\u003Cscript>script_ran = true;\u003C/script><u></u>");
     assert_equals(node.lastChild.localName, "u", "Should have had <u> as last child");
+    assert_equals(node.lastChild.previousSibling.localName, "script", "Should have had <script> as penultimate child");
     assert_false(script_ran, "script should not have run");
   }, "BeforeEnd " + node)
 
@@ -42,6 +39,7 @@ function testPositions(node) {
     script_ran = false;
     node.insertAdjacentHTML("afterend", "<a></a>\u003Cscript>script_ran = true;\u003C/script>");
     assert_equals(node.nextSibling.localName, "a", "Should have had <a> as next sibling");
+    assert_equals(node.nextSibling.nextSibling.localName, "script", "Should have had <script> as second next sibling");
     assert_false(script_ran, "script should not have run");
   }, "afterend " + node)
 }
@@ -52,6 +50,7 @@ testPositions(content); // test again when there's next sibling
 
 test(function() {
   assert_throws("SYNTAX_ERR", function() {content.insertAdjacentHTML("bar", "foo")});
+  assert_throws("SYNTAX_ERR", function() {content.insertAdjacentHTML("beforebegİn", "foo")});
 });
 
 var parent = document.createElement("div");
@@ -59,9 +58,6 @@ var child = document.createElement("div");
 
 test (function() {
   assert_throws("NO_MODIFICATION_ALLOWED_ERR", function() {child.insertAdjacentHTML("Beforebegin", "foo")});
-});
-
-test(function() {
   assert_throws("NO_MODIFICATION_ALLOWED_ERR", function() {child.insertAdjacentHTML("AfterEnd", "foo")})
 });
 
@@ -82,6 +78,7 @@ test(function() {
 });
 
 test(function() {
+  assert_throws("NO_MODIFICATION_ALLOWED_ERR", function() {document.documentElement.insertAdjacentHTML("beforebegin", "<div></div>")});
   assert_throws("NO_MODIFICATION_ALLOWED_ERR", function() {document.documentElement.insertAdjacentHTML("afterend", "<div></div>")});
 });
 
@@ -97,7 +94,6 @@ test(function() {
   assert_equals(document.getElementsByTagName("body").length, 1, "Should still have one body");
 })
 </script>
-</pre>
 <div id="log"></div>
 </body>
 </html>

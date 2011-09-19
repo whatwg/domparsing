@@ -460,7 +460,7 @@ string).
 <ol>
   <li>
     <p>Let <var title>parent</var> be the <span>context object</span>'s
-    <code data-anolis-spec=dom title=dom-Node-parentNode>parentNode</code>.
+    <span data-anolis-spec=dom title=concept-tree-parent>parent</span>.
 
   <li>
     <p>If <var title>parent</var> is null, abort these steps. There would be no
@@ -562,7 +562,7 @@ method must run these steps:
       the string "afterend"
       <dd>
         <p>Let <var title>context</var> be the <span>context object</span>'s
-        <code data-anolis-spec=dom title=dom-Node-parentNode>parentNode</code>.
+        <span data-anolis-spec=dom title=concept-tree-parent>parent</span>.
 
         <p>If <var title>context</var> is null, abort these steps.
 
@@ -746,7 +746,7 @@ method must run these steps:
       <dt><code data-anolis-spec=dom>Text</code>
       <dt><code data-anolis-spec=dom>Comment</code>
       <dd><var title>node</var>'s
-      <code data-anolis-spec=dom title=dom-Node-parentElement>parentElement</code>
+      <span data-anolis-spec=dom>parent element</span>
 
       <dt><code data-anolis-spec=dom>DocumentType</code>
       <dt><code data-anolis-spec=dom>ProcessingInstruction</code>
@@ -771,9 +771,9 @@ method must run these steps:
     </ul>
 
     <p>let <var title>element</var> be a new
-    <code data-anolis-spec=dom>Element</code> with
+    <span data-anolis-spec=dom title=concept-element>element</span> with
     <ul>
-      <li><code title>body</code> as its
+      <li>"<code title>body</code>" as its
       <span data-anolis-spec=dom title=concept-element-local-name>local name</span>,
       <li>the <span data-anolis-spec=dom>HTML namespace</span> as its
       <span data-anolis-spec=dom title=concept-element-namespace>namespace</span>, and

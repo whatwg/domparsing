@@ -19,7 +19,7 @@
 <body class=draft>
 <div class=head id=head>
 <h1>DOM Parsing and Serialization</h1>
-<h2 class="no-num no-toc" id=work-in-progress-&mdash;-last-update-18-september-2011>Work in Progress &mdash; Last Update 18 September 2011</h2>
+<h2 class="no-num no-toc" id=work-in-progress-&mdash;-last-update-19-september-2011>Work in Progress &mdash; Last Update 19 September 2011</h2>
 <dl>
  <dt>Editor
  <dd>Ms2ger &lt;ms2ger@gmail.com&gt;
@@ -277,20 +277,25 @@ must run the appropriate steps, depending on <var title="">node</var>'s interfac
 
 [Constructor]
 interface <dfn id=domparser>DOMParser</dfn> {
-  <a class=external data-anolis-spec=dom href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#document>Document</a> <a href=#dom-domparser-parsefromstring title=dom-DOMParser-parseFromString>parseFromString</a>(DOMString str, DOMString contentType);
+  <a class=external data-anolis-spec=dom href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#document>Document</a> <a href=#dom-domparser-parsefromstring title=dom-DOMParser-parseFromString>parseFromString</a>(DOMString <var title="">str</var>, DOMString <var title="">type</var>);
 };</pre>
 
-<p>The <dfn id=dom-domparser-parsefromstring title=dom-DOMParser-parseFromString><code>parseFromString(<var title="">str</var>, <var title="">contentType</var>)</code></dfn> method must run the
-following steps:
+<p>The
+<dfn id=dom-domparser-parsefromstring title=dom-DOMParser-parseFromString><code>parseFromString(<var title="">str</var>, <var title="">type</var>)</code></dfn>
+method must run these steps:
 <ol>
- <li><p>If <var title="">contentType</var> isn't <code title="">text/xml</code>, <code title="">application/xml</code> or <code title="">application/xhtml+xml</code>, raise
- a <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#dom-domexception-not_supported_err><code class=external data-anolis-spec=dom title=dom-DOMException-NOT_SUPPORTED_ERR>NOT_SUPPORTED_ERR</code></a> exception and abort these
- steps.
+ <li><p>If <var title="">type</var> is not "<code title="">text/xml</code>",
+ "<code title="">application/xml</code>" or
+ "<code title="">application/xhtml+xml</code>", throw a
+ <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#dom-domexception-not_supported_err><code class=external data-anolis-spec=dom title=dom-DOMException-NOT_SUPPORTED_ERR>NOT_SUPPORTED_ERR</code></a>
+ exception and terminate these steps.
 
- <li><p>Parse <var title="">str</var> with a namespace-enabled <a class=external data-anolis-spec=html href=http://www.whatwg.org/specs/web-apps/current-work/multipage/the-xhtml-syntax.html#xml-parser>XML parser</a>.
+ <li><p>Parse <var title="">str</var> with a namespace-enabled
+ <a class=external data-anolis-spec=html href=http://www.whatwg.org/specs/web-apps/current-work/multipage/the-xhtml-syntax.html#xml-parser>XML parser</a>.
 
- <li><p>If the previous step didn't return an error, return the newly created
- <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#document><code class=external data-anolis-spec=dom>Document</code></a> and terminate these steps.
+ <li><p>If the previous step didn't return an error, return the newly
+ created <a class=external data-anolis-spec=dom href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-document title=concept-document>document</a>
+ and terminate these steps.
 
  <li><p>Let <var title="">document</var> be a newly-created
  <a href=#xmldocument><code>XMLDocument</code></a>.
@@ -299,12 +304,12 @@ following steps:
   <p>Let <var title="">root</var> be a new
   <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#element><code class=external data-anolis-spec=dom>Element</code></a>, with its
   <a class=external data-anolis-spec=dom href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-element-local-name title=concept-element-local-name>local name</a>
-  set to <code title="">parsererror</code> and its
+  set to "<code title="">parsererror</code>" and its
   <a class=external data-anolis-spec=dom href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-element-namespace title=concept-element-namespace>namespace</a>
   set to
-  <code title="">http://www.mozilla.org/newlayout/xml/parsererror.xml</code>.
+  "<code title="">http://www.mozilla.org/newlayout/xml/parsererror.xml</code>".
 
-  <p>User agents may
+  <p>At this point user agents may
   <a class=external data-anolis-spec=dom href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-node-append title=concept-node-append>append</a> nodes
   to <var title="">root</var>, for example to describe the nature of the error.
 
@@ -319,7 +324,7 @@ following steps:
 <h2 id=the-xmlserializer-interface><span class=secno>5 </span>The <a href=#xmlserializer><code>XMLSerializer</code></a> interface</h2>
 <pre class=idl>[Constructor]
 interface <dfn id=xmlserializer>XMLSerializer</dfn> {
-  DOMString <a href=#dom-xmlserializer-serializetostring title=dom-XMLSerializer-serializeToString>serializeToString</a>(<a class=external data-anolis-spec=dom href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#node>Node</a> root);
+  DOMString <a href=#dom-xmlserializer-serializetostring title=dom-XMLSerializer-serializeToString>serializeToString</a>(<a class=external data-anolis-spec=dom href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#node>Node</a> <var title="">root</var>);
 };</pre>
 
 <p>The
@@ -334,7 +339,7 @@ method must
 <pre class=idl>partial interface <a class=external data-anolis-spec=dom href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#element>Element</a> {
   attribute DOMString <a href=#dom-element-innerhtml title=dom-Element-innerHTML>innerHTML</a>;
   attribute DOMString <a href=#dom-element-outerhtml title=dom-Element-outerHTML>outerHTML</a>;
-  void <a href=#dom-element-insertadjacenthtml title=dom-Element-insertAdjacentHTML>insertAdjacentHTML</a>(DOMString position, DOMString text);
+  void <a href=#dom-element-insertadjacenthtml title=dom-Element-insertAdjacentHTML>insertAdjacentHTML</a>(DOMString <var title="">position</var>, DOMString <var title="">text</var>);
 };</pre>
 
 
@@ -556,7 +561,7 @@ string).
 
 <p>The
 <dfn id=dom-element-insertadjacenthtml title=dom-Element-insertAdjacentHTML><code>insertAdjacentHTML(<var title="">position</var>, <var title="">text</var>)</code></dfn>
-method, when invoked, must run the following algorithm:
+method must run these steps:
 
 <ol>
   <li>
@@ -697,13 +702,15 @@ method, when invoked, must run the following algorithm:
 <p><a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#text><code class=external data-anolis-spec=dom>Text</code></a> nodes have an additional
 associated flag, the <dfn id=serialize-as-cdata-flag>serialize as CDATA flag</dfn>.
 
-<p>On getting, the
+<p>The
 <dfn id=dom-text-serializeascdata title=dom-Text-serializeAsCDATA><code>serializeAsCDATA</code></dfn>
-attribute must return whether the <a href=#context-object>context object</a> has its
-<a href=#serialize-as-cdata-flag>serialize as CDATA flag</a> set.
-On setting, if the new value is true, the user agent must set the
-<a href=#context-object>context object</a>'s <a href=#serialize-as-cdata-flag>serialize as CDATA flag</a>, and
-otherwise, must unset it.
+attribute must return true if the <a href=#context-object>context object</a> has its
+<a href=#serialize-as-cdata-flag>serialize as CDATA flag</a> set, or false otherwise.
+
+<p>Setting the <a href=#dom-text-serializeascdata><code title=dom-Text-serializeAsCDATA>serializeAsCDATA</code></a>
+attribute must, if the new value is true, set the
+<a href=#context-object>context object</a>'s <a href=#serialize-as-cdata-flag>serialize as CDATA flag</a>, or unset
+it otherwise.
 
 </div>
 
@@ -712,7 +719,7 @@ otherwise, must unset it.
 <h2 id=extensions-to-the-range-interface><span class=secno>8 </span>Extensions to the <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#range><code class=external data-anolis-spec=dom>Range</code></a> interface</h2>
 
 <pre class=idl>partial interface <a class=external data-anolis-spec=dom href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#range>Range</a> {
-  <a class=external data-anolis-spec=dom href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#documentfragment>DocumentFragment</a> <a href=#dom-range-createcontextualfragment title=dom-Range-createContextualFragment>createContextualFragment</a>(DOMString fragment);
+  <a class=external data-anolis-spec=dom href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#documentfragment>DocumentFragment</a> <a href=#dom-range-createcontextualfragment title=dom-Range-createContextualFragment>createContextualFragment</a>(DOMString <var title="">fragment</var>);
 };</pre>
 
 <dl class=domintro>
@@ -726,7 +733,7 @@ otherwise, must unset it.
 
 <p>The
 <dfn id=dom-range-createcontextualfragment title=dom-Range-createContextualFragment><code>createContextualFragment(<var title="">fragment</var>)</code></dfn>
-method must run the following steps:
+method must run these steps:
 
 <ol>
   <li>

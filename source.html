@@ -256,24 +256,25 @@ must run the appropriate steps, depending on <var title>node</var>'s interface:
 
 [Constructor]
 interface <dfn>DOMParser</dfn> {
-  <span data-anolis-spec=dom>Document</span> <span title=dom-DOMParser-parseFromString>parseFromString</span>(DOMString str, DOMString contentType);
+  <span data-anolis-spec=dom>Document</span> <span title=dom-DOMParser-parseFromString>parseFromString</span>(DOMString <var title>str</var>, DOMString <var title>type</var>);
 };</pre>
 
-<p>The <dfn title=dom-DOMParser-parseFromString><code>parseFromString(<var
-title>str</var>, <var title>contentType</var>)</code></dfn> method must run the
-following steps:
+<p>The
+<dfn title=dom-DOMParser-parseFromString><code>parseFromString(<var title>str</var>, <var title>type</var>)</code></dfn>
+method must run these steps:
 <ol>
- <li><p>If <var title>contentType</var> isn't <code title>text/xml</code>, <code
- title>application/xml</code> or <code title>application/xhtml+xml</code>, raise
- a <code title=dom-DOMException-NOT_SUPPORTED_ERR
- data-anolis-spec=dom>NOT_SUPPORTED_ERR</code> exception and abort these
- steps.
+ <li><p>If <var title>type</var> is not "<code title>text/xml</code>",
+ "<code title>application/xml</code>" or
+ "<code title>application/xhtml+xml</code>", throw a
+ <code title=dom-DOMException-NOT_SUPPORTED_ERR data-anolis-spec=dom>NOT_SUPPORTED_ERR</code>
+ exception and terminate these steps.
 
- <li><p>Parse <var title>str</var> with a namespace-enabled <span
- data-anolis-spec=html>XML parser</span>.
+ <li><p>Parse <var title>str</var> with a namespace-enabled
+ <span data-anolis-spec=html>XML parser</span>.
 
- <li><p>If the previous step didn't return an error, return the newly created
- <code data-anolis-spec=dom>Document</code> and terminate these steps.
+ <li><p>If the previous step didn't return an error, return the newly
+ created <span title=concept-document data-anolis-spec=dom>document</span>
+ and terminate these steps.
 
  <li><p>Let <var title>document</var> be a newly-created
  <code>XMLDocument</code>.
@@ -282,12 +283,12 @@ following steps:
   <p>Let <var title>root</var> be a new
   <code data-anolis-spec=dom>Element</code>, with its
   <span title=concept-element-local-name data-anolis-spec=dom>local name</span>
-  set to <code title>parsererror</code> and its
+  set to "<code title>parsererror</code>" and its
   <span title=concept-element-namespace data-anolis-spec=dom>namespace</span>
   set to
-  <code title>http://www.mozilla.org/newlayout/xml/parsererror.xml</code>.
+  "<code title>http://www.mozilla.org/newlayout/xml/parsererror.xml</code>".
 
-  <p>User agents may
+  <p>At this point user agents may
   <span data-anolis-spec=dom title=concept-node-append>append</span> nodes
   to <var title>root</var>, for example to describe the nature of the error.
 
@@ -302,7 +303,7 @@ following steps:
 <h2>The <code>XMLSerializer</code> interface</h2>
 <pre class=idl>[Constructor]
 interface <dfn>XMLSerializer</dfn> {
-  DOMString <span title=dom-XMLSerializer-serializeToString>serializeToString</span>(<span data-anolis-spec=dom>Node</span> root);
+  DOMString <span title=dom-XMLSerializer-serializeToString>serializeToString</span>(<span data-anolis-spec=dom>Node</span> <var title>root</var>);
 };</pre>
 
 <p>The
@@ -317,7 +318,7 @@ method must
 <pre class=idl>partial interface <span data-anolis-spec=dom>Element</span> {
   attribute DOMString <span title=dom-Element-innerHTML>innerHTML</span>;
   attribute DOMString <span title=dom-Element-outerHTML>outerHTML</span>;
-  void <span title=dom-Element-insertAdjacentHTML>insertAdjacentHTML</span>(DOMString position, DOMString text);
+  void <span title=dom-Element-insertAdjacentHTML>insertAdjacentHTML</span>(DOMString <var title>position</var>, DOMString <var title>text</var>);
 };</pre>
 
 
@@ -539,7 +540,7 @@ string).
 
 <p>The
 <dfn title=dom-Element-insertAdjacentHTML><code>insertAdjacentHTML(<var title>position</var>, <var title>text</var>)</code></dfn>
-method, when invoked, must run the following algorithm:
+method must run these steps:
 
 <ol>
   <li>
@@ -680,13 +681,15 @@ method, when invoked, must run the following algorithm:
 <p><code data-anolis-spec=dom>Text</code> nodes have an additional
 associated flag, the <dfn>serialize as CDATA flag</dfn>.
 
-<p>On getting, the
+<p>The
 <dfn title=dom-Text-serializeAsCDATA><code>serializeAsCDATA</code></dfn>
-attribute must return whether the <span>context object</span> has its
-<span>serialize as CDATA flag</span> set.
-On setting, if the new value is true, the user agent must set the
-<span>context object</span>'s <span>serialize as CDATA flag</span>, and
-otherwise, must unset it.
+attribute must return true if the <span>context object</span> has its
+<span>serialize as CDATA flag</span> set, or false otherwise.
+
+<p>Setting the <code title=dom-Text-serializeAsCDATA>serializeAsCDATA</code>
+attribute must, if the new value is true, set the
+<span>context object</span>'s <span>serialize as CDATA flag</span>, or unset
+it otherwise.
 
 </div>
 
@@ -695,7 +698,7 @@ otherwise, must unset it.
 <h2>Extensions to the <code data-anolis-spec=dom>Range</code> interface</h2>
 
 <pre class=idl>partial interface <span data-anolis-spec=dom>Range</span> {
-  <span data-anolis-spec=dom>DocumentFragment</span> <span title=dom-Range-createContextualFragment>createContextualFragment</span>(DOMString fragment);
+  <span data-anolis-spec=dom>DocumentFragment</span> <span title=dom-Range-createContextualFragment>createContextualFragment</span>(DOMString <var title>fragment</var>);
 };</pre>
 
 <dl class=domintro>
@@ -709,7 +712,7 @@ otherwise, must unset it.
 
 <p>The
 <dfn title=dom-Range-createContextualFragment><code>createContextualFragment(<var title>fragment</var>)</code></dfn>
-method must run the following steps:
+method must run these steps:
 
 <ol>
   <li>

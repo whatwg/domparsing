@@ -280,10 +280,10 @@ interface <dfn id=domparser>DOMParser</dfn> {
   <a class=external data-anolis-spec=dom href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#document>Document</a> <a href=#dom-domparser-parsefromstring title=dom-DOMParser-parseFromString>parseFromString</a>(DOMString <var title="">str</var>, DOMString <var title="">type</var>);
 };</pre>
 
-<p>The <dfn id=dom-domparser title=dom-DOMParser><code>DOMParser()</code> constructor must
-return a new <code>DOMParser</code> object.
+<p>The <dfn id=dom-domparser title=dom-DOMParser><code>DOMParser()</code></dfn> constructor
+must return a new <a href=#domparser><code>DOMParser</code></a> object.
 
-</dfn><p>The
+<p>The
 <dfn id=dom-domparser-parsefromstring title=dom-DOMParser-parseFromString><code>parseFromString(<var title="">str</var>, <var title="">type</var>)</code></dfn>
 method must run these steps:
 <ol>
@@ -331,10 +331,10 @@ interface <dfn id=xmlserializer>XMLSerializer</dfn> {
   DOMString <a href=#dom-xmlserializer-serializetostring title=dom-XMLSerializer-serializeToString>serializeToString</a>(<a class=external data-anolis-spec=dom href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#node>Node</a> <var title="">root</var>);
 };</pre>
 
-<p>The <dfn id=dom-xmlserializer title=dom-XMLSerializer><code>XMLSerializer()</code> constructor
-must return a new <code>XMLSerializer</code> object.
+<p>The <dfn id=dom-xmlserializer title=dom-XMLSerializer><code>XMLSerializer()</code></dfn>
+constructor must return a new <a href=#xmlserializer><code>XMLSerializer</code></a> object.
 
-</dfn><p>The
+<p>The
 <dfn id=dom-xmlserializer-serializetostring title=dom-XMLSerializer-serializeToString><code>serializeToString(<var title="">root</var>)</code></dfn>
 method must
 <a href=#concept-serialize-xml title=concept-serialize-xml>produce an XML serialization</a> of

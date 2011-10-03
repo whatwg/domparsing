@@ -564,12 +564,11 @@ method must run these steps:
         <p>Let <var title>context</var> be the <span>context object</span>'s
         <span data-anolis-spec=dom title=concept-tree-parent>parent</span>.
 
-        <p>If <var title>context</var> is null, abort these steps.
-
-        <p>If <var title>context</var> is a
-        <code data-anolis-spec=dom>Document</code>, throw a
+        <p>If <var title>context</var> is null or a
+        <span data-anolis-spec=dom title=concept-document>document</span>, throw
+        a
         <code data-anolis-spec=dom title=dom-DOMException-NO_MODIFICATION_ALLOWED_ERR>NO_MODIFICATION_ALLOWED_ERR</code>
-        exception and abort these steps.
+        and abort these steps.
 
       <dt>If <var title>position</var> is an
       <span data-anolis-spec=dom>ASCII case-insensitive</span> match for

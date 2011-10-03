@@ -19,7 +19,7 @@
 <body class=draft>
 <div class=head id=head>
 <h1>DOM Parsing and Serialization</h1>
-<h2 class="no-num no-toc" id=work-in-progress-&mdash;-last-update-19-september-2011>Work in Progress &mdash; Last Update 19 September 2011</h2>
+<h2 class="no-num no-toc" id=work-in-progress-&mdash;-last-update-3-october-2011>Work in Progress &mdash; Last Update 3 October 2011</h2>
 <dl>
  <dt>Editor
  <dd>Ms2ger &lt;ms2ger@gmail.com&gt;
@@ -585,12 +585,11 @@ method must run these steps:
         <p>Let <var title="">context</var> be the <a href=#context-object>context object</a>'s
         <a class=external data-anolis-spec=dom href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-tree-parent title=concept-tree-parent>parent</a>.
 
-        <p>If <var title="">context</var> is null, abort these steps.
-
-        <p>If <var title="">context</var> is a
-        <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#document><code class=external data-anolis-spec=dom>Document</code></a>, throw a
+        <p>If <var title="">context</var> is null or a
+        <a class=external data-anolis-spec=dom href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-document title=concept-document>document</a>, throw
+        a
         <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#dom-domexception-no_modification_allowed_err><code class=external data-anolis-spec=dom title=dom-DOMException-NO_MODIFICATION_ALLOWED_ERR>NO_MODIFICATION_ALLOWED_ERR</code></a>
-        exception and abort these steps.
+        and abort these steps.
 
       <dt>If <var title="">position</var> is an
       <a class=external data-anolis-spec=dom href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#ascii-case-insensitive>ASCII case-insensitive</a> match for

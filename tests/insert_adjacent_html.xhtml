@@ -3,6 +3,7 @@
   <title>insertAdjacentHTML</title>
   <script src="support/testharness.js"></script>
   <script src="support/testharnessreport.js"></script>
+  <script src="insert_adjacent_html.js"></script>
 </head>
 <body>
 <p id="display"></p><div id="content" style="display: none"></div><div id="content2" style="display: none"></div>
@@ -55,12 +56,8 @@ test(function() {
 var parent = document.createElement("div");
 var child = document.createElement("div");
 
-test (function() {
-  child.insertAdjacentHTML("Beforebegin", "foo");
-  child.insertAdjacentHTML("AfterEnd", "foo");
-  assert_false(child.hasChildNodes());
-}, "When the parent node is null, insertAdjacentHTML should do nothing for beforebegin and afterend");
-
+testThrowingNoParent(child, "null");
+testThrowingNoParent(document.documentElement, "a document");
 
 test(function() {
   child.insertAdjacentHTML("afterBegin", "foo");
@@ -75,11 +72,6 @@ test(function() {
   script_ran = false;
   content.appendChild(parent); // must not run scripts
   assert_false(script_ran, "script should not have run");  
-});
-
-test(function() {
-  assert_throws("NO_MODIFICATION_ALLOWED_ERR", function() {document.documentElement.insertAdjacentHTML("afterend", "<div></div>")});
-  assert_throws("NO_MODIFICATION_ALLOWED_ERR", function() {document.documentElement.insertAdjacentHTML("beforebegin", "<div></div>")});
 });
 
 var content2 = document.getElementById("content2");

@@ -19,7 +19,7 @@
 <body class=draft>
 <div class=head id=head>
 <h1>DOM Parsing and Serialization</h1>
-<h2 class="no-num no-toc" id=work-in-progress-&mdash;-last-update-3-october-2011>Work in Progress &mdash; Last Update 3 October 2011</h2>
+<h2 class="no-num no-toc" id=work-in-progress-&mdash;-last-update-12-october-2011>Work in Progress &mdash; Last Update 12 October 2011</h2>
 <dl>
  <dt>Editor
  <dd>Ms2ger &lt;ms2ger@gmail.com&gt;
@@ -288,8 +288,9 @@ must return a new <a href=#domparser><code>DOMParser</code></a> object.
 method must run these steps:
 <ol>
  <li><p>If <var title="">type</var> is not "<code title="">text/xml</code>",
- "<code title="">application/xml</code>" or
- "<code title="">application/xhtml+xml</code>", throw a
+ "<code title="">application/xml</code>",
+ "<code title="">application/xhtml+xml</code>" or
+ "<code title="">image/svg+xml</code>", throw a
  <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#dom-domexception-not_supported_err><code class=external data-anolis-spec=dom title=dom-DOMException-NOT_SUPPORTED_ERR>NOT_SUPPORTED_ERR</code></a>
  exception and terminate these steps.
 

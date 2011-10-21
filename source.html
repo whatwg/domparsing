@@ -251,10 +251,7 @@ must run the appropriate steps, depending on <var title>node</var>'s interface:
 
 
 <h2>The <code>DOMParser</code> interface</h2>
-<pre class=idl>interface <dfn>XMLDocument</dfn> : <span data-anolis-spec=dom>Document</span> {
-};
-
-[<span title=dom-DOMParser>Constructor</span>]
+<pre class=idl>[<span title=dom-DOMParser>Constructor</span>]
 interface <dfn>DOMParser</dfn> {
   <span data-anolis-spec=dom>Document</span> <span title=dom-DOMParser-parseFromString>parseFromString</span>(DOMString <var title>str</var>, DOMString <var title>type</var>);
 };</pre>
@@ -281,7 +278,7 @@ method must run these steps:
  and terminate these steps.
 
  <li><p>Let <var title>document</var> be a newly-created
- <code>XMLDocument</code>.
+ <code data-anolis-spec=dom>XMLDocument</code>.
 
  <li>
   <p>Let <var title>root</var> be a new

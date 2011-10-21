@@ -19,7 +19,7 @@
 <body class=draft>
 <div class=head id=head>
 <h1>DOM Parsing and Serialization</h1>
-<h2 class="no-num no-toc" id=work-in-progress-&mdash;-last-update-12-october-2011>Work in Progress &mdash; Last Update 12 October 2011</h2>
+<h2 class="no-num no-toc" id=work-in-progress-&mdash;-last-update-21-october-2011>Work in Progress &mdash; Last Update 21 October 2011</h2>
 <dl>
  <dt>Editor
  <dd>Ms2ger &lt;ms2ger@gmail.com&gt;
@@ -272,10 +272,7 @@ must run the appropriate steps, depending on <var title="">node</var>'s interfac
 
 
 <h2 id=the-domparser-interface><span class=secno>4 </span>The <a href=#domparser><code>DOMParser</code></a> interface</h2>
-<pre class=idl>interface <dfn id=xmldocument>XMLDocument</dfn> : <a class=external data-anolis-spec=dom href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#document>Document</a> {
-};
-
-[<a href=#dom-domparser title=dom-DOMParser>Constructor</a>]
+<pre class=idl>[<a href=#dom-domparser title=dom-DOMParser>Constructor</a>]
 interface <dfn id=domparser>DOMParser</dfn> {
   <a class=external data-anolis-spec=dom href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#document>Document</a> <a href=#dom-domparser-parsefromstring title=dom-DOMParser-parseFromString>parseFromString</a>(DOMString <var title="">str</var>, DOMString <var title="">type</var>);
 };</pre>
@@ -302,7 +299,7 @@ method must run these steps:
  and terminate these steps.
 
  <li><p>Let <var title="">document</var> be a newly-created
- <a href=#xmldocument><code>XMLDocument</code></a>.
+ <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#xmldocument><code class=external data-anolis-spec=dom>XMLDocument</code></a>.
 
  <li>
   <p>Let <var title="">root</var> be a new

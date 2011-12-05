@@ -506,7 +506,7 @@ string).
   <li>
     <p>Let <var title="">fragment</var> be the result of invoking the
     <a href=#concept-parse-fragment title=concept-parse-fragment>fragment parsing algorithm</a> with
-    the given value as <var title="">markup</var>, and <var title="">parent</var> as
+    the new value as <var title="">markup</var>, and <var title="">parent</var> as
     the <var title="">context element</var>.
 
     <p>If this raised an exception, then abort these steps.
@@ -515,7 +515,7 @@ string).
     <p><a class=external data-anolis-spec=dom href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-node-replace title=concept-node-replace>Replace</a>
     the <a href=#context-object>context object</a> with <var title="">fragment</var> within
     the <a href=#context-object>context object</a>'s
-    <a class=external data-anolis-spec=dom href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-tree-parent span="" title=concept-tree-parent>parent</a>.
+    <a class=external data-anolis-spec=dom href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-tree-parent title=concept-tree-parent>parent</a>.
 </ol>
 
 </div>
@@ -649,7 +649,7 @@ method must run these steps:
       <dd>
         <p><a class=external data-anolis-spec=dom href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-node-insert title=concept-node-insert>Insert</a>
         <var title="">fragment</var> into the <a href=#context-object>context object</a>'s
-        <a class=external data-anolis-spec=dom href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-tree-parent span="" title=concept-tree-parent>parent</a>
+        <a class=external data-anolis-spec=dom href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-tree-parent title=concept-tree-parent>parent</a>
         before the <a href=#context-object>context object</a>.
 
       <dt>If <var title="">position</var> is an

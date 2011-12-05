@@ -485,7 +485,7 @@ string).
   <li>
     <p>Let <var title>fragment</var> be the result of invoking the
     <span title=concept-parse-fragment>fragment parsing algorithm</span> with
-    the given value as <var title>markup</var>, and <var title>parent</var> as
+    the new value as <var title>markup</var>, and <var title>parent</var> as
     the <var title>context element</var>.
 
     <p>If this raised an exception, then abort these steps.
@@ -494,7 +494,7 @@ string).
     <p><span data-anolis-spec=dom title=concept-node-replace>Replace</span>
     the <span>context object</span> with <var title>fragment</var> within
     the <span>context object</span>'s
-    <span span data-anolis-spec=dom title=concept-tree-parent>parent</span>.
+    <span data-anolis-spec=dom title=concept-tree-parent>parent</span>.
 </ol>
 
 </div>
@@ -628,7 +628,7 @@ method must run these steps:
       <dd>
         <p><span data-anolis-spec=dom title=concept-node-insert>Insert</span>
         <var title>fragment</var> into the <span>context object</span>'s
-        <span span data-anolis-spec=dom title=concept-tree-parent>parent</span>
+        <span data-anolis-spec=dom title=concept-tree-parent>parent</span>
         before the <span>context object</span>.
 
       <dt>If <var title>position</var> is an

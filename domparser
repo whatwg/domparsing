@@ -89,7 +89,7 @@ not appear in all uppercase letters in this specification. <a data-anolis-ref=""
 
 <p>Requirements phrased in the imperative as part of algorithms
 (such as "strip any leading space characters" or "return false and
-abort these steps") are to be interpreted with the meaning of the
+terminate these steps") are to be interpreted with the meaning of the
 key word ("must", "should", "may", etc) used in introducing the
 algorithm.</p>
 
@@ -181,7 +181,7 @@ arguments are a <var title="">markup</var> string and a
     element.
 
   <li>
-    <p>If this raised an exception, then abort these steps.
+    <p>If this threw an exception, then terminate these steps.
 
   <li>
     <p>Let <var title="">new children</var> be the nodes returned.
@@ -404,7 +404,7 @@ must return the result of running the
 is an <a class=external data-anolis-spec=dom href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#xml-document>XML document</a>, and the attribute must
 return the result of running the
 <a class=external data-anolis-spec=html href=http://www.whatwg.org/specs/web-apps/current-work/multipage/the-xhtml-syntax.html#xml-fragment-serialization-algorithm>XML fragment serialization algorithm</a> on the
-<a href=#context-object>context object</a> instead (this might raise an
+<a href=#context-object>context object</a> instead (this might throw an
 exception instead of returning a string).
 
 <p>On setting, these steps must be run:
@@ -416,7 +416,7 @@ exception instead of returning a string).
   the new value as <var title="">markup</var>, and the
   <a href=#context-object>context object</a> as the <var title="">context element</var>.
 
-  <p>If this raised an exception, then abort these steps.
+  <p>If this threw an exception, then terminate these steps.
 
  <li><p><a class=external data-anolis-spec=dom href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-node-replace-all title=concept-node-replace-all>Replace all</a>
  with <var title="">fragment</var> within the <a href=#context-object>context object</a>.
@@ -466,7 +466,7 @@ fictional node whose only child is <a href=#context-object>context object</a>; o
 is an <a class=external data-anolis-spec=dom href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#xml-document>XML document</a>, and the attribute must
 return the result of running the
 <a class=external data-anolis-spec=html href=http://www.whatwg.org/specs/web-apps/current-work/multipage/the-xhtml-syntax.html#xml-fragment-serialization-algorithm>XML fragment serialization algorithm</a> on that
-fictional node instead (this might raise an exception instead of returning a
+fictional node instead (this might throw an exception instead of returning a
 string).
 
 <p>On setting, the following steps must be run:
@@ -477,7 +477,7 @@ string).
     <a class=external data-anolis-spec=dom href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-tree-parent title=concept-tree-parent>parent</a>.
 
   <li>
-    <p>If <var title="">parent</var> is null, abort these steps. There would be no
+    <p>If <var title="">parent</var> is null, terminate these steps. There would be no
     way to obtain a reference to the nodes created even if the remaining steps
     were run.
 
@@ -485,7 +485,7 @@ string).
     <p>If <var title="">parent</var> is a
     <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#document><code class=external data-anolis-spec=dom>Document</code></a>, throw a
     <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#dom-domexception-no_modification_allowed_err><code class=external data-anolis-spec=dom title=dom-DOMException-NO_MODIFICATION_ALLOWED_ERR>NO_MODIFICATION_ALLOWED_ERR</code></a>
-    exception and abort these steps.
+    exception and terminate these steps.
 
   <li>
     <p>If <var title="">parent</var> is a
@@ -509,7 +509,7 @@ string).
     the new value as <var title="">markup</var>, and <var title="">parent</var> as
     the <var title="">context element</var>.
 
-    <p>If this raised an exception, then abort these steps.
+    <p>If this threw an exception, then terminate these steps.
 
   <li>
     <p><a class=external data-anolis-spec=dom href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-node-replace title=concept-node-replace>Replace</a>
@@ -582,7 +582,7 @@ method must run these steps:
         <a class=external data-anolis-spec=dom href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-document title=concept-document>document</a>, throw
         a
         <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#dom-domexception-no_modification_allowed_err><code class=external data-anolis-spec=dom title=dom-DOMException-NO_MODIFICATION_ALLOWED_ERR>NO_MODIFICATION_ALLOWED_ERR</code></a>
-        and abort these steps.
+        and terminate these steps.
 
       <dt>If <var title="">position</var> is an
       <a class=external data-anolis-spec=dom href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#ascii-case-insensitive>ASCII case-insensitive</a> match for
@@ -637,7 +637,7 @@ method must run these steps:
     <var title="">text</var> as <var title="">markup</var>, and
     <var title="">parent</var> as the <var title="">context element</var>.
 
-    <p>If this raised an exception, then abort these steps.
+    <p>If this threw an exception, then terminate these steps.
 
   <li>
     <p>Use the first matching item from this list:
@@ -802,7 +802,7 @@ method must run these steps:
     <var title="">fragment</var> as <var title="">markup</var>, and
     <var title="">element</var> as the <var title="">context element</var>.
 
-    <p>If this raised an exception, then abort these steps.
+    <p>If this threw an exception, then terminate these steps.
 
   <li>
     <p>Unmark all scripts in <var title="">fragment node</var> as

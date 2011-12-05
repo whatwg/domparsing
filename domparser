@@ -19,7 +19,7 @@
 <body class=draft>
 <div class=head id=head>
 <h1>DOM Parsing and Serialization</h1>
-<h2 class="no-num no-toc" id=work-in-progress-&mdash;-last-update-30-october-2011>Work in Progress &mdash; Last Update 30 October 2011</h2>
+<h2 class="no-num no-toc" id=work-in-progress-&mdash;-last-update-5-december-2011>Work in Progress &mdash; Last Update 5 December 2011</h2>
 <dl>
  <dt>Editor
  <dd>Ms2ger &lt;ms2ger@gmail.com&gt;
@@ -407,26 +407,19 @@ return the result of running the
 <a href=#context-object>context object</a> instead (this might raise an
 exception instead of returning a string).
 
-<p>On setting, the following steps must be run:
+<p>On setting, these steps must be run:
 
 <ol>
-  <li>
-    <p>Let <var title="">fragment</var> be the result of invoking the
-    <a href=#concept-parse-fragment title=concept-parse-fragment>fragment parsing algorithm</a> with
-    the given value as <var title="">markup</var>, and the
-    <a href=#context-object>context object</a> as the <var title="">context element</var>.
+ <li>
+  <p>Let <var title="">fragment</var> be the result of invoking the
+  <a href=#concept-parse-fragment title=concept-parse-fragment>fragment parsing algorithm</a> with
+  the new value as <var title="">markup</var>, and the
+  <a href=#context-object>context object</a> as the <var title="">context element</var>.
 
-    <p>If this raised an exception, then abort these steps.
+  <p>If this raised an exception, then abort these steps.
 
-  <li>
-    <p>While the <a href=#context-object>context object</a> has
-    <a class=external data-anolis-spec=dom href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-tree-child title=concept-tree-child>children</a>,
-    <a class=external data-anolis-spec=dom href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-node-remove title=concept-node-remove>remove</a> its
-    <a class=external data-anolis-spec=dom href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-tree-first-child title=concept-tree-first-child>first child</a>.
-
-  <li>
-    <p><a class=external data-anolis-spec=dom href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-node-append title=concept-node-append>Append</a>
-    <var title="">fragment</var> to the <a href=#context-object>context object</a>.
+ <li><p><a class=external data-anolis-spec=dom href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-node-replace-all title=concept-node-replace-all>Replace all</a>
+ with <var title="">fragment</var> within the <a href=#context-object>context object</a>.
 </ol>
 
 </div>

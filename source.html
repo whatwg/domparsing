@@ -386,26 +386,19 @@ return the result of running the
 <span>context object</span> instead (this might raise an
 exception instead of returning a string).
 
-<p>On setting, the following steps must be run:
+<p>On setting, these steps must be run:
 
 <ol>
-  <li>
-    <p>Let <var title>fragment</var> be the result of invoking the
-    <span title=concept-parse-fragment>fragment parsing algorithm</span> with
-    the given value as <var title>markup</var>, and the
-    <span>context object</span> as the <var title>context element</var>.
+ <li>
+  <p>Let <var title>fragment</var> be the result of invoking the
+  <span title=concept-parse-fragment>fragment parsing algorithm</span> with
+  the new value as <var title>markup</var>, and the
+  <span>context object</span> as the <var title>context element</var>.
 
-    <p>If this raised an exception, then abort these steps.
+  <p>If this raised an exception, then abort these steps.
 
-  <li>
-    <p>While the <span>context object</span> has
-    <span data-anolis-spec=dom title=concept-tree-child>children</span>,
-    <span data-anolis-spec=dom title=concept-node-remove>remove</span> its
-    <span data-anolis-spec=dom title=concept-tree-first-child>first child</span>.
-
-  <li>
-    <p><span data-anolis-spec=dom title=concept-node-append>Append</span>
-    <var title>fragment</var> to the <span>context object</span>.
+ <li><p><span data-anolis-spec=dom title=concept-node-replace-all>Replace all</span>
+ with <var title>fragment</var> within the <span>context object</span>.
 </ol>
 
 </div>

@@ -49,10 +49,7 @@ var content = document.getElementById("content");
 testPositions(content); // without next sibling
 testPositions(content); // test again when there's next sibling
 
-test(function() {
-  assert_throws("SYNTAX_ERR", function() {content.insertAdjacentHTML("bar", "foo")});
-  assert_throws("SYNTAX_ERR", function() {content.insertAdjacentHTML("beforebegİn", "foo")});
-});
+testThrowingPosition(content);
 
 var parent = document.createElement("div");
 var child = document.createElement("div");

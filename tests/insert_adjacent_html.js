@@ -1,3 +1,14 @@
+function testThrowingPosition(element) {
+  test(function() {
+    assert_throws(new TypeError(),
+      function() { element.insertAdjacentHTML("bar", "foo") }
+    );
+    assert_throws(new TypeError(),
+      function() { element.insertAdjacentHTML("beforebegİn", "foo") }
+    );
+  });
+}
+
 function testThrowingNoParent(element, desc) {
   test(function() {
     assert_throws("NO_MODIFICATION_ALLOWED_ERR",
@@ -30,4 +41,3 @@ function testThrowingNoParent(element, desc) {
     );
   }, "When the parent node is " + desc + ", insertAdjacentHTML should throw for beforebegin and afterend (elements)");
 }
-

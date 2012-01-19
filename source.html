@@ -301,6 +301,17 @@ method must run these steps:
  <li><p>Return <var title>document</var>.
 </ol>
 
+<p>In either case, the returned
+<span title=concept-document data-anolis-spec=dom>document</span>'s
+<span title=concept-document-content-type data-anolis-spec=dom>content type</span>
+must be the <var title>type</var> argument, and its
+<span title=concept-document-url data-anolis-spec=dom>URL</span> must be null.
+
+<p class=note>The returned
+<span title=concept-document data-anolis-spec=dom>document</span>'s
+<span title=concept-document-encoding data-anolis-spec=dom>encoding</span> is
+the default, UTF-8.
+
 
 
 <h2>The <code>XMLSerializer</code> interface</h2>

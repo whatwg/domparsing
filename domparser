@@ -19,7 +19,7 @@
 <body class=draft>
 <div class=head id=head>
 <h1>DOM Parsing and Serialization</h1>
-<h2 class="no-num no-toc" id=work-in-progress-&mdash;-last-update-19-january-2012>Work in Progress &mdash; Last Update 19 January 2012</h2>
+<h2 class="no-num no-toc" id=work-in-progress-&mdash;-last-update-3-february-2012>Work in Progress &mdash; Last Update 3 February 2012</h2>
 <dl>
  <dt>Editor
  <dd>Ms2ger &lt;ms2ger@gmail.com&gt;
@@ -274,9 +274,19 @@ must run the appropriate steps, depending on <var title="">node</var>'s interfac
 
 
 <h2 id=the-domparser-interface><span class=secno>4 </span>The <a href=#domparser><code>DOMParser</code></a> interface</h2>
-<pre class=idl>[<a href=#dom-domparser title=dom-DOMParser>Constructor</a>]
+<pre class=idl>enum <dfn id=supportedtype>SupportedType</dfn> {
+  "text/xml",
+  "application/xml",
+  "application/xhtml+xml",
+  "image/svg+xml"
+};
+
+[<a href=#dom-domparser title=dom-DOMParser>Constructor</a>]
 interface <dfn id=domparser>DOMParser</dfn> {
-  <a class=external data-anolis-spec=dom href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#document>Document</a> <a href=#dom-domparser-parsefromstring title=dom-DOMParser-parseFromString>parseFromString</a>(DOMString <var title="">str</var>, DOMString <var title="">type</var>);
+  <a class=external data-anolis-spec=dom href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#document>Document</a> <!--
+  --><a href=#dom-domparser-parsefromstring title=dom-DOMParser-parseFromString>parseFromString</a>(<!--
+  -->DOMString <var title="">str</var>, <!--
+  --><a href=#supportedtype>SupportedType</a> <var title="">type</var>);
 };</pre>
 
 <p>The <dfn id=dom-domparser title=dom-DOMParser><code>DOMParser()</code></dfn> constructor
@@ -286,13 +296,6 @@ must return a new <a href=#domparser><code>DOMParser</code></a> object.
 <dfn id=dom-domparser-parsefromstring title=dom-DOMParser-parseFromString><code>parseFromString(<var title="">str</var>, <var title="">type</var>)</code></dfn>
 method must run these steps:
 <ol>
- <li><p>If <var title="">type</var> is not "<code title="">text/xml</code>",
- "<code title="">application/xml</code>",
- "<code title="">application/xhtml+xml</code>" or
- "<code title="">image/svg+xml</code>", throw a
- <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#dom-domexception-not_supported_err><code class=external data-anolis-spec=dom title=dom-DOMException-NOT_SUPPORTED_ERR>NOT_SUPPORTED_ERR</code></a>
- exception and terminate these steps.
-
  <li><p>Parse <var title="">str</var> with a namespace-enabled
  <a class=external data-anolis-spec=html href=http://www.whatwg.org/specs/web-apps/current-work/multipage/the-xhtml-syntax.html#xml-parser>XML parser</a>.
 

@@ -254,6 +254,7 @@ must run the appropriate steps, depending on <var title>node</var>'s interface:
 
 <h2>The <code>DOMParser</code> interface</h2>
 <pre class=idl>enum <dfn>SupportedType</dfn> {
+  "text/html",
   "text/xml",
   "application/xml",
   "application/xhtml+xml",
@@ -273,38 +274,63 @@ must return a new <code>DOMParser</code> object.
 
 <p>The
 <dfn title=dom-DOMParser-parseFromString><code>parseFromString(<var title>str</var>, <var title>type</var>)</code></dfn>
-method must run these steps:
-<ol>
- <li><p>Parse <var title>str</var> with a namespace-enabled
- <span data-anolis-spec=html>XML parser</span>.
+method must run these steps, depending on <var title>type</var>:
+<dl class=switch>
+  <dt>"<code title>text/html</code>"
+  <dd>
+    <p>Parse <var title>str</var> with an
+    <span data-anolis-spec=html>HTML parser</span>, and return the newly
+    created <span title=concept-document data-anolis-spec=dom>document</span>.
 
- <li><p>If the previous step didn't return an error, return the newly
- created <span title=concept-document data-anolis-spec=dom>document</span>
- and terminate these steps.
+    <p>The <span data-anolis-spec=html>scripting flag</span> must be set to
+    "disabled".
 
- <li><p>Let <var title>document</var> be a newly-created
- <code data-anolis-spec=dom>XMLDocument</code>.
+    <p class=note><code data-anolis-spec=html>meta</code> elements are not
+    taken into account for the encoding used, as a Unicode stream is passed into
+    the parser.
 
- <li>
-  <p>Let <var title>root</var> be a new
-  <code data-anolis-spec=dom>Element</code>, with its
-  <span title=concept-element-local-name data-anolis-spec=dom>local name</span>
-  set to "<code title>parsererror</code>" and its
-  <span title=concept-element-namespace data-anolis-spec=dom>namespace</span>
-  set to
-  "<code title>http://www.mozilla.org/newlayout/xml/parsererror.xml</code>".
+    <p class=note><code data-anolis-spec=html>script</code> elements get marked
+    unexecutable and the contents of <code data-anolis-spec=html>noscript</code>
+    get parsed as markup.
 
-  <p>At this point user agents may
-  <span data-anolis-spec=dom title=concept-node-append>append</span> nodes
-  to <var title>root</var>, for example to describe the nature of the error.
+  <dt>"<code title>text/xml</code>"
+  <dt>"<code title>application/xml</code>"
+  <dt>"<code title>application/xhtml+xml</code>"
+  <dt>"<code title>image/svg+xml</code>"
+  <dd>
+    <ol>
+      <li><p>Parse <var title>str</var> with a namespace-enabled
+      <span data-anolis-spec=html>XML parser</span>.
 
- <li><p><span data-anolis-spec=dom title=concept-node-append>Append</span>
- <var title>root</var> to <var title>document</var>.
+      <li><p>If the previous step didn't return an error, return the newly
+      created <span title=concept-document data-anolis-spec=dom>document</span>
+      and terminate these steps.
 
- <li><p>Return <var title>document</var>.
-</ol>
+      <li><p>Let <var title>document</var> be a newly-created
+      <code data-anolis-spec=dom>XMLDocument</code>.
 
-<p>In either case, the returned
+      <li>
+        <p>Let <var title>root</var> be a new
+        <code data-anolis-spec=dom>Element</code>, with its
+        <span title=concept-element-local-name data-anolis-spec=dom>local name</span>
+        set to "<code title>parsererror</code>" and its
+        <span title=concept-element-namespace data-anolis-spec=dom>namespace</span>
+        set to
+        "<code title>http://www.mozilla.org/newlayout/xml/parsererror.xml</code>".
+
+        <p>At this point user agents may
+        <span data-anolis-spec=dom title=concept-node-append>append</span> nodes
+        to <var title>root</var>, for example to describe the nature of the
+        error.
+
+      <li><p><span data-anolis-spec=dom title=concept-node-append>Append</span>
+      <var title>root</var> to <var title>document</var>.
+
+      <li><p>Return <var title>document</var>.
+    </ol>
+</dl>
+
+<p>In any case, the returned
 <span title=concept-document data-anolis-spec=dom>document</span>'s
 <span title=concept-document-content-type data-anolis-spec=dom>content type</span>
 must be the <var title>type</var> argument, and its

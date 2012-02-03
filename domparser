@@ -275,6 +275,7 @@ must run the appropriate steps, depending on <var title="">node</var>'s interfac
 
 <h2 id=the-domparser-interface><span class=secno>4 </span>The <a href=#domparser><code>DOMParser</code></a> interface</h2>
 <pre class=idl>enum <dfn id=supportedtype>SupportedType</dfn> {
+  "text/html",
   "text/xml",
   "application/xml",
   "application/xhtml+xml",
@@ -294,38 +295,63 @@ must return a new <a href=#domparser><code>DOMParser</code></a> object.
 
 <p>The
 <dfn id=dom-domparser-parsefromstring title=dom-DOMParser-parseFromString><code>parseFromString(<var title="">str</var>, <var title="">type</var>)</code></dfn>
-method must run these steps:
-<ol>
- <li><p>Parse <var title="">str</var> with a namespace-enabled
- <a class=external data-anolis-spec=html href=http://www.whatwg.org/specs/web-apps/current-work/multipage/the-xhtml-syntax.html#xml-parser>XML parser</a>.
+method must run these steps, depending on <var title="">type</var>:
+<dl class=switch>
+  <dt>"<code title="">text/html</code>"
+  <dd>
+    <p>Parse <var title="">str</var> with an
+    <a class=external data-anolis-spec=html href=http://www.whatwg.org/specs/web-apps/current-work/multipage/parsing.html#html-parser>HTML parser</a>, and return the newly
+    created <a class=external data-anolis-spec=dom href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-document title=concept-document>document</a>.
 
- <li><p>If the previous step didn't return an error, return the newly
- created <a class=external data-anolis-spec=dom href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-document title=concept-document>document</a>
- and terminate these steps.
+    <p>The <a class=external data-anolis-spec=html href=http://www.whatwg.org/specs/web-apps/current-work/multipage/parsing.html#scripting-flag>scripting flag</a> must be set to
+    "disabled".
 
- <li><p>Let <var title="">document</var> be a newly-created
- <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#xmldocument><code class=external data-anolis-spec=dom>XMLDocument</code></a>.
+    <p class=note><a href=http://www.whatwg.org/specs/web-apps/current-work/multipage/semantics.html#the-meta-element><code class=external data-anolis-spec=html>meta</code></a> elements are not
+    taken into account for the encoding used, as a Unicode stream is passed into
+    the parser.
 
- <li>
-  <p>Let <var title="">root</var> be a new
-  <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#element><code class=external data-anolis-spec=dom>Element</code></a>, with its
-  <a class=external data-anolis-spec=dom href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-element-local-name title=concept-element-local-name>local name</a>
-  set to "<code title="">parsererror</code>" and its
-  <a class=external data-anolis-spec=dom href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-element-namespace title=concept-element-namespace>namespace</a>
-  set to
-  "<code title="">http://www.mozilla.org/newlayout/xml/parsererror.xml</code>".
+    <p class=note><a href=http://www.whatwg.org/specs/web-apps/current-work/multipage/scripting-1.html#the-script-element><code class=external data-anolis-spec=html>script</code></a> elements get marked
+    unexecutable and the contents of <a href=http://www.whatwg.org/specs/web-apps/current-work/multipage/scripting-1.html#the-noscript-element><code class=external data-anolis-spec=html>noscript</code></a>
+    get parsed as markup.
 
-  <p>At this point user agents may
-  <a class=external data-anolis-spec=dom href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-node-append title=concept-node-append>append</a> nodes
-  to <var title="">root</var>, for example to describe the nature of the error.
+  <dt>"<code title="">text/xml</code>"
+  <dt>"<code title="">application/xml</code>"
+  <dt>"<code title="">application/xhtml+xml</code>"
+  <dt>"<code title="">image/svg+xml</code>"
+  <dd>
+    <ol>
+      <li><p>Parse <var title="">str</var> with a namespace-enabled
+      <a class=external data-anolis-spec=html href=http://www.whatwg.org/specs/web-apps/current-work/multipage/the-xhtml-syntax.html#xml-parser>XML parser</a>.
 
- <li><p><a class=external data-anolis-spec=dom href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-node-append title=concept-node-append>Append</a>
- <var title="">root</var> to <var title="">document</var>.
+      <li><p>If the previous step didn't return an error, return the newly
+      created <a class=external data-anolis-spec=dom href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-document title=concept-document>document</a>
+      and terminate these steps.
 
- <li><p>Return <var title="">document</var>.
-</ol>
+      <li><p>Let <var title="">document</var> be a newly-created
+      <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#xmldocument><code class=external data-anolis-spec=dom>XMLDocument</code></a>.
 
-<p>In either case, the returned
+      <li>
+        <p>Let <var title="">root</var> be a new
+        <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#element><code class=external data-anolis-spec=dom>Element</code></a>, with its
+        <a class=external data-anolis-spec=dom href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-element-local-name title=concept-element-local-name>local name</a>
+        set to "<code title="">parsererror</code>" and its
+        <a class=external data-anolis-spec=dom href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-element-namespace title=concept-element-namespace>namespace</a>
+        set to
+        "<code title="">http://www.mozilla.org/newlayout/xml/parsererror.xml</code>".
+
+        <p>At this point user agents may
+        <a class=external data-anolis-spec=dom href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-node-append title=concept-node-append>append</a> nodes
+        to <var title="">root</var>, for example to describe the nature of the
+        error.
+
+      <li><p><a class=external data-anolis-spec=dom href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-node-append title=concept-node-append>Append</a>
+      <var title="">root</var> to <var title="">document</var>.
+
+      <li><p>Return <var title="">document</var>.
+    </ol>
+</dl>
+
+<p>In any case, the returned
 <a class=external data-anolis-spec=dom href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-document title=concept-document>document</a>'s
 <a class=external data-anolis-spec=dom href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-document-content-type title=concept-document-content-type>content type</a>
 must be the <var title="">type</var> argument, and its

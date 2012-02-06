@@ -369,6 +369,7 @@ must be the <var title="">type</var> argument.
 <a class=external data-anolis-spec=dom href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-document-url title=concept-document-url>URL</a> of the returned
 <a class=external data-anolis-spec=dom href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-document title=concept-document>document</a> should be.
 
+<p>Results for a <a href=http://software.hixie.ch/utilities/js/live-dom-viewer/saved/1322>test case</a>:
 <table>
 <thead>
   <tr>

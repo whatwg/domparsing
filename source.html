@@ -341,8 +341,28 @@ method must run these steps, depending on <var title>type</var>:
 <p>In any case, the returned
 <span title=concept-document data-anolis-spec=dom>document</span>'s
 <span title=concept-document-content-type data-anolis-spec=dom>content type</span>
-must be the <var title>type</var> argument, and its
-<span title=concept-document-url data-anolis-spec=dom>URL</span> must be null.
+must be the <var title>type</var> argument.
+
+<div class=XXX>
+<p>It is currently unclear what the
+<span title=concept-document-url data-anolis-spec=dom>URL</span> of the returned
+<span title=concept-document data-anolis-spec=dom>document</span> should be.
+
+<table>
+<thead>
+  <tr>
+    <th><th>Gecko<th>Opera<th>Chrome
+<tbody>
+  <tr>
+    <th>document.location <td colspan=3>null
+  <tr>
+    <th>document.URL <td>unsupported <td>unsupported <td>""
+  <tr>
+    <th>document.documentURI <td>Page URL <td>null <td>null
+</table>
+
+<p>Anne van Kesteren suggests using the default, about:blank.
+</div>
 
 <p class=note>The returned
 <span title=concept-document data-anolis-spec=dom>document</span>'s

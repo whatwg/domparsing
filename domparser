@@ -362,8 +362,28 @@ method must run these steps, depending on <var title="">type</var>:
 <p>In any case, the returned
 <a class=external data-anolis-spec=dom href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-document title=concept-document>document</a>'s
 <a class=external data-anolis-spec=dom href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-document-content-type title=concept-document-content-type>content type</a>
-must be the <var title="">type</var> argument, and its
-<a class=external data-anolis-spec=dom href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-document-url title=concept-document-url>URL</a> must be null.
+must be the <var title="">type</var> argument.
+
+<div class=XXX>
+<p>It is currently unclear what the
+<a class=external data-anolis-spec=dom href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-document-url title=concept-document-url>URL</a> of the returned
+<a class=external data-anolis-spec=dom href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-document title=concept-document>document</a> should be.
+
+<table>
+<thead>
+  <tr>
+    <th><th>Gecko<th>Opera<th>Chrome
+<tbody>
+  <tr>
+    <th>document.location <td colspan=3>null
+  <tr>
+    <th>document.URL <td>unsupported <td>unsupported <td>""
+  <tr>
+    <th>document.documentURI <td>Page URL <td>null <td>null
+</table>
+
+<p>Anne van Kesteren suggests using the default, about:blank.
+</div>
 
 <p class=note>The returned
 <a class=external data-anolis-spec=dom href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-document title=concept-document>document</a>'s

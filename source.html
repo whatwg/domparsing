@@ -195,6 +195,43 @@ arguments are a <var title>markup</var> string and a
 </ol>
 
 <h3>Serializing</h3>
+<p>To <dfn title=concept-serialize>serialize</dfn> a
+<code data-anolis-spec=dom>Node</code> <var title>node</var>, the user agent
+must run the following steps:
+
+<ol>
+  <li>Let <var title>document</var> be <var title>node</var>'s
+  <span data-anolis-spec=dom title=concept-node-document>node document</span>.
+
+  <li>If <var title>document</var> is an
+  <span data-anolis-spec=dom>HTML document</span>, return an
+  <span title=concept-serialize-html>HTML serialization</span> of
+  <var title>node</var>.
+
+  <li>Otherwise, <var title>document</var> is an
+  <span data-anolis-spec=dom>XML document</span>. Return an
+  <span title=concept-serialize-xml>XML serialization</span> of
+  <var title>node</var>.
+</ol>
+
+<p>To <dfn title=concept-serialize-html>produce an HTML serialization</dfn> of a
+<code data-anolis-spec=dom>Node</code> <var title>node</var>, the user agent
+must run the appropriate steps, depending on <var title>node</var>'s interface:
+<dl class=switch>
+  <dt><code data-anolis-spec=dom>Element</code>
+  <dt><code data-anolis-spec=dom>Document</code>
+  <dt><code data-anolis-spec=dom>DocumentFragment</code>
+  <dd><p>Run the
+  <span data-anolis-spec=html>HTML fragment serialization algorithm</span> on
+  <var title>node</var>. Return the returned string.
+
+  <dt><code data-anolis-spec=dom>Comment</code>
+  <dt><code data-anolis-spec=dom>Text</code>
+  <dt><code data-anolis-spec=dom>DocumentType</code>
+  <dt><code data-anolis-spec=dom>ProcessingInstruction</code>
+  <dd class=XXX>You tell me.
+</dl>
+
 <p>To <dfn title=concept-serialize-xml>produce an XML serialization</dfn> of a
 <code data-anolis-spec=dom>Node</code> <var title>node</var>, the user agent
 must run the appropriate steps, depending on <var title>node</var>'s interface:

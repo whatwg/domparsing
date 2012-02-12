@@ -19,7 +19,7 @@
 <body class=draft>
 <div class=head id=head>
 <h1>DOM Parsing and Serialization</h1>
-<h2 class="no-num no-toc" id=work-in-progress-&mdash;-last-update-6-february-2012>Work in Progress &mdash; Last Update 6 February 2012</h2>
+<h2 class="no-num no-toc" id=work-in-progress-&mdash;-last-update-12-february-2012>Work in Progress &mdash; Last Update 12 February 2012</h2>
 <dl>
   <dt>This Version:
   <dd><a href=http://html5.org/specs/dom-parsing.html>http://html5.org/specs/dom-parsing.html</a>
@@ -216,6 +216,43 @@ arguments are a <var title="">markup</var> string and a
 </ol>
 
 <h3 id=serializing><span class=secno>3.2 </span>Serializing</h3>
+<p>To <dfn id=concept-serialize title=concept-serialize>serialize</dfn> a
+<a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#node><code class=external data-anolis-spec=dom>Node</code></a> <var title="">node</var>, the user agent
+must run the following steps:
+
+<ol>
+  <li>Let <var title="">document</var> be <var title="">node</var>'s
+  <a class=external data-anolis-spec=dom href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-node-document title=concept-node-document>node document</a>.
+
+  <li>If <var title="">document</var> is an
+  <a class=external data-anolis-spec=dom href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#html-document>HTML document</a>, return an
+  <a href=#concept-serialize-html title=concept-serialize-html>HTML serialization</a> of
+  <var title="">node</var>.
+
+  <li>Otherwise, <var title="">document</var> is an
+  <a class=external data-anolis-spec=dom href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#xml-document>XML document</a>. Return an
+  <a href=#concept-serialize-xml title=concept-serialize-xml>XML serialization</a> of
+  <var title="">node</var>.
+</ol>
+
+<p>To <dfn id=concept-serialize-html title=concept-serialize-html>produce an HTML serialization</dfn> of a
+<a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#node><code class=external data-anolis-spec=dom>Node</code></a> <var title="">node</var>, the user agent
+must run the appropriate steps, depending on <var title="">node</var>'s interface:
+<dl class=switch>
+  <dt><a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#element><code class=external data-anolis-spec=dom>Element</code></a>
+  <dt><a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#document><code class=external data-anolis-spec=dom>Document</code></a>
+  <dt><a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#documentfragment><code class=external data-anolis-spec=dom>DocumentFragment</code></a>
+  <dd><p>Run the
+  <a class=external data-anolis-spec=html href=http://www.whatwg.org/specs/web-apps/current-work/multipage/the-end.html#html-fragment-serialization-algorithm>HTML fragment serialization algorithm</a> on
+  <var title="">node</var>. Return the returned string.
+
+  <dt><a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#comment><code class=external data-anolis-spec=dom>Comment</code></a>
+  <dt><a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#text><code class=external data-anolis-spec=dom>Text</code></a>
+  <dt><a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#documenttype><code class=external data-anolis-spec=dom>DocumentType</code></a>
+  <dt><a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#processinginstruction><code class=external data-anolis-spec=dom>ProcessingInstruction</code></a>
+  <dd class=XXX>You tell me.
+</dl>
+
 <p>To <dfn id=concept-serialize-xml title=concept-serialize-xml>produce an XML serialization</dfn> of a
 <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#node><code class=external data-anolis-spec=dom>Node</code></a> <var title="">node</var>, the user agent
 must run the appropriate steps, depending on <var title="">node</var>'s interface:

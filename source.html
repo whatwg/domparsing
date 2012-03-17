@@ -237,6 +237,28 @@ must run the appropriate steps, depending on <var title>node</var>'s interface:
 must run the appropriate steps, depending on <var title>node</var>'s interface:
 <dl class=switch>
   <dt><code data-anolis-spec=dom>Element</code>
+  <dd>
+    <p>Return the concatenation of the following strings:
+    <ul>
+      <li>"<code title>&lt;</code>" (U+003C LESS-THAN SIGN);
+      <li>the value of <var title>node</var>'s
+      <code title=dom-Element-tagName data-anolis-spec=dom>tagName</code>
+      attribute;
+      <p class=XXX>escaping / throwing
+      <li>the <span title=concept-serialize-xml-attributes>XML serialization of
+      <var title>node</var>'s attributes</span>;
+      <li>"<code title>&gt;</code>" (U+003E GREATER-THAN SIGN);
+      <li>the <span title=concept-serialize-xml>serialization</span> of
+      <var title>node</var>'s
+      <span title=concept-tree-child data-anolis-spec=dom>children</span>, in
+      order;
+      <li>"<code title>&lt;/</code>" (U+003C LESS-THAN SIGN, U+002F SOLIDUS);
+      <li>the value of <var title>node</var>'s
+      <code title=dom-Element-tagName data-anolis-spec=dom>tagName</code>
+      attribute;
+      <li>"<code title>&gt;</code>" (U+003E GREATER-THAN SIGN).
+    </ul>
+
   <dt><code data-anolis-spec=dom>Document</code>
   <dd><p>Run the
   <span data-anolis-spec=html>XML fragment serialization algorithm</span> on
@@ -294,6 +316,31 @@ must run the appropriate steps, depending on <var title>node</var>'s interface:
   <dt><code data-anolis-spec=dom>ProcessingInstruction</code>
   <dd class=XXX>You tell me.
 </dl>
+
+<p>The <dfn title=concept-serialize-xml-attributes>XML serialization of the
+attributes</dfn> of an
+<span title=concept-element data-anolis-spec=dom>element</span>
+<var title>element</var> is the result of the following algorithm:
+<ol>
+  <li>Let <var title>result</var> be the empty string.
+  <li>
+    <p>For each
+    <span title=concept-attribute data-anolis-spec=dom>attribute</span>
+    <var title>attr</var> in <var title>element</var>
+    <span title=concept-element-attribute data-anolis-spec=dom>attributes</span>,
+    in order, append the following strings:
+    <ol>
+      <li>"<code title> </code>" (U+0020 SPACE);
+      <li><var title>attr</var>'s
+      <span title=concept-attribute-name data-anolis-spec=dom>name</span>;
+      <p class=XXX>escaping / throwing
+      <li>"<code title>="</code>" (U+003D EQUALS SIGN, U+0022 QUOTATION MARK);
+      <li><var title>attr</var>'s
+      <span title=concept-attribute-value data-anolis-spec=dom>value</span>;
+      <p class=XXX>escaping / throwing
+      <li>"<code title>"</code>" (U+0022 QUOTATION MARK).
+    </ol>
+</ol>
 
 
 

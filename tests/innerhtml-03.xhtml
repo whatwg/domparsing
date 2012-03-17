@@ -8,7 +8,6 @@
 <script src="/resources/testharnessreport.js"></script>
 </head>
 <body>
-<p>Note: this test relies on the user agent using the '"' character to quote attributes, which is not currently required by the specification.</p>
 <div id="log"></div>
 <script><![CDATA[
 test(function() {
@@ -33,6 +32,11 @@ test(function() {
   var el = document.createElement("div");
   el.appendChild(document.createElement("br"));
   assert_equals(el.innerHTML, "<br xmlns=\"http://www.w3.org/1999/xhtml\" />");
+})
+test(function() {
+  var el = document.createElement("div");
+  el.appendChild(document.createElementNS("http://www.w3.org/1999/xhtml", "html:br"));
+  assert_equals(el.innerHTML, "<html:br xmlns:html=\"http://www.w3.org/1999/xhtml\" />");
 })
 ]]></script>
 </body>

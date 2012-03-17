@@ -349,7 +349,7 @@ attributes</dfn> of an
     <a class=external data-anolis-spec=dom href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-attribute title=concept-attribute>attribute</a>
     <var title="">attr</var> in <var title="">element</var>
     <a class=external data-anolis-spec=dom href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-element-attribute title=concept-element-attribute>attributes</a>,
-    in order, append the following strings:
+    in order, append the following strings to <var title="">result</var>:
     <ol>
       <li>"<code title=""> </code>" (U+0020 SPACE);
       <li><var title="">attr</var>'s
@@ -361,6 +361,7 @@ attributes</dfn> of an
       <p class=XXX>escaping / throwing
       <li>"<code title="">"</code>" (U+0022 QUOTATION MARK).
     </ol>
+  <li>Return <var title="">result</var>.
 </ol>
 
 

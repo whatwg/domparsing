@@ -19,7 +19,7 @@
 <body class=draft>
 <div class=head id=head>
 <h1>DOM Parsing and Serialization</h1>
-<h2 class="no-num no-toc" id=work-in-progress-&mdash;-last-update-17-march-2012>Work in Progress &mdash; Last Update 17 March 2012</h2>
+<h2 class="no-num no-toc" id=work-in-progress-&mdash;-last-update-3-april-2012>Work in Progress &mdash; Last Update 3 April 2012</h2>
 <dl>
   <dt>This Version:
   <dd><a href=http://html5.org/specs/dom-parsing.html>http://html5.org/specs/dom-parsing.html</a>
@@ -116,6 +116,10 @@ out of memory, or to work around platform-specific limitations.</p>
 
 <p>Unless otherwise stated, string comparisons are done in a <a class=external data-anolis-spec=dom href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#case-sensitive>case-sensitive</a> manner.
 
+<p>If an algorithm calls into another algorithm, any exception that is thrown
+by the latter (unless it is explicitly caught), must cause the former to
+terminate, and the exception to be propagated up to <em>its</em> caller.
+
 
 <h3 id=dependencies><span class=secno>1.1 </span>Dependencies</h3>
 <p>The IDL fragments in this specification must be interpreted as
@@ -187,9 +191,6 @@ arguments are a <var title="">markup</var> string and a
     the <var title="">input</var>, and <var title="">context element</var> as the
     <a href=http://www.whatwg.org/specs/web-apps/current-work/multipage/the-end.html#concept-frag-parse-context><var class=external data-anolis-spec=html title=concept-frag-parse-context>context</var></a>
     element.
-
-  <li>
-    <p>If this threw an exception, then terminate these steps.
 
   <li>
     <p>Let <var title="">new children</var> be the nodes returned.
@@ -283,8 +284,7 @@ must run the appropriate steps, depending on <var title="">node</var>'s interfac
   <dt><a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#document><code class=external data-anolis-spec=dom>Document</code></a>
   <dd><p>Run the
   <a class=external data-anolis-spec=html href=http://www.whatwg.org/specs/web-apps/current-work/multipage/the-xhtml-syntax.html#xml-fragment-serialization-algorithm>XML fragment serialization algorithm</a> on
-  <var title="">node</var>. If this threw an exception, allow that exception to
-  propagate out from this algorithm. Otherwise, return the returned string.
+  <var title="">node</var>. Return the string this produced.
 
   <dt><a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#comment><code class=external data-anolis-spec=dom>Comment</code></a>
   <dd>
@@ -577,8 +577,6 @@ exception instead of returning a string).
   the new value as <var title="">markup</var>, and the
   <a href=#context-object>context object</a> as the <var title="">context element</var>.
 
-  <p>If this threw an exception, then terminate these steps.
-
  <li><p><a class=external data-anolis-spec=dom href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-node-replace-all title=concept-node-replace-all>Replace all</a>
  with <var title="">fragment</var> within the <a href=#context-object>context object</a>.
 </ol>
@@ -669,8 +667,6 @@ string).
     <a href=#concept-parse-fragment title=concept-parse-fragment>fragment parsing algorithm</a> with
     the new value as <var title="">markup</var>, and <var title="">parent</var> as
     the <var title="">context element</var>.
-
-    <p>If this threw an exception, then terminate these steps.
 
   <li>
     <p><a class=external data-anolis-spec=dom href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-node-replace title=concept-node-replace>Replace</a>
@@ -793,8 +789,6 @@ method must run these steps:
     <a href=#concept-parse-fragment title=concept-parse-fragment>fragment parsing algorithm</a> with
     <var title="">text</var> as <var title="">markup</var>, and
     <var title="">parent</var> as the <var title="">context element</var>.
-
-    <p>If this threw an exception, then terminate these steps.
 
   <li>
     <p>Use the first matching item from this list:
@@ -959,8 +953,6 @@ method must run these steps:
     <var title="">fragment</var> as <var title="">markup</var>, and
     <var title="">element</var> as the <var title="">context element</var>.
 
-    <p>If this threw an exception, then terminate these steps.
-
   <li>
     <p>Unmark all scripts in <var title="">fragment node</var> as
     "already started".
@@ -994,7 +986,7 @@ method must run these steps:
 
 <h2 class=no-num id=acknowledgements>Acknowledgements</h2>
 <p>Thanks to
-Anne van Kesteren, Aryeh Gregor, Henri Sivonen and timeless
+Anne van Kesteren, Aryeh Gregor, Henri Sivonen, Simon Pieters and timeless
 for their useful comments.
 
 <p>Special thanks to Ian Hickson for defining the

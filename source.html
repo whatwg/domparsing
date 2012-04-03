@@ -95,6 +95,10 @@ out of memory, or to work around platform-specific limitations.</p>
 <p>Unless otherwise stated, string comparisons are done in a <span
 data-anolis-spec=dom>case-sensitive</span> manner.
 
+<p>If an algorithm calls into another algorithm, any exception that is thrown
+by the latter (unless it is explicitly caught), must cause the former to
+terminate, and the exception to be propagated up to <em>its</em> caller.
+
 
 <h3>Dependencies</h3>
 <p>The IDL fragments in this specification must be interpreted as
@@ -166,9 +170,6 @@ arguments are a <var title>markup</var> string and a
     the <var title>input</var>, and <var title>context element</var> as the
     <var data-anolis-spec=html title=concept-frag-parse-context>context</var>
     element.
-
-  <li>
-    <p>If this threw an exception, then terminate these steps.
 
   <li>
     <p>Let <var title>new children</var> be the nodes returned.
@@ -262,8 +263,7 @@ must run the appropriate steps, depending on <var title>node</var>'s interface:
   <dt><code data-anolis-spec=dom>Document</code>
   <dd><p>Run the
   <span data-anolis-spec=html>XML fragment serialization algorithm</span> on
-  <var title>node</var>. If this threw an exception, allow that exception to
-  propagate out from this algorithm. Otherwise, return the returned string.
+  <var title>node</var>. Return the string this produced.
 
   <dt><code data-anolis-spec=dom>Comment</code>
   <dd>
@@ -556,8 +556,6 @@ exception instead of returning a string).
   the new value as <var title>markup</var>, and the
   <span>context object</span> as the <var title>context element</var>.
 
-  <p>If this threw an exception, then terminate these steps.
-
  <li><p><span data-anolis-spec=dom title=concept-node-replace-all>Replace all</span>
  with <var title>fragment</var> within the <span>context object</span>.
 </ol>
@@ -648,8 +646,6 @@ string).
     <span title=concept-parse-fragment>fragment parsing algorithm</span> with
     the new value as <var title>markup</var>, and <var title>parent</var> as
     the <var title>context element</var>.
-
-    <p>If this threw an exception, then terminate these steps.
 
   <li>
     <p><span data-anolis-spec=dom title=concept-node-replace>Replace</span>
@@ -772,8 +768,6 @@ method must run these steps:
     <span title=concept-parse-fragment>fragment parsing algorithm</span> with
     <var title>text</var> as <var title>markup</var>, and
     <var title>parent</var> as the <var title>context element</var>.
-
-    <p>If this threw an exception, then terminate these steps.
 
   <li>
     <p>Use the first matching item from this list:
@@ -938,8 +932,6 @@ method must run these steps:
     <var title>fragment</var> as <var title>markup</var>, and
     <var title>element</var> as the <var title>context element</var>.
 
-    <p>If this threw an exception, then terminate these steps.
-
   <li>
     <p>Unmark all scripts in <var title>fragment node</var> as
     "already started".
@@ -961,7 +953,7 @@ method must run these steps:
 
 <h2 class=no-num>Acknowledgements</h2>
 <p>Thanks to
-Anne van Kesteren, Aryeh Gregor, Henri Sivonen and timeless
+Anne van Kesteren, Aryeh Gregor, Henri Sivonen, Simon Pieters and timeless
 for their useful comments.
 
 <p>Special thanks to Ian Hickson for defining the

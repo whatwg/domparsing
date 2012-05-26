@@ -99,11 +99,11 @@ function testEquivalence(element1, fragment1, element2, fragment2) {
 	// Throw in partial ownerDocument tests on the side, since the algorithm
 	// does specify that and we don't want to completely not test it.
 	if (result1.firstChild != null) {
-		assert_true(result1.firstChild.ownerDocument.isSameNode(element1.ownerDocument),
+		assert_equals(result1.firstChild.ownerDocument, element1.ownerDocument,
 			"ownerDocument must be set to that of the reference node");
 	}
 	if (result2.firstChild != null) {
-		assert_true(result2.firstChild.ownerDocument.isSameNode(element2.ownerDocument),
+		assert_equals(result2.firstChild.ownerDocument, element2.ownerDocument,
 			"ownerDocument must be set to that of the reference node");
 	}
 }

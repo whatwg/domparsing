@@ -13,13 +13,11 @@
 // Exception-throwing
 test(function() {
 	var range = document.createRange();
-	// FIXME: Is there a way to get a non-detached Range with null start?  If
-	// so, we want to test that too.
 	range.detach();
 	assert_throws("INVALID_STATE_ERR", function() {
 		range.createContextualFragment("");
 	});
-}, "Must throw INVALID_STATE_ERR if start node is null");
+}, "Must throw INVALID_STATE_ERR for a detached node. (Note: this requirement may be dropped.)");
 
 test(function() {
 	// Simple test

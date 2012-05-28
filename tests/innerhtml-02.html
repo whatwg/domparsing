@@ -6,6 +6,11 @@
 <script src="/resources/testharnessreport.js"></script>
 <div id="log"></div>
 <script>
+var voidElements = [
+  "area", "base", "basefont", "bgsound", "br", "col", "command", "embed",
+  "frame", "hr", "img", "input", "keygen", "link", "meta", "param", "source",
+  "track", "wbr"
+];
 var tests = [
   [
     function() {
@@ -41,12 +46,53 @@ var tests = [
       return el;
     },
     "<br>"
+  ],
+  [
+    function() {
+      var el = document.createElement("div");
+      el.appendChild(document.createElement("input"))
+        .appendChild(document.createElement("span"));
+      return el;
+    },
+    "<input>"
+  ],
+  [
+    function() {
+      var el = document.createElement("img");
+      el.appendChild(document.createElement("div"))
+        .appendChild(document.createElement("span"));
+      return el.firstChild;
+    },
+    "<span><\/span>"
   ]
 ];
-tests.forEach(function(t) {
-  test(function() {
+voidElements.forEach(function(tag) {
+  tests.push([
+    function() {
+      var el = document.createElement(tag);
+      el.appendChild(document.createElement("span"));
+      return el;
+    },
+    "<span><\/span>"
+  ]);
+});
+["pre", "textarea", "listing"].forEach(function(tag) {
+  tests.push([
+    function() {
+      var el = document.createElement("div");
+      el.appendChild(document.createElement(tag))
+        .appendChild(document.createTextNode("\nA"));
+      return el;
+    },
+    "<" + tag + ">\n\nA<\/" + tag + ">"
+  ]);
+});
+test(function() {
+  tests.forEach(function(t) {
     var el = t[0](), expected = t[1];
-    assert_equals(el.innerHTML, expected);
-  }, "Expected innerHTML: " + format_value(t[1]) + ".");
+    test(function() {
+      assert_equals(el.innerHTML, expected);
+    }, "Expected innerHTML: " + format_value(expected) + " for " + el.localName + ".");
+  });
 });
 </script>

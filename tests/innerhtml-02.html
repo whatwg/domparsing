@@ -6,27 +6,47 @@
 <script src="/resources/testharnessreport.js"></script>
 <div id="log"></div>
 <script>
-test(function() {
-  var el = document.createElement("div");
-  el.appendChild(document.createElement("xmp"))
-    .appendChild(document.createElement("span"))
-    .appendChild(document.createTextNode("<"));
-  assert_equals(el.innerHTML, "<xmp><span>&lt;<\/span><\/xmp>");
-})
-test(function() {
-  var el = document.createElement("xmp");
-  el.appendChild(document.createElement("span"))
-    .appendChild(document.createTextNode("<"));
-  assert_equals(el.innerHTML, "<span>&lt;<\/span>");
-})
-test(function() {
-  var el = document.createElement("xmp");
-  el.appendChild(document.createTextNode("<"));
-  assert_equals(el.innerHTML, "<");
-})
-test(function() {
-  var el = document.createElement("div");
-  el.appendChild(document.createElement("br"));
-  assert_equals(el.innerHTML, "<br>");
-})
+var tests = [
+  [
+    function() {
+      var el = document.createElement("div");
+      el.appendChild(document.createElement("xmp"))
+        .appendChild(document.createElement("span"))
+        .appendChild(document.createTextNode("<"));
+      return el;
+    },
+    "<xmp><span>&lt;<\/span><\/xmp>"
+  ],
+  [
+    function() {
+      var el = document.createElement("xmp");
+      el.appendChild(document.createElement("span"))
+        .appendChild(document.createTextNode("<"));
+      return el;
+    },
+    "<span>&lt;<\/span>"
+  ],
+  [
+    function() {
+      var el = document.createElement("xmp");
+      el.appendChild(document.createTextNode("<"));
+      return el;
+    },
+    "<"
+  ],
+  [
+    function() {
+      var el = document.createElement("div");
+      el.appendChild(document.createElement("br"));
+      return el;
+    },
+    "<br>"
+  ]
+];
+tests.forEach(function(t) {
+  test(function() {
+    var el = t[0](), expected = t[1];
+    assert_equals(el.innerHTML, expected);
+  }, "Expected innerHTML: " + format_value(t[1]) + ".");
+});
 </script>

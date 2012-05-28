@@ -64,6 +64,34 @@ var tests = [
       return el.firstChild;
     },
     "<span><\/span>"
+  ],
+  [
+    function() {
+      var el = document.createElement("div");
+      el.appendChild(document.createElement("style"))
+        .appendChild(document.createElement("span"));
+      return el;
+    },
+    "<style><span><\/span><\/style>"
+  ],
+  [
+    function() {
+      var el = document.createElement("div");
+      el.appendChild(document.createElement("style"))
+        .appendChild(document.createTextNode("<"));
+      return el;
+    },
+    "<style><<\/style>"
+  ],
+  [
+    function() {
+      var el = document.createElement("div");
+      el.appendChild(document.createElement("style"))
+        .appendChild(document.createElement("span"))
+        .appendChild(document.createTextNode("<"));
+      return el;
+    },
+    "<style><span>&lt;<\/span><\/style>"
   ]
 ];
 voidElements.forEach(function(tag) {

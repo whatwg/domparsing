@@ -19,7 +19,7 @@
 <body class=draft>
 <div class=head id=head>
 <h1>DOM Parsing and Serialization</h1>
-<h2 class="no-num no-toc" id=work-in-progress-&mdash;-last-update-3-april-2012>Work in Progress &mdash; Last Update 3 April 2012</h2>
+<h2 class="no-num no-toc" id=work-in-progress-&mdash;-last-update-24-may-2012>Work in Progress &mdash; Last Update 24 May 2012</h2>
 <dl>
   <dt>This Version:
   <dd><a href=http://html5.org/specs/dom-parsing.html>http://html5.org/specs/dom-parsing.html</a>
@@ -954,8 +954,15 @@ method must run these steps:
     <var title="">element</var> as the <var title="">context element</var>.
 
   <li>
-    <p>Unmark all scripts in <var title="">fragment node</var> as
-    "already started".
+    <p>For each script in <var title="">fragment node</var>, unset the
+    <a class=external data-anolis-spec=html href=http://www.whatwg.org/specs/web-apps/current-work/multipage/scripting-1.html#parser-inserted title=parser-inserted>"parser-inserted"</a>
+    and
+    <a class=external data-anolis-spec=html href=http://www.whatwg.org/specs/web-apps/current-work/multipage/scripting-1.html#already-started title="already started">"already started"</a>
+    flags.
+
+    <p class=note>This step is intended to be equivalent to not setting those
+    flags in the first place, and to ensure that scripts are run when
+    <var title="">fragment node</var> is inserted into a document.
 
   <li>
     <p>Return <var title="">fragment node</var>.
@@ -986,7 +993,7 @@ method must run these steps:
 
 <h2 class=no-num id=acknowledgements>Acknowledgements</h2>
 <p>Thanks to
-Anne van Kesteren, Aryeh Gregor, Henri Sivonen, Simon Pieters and timeless
+Anne van Kesteren, Aryeh Gregor, Henri Sivonen, Ryosuke Niwa, Simon Pieters and timeless
 for their useful comments.
 
 <p>Special thanks to Ian Hickson for defining the

@@ -933,8 +933,15 @@ method must run these steps:
     <var title>element</var> as the <var title>context element</var>.
 
   <li>
-    <p>Unmark all scripts in <var title>fragment node</var> as
-    "already started".
+    <p>For each script in <var title>fragment node</var>, unset the
+    <span data-anolis-spec=html title=parser-inserted>"parser-inserted"</span>
+    and
+    <span data-anolis-spec=html title="already started">"already started"</span>
+    flags.
+
+    <p class=note>This step is intended to be equivalent to not setting those
+    flags in the first place, and to ensure that scripts are run when
+    <var title>fragment node</var> is inserted into a document.
 
   <li>
     <p>Return <var title>fragment node</var>.
@@ -953,7 +960,7 @@ method must run these steps:
 
 <h2 class=no-num>Acknowledgements</h2>
 <p>Thanks to
-Anne van Kesteren, Aryeh Gregor, Henri Sivonen, Simon Pieters and timeless
+Anne van Kesteren, Aryeh Gregor, Henri Sivonen, Ryosuke Niwa, Simon Pieters and timeless
 for their useful comments.
 
 <p>Special thanks to Ian Hickson for defining the

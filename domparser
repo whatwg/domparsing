@@ -315,11 +315,20 @@ must run the appropriate steps, depending on <var title="">node</var>'s interfac
       <li>Let <var title="">markup</var> be the concatenation of
       "<code title="">&lt;![CDATA[</code>", <var title="">data</var>, and
       "<code title="">]]&gt;</code>".
-
-      <li>Return <var title="">markup</var>.
     </ol>
 
-    <p>Otherwise, return <var title="">data</var>.
+    <p>Otherwise, run the following steps:
+    <ol>
+      <li>Let <var title="">markup</var> be <var title="">data</var>.
+      <li>Replace any occurrences of "<code title="">&amp;</code>" in
+      <var title="">markup</var> by "<code title="">&amp;amp;</code>".
+      <li>Replace any occurrences of "<code title="">&lt;</code>" in
+      <var title="">markup</var> by "<code title="">&amp;lt;</code>".
+      <li>Replace any occurrences of "<code title="">&gt;</code>" in
+      <var title="">markup</var> by "<code title="">&amp;gt;</code>".
+    </ol>
+
+    <p>Return <var title="">markup</var>.
 
   <dt><a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#documentfragment><code class=external data-anolis-spec=dom>DocumentFragment</code></a>
   <dd>

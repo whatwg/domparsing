@@ -288,59 +288,67 @@ must run the appropriate steps, depending on <var title="">node</var>'s interfac
 
   <dt><a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#comment><code class=external data-anolis-spec=dom>Comment</code></a>
   <dd>
-    <p>Let <var title="">markup</var> the concatenation of
-    "<code title="">&lt;!--</code>", <var title="">node</var>'s
-    <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#dom-characterdata-data><code class=external data-anolis-spec=dom title=dom-characterdata-data>data</code></a>, and
-    "<code title="">--&gt;</code>".
+    <ol>
+      <li>Let <var title="">markup</var> the concatenation of
+      "<code title="">&lt;!--</code>", <var title="">node</var>'s
+      <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#dom-characterdata-data><code class=external data-anolis-spec=dom title=dom-characterdata-data>data</code></a>, and
+      "<code title="">--&gt;</code>".
 
-    <p>If <var title="">markup</var> matches the
-    <a href=http://www.w3.org/TR/xml/#NT-Comment><code class=external data-anolis-spec=xml>Comment</code></a> production, return
-    <var title="">markup</var>. Otherwise, throw an
-    <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#dom-domexception-invalid_state_err><code class=external data-anolis-spec=dom title=dom-DOMException-INVALID_STATE_ERR>INVALID_STATE_ERR</code></a>
-    exception.
+      <li>If <var title="">markup</var> matches the
+      <a href=http://www.w3.org/TR/xml/#NT-Comment><code class=external data-anolis-spec=xml>Comment</code></a> production, return
+      <var title="">markup</var>. Otherwise, throw an
+      <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#dom-domexception-invalid_state_err><code class=external data-anolis-spec=dom title=dom-DOMException-INVALID_STATE_ERR>INVALID_STATE_ERR</code></a>
+      exception.
+    </ol>
 
   <dt><a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#text><code class=external data-anolis-spec=dom>Text</code></a>
   <dd>
-    <p>Let <var title="">data</var> be <var title="">node</var>'s
-    <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#dom-characterdata-data><code class=external data-anolis-spec=dom title=dom-characterdata-data>data</code></a>.
-
-    <p>If <var title="">node</var> has its <a href=#serialize-as-cdata-flag>serialize as CDATA flag</a>
-    set, run the following steps:
     <ol>
-      <li>If <var title="">data</var> doesn't match the
-      <a href=http://www.w3.org/TR/xml/#NT-CData><code class=external data-anolis-spec=xml>CData</code></a> production, throw an
-      <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#dom-domexception-invalid_state_err><code class=external data-anolis-spec=dom title=dom-DOMException-INVALID_STATE_ERR>INVALID_STATE_ERR</code></a>
-      exception and terminate the entire algorithm.
+      <li>Let <var title="">data</var> be <var title="">node</var>'s
+      <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#dom-characterdata-data><code class=external data-anolis-spec=dom title=dom-characterdata-data>data</code></a>.
 
-      <li>Let <var title="">markup</var> be the concatenation of
-      "<code title="">&lt;![CDATA[</code>", <var title="">data</var>, and
-      "<code title="">]]&gt;</code>".
+      <li>
+      <p>If <var title="">node</var> has its <a href=#serialize-as-cdata-flag>serialize as CDATA flag</a>
+      set, run the following steps:
+      <ol>
+        <li>If <var title="">data</var> doesn't match the
+        <a href=http://www.w3.org/TR/xml/#NT-CData><code class=external data-anolis-spec=xml>CData</code></a> production, throw an
+        <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#dom-domexception-invalid_state_err><code class=external data-anolis-spec=dom title=dom-DOMException-INVALID_STATE_ERR>INVALID_STATE_ERR</code></a>
+        exception and terminate the entire algorithm.
+
+        <li>Let <var title="">markup</var> be the concatenation of
+        "<code title="">&lt;![CDATA[</code>", <var title="">data</var>, and
+        "<code title="">]]&gt;</code>".
+      </ol>
+
+      <li>
+      <p>Otherwise, run the following steps:
+      <ol>
+        <li>Let <var title="">markup</var> be <var title="">data</var>.
+        <li>Replace any occurrences of "<code title="">&amp;</code>" in
+        <var title="">markup</var> by "<code title="">&amp;amp;</code>".
+        <li>Replace any occurrences of "<code title="">&lt;</code>" in
+        <var title="">markup</var> by "<code title="">&amp;lt;</code>".
+        <li>Replace any occurrences of "<code title="">&gt;</code>" in
+        <var title="">markup</var> by "<code title="">&amp;gt;</code>".
+      </ol>
+
+      <li>Return <var title="">markup</var>.
     </ol>
-
-    <p>Otherwise, run the following steps:
-    <ol>
-      <li>Let <var title="">markup</var> be <var title="">data</var>.
-      <li>Replace any occurrences of "<code title="">&amp;</code>" in
-      <var title="">markup</var> by "<code title="">&amp;amp;</code>".
-      <li>Replace any occurrences of "<code title="">&lt;</code>" in
-      <var title="">markup</var> by "<code title="">&amp;lt;</code>".
-      <li>Replace any occurrences of "<code title="">&gt;</code>" in
-      <var title="">markup</var> by "<code title="">&amp;gt;</code>".
-    </ol>
-
-    <p>Return <var title="">markup</var>.
 
   <dt><a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#documentfragment><code class=external data-anolis-spec=dom>DocumentFragment</code></a>
   <dd>
-    <p>Let <var title="">markup</var> the empty string.
+    <ol>
+      <li>Let <var title="">markup</var> the empty string.
 
-    <p>For each
-    <a class=external data-anolis-spec=dom href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-tree-child title=concept-tree-child>child</a> of
-    <var title="">node</var>, in order,
-    <a href=#concept-serialize-xml title=concept-serialize-xml>produce an XML serialization</a>
-    of the child and concatenate the result to <var title="">markup</var>.
+      <li>For each
+      <a class=external data-anolis-spec=dom href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-tree-child title=concept-tree-child>child</a> of
+      <var title="">node</var>, in order,
+      <a href=#concept-serialize-xml title=concept-serialize-xml>produce an XML serialization</a>
+      of the child and concatenate the result to <var title="">markup</var>.
 
-    <p>Return <var title="">markup</var>.
+      <li>Return <var title="">markup</var>.
+    </ol>
 
   <dt><a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#documenttype><code class=external data-anolis-spec=dom>DocumentType</code></a>
   <dt><a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#processinginstruction><code class=external data-anolis-spec=dom>ProcessingInstruction</code></a>

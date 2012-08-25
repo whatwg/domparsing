@@ -276,7 +276,7 @@ must run the appropriate steps, depending on <var title>node</var>'s interface:
       <li>If <var title>markup</var> matches the
       <code data-anolis-spec=xml>Comment</code> production, return
       <var title>markup</var>. Otherwise, throw an
-      <code title=dom-DOMException-INVALID_STATE_ERR data-anolis-spec=dom>INVALID_STATE_ERR</code>
+      <code data-anolis-spec=dom>InvalidStateError</code>
       exception.
     </ol>
 
@@ -292,7 +292,7 @@ must run the appropriate steps, depending on <var title>node</var>'s interface:
       <ol>
         <li>If <var title>data</var> doesn't match the
         <code data-anolis-spec=xml>CData</code> production, throw an
-        <code title=dom-DOMException-INVALID_STATE_ERR data-anolis-spec=dom>INVALID_STATE_ERR</code>
+        <code data-anolis-spec=dom>InvalidStateError</code>
         exception and terminate the entire algorithm.
 
         <li>Let <var title>markup</var> be the concatenation of
@@ -513,25 +513,6 @@ attribute represents the markup of the
 <code data-anolis-spec=dom>Element</code>'s contents.
 
 <dl class=domintro>
-  <!--doc.ih
-  <dt><var title>document</var> . <code title=dom-Document-innerHTML>innerHTML</code> [ = <var title>value</var> ]
-  <dd>
-    <p>Returns a fragment of HTML or XML that represents the
-    <code data-anolis-spec=dom>Document</code>.
-
-    <p>Can be set, to replace the
-    <code data-anolis-spec=dom>Document</code>'s contents with the result of
-    parsing the given string.
-
-    <p>In the case of an <span data-anolis-spec=dom>XML document</span>,
-    will throw an
-    <code data-anolis-spec=dom title=dom-DOMException-INVALID_STATE_ERR>INVALID_STATE_ERR</code>
-    if the <code data-anolis-spec=dom>Document</code> cannot be serialized
-    to XML, and a
-    <code data-anolis-spec=dom title=dom-DOMException-SYNTAX_ERR>SYNTAX_ERR</code>
-    if the given string is not well-formed.
-  -->
-
   <dt><var title>element</var> . <code title=dom-Element-innerHTML>innerHTML</code> [ = <var title>value</var> ]
   <dd>
     <p>Returns a fragment of HTML or XML that represents the element's
@@ -541,11 +522,9 @@ attribute represents the markup of the
     parsed from the given string.
 
     <p>In the case of an <span data-anolis-spec=dom>XML document</span>,
-    will throw an
-    <code data-anolis-spec=dom title=dom-DOMException-INVALID_STATE_ERR>INVALID_STATE_ERR</code>
+    will throw an <code data-anolis-spec=dom>InvalidStateError</code>
     if the <code data-anolis-spec=dom>Element</code> cannot be serialized
-    to XML, and a
-    <code data-anolis-spec=dom title=dom-DOMException-SYNTAX_ERR>SYNTAX_ERR</code>
+    to XML, and a <code data-anolis-spec=dom>SyntaxError</code>
     if the given string is not well-formed.
 </dl>
 
@@ -596,14 +575,12 @@ attribute represents the markup of the
     string.
 
     <p>In the case of an <span data-anolis-spec=dom>XML document</span>,
-    will throw an
-    <code data-anolis-spec=dom title=dom-DOMException-INVALID_STATE_ERR>INVALID_STATE_ERR</code>
-    if the element cannot be serialized to XML, and a
-    <code data-anolis-spec=dom title=dom-DOMException-SYNTAX_ERR>SYNTAX_ERR</code>
-    if the given string is not well-formed.
+    will throw an <code data-anolis-spec=dom>InvalidStateError</code> if the
+    element cannot be serialized to XML, and a
+    <code data-anolis-spec=dom>SyntaxError</code> if the given string is not
+    well-formed.
 
-    <p>Throws a
-    <code data-anolis-spec=dom title=dom-DOMException-NO_MODIFICATION_ALLOWED_ERR>NO_MODIFICATION_ALLOWED_ERR</code>
+    <p>Throws a <code data-anolis-spec=dom>NoModificationAllowedError</code>
     exception if the parent of the element is the
     <code data-anolis-spec=dom>Document</code> node.
 </dl>
@@ -639,7 +616,7 @@ string).
   <li>
     <p>If <var title>parent</var> is a
     <code data-anolis-spec=dom>Document</code>, throw a
-    <code data-anolis-spec=dom title=dom-DOMException-NO_MODIFICATION_ALLOWED_ERR>NO_MODIFICATION_ALLOWED_ERR</code>
+    <code data-anolis-spec=dom>NoModificationAllowedError</code>
     exception and terminate these steps.
 
   <li>
@@ -702,12 +679,10 @@ string).
     has an invalid value.
 
     <p>In <span data-anolis-spec=dom title="XML document">XML documents</span>,
-    throws a
-    <code data-anolis-spec=dom title=dom-DOMException-SYNTAX_ERR>SYNTAX_ERR</code>
+    throws a <code data-anolis-spec=dom>SyntaxError</code>
     exception if the given string is not well-formed.
 
-    <p>Throws a
-    <code data-anolis-spec=dom title=dom-DOMException-NO_MODIFICATION_ALLOWED_ERR>NO_MODIFICATION_ALLOWED_ERR</code>
+    <p>Throws a <code data-anolis-spec=dom>NoModificationAllowedError</code>
     exception if the given position isn't possible (e.g. inserting elements
     after the root element of a <code data-anolis-spec=dom>Document</code>).
 </dl>
@@ -735,9 +710,8 @@ method must run these steps:
 
         <p>If <var title>context</var> is null or a
         <span data-anolis-spec=dom title=concept-document>document</span>, throw
-        a
-        <code data-anolis-spec=dom title=dom-DOMException-NO_MODIFICATION_ALLOWED_ERR>NO_MODIFICATION_ALLOWED_ERR</code>
-        and terminate these steps.
+        a <code data-anolis-spec=dom>NoModificationAllowedError</code> and
+        terminate these steps.
 
       <dt>If <var title>position</var> is an
       <span data-anolis-spec=dom>ASCII case-insensitive</span> match for
@@ -885,8 +859,7 @@ method must run these steps:
   <li>
     <p>If the <span>context object</span>'s
     <span data-anolis-spec=dom title=concept-range-detached>detached flag</span>
-    is set, throw an
-    <code data-anolis-spec=dom title=dom-DOMException-INVALID_STATE_ERR>INVALID_STATE_ERR</code>
+    is set, throw an <code data-anolis-spec=dom>InvalidStateError</code>
     exception and terminate these steps.
 
   <li>

@@ -19,7 +19,7 @@
 <body class=draft>
 <div class=head id=head>
 <h1>DOM Parsing and Serialization</h1>
-<h2 class="no-num no-toc" id=work-in-progress-&mdash;-last-update-2-august-2012>Work in Progress &mdash; Last Update 2 August 2012</h2>
+<h2 class="no-num no-toc" id=work-in-progress-&mdash;-last-update-25-august-2012>Work in Progress &mdash; Last Update 25 August 2012</h2>
 <dl>
   <dt>This Version:
   <dd><a href=http://html5.org/specs/dom-parsing.html>http://html5.org/specs/dom-parsing.html</a>
@@ -297,7 +297,7 @@ must run the appropriate steps, depending on <var title="">node</var>'s interfac
       <li>If <var title="">markup</var> matches the
       <a href=http://www.w3.org/TR/xml/#NT-Comment><code class=external data-anolis-spec=xml>Comment</code></a> production, return
       <var title="">markup</var>. Otherwise, throw an
-      <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#dom-domexception-invalid_state_err><code class=external data-anolis-spec=dom title=dom-DOMException-INVALID_STATE_ERR>INVALID_STATE_ERR</code></a>
+      <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#invalidstateerror><code class=external data-anolis-spec=dom>InvalidStateError</code></a>
       exception.
     </ol>
 
@@ -313,7 +313,7 @@ must run the appropriate steps, depending on <var title="">node</var>'s interfac
       <ol>
         <li>If <var title="">data</var> doesn't match the
         <a href=http://www.w3.org/TR/xml/#NT-CData><code class=external data-anolis-spec=xml>CData</code></a> production, throw an
-        <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#dom-domexception-invalid_state_err><code class=external data-anolis-spec=dom title=dom-DOMException-INVALID_STATE_ERR>INVALID_STATE_ERR</code></a>
+        <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#invalidstateerror><code class=external data-anolis-spec=dom>InvalidStateError</code></a>
         exception and terminate the entire algorithm.
 
         <li>Let <var title="">markup</var> be the concatenation of
@@ -534,25 +534,6 @@ attribute represents the markup of the
 <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#element><code class=external data-anolis-spec=dom>Element</code></a>'s contents.
 
 <dl class=domintro>
-  <!--doc.ih
-  <dt><var title>document</var> . <code title=dom-Document-innerHTML>innerHTML</code> [ = <var title>value</var> ]
-  <dd>
-    <p>Returns a fragment of HTML or XML that represents the
-    <code data-anolis-spec=dom>Document</code>.
-
-    <p>Can be set, to replace the
-    <code data-anolis-spec=dom>Document</code>'s contents with the result of
-    parsing the given string.
-
-    <p>In the case of an <span data-anolis-spec=dom>XML document</span>,
-    will throw an
-    <code data-anolis-spec=dom title=dom-DOMException-INVALID_STATE_ERR>INVALID_STATE_ERR</code>
-    if the <code data-anolis-spec=dom>Document</code> cannot be serialized
-    to XML, and a
-    <code data-anolis-spec=dom title=dom-DOMException-SYNTAX_ERR>SYNTAX_ERR</code>
-    if the given string is not well-formed.
-  -->
-
   <dt><var title="">element</var> . <a href=#dom-element-innerhtml><code title=dom-Element-innerHTML>innerHTML</code></a> [ = <var title="">value</var> ]
   <dd>
     <p>Returns a fragment of HTML or XML that represents the element's
@@ -562,11 +543,9 @@ attribute represents the markup of the
     parsed from the given string.
 
     <p>In the case of an <a class=external data-anolis-spec=dom href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#xml-document>XML document</a>,
-    will throw an
-    <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#dom-domexception-invalid_state_err><code class=external data-anolis-spec=dom title=dom-DOMException-INVALID_STATE_ERR>INVALID_STATE_ERR</code></a>
+    will throw an <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#invalidstateerror><code class=external data-anolis-spec=dom>InvalidStateError</code></a>
     if the <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#element><code class=external data-anolis-spec=dom>Element</code></a> cannot be serialized
-    to XML, and a
-    <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#dom-domexception-syntax_err><code class=external data-anolis-spec=dom title=dom-DOMException-SYNTAX_ERR>SYNTAX_ERR</code></a>
+    to XML, and a <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#syntaxerror><code class=external data-anolis-spec=dom>SyntaxError</code></a>
     if the given string is not well-formed.
 </dl>
 
@@ -617,14 +596,12 @@ attribute represents the markup of the
     string.
 
     <p>In the case of an <a class=external data-anolis-spec=dom href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#xml-document>XML document</a>,
-    will throw an
-    <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#dom-domexception-invalid_state_err><code class=external data-anolis-spec=dom title=dom-DOMException-INVALID_STATE_ERR>INVALID_STATE_ERR</code></a>
-    if the element cannot be serialized to XML, and a
-    <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#dom-domexception-syntax_err><code class=external data-anolis-spec=dom title=dom-DOMException-SYNTAX_ERR>SYNTAX_ERR</code></a>
-    if the given string is not well-formed.
+    will throw an <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#invalidstateerror><code class=external data-anolis-spec=dom>InvalidStateError</code></a> if the
+    element cannot be serialized to XML, and a
+    <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#syntaxerror><code class=external data-anolis-spec=dom>SyntaxError</code></a> if the given string is not
+    well-formed.
 
-    <p>Throws a
-    <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#dom-domexception-no_modification_allowed_err><code class=external data-anolis-spec=dom title=dom-DOMException-NO_MODIFICATION_ALLOWED_ERR>NO_MODIFICATION_ALLOWED_ERR</code></a>
+    <p>Throws a <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#nomodificationallowederror><code class=external data-anolis-spec=dom>NoModificationAllowedError</code></a>
     exception if the parent of the element is the
     <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#document><code class=external data-anolis-spec=dom>Document</code></a> node.
 </dl>
@@ -660,7 +637,7 @@ string).
   <li>
     <p>If <var title="">parent</var> is a
     <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#document><code class=external data-anolis-spec=dom>Document</code></a>, throw a
-    <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#dom-domexception-no_modification_allowed_err><code class=external data-anolis-spec=dom title=dom-DOMException-NO_MODIFICATION_ALLOWED_ERR>NO_MODIFICATION_ALLOWED_ERR</code></a>
+    <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#nomodificationallowederror><code class=external data-anolis-spec=dom>NoModificationAllowedError</code></a>
     exception and terminate these steps.
 
   <li>
@@ -723,12 +700,10 @@ string).
     has an invalid value.
 
     <p>In <a class=external data-anolis-spec=dom href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#xml-document title="XML document">XML documents</a>,
-    throws a
-    <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#dom-domexception-syntax_err><code class=external data-anolis-spec=dom title=dom-DOMException-SYNTAX_ERR>SYNTAX_ERR</code></a>
+    throws a <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#syntaxerror><code class=external data-anolis-spec=dom>SyntaxError</code></a>
     exception if the given string is not well-formed.
 
-    <p>Throws a
-    <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#dom-domexception-no_modification_allowed_err><code class=external data-anolis-spec=dom title=dom-DOMException-NO_MODIFICATION_ALLOWED_ERR>NO_MODIFICATION_ALLOWED_ERR</code></a>
+    <p>Throws a <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#nomodificationallowederror><code class=external data-anolis-spec=dom>NoModificationAllowedError</code></a>
     exception if the given position isn't possible (e.g. inserting elements
     after the root element of a <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#document><code class=external data-anolis-spec=dom>Document</code></a>).
 </dl>
@@ -756,9 +731,8 @@ method must run these steps:
 
         <p>If <var title="">context</var> is null or a
         <a class=external data-anolis-spec=dom href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-document title=concept-document>document</a>, throw
-        a
-        <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#dom-domexception-no_modification_allowed_err><code class=external data-anolis-spec=dom title=dom-DOMException-NO_MODIFICATION_ALLOWED_ERR>NO_MODIFICATION_ALLOWED_ERR</code></a>
-        and terminate these steps.
+        a <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#nomodificationallowederror><code class=external data-anolis-spec=dom>NoModificationAllowedError</code></a> and
+        terminate these steps.
 
       <dt>If <var title="">position</var> is an
       <a class=external data-anolis-spec=dom href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#ascii-case-insensitive>ASCII case-insensitive</a> match for
@@ -906,8 +880,7 @@ method must run these steps:
   <li>
     <p>If the <a href=#context-object>context object</a>'s
     <a class=external data-anolis-spec=dom href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-range-detached title=concept-range-detached>detached flag</a>
-    is set, throw an
-    <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#dom-domexception-invalid_state_err><code class=external data-anolis-spec=dom title=dom-DOMException-INVALID_STATE_ERR>INVALID_STATE_ERR</code></a>
+    is set, throw an <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#invalidstateerror><code class=external data-anolis-spec=dom>InvalidStateError</code></a>
     exception and terminate these steps.
 
   <li>

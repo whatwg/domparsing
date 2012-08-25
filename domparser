@@ -44,7 +44,9 @@
 
 
 <h2 class="no-num no-toc" id=abstract>Abstract</h2>
-<p>
+<p>This specification aims to describe DOM APIs related to parsing markup into
+DOM trees and serializing DOM trees into markup, with a strong focus on
+compatibility with existing content.
 
 
 

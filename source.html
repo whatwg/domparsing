@@ -497,17 +497,10 @@ method must
 
 <h2>Extensions to the <code data-anolis-spec=dom>Element</code> interface</h2>
 
-<pre class=idl>enum insertAdjacentHTMLPosition {
-  "beforebegin",
-  "afterbegin",
-  "beforeend",
-  "afterend"
-};
-
-partial interface <span data-anolis-spec=dom>Element</span> {
+<pre class=idl>partial interface <span data-anolis-spec=dom>Element</span> {
   attribute DOMString <span title=dom-Element-innerHTML>innerHTML</span>;
   attribute DOMString <span title=dom-Element-outerHTML>outerHTML</span>;
-  void <span title=dom-Element-insertAdjacentHTML>insertAdjacentHTML</span>(insertAdjacentHTMLPosition <var title>position</var>, DOMString <var title>text</var>);
+  void <span title=dom-Element-insertAdjacentHTML>insertAdjacentHTML</span>(DOMString <var title>position</var>, DOMString <var title>text</var>);
 };</pre>
 
 
@@ -679,12 +672,10 @@ string).
       <dd>After the element itself.
     </dl>
 
-    <p>Throws a TypeError exception if the <var title>position</var> argument
-    has an invalid value.
-
-    <p>In <span data-anolis-spec=dom title="XML document">XML documents</span>,
-    throws a <code data-anolis-spec=dom>SyntaxError</code>
-    exception if the given string is not well-formed.
+    <p>Throws a <code data-anolis-spec=dom>SyntaxError</code>
+    exception if the arguments have invalid values (e.g., in the case of an
+    <span data-anolis-spec=dom>XML document</span>, if the given string is
+    not well-formed).
 
     <p>Throws a <code data-anolis-spec=dom>NoModificationAllowedError</code>
     exception if the given position isn't possible (e.g. inserting elements
@@ -725,6 +716,10 @@ method must run these steps:
       the string "beforeend"
       <dd>
         <p>Let <var title>context</var> be the <span>context object</span>.
+
+      <dt>Otherwise
+      <dd>
+        <p>Throw a <code data-anolis-spec=dom>SyntaxError</code> exception.
     </dl>
 
   <li>

@@ -19,7 +19,7 @@
 <body class=draft>
 <div class=head id=head>
 <h1>DOM Parsing and Serialization</h1>
-<h2 class="no-num no-toc" id=living-specification-&mdash;-last-update-25-august-2012>Living Specification &mdash; Last Update 25 August 2012</h2>
+<h2 class="no-num no-toc" id=living-specification-&mdash;-last-update-22-september-2012>Living Specification &mdash; Last Update 22 September 2012</h2>
 <dl>
   <dt>This Version:
   <dd><a href=http://html5.org/specs/dom-parsing.html>http://html5.org/specs/dom-parsing.html</a>
@@ -518,17 +518,10 @@ method must
 
 <h2 id=extensions-to-the-element-interface><span class=secno>6 </span>Extensions to the <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#element><code class=external data-anolis-spec=dom>Element</code></a> interface</h2>
 
-<pre class=idl>enum insertAdjacentHTMLPosition {
-  "beforebegin",
-  "afterbegin",
-  "beforeend",
-  "afterend"
-};
-
-partial interface <a class=external data-anolis-spec=dom href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#element>Element</a> {
+<pre class=idl>partial interface <a class=external data-anolis-spec=dom href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#element>Element</a> {
   attribute DOMString <a href=#dom-element-innerhtml title=dom-Element-innerHTML>innerHTML</a>;
   attribute DOMString <a href=#dom-element-outerhtml title=dom-Element-outerHTML>outerHTML</a>;
-  void <a href=#dom-element-insertadjacenthtml title=dom-Element-insertAdjacentHTML>insertAdjacentHTML</a>(insertAdjacentHTMLPosition <var title="">position</var>, DOMString <var title="">text</var>);
+  void <a href=#dom-element-insertadjacenthtml title=dom-Element-insertAdjacentHTML>insertAdjacentHTML</a>(DOMString <var title="">position</var>, DOMString <var title="">text</var>);
 };</pre>
 
 
@@ -700,12 +693,10 @@ string).
       <dd>After the element itself.
     </dl>
 
-    <p>Throws a TypeError exception if the <var title="">position</var> argument
-    has an invalid value.
-
-    <p>In <a class=external data-anolis-spec=dom href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#xml-document title="XML document">XML documents</a>,
-    throws a <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#syntaxerror><code class=external data-anolis-spec=dom>SyntaxError</code></a>
-    exception if the given string is not well-formed.
+    <p>Throws a <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#syntaxerror><code class=external data-anolis-spec=dom>SyntaxError</code></a>
+    exception if the arguments have invalid values (e.g., in the case of an
+    <a class=external data-anolis-spec=dom href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#xml-document>XML document</a>, if the given string is
+    not well-formed).
 
     <p>Throws a <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#nomodificationallowederror><code class=external data-anolis-spec=dom>NoModificationAllowedError</code></a>
     exception if the given position isn't possible (e.g. inserting elements
@@ -746,6 +737,10 @@ method must run these steps:
       the string "beforeend"
       <dd>
         <p>Let <var title="">context</var> be the <a href=#context-object>context object</a>.
+
+      <dt>Otherwise
+      <dd>
+        <p>Throw a <a href=http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#syntaxerror><code class=external data-anolis-spec=dom>SyntaxError</code></a> exception.
     </dl>
 
   <li>

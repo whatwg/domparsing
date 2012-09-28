@@ -1,44 +1,45 @@
 <!DOCTYPE html><meta charset=UTF-8>
-<title>DOM Parsing and Serialization</title>
-<link href=http://www.whatwg.org/style/specification rel=stylesheet>
+<title>DOM Parsing and Serialization Standard</title>
 <style>
- pre, code { font-family:monospace, sans-serif; }
- h2 code, h3 code, h4 code,
- h2 :link, h3 :link, h4 :link,
- h2 :visited, h3 :visited, h4 :visited
- { font:inherit; color:inherit; font-style:italic; }
  @media print {
-   [data-anolis-spec]::after {
-     content: "[" attr(data-anolis-spec) "]";
-     font-size: 0.6em;
-     vertical-align: super;
-     text-transform: uppercase;
-   }
+   [data-anolis-spec]::after { content:"[" attr(data-anolis-spec) "]"; font-size:.6em; vertical-align:super; text-transform:uppercase }
  }
 </style>
-<body class=draft>
-<div class=head id=head>
+<link href=//www.whatwg.org/style/specification rel=stylesheet>
+<link href=//www.whatwg.org/images/icon rel=icon>
+<body>
+<div class=head>
 <h1>DOM Parsing and Serialization</h1>
-<h2 class="no-num no-toc" id=living-specification-&mdash;-last-update-22-september-2012>Living Specification &mdash; Last Update 22 September 2012</h2>
+<h2 class="no-num no-toc" id=living-standard-&mdash;-last-updated-28-september-2012>Living Standard &mdash; Last Updated 28 September 2012</h2>
 <dl>
   <dt>This Version:
-  <dd><a href=http://html5.org/specs/dom-parsing.html>http://html5.org/specs/dom-parsing.html</a>
+  <dd><a href=http://domparsing.spec.whatwg.org/>http://domparsing.spec.whatwg.org/</a>
 
   <dt>Participate:
   <dd>Send feedback to <a href=http://www.whatwg.org/mailing-list>whatwg@whatwg.org</a>
   (<a href=http://www.whatwg.org/mailing-list#specs>archives</a>) or
-  <a href="https://www.w3.org/Bugs/Public/enter_bug.cgi?product=WebAppsWG&amp;component=DOM%20Parsing%20and%20Serialization">file a bug</a>
-  (<a href="https://www.w3.org/Bugs/Public/buglist.cgi?product=WebAppsWG&amp;component=DOM%20Parsing%20and%20Serialization&amp;resolution=---">open bugs</a>)
+  <a href="https://www.w3.org/Bugs/Public/enter_bug.cgi?product=WhatWG&amp;component=DOM%20Parsing%20and%20Serialization">file a bug</a>
+  (<a href="https://www.w3.org/Bugs/Public/buglist.cgi?product=WhatWG&amp;component=DOM%20Parsing%20and%20Serialization&amp;resolution=---">open bugs</a>)
   <dd><a href=http://wiki.whatwg.org/wiki/IRC>IRC: #whatwg on Freenode</a>
 
   <dt>Version History:
-  <dd><a href=http://bitbucket.org/ms2ger/dom-parsing-and-serialization/>http://bitbucket.org/ms2ger/dom-parsing-and-serialization/</a>
+  <dd><a href=https://github.com/whatwg/dom/commits>https://github.com/whatwg/domparsing/commits</a>
 
   <dt>Editor:
   <dd>Ms2ger &lt;<a href=mailto:ms2ger@gmail.com>ms2ger@gmail.com</a>&gt;
 </dl>
-<p class=copyright>&copy; 2010&ndash;2012 The editors.
-<p class=copyright><a href=http://creativecommons.org/publicdomain/zero/1.0/>CC0 1.0 Universal</a>.
+
+<script async="" src=//dvcs.w3.org/hg/quirks-mode/raw-file/tip/file-bug.js></script>
+
+<p class=copyright><a href=http://creativecommons.org/publicdomain/zero/1.0/ rel=license><img alt=CC0 src=http://i.creativecommons.org/p/zero/1.0/80x15.png></a>
+To the extent possible under law, the editors have waived all copyright and
+related or neighboring rights to this work. In addition, as of
+28 September 2012, the editors have made this specification available
+under the
+<a href=http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0 rel=license>Open Web Foundation Agreement Version 1.0</a>,
+which is available at
+http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0.
+
 </div>
 
 

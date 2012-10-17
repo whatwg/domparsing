@@ -1,10 +1,12 @@
+# http://wiki.whatwg.org/wiki/GitHub#Makefile
+
 ANOLIS = anolis
 
-all: domparser data/xrefs/dom/domps.json
+all: domparser ../xref/xrefs/dom/domps.json
 
-domparser: source.html data Makefile
+domparser: source.html ../xref Makefile
 	$(ANOLIS) --output-encoding=ascii --omit-optional-tags --enable=xspecxref \
-	--enable=refs --use-strict $< $@
+	--enable=refs --use-strict --xref="../xref" $< $@
 
-data/xrefs/dom/domps.json: source.html Makefile
+../xref/xrefs/dom/domps.json: source.html Makefile
 	$(ANOLIS) --dump-xrefs=$@ $< /tmp/spec

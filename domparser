@@ -10,7 +10,7 @@
 <body>
 <div class=head>
 <h1>DOM Parsing and Serialization</h1>
-<h2 class="no-num no-toc" id=living-standard-&mdash;-last-updated-28-september-2012>Living Standard &mdash; Last Updated 28 September 2012</h2>
+<h2 class="no-num no-toc" id=living-standard-&mdash;-last-updated-17-october-2012>Living Standard &mdash; Last Updated 17 October 2012</h2>
 <dl>
   <dt>This Version:
   <dd><a href=http://domparsing.spec.whatwg.org/>http://domparsing.spec.whatwg.org/</a>
@@ -34,7 +34,7 @@
 <p class=copyright><a href=http://creativecommons.org/publicdomain/zero/1.0/ rel=license><img alt=CC0 src=http://i.creativecommons.org/p/zero/1.0/80x15.png></a>
 To the extent possible under law, the editors have waived all copyright and
 related or neighboring rights to this work. In addition, as of
-28 September 2012, the editors have made this specification available
+17 October 2012, the editors have made this specification available
 under the
 <a href=http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0 rel=license>Open Web Foundation Agreement Version 1.0</a>,
 which is available at

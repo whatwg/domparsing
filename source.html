@@ -500,8 +500,8 @@ method must
 <h2>Extensions to the <code data-anolis-spec=dom>Element</code> interface</h2>
 
 <pre class=idl>partial interface <span data-anolis-spec=dom>Element</span> {
-  attribute DOMString <span title=dom-Element-innerHTML>innerHTML</span>;
-  attribute DOMString <span title=dom-Element-outerHTML>outerHTML</span>;
+  [TreatNullAs=EmptyString] attribute DOMString <span title=dom-Element-innerHTML>innerHTML</span>;
+  [TreatNullAs=EmptyString] attribute DOMString <span title=dom-Element-outerHTML>outerHTML</span>;
   void <span title=dom-Element-insertAdjacentHTML>insertAdjacentHTML</span>(DOMString <var title>position</var>, DOMString <var title>text</var>);
 };</pre>
 
@@ -945,7 +945,7 @@ method must run these steps:
 
 <h2 class=no-num>Acknowledgements</h2>
 <p>Thanks to
-Anne van Kesteren, Aryeh Gregor, Henri Sivonen, Ryosuke Niwa, Simon Pieters and timeless
+Anne van Kesteren, Aryeh Gregor, Boris Zbarsky, Henri Sivonen, Ryosuke Niwa, Simon Pieters and timeless
 for their useful comments.
 
 <p>Special thanks to Ian Hickson for defining the

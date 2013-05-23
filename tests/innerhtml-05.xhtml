@@ -15,10 +15,10 @@
 var t = async_test();
 window.onload = t.step_func(function() {
   var foo = window[0].document.documentElement.firstChild;
-  foo.innerHTML = 'x<\/foo--><\!--y';
-  // This is ridiculous.
-  assert_equals(foo.parentNode.innerHTML,
-                '<foo-- xmlns="http://www.w3.org/1999/xhtml">x</foo-->');
+  assert_throws('SyntaxError', function() {
+    foo.innerHTML = 'x<\/foo--><\!--y';
+    // This is ridiculous.
+  });
   t.done();
 });
 ]]></script>

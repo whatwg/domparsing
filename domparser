@@ -356,6 +356,67 @@ must run the appropriate steps, depending on <var title="">node</var>'s interfac
     </ol>
 
   <dt><a href=http://dom.spec.whatwg.org/#documenttype><code class=external data-anolis-spec=dom>DocumentType</code></a>
+  <dd>
+    <ol>
+      <li>Let <var title="">name</var> be <var title="">node</var>'s
+      <a class=external data-anolis-spec=dom href=http://dom.spec.whatwg.org/#concept-doctype-name title=concept-doctype-name>name</a>.
+      <li>Let <var title="">public ID</var> be <var title="">node</var>'s
+      <a class=external data-anolis-spec=dom href=http://dom.spec.whatwg.org/#concept-doctype-publicid title=concept-doctype-publicid>public ID</a>.
+      <li>Let <var title="">system ID</var> be <var title="">node</var>'s
+      <a class=external data-anolis-spec=dom href=http://dom.spec.whatwg.org/#concept-doctype-systemid title=concept-doctype-systemid>system ID</a>.
+      <li>Let <var title="">ids</var> be as follows:
+        <dl class=switch>
+          <dt>if both <var title="">public ID</var> and <var title="">system ID</var>
+          are the empty string
+          <dd>
+            <p>the empty string
+          <dt>if <var title="">system ID</var> is the empty string
+          <dd>
+            <p>the concatenation of
+            <ol>
+              <li>"<code title="">PUBLIC</code>";
+              <li>"<code title=""> "</code>" (U+0020 SPACE, U+0022 QUOTATION MARK);
+              <li><var title="">public ID</var>;
+              <li>"<code title="">"</code>" (U+0022 QUOTATION MARK).
+            </ol>
+          <dt>if <var title="">public ID</var> is the empty string
+          <dd>
+            <p>the concatenation of
+            <ol>
+              <li>"<code title="">SYSTEM</code>";
+              <li>"<code title=""> "</code>" (U+0020 SPACE, U+0022 QUOTATION MARK);
+              <li><var title="">system ID</var>;
+              <li>"<code title="">"</code>" (U+0022 QUOTATION MARK).
+            </ol>
+          <dt>otherwise
+          <dd>
+            <p>the concatenation of
+            <ol>
+              <li>"<code title="">PUBLIC</code>";
+              <li>"<code title=""> "</code>" (U+0020 SPACE, U+0022 QUOTATION MARK);
+              <li><var title="">public ID</var>;
+              <li>"<code title="">" "</code>" (U+0022 QUOTATION MARK, U+0020 SPACE, U+0022 QUOTATION MARK);
+              <li><var title="">system ID</var>;
+              <li>"<code title="">"</code>" (U+0022 QUOTATION MARK).
+            </ol>
+        </dl>
+      <li>
+        <p>Return the concatenation of
+        <ol>
+          <li>"<code title="">&lt;!DOCTYPE</code>";
+          <li>"<code title=""> </code>" (U+0020 SPACE);
+          <li>name;
+          <li>"<code title=""> </code>" (U+0020 SPACE);
+          <li>ids;
+          <li>"<code title="">&gt;</code>" (U+003E GREATER-THAN SIGN).
+        </ol>
+    </ol>
+    <p class=note>No attempt is made to ensure that the result of this
+    algorithm is sensible if the
+    <a class=external data-anolis-spec=dom href=http://dom.spec.whatwg.org/#concept-doctype-publicid title=concept-doctype-publicid>public</a> or
+    <a class=external data-anolis-spec=dom href=http://dom.spec.whatwg.org/#concept-doctype-systemid title=concept-doctype-systemid>system ID</a>
+    contains a "<code title="">"</code>" character.
+
   <dt><a href=http://dom.spec.whatwg.org/#processinginstruction><code class=external data-anolis-spec=dom>ProcessingInstruction</code></a>
   <dd class=XXX>You tell me.
 </dl>

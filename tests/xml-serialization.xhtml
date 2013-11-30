@@ -1,0 +1,51 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>XML serialization</title>
+  <script src="/resources/testharness.js"></script>
+  <script src="/resources/testharnessreport.js"></script>
+</head>
+<body>
+<div id="log"></div>
+<script><![CDATA[
+function serialize(node) {
+  var serializer = new XMLSerializer();
+  return serializer.serializeToString(node);
+}
+
+test(function() {
+  var dt = document.implementation.createDocumentType("html", "", "")
+  assert_equals(serialize(dt), '<!DOCTYPE html>')
+}, "DocumentType: empty public and system id");
+
+test(function() {
+  var dt = document.implementation.createDocumentType("html", "a", "")
+  assert_equals(serialize(dt), '<!DOCTYPE html PUBLIC "a">')
+}, "DocumentType: empty system id");
+
+test(function() {
+  var dt = document.implementation.createDocumentType("html", "", "a")
+  assert_equals(serialize(dt), '<!DOCTYPE html SYSTEM "a">')
+}, "DocumentType: empty public id");
+
+test(function() {
+  var dt = document.implementation.createDocumentType("html", "a", "b")
+  assert_equals(serialize(dt), '<!DOCTYPE html PUBLIC "a" "b">')
+}, "DocumentType: non-empty public and system id");
+
+test(function() {
+  var dt = document.implementation.createDocumentType("html", "'", "'")
+  assert_equals(serialize(dt), "<!DOCTYPE html PUBLIC \"'\" \"'\">")
+}, "DocumentType: 'APOSTROPHE' (U+0027)");
+
+test(function() {
+  var dt = document.implementation.createDocumentType("html", '"', '"')
+  assert_equals(serialize(dt), '<!DOCTYPE html PUBLIC """ """>')
+}, "DocumentType: 'QUOTATION MARK' (U+0022)");
+
+test(function() {
+  var dt = document.implementation.createDocumentType("html", '"\'', '\'"')
+  assert_equals(serialize(dt), '<!DOCTYPE html PUBLIC ""\'" "\'"">')
+}, "DocumentType: 'APOSTROPHE' (U+0027) and 'QUOTATION MARK' (U+0022)");
+]]></script>
+</body>
+</html>

@@ -10,7 +10,7 @@
 <body>
 <div class=head>
 <h1>DOM Parsing and Serialization</h1>
-<h2 class="no-num no-toc" id=living-standard-&mdash;-last-updated-23-may-2013>Living Standard &mdash; Last Updated 23 May 2013</h2>
+<h2 class="no-num no-toc" id=living-standard-&mdash;-last-updated-30-november-2013>Living Standard &mdash; Last Updated 30 November 2013</h2>
 <dl>
   <dt>This Version:
   <dd><a href=http://domparsing.spec.whatwg.org/>http://domparsing.spec.whatwg.org/</a>
@@ -34,7 +34,7 @@
 <p class=copyright><a href=http://creativecommons.org/publicdomain/zero/1.0/ rel=license><img alt=CC0 src=http://i.creativecommons.org/p/zero/1.0/80x15.png></a>
 To the extent possible under law, the editors have waived all copyright and
 related or neighboring rights to this work. In addition, as of
-23 May 2013, the editors have made this specification available
+30 November 2013, the editors have made this specification available
 under the
 <a href=http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0 rel=license>Open Web Foundation Agreement Version 1.0</a>,
 which is available at
@@ -294,7 +294,7 @@ must run the appropriate steps, depending on <var title="">node</var>'s interfac
   <dt><a href=http://dom.spec.whatwg.org/#comment><code class=external data-anolis-spec=dom>Comment</code></a>
   <dd>
     <ol>
-      <li>Let <var title="">markup</var> the concatenation of
+      <li>Let <var title="">markup</var> be the concatenation of
       "<code title="">&lt;!--</code>", <var title="">node</var>'s
       <a href=http://dom.spec.whatwg.org/#dom-characterdata-data><code class=external data-anolis-spec=dom title=dom-characterdata-data>data</code></a>, and
       "<code title="">--&gt;</code>".
@@ -344,7 +344,7 @@ must run the appropriate steps, depending on <var title="">node</var>'s interfac
   <dt><a href=http://dom.spec.whatwg.org/#documentfragment><code class=external data-anolis-spec=dom>DocumentFragment</code></a>
   <dd>
     <ol>
-      <li>Let <var title="">markup</var> the empty string.
+      <li>Let <var title="">markup</var> be the empty string.
 
       <li>For each
       <a class=external data-anolis-spec=dom href=http://dom.spec.whatwg.org/#concept-tree-child title=concept-tree-child>child</a> of
@@ -977,7 +977,7 @@ method must run these steps:
 
 <h2 class=no-num id=acknowledgements>Acknowledgements</h2>
 <p>Thanks to
-Anne van Kesteren, Aryeh Gregor, Boris Zbarsky, Henri Sivonen, Ryosuke Niwa, Simon Pieters and timeless
+Anne van Kesteren, Aryeh Gregor, Boris Zbarsky, Henri Sivonen, Ryosuke Niwa, Simon Pieters, timeless and Travis Leithead
 for their useful comments.
 
 <p>Special thanks to Ian Hickson for defining the

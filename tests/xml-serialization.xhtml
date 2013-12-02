@@ -13,6 +13,26 @@ function serialize(node) {
 }
 
 test(function() {
+  var dt = document.createComment("--");
+  assert_equals(serialize(dt), '<!------>');
+}, "Comment: containing --");
+
+test(function() {
+  var dt = document.createComment("- x");
+  assert_equals(serialize(dt), '<!--- x-->');
+}, "Comment: starting with -");
+
+test(function() {
+  var dt = document.createComment("x -");
+  assert_equals(serialize(dt), '<!--x --->');
+}, "Comment: ending with -");
+
+test(function() {
+  var dt = document.createComment("-->");
+  assert_equals(serialize(dt), '<!---->-->');
+}, "Comment: containing -->");
+
+test(function() {
   var dt = document.implementation.createDocumentType("html", "", "");
   assert_equals(serialize(dt), '<!DOCTYPE html>');
 }, "DocumentType: empty public and system id");

@@ -293,17 +293,14 @@ must run the appropriate steps, depending on <var title="">node</var>'s interfac
 
   <dt><a href=http://dom.spec.whatwg.org/#comment><code class=external data-anolis-spec=dom>Comment</code></a>
   <dd>
+    <p>Return the concatenation of
     <ol>
-      <li>Let <var title="">markup</var> be the concatenation of
-      "<code title="">&lt;!--</code>", <var title="">node</var>'s
-      <a href=http://dom.spec.whatwg.org/#dom-characterdata-data><code class=external data-anolis-spec=dom title=dom-characterdata-data>data</code></a>, and
-      "<code title="">--&gt;</code>".
-
-      <li>If <var title="">markup</var> matches the
-      <a href=http://www.w3.org/TR/xml/#NT-Comment><code class=external data-anolis-spec=xml>Comment</code></a> production, return
-      <var title="">markup</var>. Otherwise, throw an
-      <a href=http://dom.spec.whatwg.org/#invalidstateerror><code class=external data-anolis-spec=dom>InvalidStateError</code></a>
-      exception.
+      <li>"<code title="">&lt;!--</code>" (U+003C LESS-THAN SIGN,
+      U+0021 EXCLAMATION MARK, U+002D HYPHEN-MINUS, U+002D HYPHEN-MINUS);
+      <li><var>node</var>'s
+      <a class=external data-anolis-spec=dom href=http://dom.spec.whatwg.org/#concept-cd-data title=concept-cd-data>data</a>;
+      <li>"<code title="">--&gt;</code>" (U+002D HYPHEN-MINUS, U+002D HYPHEN-MINUS,
+      U+003E GREATER-THAN SIGN).
     </ol>
 
   <dt><a href=http://dom.spec.whatwg.org/#text><code class=external data-anolis-spec=dom>Text</code></a>

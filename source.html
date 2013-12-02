@@ -398,7 +398,17 @@ must run the appropriate steps, depending on <var title>node</var>'s interface:
     contains a "<code title>"</code>" character.
 
   <dt><code data-anolis-spec=dom>ProcessingInstruction</code>
-  <dd class=XXX>You tell me.
+  <dd>
+    <p>Return the concatenation of
+    <ol>
+      <li>"<code title>&lt;?</code>" (U+003C LESS-THAN SIGN, U+003F QUESTION MARK);
+      <li><var>node</var>'s
+      <span title=concept-pi-target data-anolis-spec=dom>target</span>;
+      <li>"<code title> </code>" (U+0020 SPACE);
+      <li><var>node</var>'s
+      <span title=concept-cd-data data-anolis-spec=dom>data</span>;
+      <li>"<code title>?></code>" (U+003F QUESTION MARK, U+003E GREATER-THAN SIGN).
+    </ol>
 </dl>
 
 <p>The <dfn title=concept-serialize-xml-attributes>XML serialization of the

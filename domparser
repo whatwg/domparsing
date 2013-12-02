@@ -1048,7 +1048,7 @@ method must run these steps:
 
 <h2 class=no-num id=acknowledgements>Acknowledgements</h2>
 <p>Thanks to
-Anne van Kesteren, Aryeh Gregor, Boris Zbarsky, Henri Sivonen, Ryosuke Niwa, Simon Pieters, timeless and Travis Leithead
+Anne van Kesteren, Aryeh Gregor, Boris Zbarsky, David H&aring;s&auml;ther, Henri Sivonen, Ryosuke Niwa, Simon Pieters, timeless and Travis Leithead
 for their useful comments.
 
 <p>Special thanks to Ian Hickson for defining the

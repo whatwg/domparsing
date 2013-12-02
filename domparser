@@ -949,7 +949,7 @@ method must run these steps:
 
 <ol>
   <li>
-    <p>Let <var title="">node</var> the <a href=#context-object>context object</a>'s
+    <p>Let <var title="">node</var> be the <a href=#context-object>context object</a>'s
     <a class=external data-anolis-spec=dom href=http://dom.spec.whatwg.org/#concept-range-start-node title=concept-range-start-node>start node</a>.
 
     <p>Let <var title="">element</var> be as follows, depending on

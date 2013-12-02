@@ -13,38 +13,38 @@ function serialize(node) {
 }
 
 test(function() {
-  var dt = document.implementation.createDocumentType("html", "", "")
-  assert_equals(serialize(dt), '<!DOCTYPE html>')
+  var dt = document.implementation.createDocumentType("html", "", "");
+  assert_equals(serialize(dt), '<!DOCTYPE html>');
 }, "DocumentType: empty public and system id");
 
 test(function() {
-  var dt = document.implementation.createDocumentType("html", "a", "")
-  assert_equals(serialize(dt), '<!DOCTYPE html PUBLIC "a">')
+  var dt = document.implementation.createDocumentType("html", "a", "");
+  assert_equals(serialize(dt), '<!DOCTYPE html PUBLIC "a">');
 }, "DocumentType: empty system id");
 
 test(function() {
-  var dt = document.implementation.createDocumentType("html", "", "a")
-  assert_equals(serialize(dt), '<!DOCTYPE html SYSTEM "a">')
+  var dt = document.implementation.createDocumentType("html", "", "a");
+  assert_equals(serialize(dt), '<!DOCTYPE html SYSTEM "a">');
 }, "DocumentType: empty public id");
 
 test(function() {
-  var dt = document.implementation.createDocumentType("html", "a", "b")
-  assert_equals(serialize(dt), '<!DOCTYPE html PUBLIC "a" "b">')
+  var dt = document.implementation.createDocumentType("html", "a", "b");
+  assert_equals(serialize(dt), '<!DOCTYPE html PUBLIC "a" "b">');
 }, "DocumentType: non-empty public and system id");
 
 test(function() {
-  var dt = document.implementation.createDocumentType("html", "'", "'")
-  assert_equals(serialize(dt), "<!DOCTYPE html PUBLIC \"'\" \"'\">")
+  var dt = document.implementation.createDocumentType("html", "'", "'");
+  assert_equals(serialize(dt), "<!DOCTYPE html PUBLIC \"'\" \"'\">");
 }, "DocumentType: 'APOSTROPHE' (U+0027)");
 
 test(function() {
-  var dt = document.implementation.createDocumentType("html", '"', '"')
-  assert_equals(serialize(dt), '<!DOCTYPE html PUBLIC """ """>')
+  var dt = document.implementation.createDocumentType("html", '"', '"');
+  assert_equals(serialize(dt), '<!DOCTYPE html PUBLIC """ """>');
 }, "DocumentType: 'QUOTATION MARK' (U+0022)");
 
 test(function() {
-  var dt = document.implementation.createDocumentType("html", '"\'', '\'"')
-  assert_equals(serialize(dt), '<!DOCTYPE html PUBLIC ""\'" "\'"">')
+  var dt = document.implementation.createDocumentType("html", '"\'', '\'"');
+  assert_equals(serialize(dt), '<!DOCTYPE html PUBLIC ""\'" "\'"">');
 }, "DocumentType: 'APOSTROPHE' (U+0027) and 'QUOTATION MARK' (U+0022)");
 ]]></script>
 </body>

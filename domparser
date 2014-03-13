@@ -10,7 +10,7 @@
 <body>
 <div class=head>
 <h1>DOM Parsing and Serialization</h1>
-<h2 class="no-num no-toc" id=living-standard-&mdash;-last-updated-2-december-2013>Living Standard &mdash; Last Updated 2 December 2013</h2>
+<h2 class="no-num no-toc" id=living-standard-&mdash;-last-updated-13-march-2014>Living Standard &mdash; Last Updated 13 March 2014</h2>
 <dl>
   <dt>This Version:
   <dd><a href=http://domparsing.spec.whatwg.org/>http://domparsing.spec.whatwg.org/</a>
@@ -34,7 +34,7 @@
 <p class=copyright><a href=http://creativecommons.org/publicdomain/zero/1.0/ rel=license><img alt=CC0 src=http://i.creativecommons.org/p/zero/1.0/80x15.png></a>
 To the extent possible under law, the editors have waived all copyright and
 related or neighboring rights to this work. In addition, as of
-2 December 2013, the editors have made this specification available
+13 March 2014, the editors have made this specification available
 under the
 <a href=http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0 rel=license>Open Web Foundation Agreement Version 1.0</a>,
 which is available at
@@ -1037,7 +1037,7 @@ method must run these steps:
 <dd><cite><a href=http://tools.ietf.org/html/rfc2119>Key words for use in RFCs to Indicate Requirement Levels</a></cite>, Scott Bradner. IETF.
 
 <dt id=refsWEBIDL>[WEBIDL]
-<dd><cite><a href=http://dev.w3.org/2006/webapi/WebIDL/>Web IDL</a></cite>, Cameron McCormack. W3C.
+<dd><cite><a href=http://heycam.github.io/webidl/>Web IDL</a></cite>, Cameron McCormack. W3C.
 
 </dl></div>
 

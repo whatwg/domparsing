@@ -490,8 +490,15 @@ method must run these steps, depending on <var title>type</var>:
       created <span title=concept-document data-anolis-spec=dom>document</span>
       and terminate these steps.
 
-      <li><p>Let <var title>document</var> be a newly-created
-      <code data-anolis-spec=dom>XMLDocument</code>.
+      <li>
+        <p>Let <var title>document</var> be a newly-created
+        <code data-anolis-spec=dom>Document</code>.
+
+        <p class=XXX>The intention is that this document does not support
+        <code data-anolis-spec=html title=dom-xmldocument-load>document.load()</code>.
+        It is not clear if it needs to be a
+        <code data-anolis-spec=dom>XMLDocument</code> for other reasons (such
+        as stringification).
 
       <li>
         <p>Let <var title>root</var> be a new

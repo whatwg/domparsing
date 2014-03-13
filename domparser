@@ -510,8 +510,15 @@ method must run these steps, depending on <var title="">type</var>:
       created <a class=external data-anolis-spec=dom href=http://dom.spec.whatwg.org/#concept-document title=concept-document>document</a>
       and terminate these steps.
 
-      <li><p>Let <var title="">document</var> be a newly-created
-      <a href=http://dom.spec.whatwg.org/#xmldocument><code class=external data-anolis-spec=dom>XMLDocument</code></a>.
+      <li>
+        <p>Let <var title="">document</var> be a newly-created
+        <a href=http://dom.spec.whatwg.org/#document><code class=external data-anolis-spec=dom>Document</code></a>.
+
+        <p class=XXX>The intention is that this document does not support
+        <a href=http://www.whatwg.org/specs/web-apps/current-work/multipage/dom.html#dom-xmldocument-load><code class=external data-anolis-spec=html title=dom-xmldocument-load>document.load()</code></a>.
+        It is not clear if it needs to be a
+        <a href=http://dom.spec.whatwg.org/#xmldocument><code class=external data-anolis-spec=dom>XMLDocument</code></a> for other reasons (such
+        as stringification).
 
       <li>
         <p>Let <var title="">root</var> be a new

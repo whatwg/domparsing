@@ -221,6 +221,73 @@ must run the following steps:
   <var title>node</var>.
 </ol>
 
+<hr>
+
+<p>The <dfn title=concept-serialization-doctype>serialization of a
+<code>DocumentType</code> <var title>node</var></dfn> is the string returned by
+the following steps:
+<ol>
+  <li>Let <var title>name</var> be <var title>node</var>'s
+  <span title=concept-doctype-name data-anolis-spec=dom>name</span>.
+  <li>Let <var title>public ID</var> be <var title>node</var>'s
+  <span title=concept-doctype-publicid data-anolis-spec=dom>public ID</span>.
+  <li>Let <var title>system ID</var> be <var title>node</var>'s
+  <span title=concept-doctype-systemid data-anolis-spec=dom>system ID</span>.
+  <li>Let <var title>ids</var> be as follows:
+    <dl class=switch>
+      <dt>if both <var title>public ID</var> and <var title>system ID</var>
+      are the empty string
+      <dd>
+        <p>the empty string
+      <dt>if <var title>system ID</var> is the empty string
+      <dd>
+        <p>the concatenation of
+        <ol>
+          <li>"<code title>PUBLIC</code>";
+          <li>"<code title> "</code>" (U+0020 SPACE, U+0022 QUOTATION MARK);
+          <li><var title>public ID</var>;
+          <li>"<code title>"</code>" (U+0022 QUOTATION MARK).
+        </ol>
+      <dt>if <var title>public ID</var> is the empty string
+      <dd>
+        <p>the concatenation of
+        <ol>
+          <li>"<code title>SYSTEM</code>";
+          <li>"<code title> "</code>" (U+0020 SPACE, U+0022 QUOTATION MARK);
+          <li><var title>system ID</var>;
+          <li>"<code title>"</code>" (U+0022 QUOTATION MARK).
+        </ol>
+      <dt>otherwise
+      <dd>
+        <p>the concatenation of
+        <ol>
+          <li>"<code title>PUBLIC</code>";
+          <li>"<code title> "</code>" (U+0020 SPACE, U+0022 QUOTATION MARK);
+          <li><var title>public ID</var>;
+          <li>"<code title>" "</code>" (U+0022 QUOTATION MARK, U+0020 SPACE, U+0022 QUOTATION MARK);
+          <li><var title>system ID</var>;
+          <li>"<code title>"</code>" (U+0022 QUOTATION MARK).
+        </ol>
+    </dl>
+  <li>
+    <p>Return the concatenation of
+    <ol>
+      <li>"<code title>&lt;!DOCTYPE</code>";
+      <li>"<code title> </code>" (U+0020 SPACE);
+      <li>name;
+      <li>"<code title> </code>" (U+0020 SPACE);
+      <li>ids;
+      <li>"<code title>&gt;</code>" (U+003E GREATER-THAN SIGN).
+    </ol>
+</ol>
+<p class=note>No attempt is made to ensure that the result of this
+algorithm is sensible if the
+<span title=concept-doctype-publicid data-anolis-spec=dom>public</span> or
+<span title=concept-doctype-systemid data-anolis-spec=dom>system ID</span>
+contains a "<code title>"</code>" character.
+
+<hr>
+
 <p>To <dfn title=concept-serialize-html>produce an HTML serialization</dfn> of a
 <code data-anolis-spec=dom>Node</code> <var title>node</var>, the user agent
 must run the appropriate steps, depending on <var title>node</var>'s interface:
@@ -234,7 +301,13 @@ must run the appropriate steps, depending on <var title>node</var>'s interface:
 
   <dt><code data-anolis-spec=dom>Comment</code>
   <dt><code data-anolis-spec=dom>Text</code>
+  <dd class=XXX>You tell me.
+
   <dt><code data-anolis-spec=dom>DocumentType</code>
+  <dd><p>Return the
+  <span title=concept-serialization-doctype>serialization</span> of
+  <var title>node</var>.
+
   <dt><code data-anolis-spec=dom>ProcessingInstruction</code>
   <dd class=XXX>You tell me.
 </dl>
@@ -333,66 +406,9 @@ must run the appropriate steps, depending on <var title>node</var>'s interface:
     </ol>
 
   <dt><code data-anolis-spec=dom>DocumentType</code>
-  <dd>
-    <ol>
-      <li>Let <var title>name</var> be <var title>node</var>'s
-      <span title=concept-doctype-name data-anolis-spec=dom>name</span>.
-      <li>Let <var title>public ID</var> be <var title>node</var>'s
-      <span title=concept-doctype-publicid data-anolis-spec=dom>public ID</span>.
-      <li>Let <var title>system ID</var> be <var title>node</var>'s
-      <span title=concept-doctype-systemid data-anolis-spec=dom>system ID</span>.
-      <li>Let <var title>ids</var> be as follows:
-        <dl class=switch>
-          <dt>if both <var title>public ID</var> and <var title>system ID</var>
-          are the empty string
-          <dd>
-            <p>the empty string
-          <dt>if <var title>system ID</var> is the empty string
-          <dd>
-            <p>the concatenation of
-            <ol>
-              <li>"<code title>PUBLIC</code>";
-              <li>"<code title> "</code>" (U+0020 SPACE, U+0022 QUOTATION MARK);
-              <li><var title>public ID</var>;
-              <li>"<code title>"</code>" (U+0022 QUOTATION MARK).
-            </ol>
-          <dt>if <var title>public ID</var> is the empty string
-          <dd>
-            <p>the concatenation of
-            <ol>
-              <li>"<code title>SYSTEM</code>";
-              <li>"<code title> "</code>" (U+0020 SPACE, U+0022 QUOTATION MARK);
-              <li><var title>system ID</var>;
-              <li>"<code title>"</code>" (U+0022 QUOTATION MARK).
-            </ol>
-          <dt>otherwise
-          <dd>
-            <p>the concatenation of
-            <ol>
-              <li>"<code title>PUBLIC</code>";
-              <li>"<code title> "</code>" (U+0020 SPACE, U+0022 QUOTATION MARK);
-              <li><var title>public ID</var>;
-              <li>"<code title>" "</code>" (U+0022 QUOTATION MARK, U+0020 SPACE, U+0022 QUOTATION MARK);
-              <li><var title>system ID</var>;
-              <li>"<code title>"</code>" (U+0022 QUOTATION MARK).
-            </ol>
-        </dl>
-      <li>
-        <p>Return the concatenation of
-        <ol>
-          <li>"<code title>&lt;!DOCTYPE</code>";
-          <li>"<code title> </code>" (U+0020 SPACE);
-          <li>name;
-          <li>"<code title> </code>" (U+0020 SPACE);
-          <li>ids;
-          <li>"<code title>&gt;</code>" (U+003E GREATER-THAN SIGN).
-        </ol>
-    </ol>
-    <p class=note>No attempt is made to ensure that the result of this
-    algorithm is sensible if the
-    <span title=concept-doctype-publicid data-anolis-spec=dom>public</span> or
-    <span title=concept-doctype-systemid data-anolis-spec=dom>system ID</span>
-    contains a "<code title>"</code>" character.
+  <dd><p>Return the
+  <span title=concept-serialization-doctype>serialization</span> of
+  <var title>node</var>.
 
   <dt><code data-anolis-spec=dom>ProcessingInstruction</code>
   <dd>

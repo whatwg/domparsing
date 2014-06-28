@@ -10,7 +10,7 @@
 <body>
 <div class=head>
 <h1>DOM Parsing and Serialization</h1>
-<h2 class="no-num no-toc" id=living-standard-&mdash;-last-updated-13-march-2014>Living Standard &mdash; Last Updated 13 March 2014</h2>
+<h2 class="no-num no-toc" id=living-standard-&mdash;-last-updated-28-june-2014>Living Standard &mdash; Last Updated 28 June 2014</h2>
 <dl>
   <dt>This Version:
   <dd><a href=http://domparsing.spec.whatwg.org/>http://domparsing.spec.whatwg.org/</a>
@@ -34,7 +34,7 @@
 <p class=copyright><a href=http://creativecommons.org/publicdomain/zero/1.0/ rel=license><img alt=CC0 src=http://i.creativecommons.org/p/zero/1.0/80x15.png></a>
 To the extent possible under law, the editors have waived all copyright and
 related or neighboring rights to this work. In addition, as of
-13 March 2014, the editors have made this specification available
+28 June 2014, the editors have made this specification available
 under the
 <a href=http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0 rel=license>Open Web Foundation Agreement Version 1.0</a>,
 which is available at
@@ -241,6 +241,73 @@ must run the following steps:
   <var title="">node</var>.
 </ol>
 
+<hr>
+
+<p>The <dfn id=concept-serialization-doctype title=concept-serialization-doctype>serialization of a
+<code>DocumentType</code> <var title="">node</var></dfn> is the string returned by
+the following steps:
+<ol>
+  <li>Let <var title="">name</var> be <var title="">node</var>'s
+  <a class=external data-anolis-spec=dom href=http://dom.spec.whatwg.org/#concept-doctype-name title=concept-doctype-name>name</a>.
+  <li>Let <var title="">public ID</var> be <var title="">node</var>'s
+  <a class=external data-anolis-spec=dom href=http://dom.spec.whatwg.org/#concept-doctype-publicid title=concept-doctype-publicid>public ID</a>.
+  <li>Let <var title="">system ID</var> be <var title="">node</var>'s
+  <a class=external data-anolis-spec=dom href=http://dom.spec.whatwg.org/#concept-doctype-systemid title=concept-doctype-systemid>system ID</a>.
+  <li>Let <var title="">ids</var> be as follows:
+    <dl class=switch>
+      <dt>if both <var title="">public ID</var> and <var title="">system ID</var>
+      are the empty string
+      <dd>
+        <p>the empty string
+      <dt>if <var title="">system ID</var> is the empty string
+      <dd>
+        <p>the concatenation of
+        <ol>
+          <li>"<code title="">PUBLIC</code>";
+          <li>"<code title=""> "</code>" (U+0020 SPACE, U+0022 QUOTATION MARK);
+          <li><var title="">public ID</var>;
+          <li>"<code title="">"</code>" (U+0022 QUOTATION MARK).
+        </ol>
+      <dt>if <var title="">public ID</var> is the empty string
+      <dd>
+        <p>the concatenation of
+        <ol>
+          <li>"<code title="">SYSTEM</code>";
+          <li>"<code title=""> "</code>" (U+0020 SPACE, U+0022 QUOTATION MARK);
+          <li><var title="">system ID</var>;
+          <li>"<code title="">"</code>" (U+0022 QUOTATION MARK).
+        </ol>
+      <dt>otherwise
+      <dd>
+        <p>the concatenation of
+        <ol>
+          <li>"<code title="">PUBLIC</code>";
+          <li>"<code title=""> "</code>" (U+0020 SPACE, U+0022 QUOTATION MARK);
+          <li><var title="">public ID</var>;
+          <li>"<code title="">" "</code>" (U+0022 QUOTATION MARK, U+0020 SPACE, U+0022 QUOTATION MARK);
+          <li><var title="">system ID</var>;
+          <li>"<code title="">"</code>" (U+0022 QUOTATION MARK).
+        </ol>
+    </dl>
+  <li>
+    <p>Return the concatenation of
+    <ol>
+      <li>"<code title="">&lt;!DOCTYPE</code>";
+      <li>"<code title=""> </code>" (U+0020 SPACE);
+      <li>name;
+      <li>"<code title=""> </code>" (U+0020 SPACE);
+      <li>ids;
+      <li>"<code title="">&gt;</code>" (U+003E GREATER-THAN SIGN).
+    </ol>
+</ol>
+<p class=note>No attempt is made to ensure that the result of this
+algorithm is sensible if the
+<a class=external data-anolis-spec=dom href=http://dom.spec.whatwg.org/#concept-doctype-publicid title=concept-doctype-publicid>public</a> or
+<a class=external data-anolis-spec=dom href=http://dom.spec.whatwg.org/#concept-doctype-systemid title=concept-doctype-systemid>system ID</a>
+contains a "<code title="">"</code>" character.
+
+<hr>
+
 <p>To <dfn id=concept-serialize-html title=concept-serialize-html>produce an HTML serialization</dfn> of a
 <a href=http://dom.spec.whatwg.org/#node><code class=external data-anolis-spec=dom>Node</code></a> <var title="">node</var>, the user agent
 must run the appropriate steps, depending on <var title="">node</var>'s interface:
@@ -254,7 +321,13 @@ must run the appropriate steps, depending on <var title="">node</var>'s interfac
 
   <dt><a href=http://dom.spec.whatwg.org/#comment><code class=external data-anolis-spec=dom>Comment</code></a>
   <dt><a href=http://dom.spec.whatwg.org/#text><code class=external data-anolis-spec=dom>Text</code></a>
+  <dd class=XXX>You tell me.
+
   <dt><a href=http://dom.spec.whatwg.org/#documenttype><code class=external data-anolis-spec=dom>DocumentType</code></a>
+  <dd><p>Return the
+  <a href=#concept-serialization-doctype title=concept-serialization-doctype>serialization</a> of
+  <var title="">node</var>.
+
   <dt><a href=http://dom.spec.whatwg.org/#processinginstruction><code class=external data-anolis-spec=dom>ProcessingInstruction</code></a>
   <dd class=XXX>You tell me.
 </dl>
@@ -353,66 +426,9 @@ must run the appropriate steps, depending on <var title="">node</var>'s interfac
     </ol>
 
   <dt><a href=http://dom.spec.whatwg.org/#documenttype><code class=external data-anolis-spec=dom>DocumentType</code></a>
-  <dd>
-    <ol>
-      <li>Let <var title="">name</var> be <var title="">node</var>'s
-      <a class=external data-anolis-spec=dom href=http://dom.spec.whatwg.org/#concept-doctype-name title=concept-doctype-name>name</a>.
-      <li>Let <var title="">public ID</var> be <var title="">node</var>'s
-      <a class=external data-anolis-spec=dom href=http://dom.spec.whatwg.org/#concept-doctype-publicid title=concept-doctype-publicid>public ID</a>.
-      <li>Let <var title="">system ID</var> be <var title="">node</var>'s
-      <a class=external data-anolis-spec=dom href=http://dom.spec.whatwg.org/#concept-doctype-systemid title=concept-doctype-systemid>system ID</a>.
-      <li>Let <var title="">ids</var> be as follows:
-        <dl class=switch>
-          <dt>if both <var title="">public ID</var> and <var title="">system ID</var>
-          are the empty string
-          <dd>
-            <p>the empty string
-          <dt>if <var title="">system ID</var> is the empty string
-          <dd>
-            <p>the concatenation of
-            <ol>
-              <li>"<code title="">PUBLIC</code>";
-              <li>"<code title=""> "</code>" (U+0020 SPACE, U+0022 QUOTATION MARK);
-              <li><var title="">public ID</var>;
-              <li>"<code title="">"</code>" (U+0022 QUOTATION MARK).
-            </ol>
-          <dt>if <var title="">public ID</var> is the empty string
-          <dd>
-            <p>the concatenation of
-            <ol>
-              <li>"<code title="">SYSTEM</code>";
-              <li>"<code title=""> "</code>" (U+0020 SPACE, U+0022 QUOTATION MARK);
-              <li><var title="">system ID</var>;
-              <li>"<code title="">"</code>" (U+0022 QUOTATION MARK).
-            </ol>
-          <dt>otherwise
-          <dd>
-            <p>the concatenation of
-            <ol>
-              <li>"<code title="">PUBLIC</code>";
-              <li>"<code title=""> "</code>" (U+0020 SPACE, U+0022 QUOTATION MARK);
-              <li><var title="">public ID</var>;
-              <li>"<code title="">" "</code>" (U+0022 QUOTATION MARK, U+0020 SPACE, U+0022 QUOTATION MARK);
-              <li><var title="">system ID</var>;
-              <li>"<code title="">"</code>" (U+0022 QUOTATION MARK).
-            </ol>
-        </dl>
-      <li>
-        <p>Return the concatenation of
-        <ol>
-          <li>"<code title="">&lt;!DOCTYPE</code>";
-          <li>"<code title=""> </code>" (U+0020 SPACE);
-          <li>name;
-          <li>"<code title=""> </code>" (U+0020 SPACE);
-          <li>ids;
-          <li>"<code title="">&gt;</code>" (U+003E GREATER-THAN SIGN).
-        </ol>
-    </ol>
-    <p class=note>No attempt is made to ensure that the result of this
-    algorithm is sensible if the
-    <a class=external data-anolis-spec=dom href=http://dom.spec.whatwg.org/#concept-doctype-publicid title=concept-doctype-publicid>public</a> or
-    <a class=external data-anolis-spec=dom href=http://dom.spec.whatwg.org/#concept-doctype-systemid title=concept-doctype-systemid>system ID</a>
-    contains a "<code title="">"</code>" character.
+  <dd><p>Return the
+  <a href=#concept-serialization-doctype title=concept-serialization-doctype>serialization</a> of
+  <var title="">node</var>.
 
   <dt><a href=http://dom.spec.whatwg.org/#processinginstruction><code class=external data-anolis-spec=dom>ProcessingInstruction</code></a>
   <dd>

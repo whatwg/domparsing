@@ -10,7 +10,7 @@
 <body>
 <div class=head>
 <h1>DOM Parsing and Serialization</h1>
-<h2 class="no-num no-toc" id=living-standard-&mdash;-last-updated-28-june-2014>Living Standard &mdash; Last Updated 28 June 2014</h2>
+<h2 class="no-num no-toc" id=living-standard-&mdash;-last-updated-4-august-2014>Living Standard &mdash; Last Updated 4 August 2014</h2>
 <dl>
   <dt>This Version:
   <dd><a href=http://domparsing.spec.whatwg.org/>http://domparsing.spec.whatwg.org/</a>
@@ -34,7 +34,7 @@
 <p class=copyright><a href=http://creativecommons.org/publicdomain/zero/1.0/ rel=license><img alt=CC0 src=http://i.creativecommons.org/p/zero/1.0/80x15.png></a>
 To the extent possible under law, the editors have waived all copyright and
 related or neighboring rights to this work. In addition, as of
-28 June 2014, the editors have made this specification available
+4 August 2014, the editors have made this specification available
 under the
 <a href=http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0 rel=license>Open Web Foundation Agreement Version 1.0</a>,
 which is available at
@@ -183,18 +183,18 @@ arguments are a <var title="">markup</var> string and a
     <a class=external data-anolis-spec=dom href=http://dom.spec.whatwg.org/#concept-node-document title=concept-node-document>node document</a>
     is an <a class=external data-anolis-spec=dom href=http://dom.spec.whatwg.org/#html-document>HTML document</a>: let
     <var title="">algorithm</var> be the
-    <a class=external data-anolis-spec=html href=http://www.whatwg.org/specs/web-apps/current-work/multipage/the-end.html#html-fragment-parsing-algorithm>HTML fragment parsing algorithm</a>.
+    <a class=external data-anolis-spec=html href=http://www.whatwg.org/specs/web-apps/current-work/multipage/syntax.html#html-fragment-parsing-algorithm>HTML fragment parsing algorithm</a>.
 
     <p>If the <var title="">context element</var>'s
     <a class=external data-anolis-spec=dom href=http://dom.spec.whatwg.org/#concept-node-document title=concept-node-document>node document</a>
     is an <a class=external data-anolis-spec=dom href=http://dom.spec.whatwg.org/#xml-document>XML document</a>: let
     <var title="">algorithm</var> be the
-    <a class=external data-anolis-spec=html href=http://www.whatwg.org/specs/web-apps/current-work/multipage/the-xhtml-syntax.html#xml-fragment-parsing-algorithm>XML fragment parsing algorithm</a>.
+    <a class=external data-anolis-spec=html href=http://www.whatwg.org/specs/web-apps/current-work/multipage/xhtml.html#xml-fragment-parsing-algorithm>XML fragment parsing algorithm</a>.
 
   <li>
     <p>Invoke <var title="">algorithm</var> with <var title="">markup</var> as
     the <var title="">input</var>, and <var title="">context element</var> as the
-    <a href=http://www.whatwg.org/specs/web-apps/current-work/multipage/the-end.html#concept-frag-parse-context><var class=external data-anolis-spec=html title=concept-frag-parse-context>context</var></a>
+    <a href=http://www.whatwg.org/specs/web-apps/current-work/multipage/syntax.html#concept-frag-parse-context><var class=external data-anolis-spec=html title=concept-frag-parse-context>context</var></a>
     element.
 
   <li>
@@ -316,7 +316,7 @@ must run the appropriate steps, depending on <var title="">node</var>'s interfac
   <dt><a href=http://dom.spec.whatwg.org/#document><code class=external data-anolis-spec=dom>Document</code></a>
   <dt><a href=http://dom.spec.whatwg.org/#documentfragment><code class=external data-anolis-spec=dom>DocumentFragment</code></a>
   <dd><p>Run the
-  <a class=external data-anolis-spec=html href=http://www.whatwg.org/specs/web-apps/current-work/multipage/the-end.html#html-fragment-serialization-algorithm>HTML fragment serialization algorithm</a> on
+  <a class=external data-anolis-spec=html href=http://www.whatwg.org/specs/web-apps/current-work/multipage/syntax.html#html-fragment-serialisation-algorithm>HTML fragment serialization algorithm</a> on
   <var title="">node</var>. Return the returned string.
 
   <dt><a href=http://dom.spec.whatwg.org/#comment><code class=external data-anolis-spec=dom>Comment</code></a>
@@ -361,7 +361,7 @@ must run the appropriate steps, depending on <var title="">node</var>'s interfac
 
   <dt><a href=http://dom.spec.whatwg.org/#document><code class=external data-anolis-spec=dom>Document</code></a>
   <dd><p>Run the
-  <a class=external data-anolis-spec=html href=http://www.whatwg.org/specs/web-apps/current-work/multipage/the-xhtml-syntax.html#xml-fragment-serialization-algorithm>XML fragment serialization algorithm</a> on
+  <a class=external data-anolis-spec=html href=http://www.whatwg.org/specs/web-apps/current-work/multipage/xhtml.html#xml-fragment-serialisation-algorithm>XML fragment serialization algorithm</a> on
   <var title="">node</var>. Return the string this produced.
 
   <dt><a href=http://dom.spec.whatwg.org/#comment><code class=external data-anolis-spec=dom>Comment</code></a>
@@ -499,18 +499,18 @@ method must run these steps, depending on <var title="">type</var>:
   <dt>"<code title="">text/html</code>"
   <dd>
     <p>Parse <var title="">str</var> with an
-    <a class=external data-anolis-spec=html href=http://www.whatwg.org/specs/web-apps/current-work/multipage/parsing.html#html-parser>HTML parser</a>, and return the newly
+    <a class=external data-anolis-spec=html href=http://www.whatwg.org/specs/web-apps/current-work/multipage/syntax.html#html-parser>HTML parser</a>, and return the newly
     created <a class=external data-anolis-spec=dom href=http://dom.spec.whatwg.org/#concept-document title=concept-document>document</a>.
 
-    <p>The <a class=external data-anolis-spec=html href=http://www.whatwg.org/specs/web-apps/current-work/multipage/parsing.html#scripting-flag>scripting flag</a> must be set to
+    <p>The <a class=external data-anolis-spec=html href=http://www.whatwg.org/specs/web-apps/current-work/multipage/syntax.html#scripting-flag>scripting flag</a> must be set to
     "disabled".
 
     <p class=note><a href=http://www.whatwg.org/specs/web-apps/current-work/multipage/semantics.html#the-meta-element><code class=external data-anolis-spec=html>meta</code></a> elements are not
     taken into account for the encoding used, as a Unicode stream is passed into
     the parser.
 
-    <p class=note><a href=http://www.whatwg.org/specs/web-apps/current-work/multipage/scripting-1.html#the-script-element><code class=external data-anolis-spec=html>script</code></a> elements get marked
-    unexecutable and the contents of <a href=http://www.whatwg.org/specs/web-apps/current-work/multipage/scripting-1.html#the-noscript-element><code class=external data-anolis-spec=html>noscript</code></a>
+    <p class=note><a href=http://www.whatwg.org/specs/web-apps/current-work/multipage/scripting.html#the-script-element><code class=external data-anolis-spec=html>script</code></a> elements get marked
+    unexecutable and the contents of <a href=http://www.whatwg.org/specs/web-apps/current-work/multipage/scripting.html#the-noscript-element><code class=external data-anolis-spec=html>noscript</code></a>
     get parsed as markup.
 
   <dt>"<code title="">text/xml</code>"
@@ -520,7 +520,7 @@ method must run these steps, depending on <var title="">type</var>:
   <dd>
     <ol>
       <li><p>Parse <var title="">str</var> with a namespace-enabled
-      <a class=external data-anolis-spec=html href=http://www.whatwg.org/specs/web-apps/current-work/multipage/the-xhtml-syntax.html#xml-parser>XML parser</a>.
+      <a class=external data-anolis-spec=html href=http://www.whatwg.org/specs/web-apps/current-work/multipage/xhtml.html#xml-parser>XML parser</a>.
 
       <li><p>If the previous step didn't return an error, return the newly
       created <a class=external data-anolis-spec=dom href=http://dom.spec.whatwg.org/#concept-document title=concept-document>document</a>
@@ -644,12 +644,12 @@ attribute represents the markup of the
 <a class=external data-anolis-spec=dom href=http://dom.spec.whatwg.org/#concept-node-document title=concept-node-document>node document</a>
 is an <a class=external data-anolis-spec=dom href=http://dom.spec.whatwg.org/#html-document>HTML document</a>, then the attribute
 must return the result of running the
-<a class=external data-anolis-spec=html href=http://www.whatwg.org/specs/web-apps/current-work/multipage/the-end.html#html-fragment-serialization-algorithm>HTML fragment serialization algorithm</a> on the
+<a class=external data-anolis-spec=html href=http://www.whatwg.org/specs/web-apps/current-work/multipage/syntax.html#html-fragment-serialisation-algorithm>HTML fragment serialization algorithm</a> on the
 <a href=#context-object>context object</a>; otherwise, the <a href=#context-object>context object</a>'s
 <a class=external data-anolis-spec=dom href=http://dom.spec.whatwg.org/#concept-node-document title=concept-node-document>node document</a>
 is an <a class=external data-anolis-spec=dom href=http://dom.spec.whatwg.org/#xml-document>XML document</a>, and the attribute must
 return the result of running the
-<a class=external data-anolis-spec=html href=http://www.whatwg.org/specs/web-apps/current-work/multipage/the-xhtml-syntax.html#xml-fragment-serialization-algorithm>XML fragment serialization algorithm</a> on the
+<a class=external data-anolis-spec=html href=http://www.whatwg.org/specs/web-apps/current-work/multipage/xhtml.html#xml-fragment-serialisation-algorithm>XML fragment serialization algorithm</a> on the
 <a href=#context-object>context object</a> instead (this might throw an
 exception instead of returning a string).
 
@@ -701,13 +701,13 @@ attribute represents the markup of the
 <a class=external data-anolis-spec=dom href=http://dom.spec.whatwg.org/#concept-node-document title=concept-node-document>node document</a>
 is an <a class=external data-anolis-spec=dom href=http://dom.spec.whatwg.org/#html-document>HTML document</a>, then the attribute
 must return the result of running the
-<a class=external data-anolis-spec=html href=http://www.whatwg.org/specs/web-apps/current-work/multipage/the-end.html#html-fragment-serialization-algorithm>HTML fragment serialization algorithm</a> on a
+<a class=external data-anolis-spec=html href=http://www.whatwg.org/specs/web-apps/current-work/multipage/syntax.html#html-fragment-serialisation-algorithm>HTML fragment serialization algorithm</a> on a
 fictional node whose only child is <a href=#context-object>context object</a>; otherwise, the
 <a href=#context-object>context object</a>'s
 <a class=external data-anolis-spec=dom href=http://dom.spec.whatwg.org/#concept-node-document title=concept-node-document>node document</a>
 is an <a class=external data-anolis-spec=dom href=http://dom.spec.whatwg.org/#xml-document>XML document</a>, and the attribute must
 return the result of running the
-<a class=external data-anolis-spec=html href=http://www.whatwg.org/specs/web-apps/current-work/multipage/the-xhtml-syntax.html#xml-fragment-serialization-algorithm>XML fragment serialization algorithm</a> on that
+<a class=external data-anolis-spec=html href=http://www.whatwg.org/specs/web-apps/current-work/multipage/xhtml.html#xml-fragment-serialisation-algorithm>XML fragment serialization algorithm</a> on that
 fictional node instead (this might throw an exception instead of returning a
 string).
 
@@ -1030,9 +1030,9 @@ method must run these steps:
 
   <li>
     <p>For each script in <var title="">fragment node</var>, unset the
-    <a class=external data-anolis-spec=html href=http://www.whatwg.org/specs/web-apps/current-work/multipage/scripting-1.html#parser-inserted title=parser-inserted>"parser-inserted"</a>
+    <a class=external data-anolis-spec=html href=http://www.whatwg.org/specs/web-apps/current-work/multipage/scripting.html#parser-inserted title=parser-inserted>"parser-inserted"</a>
     and
-    <a class=external data-anolis-spec=html href=http://www.whatwg.org/specs/web-apps/current-work/multipage/scripting-1.html#already-started title="already started">"already started"</a>
+    <a class=external data-anolis-spec=html href=http://www.whatwg.org/specs/web-apps/current-work/multipage/scripting.html#already-started title="already started">"already started"</a>
     flags.
 
     <p class=note>This step is intended to be equivalent to not setting those
